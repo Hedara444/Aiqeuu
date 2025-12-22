@@ -106,13 +106,13 @@ export default function Feedback() {
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ pb: { xs: 8, md: 16 } }}>
         {/* Header */}
-        <Box textAlign="center" sx={{ mb: 8 }}>
+        <Box textAlign="center" sx={{ mb: 4 }}>
           <Typography
-            variant="h1"
+            variant="h5"
             sx={{
-              fontSize: { xs: "3rem", md: "4.5rem" },
+              fontSize: { xs: "2rem", md: "3.5rem" },
               fontWeight: 700,
-              mb: 3,
+              mb: 0.1,
               color: "text.primary",
             }}
           >
@@ -125,20 +125,20 @@ export default function Feedback() {
           <Card
             sx={{
               borderRadius: "30px",
-              p: { xs: 2 },
+              p: { xs: 2 , md:1 },
               boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
             }}
           >
-            <CardContent sx={{ p: { xs: 4, md: 8 } }}>
+            <CardContent sx={{ p: { xs: 2, md: 4   } }}>
               {/* Form Header */}
-              <Box sx={{ mb: 6 }}>
+              <Box sx={{ mb: 4 }}>
                 <Typography
                   variant="h4"
                   sx={{
                     fontWeight: 500,
                     mb: 4,
                     color: "text.primary",
-                    fontSize: { xs: "1.5rem", md: "1.875rem" },
+                    fontSize: { xs: "1.25rem", md: "1.775rem" },
                   }}
                 >
                   Submit Feedback
@@ -157,7 +157,7 @@ export default function Feedback() {
                         color: "grey.500",
                         fontSize: { xs: "1.125rem", md: "1.25rem" },
                         fontWeight: 400,
-                        mb: 1.5,
+                        mb: 1.05,
                         textTransform: "capitalize",
                         letterSpacing: "0.025em",
                       }}
@@ -171,7 +171,7 @@ export default function Feedback() {
                       helperText={errors.title?.message}
                       sx={{
                         '& .MuiOutlinedInput-root': {
-                          height: { xs: "64px", md: "71px" },
+                          height: { xs: "60px", md: "65px" },
                           borderRadius: "16px",
                           '& fieldset': {
                             borderColor: errors.title ? "error.main" : "grey.400",
@@ -193,7 +193,7 @@ export default function Feedback() {
                         color: "grey.500",
                         fontSize: { xs: "1.125rem", md: "1.25rem" },
                         fontWeight: 400,
-                        mb: 1.5,
+                        mb: 1.25,
                         textTransform: "capitalize",
                         letterSpacing: "0.025em",
                       }}
@@ -229,7 +229,7 @@ export default function Feedback() {
                       sx={{
                         display: "block",
                         color: "grey.500",
-                        fontSize: { xs: "1.125rem", md: "1.25rem" },
+                        fontSize: { xs: "1.125rem", md: "1.125rem" },
                         fontWeight: 400,
                         mb: 1.5,
                         textTransform: "capitalize",
@@ -245,14 +245,14 @@ export default function Feedback() {
                         tabIndex={-1}
                         startIcon={<CloudUploadIcon />}
                         sx={{
-                          height: { xs: "64px", md: "71px" },
-                          px: { xs: 3, md: 5 },
+                          height: { xs: "60px", md: "65px" },
+                          px: { xs: 2, md: 3 },
                           backgroundColor: "background.default",
                           border: "1px solid white",
-                          borderRadius: "16px",
+                          borderRadius: "14px",
                           boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
                           color: "grey.500",
-                          fontSize: { xs: "1.125rem", md: "1.25rem" },
+                          fontSize: { xs: "1.025rem", md: "1.25rem" },
                           fontWeight: 400,
                           textTransform: "capitalize",
                           letterSpacing: "0.025em",
@@ -299,7 +299,7 @@ export default function Feedback() {
                   direction="row"
                   spacing={2}
                   justifyContent="flex-end"
-                  sx={{ mt: { xs: 6, md: 8 } }}
+                  sx={{ mt: { xs: 4, md: 6 } }}
                 >
                   <Button
                     variant="outlined"

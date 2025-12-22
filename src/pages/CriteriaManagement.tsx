@@ -141,10 +141,10 @@ export default function CriteriaManagement() {
                   }} />
                 </Box>
                 <Box sx={{ textAlign: 'center', maxWidth: '240px' }}>
-                  <Typography variant="h3" sx={{
+                  <Typography variant="h6" sx={{
                     color: 'primary.dark',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.5rem', md: '1.875rem' },
+                    fontSize: { xs: '1.15rem', md: '1.175rem'  },
                     fontWeight: 700,
                     mb: 1
                   }}>
@@ -176,10 +176,10 @@ export default function CriteriaManagement() {
                   zIndex: 10
                 }} />
                 <Box sx={{ textAlign: 'center', maxWidth: '240px' }}>
-                  <Typography variant="h3" sx={{
+                  <Typography variant="h6" sx={{
                     color: 'primary.dark',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.5rem', md: '1.875rem' },
+                    fontSize: { xs: '1.15rem', md: '1.175rem' },
                     fontWeight: 700,
                     mb: 1
                   }}>
@@ -211,10 +211,10 @@ export default function CriteriaManagement() {
                   zIndex: 10
                 }} />
                 <Box sx={{ textAlign: 'center', maxWidth: '240px' }}>
-                  <Typography variant="h3" sx={{
+                  <Typography variant="h5" sx={{
                     color: 'primary.dark',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.5rem', md: '1.875rem' },
+                    fontSize: { xs: '1.5rem', md: '1.175rem' },
                     fontWeight: 700,
                     mb: 1
                   }}>

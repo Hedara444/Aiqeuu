@@ -164,7 +164,7 @@ export default function UploadCV() {
                   borderColor: isDragOver ? 'primary.main' : 'grey.300',
                   backgroundColor: isDragOver ? 'rgba(0, 235, 189, 0.05)' : 'background.paper',
                   borderRadius: '16px',
-                  p: 8,
+                  p: 4,
                   textAlign: 'center',
                   transition: 'all 0.3s ease',
                   cursor: 'pointer',
@@ -174,7 +174,7 @@ export default function UploadCV() {
                 onDragLeave={handleDragLeave}
                 onClick={handleClickUpload}
               >
-                <Stack alignItems="center" spacing={1.5}>
+                <Stack alignItems="center" spacing={1.25}>
                   <Box sx={{
                     width: '60px',
                     height: '60px',
@@ -192,7 +192,7 @@ export default function UploadCV() {
                       sx={{
                         color: 'text.primary',
                         fontFamily: 'Montserrat',
-                        fontSize: '1.5rem',
+                        fontSize: '1.25rem',
                         fontWeight: 700,
                         textDecoration: 'underline',
                         cursor: 'pointer',
@@ -207,7 +207,7 @@ export default function UploadCV() {
                       sx={{
                         color: 'text.primary',
                         fontFamily: 'Montserrat',
-                        fontSize: '1.5rem',
+                        fontSize: '1.25rem',
                         fontWeight: 400,
                         ml: 1
                       }}

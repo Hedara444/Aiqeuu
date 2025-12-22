@@ -96,8 +96,8 @@ export default function Register() {
         src="/signup.png"
         alt="Professional person with phone"
         sx={{
-          width: '100%',
-          height: '100%',
+          width: '90%',
+          height: '90%',
           objectFit: 'cover',
           borderRadius: '8px',
         }}
@@ -161,17 +161,17 @@ export default function Register() {
 
   return (
     <AuthLayout rightContent={rightContent}>
-      <Box sx={{ maxWidth: { xs: '100%', lg: '807px' } }}>
+      <Box sx={{ maxWidth: { xs: '100%', lg: '807px' , p:'0' } }}>
         {/* Heading */}
         <Typography
           variant="h1"
           sx={{
             color: 'primary.dark',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '2rem', md: '2.5rem', lg: '2.8125rem' },
+            fontSize: { xs: '1rem', md: '2.15rem', lg: '2.125rem' },
             fontWeight: 700,
             lineHeight: 'normal',
-            mb: { xs: 2, md: '23px' }
+            mb: { xs: 2, md: '12px' }
           }}
         >
           Join Aikyuu, Let's Do it!
@@ -184,7 +184,7 @@ export default function Register() {
           fontSize: { xs: '1.125rem', md: '1.25rem', lg: '1.5rem' },
           fontWeight: 500,
           lineHeight: 'normal',
-          mb: { xs: 4, md: 8 }
+          mb: { xs: 4, md: 8, lg: '50px' }
         }}>
           Enter below details to create an account
         </Typography>
@@ -200,7 +200,7 @@ export default function Register() {
             onChange={handleInputChange}
             error={!!errors.name}
             helperText={errors.name?.message}
-            sx={{ mb: 3 }}
+            sx={{ mb: 2 }}
           />
 
           <InputField
@@ -212,7 +212,7 @@ export default function Register() {
             onChange={handleInputChange}
             error={!!errors.email}
             helperText={errors.email?.message}
-            sx={{ mb: 3 }}
+            sx={{ mb: 2 }}
           />
 
           {/* Password Row */}
@@ -262,7 +262,7 @@ export default function Register() {
               <Typography sx={{
                 color: 'primary.dark',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1.25rem' },
+                fontSize: { xs: '1rem', md: '1.15rem' },
                 fontWeight: 400,
                 lineHeight: 'normal'
               }}>
@@ -272,7 +272,7 @@ export default function Register() {
                 </Link>
               </Typography>
             }
-            sx={{ mb: { xs: 4, md: 8, lg: '135px' } }}
+            sx={{ mb: { xs: 4, md: 8, lg: '15px' } }}
           />
           {errors.agreeToTerms && (
             <Typography color="error" sx={{ mt: -2, mb: 2 }}>
@@ -284,7 +284,7 @@ export default function Register() {
           <AikyuuButton
             type="submit"
             loading={isLoading}
-            sx={{ mb: { xs: 4, md: 8, lg: '117px' } }}
+            sx={{ mb: { xs: 4, md: 8, lg: '47px' } }}
           >
             Sign Up
           </AikyuuButton>

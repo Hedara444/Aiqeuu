@@ -68,8 +68,8 @@ export default function ResetPassword() {
         src="/signup.png"
         alt="Person working on laptop"
         sx={{
-          width: "100%",
-          height: "100%",
+          width: "90%",
+          height: "90%",
           objectFit: "cover",
           borderRadius: 1
         }}
@@ -84,7 +84,7 @@ export default function ResetPassword() {
         <Typography
           variant="h1"
           sx={{
-            fontSize: "2.8125rem",
+            fontSize: "2.125rem",
             fontWeight: 700,
             lineHeight: "normal",
             mb: "23px",
@@ -101,7 +101,7 @@ export default function ResetPassword() {
             fontSize: "1.5rem",
             fontWeight: 500,
             lineHeight: 1.375,
-            mb: 10,
+            mb: 7,
             maxWidth: 807,
             color: "text.secondary"
           }}
@@ -145,7 +145,7 @@ export default function ResetPassword() {
                 error={!!errors.email}
                 helperText={errors.email?.message}
                 sx={{
-                  mb: 10,
+                  mb: 5,
                   '& .MuiOutlinedInput-root': {
                     height: "60px",
                     borderRadius: "16px"

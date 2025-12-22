@@ -7,12 +7,12 @@ import {
 
 const Stepper = ({ step }: { step: number }) => {
     return (
-        <Paper sx={{ borderRadius: '40px', p: { xs: 4, md: 7 }, mb: 7 }}>
-            <Container maxWidth="xl" sx={{ position: 'relative', mb: 8 }}>
+        <Paper sx={{ borderRadius: '20px', paddingTop:{xs:"17px"  ,  md:"37px"} ,paddingBottom:{ xs:"10px" ,  md:"15px"}  , mb: 3    }}>
+            <Container maxWidth="xl" sx={{ position: 'relative', mb: 2 }}>
                 {/* Progress Line */}
                 <Box sx={{
                     position: 'absolute',
-                    top: '24px',
+                    top: '18px',
                     left: '48px',
                     right: '48px',
                     height: '4px',
@@ -32,8 +32,8 @@ const Stepper = ({ step }: { step: number }) => {
                     {/* Step 1 - Active */}
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <Box sx={{
-                            width: '48px',
-                            height: '48px',
+                            width: '38px',
+                            height: '38px',
                             backgroundColor: step >= 1 ? "primary.main" : "grey.300",
                             borderRadius: '50%',
                             display: 'flex',
@@ -44,8 +44,8 @@ const Stepper = ({ step }: { step: number }) => {
                             zIndex: 10
                         }}>
                             {step >= 1 && <Box sx={{
-                                width: '24px',
-                                height: '24px',
+                                width: '20px',
+                                height: '20px',
                                 backgroundColor: 'white',
                                 borderRadius: '50%'
                             }} />}
@@ -54,7 +54,7 @@ const Stepper = ({ step }: { step: number }) => {
                             <Typography variant="h3" sx={{
                                 color: 'primary.dark',
                                 fontFamily: 'Montserrat',
-                                fontSize: { xs: '1.5rem', md: '1.875rem' },
+                                fontSize: {  xs: '0.725rem', md: '1.075rem' },
                                 fontWeight: 700,
                                 mb: 1
                             }}>
@@ -63,7 +63,7 @@ const Stepper = ({ step }: { step: number }) => {
                             <Typography sx={{
                                 color: 'text.secondary',
                                 fontFamily: 'Montserrat',
-                                fontSize: { xs: '1.125rem', md: '1rem' },
+                                fontSize: { xs: '0.525rem', md: '0.8rem' },
                                 fontWeight: 500
                             }}>
                                 Create New Position
@@ -74,8 +74,8 @@ const Stepper = ({ step }: { step: number }) => {
                     {/* Step 2 - Inactive */}
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <Box sx={{
-                            width: '48px',
-                            height: '48px',
+                            width: '38px',
+                            height: '38px',
                             backgroundColor: step >= 2 ? "primary.main" : "grey.300",
                             borderRadius: '50%',
                             display: 'flex',
@@ -86,8 +86,8 @@ const Stepper = ({ step }: { step: number }) => {
                             zIndex: 10
                         }}>
                             {step >= 2 && <Box sx={{
-                                width: '24px',
-                                height: '24px',
+                                width: '20px',
+                                height: '20px',
                                 backgroundColor: 'white',
                                 borderRadius: '50%'
                             }} />}
@@ -96,7 +96,7 @@ const Stepper = ({ step }: { step: number }) => {
                             <Typography variant="h3" sx={{
                                 color: 'primary.dark',
                                 fontFamily: 'Montserrat',
-                                fontSize: { xs: '1.5rem', md: '1.875rem' },
+                                fontSize: {  xs: '0.725rem', md: '1.075rem' },
                                 fontWeight: 700,
                                 mb: 1
                             }}>
@@ -105,7 +105,7 @@ const Stepper = ({ step }: { step: number }) => {
                             <Typography sx={{
                                 color: 'text.secondary',
                                 fontFamily: 'Montserrat',
-                                fontSize: { xs: '1.125rem', md: '1rem' },
+                                fontSize: { xs: '0.525rem', md: '0.8rem' },
                                 fontWeight: 500
                             }}>
                                 Download one or more CVs
@@ -116,8 +116,8 @@ const Stepper = ({ step }: { step: number }) => {
                     {/* Step 3 - Inactive */}
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <Box sx={{
-                            width: '48px',
-                            height: '48px',
+                            width: '38px',
+                            height: '38px',
                             backgroundColor: step >= 3 ? "primary.main" : "grey.300",
                             borderRadius: '50%',
                             display: 'flex',
@@ -128,8 +128,8 @@ const Stepper = ({ step }: { step: number }) => {
                             zIndex: 10
                         }}>
                             {step >= 3 && <Box sx={{
-                                width: '24px',
-                                height: '24px',
+                                width: '20px',
+                                height: '20px',
                                 backgroundColor: 'white',
                                 borderRadius: '50%'
                             }} />}
@@ -138,7 +138,7 @@ const Stepper = ({ step }: { step: number }) => {
                             <Typography variant="h3" sx={{
                                 color: 'primary.dark',
                                 fontFamily: 'Montserrat',
-                                fontSize: { xs: '1.5rem', md: '1.875rem' },
+                                fontSize: {  xs: '0.725rem', md: '1.075rem' },
                                 fontWeight: 700,
                                 mb: 1
                             }}>
@@ -147,7 +147,7 @@ const Stepper = ({ step }: { step: number }) => {
                             <Typography sx={{
                                 color: 'text.secondary',
                                 fontFamily: 'Montserrat',
-                                fontSize: { xs: '1.125rem', md: '1rem' },
+                                fontSize: { xs: '0.525rem', md: '0.8rem'},
                                 fontWeight: 500
                             }}>
                                 View Result

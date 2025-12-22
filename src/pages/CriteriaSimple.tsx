@@ -97,9 +97,9 @@ export default function CriteriaSimple() {
 
         {/* Position and Criteria Section */}
         <Container maxWidth="xl" sx={{ mb: 8 }}>
-          <Stack spacing={5.5}>
+          <Stack spacing={3.5}>
             {/* Position Display */}
-            <Paper sx={{ borderRadius: '16px', px: { xs: 4, md: 22 }, py: 4, boxShadow: 1 }}>
+            <Paper sx={{ borderRadius: '14px', px: { xs: 4, md:8 }, py: 2, boxShadow: 1 }}>
               <Stack direction="row" alignItems="center" spacing={8}>
                 <Typography sx={{
                   color: 'text.secondary',
@@ -112,7 +112,7 @@ export default function CriteriaSimple() {
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.5rem', md: '1.875rem' },
+                  fontSize: { xs: '1.25rem', md: '1.875rem' },
                   fontWeight: 700
                 }}>
                   {currentPosition.title}
@@ -127,7 +127,7 @@ export default function CriteriaSimple() {
                 <Typography variant="h1" sx={{
                   color: 'white',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.5rem', md: '1.875rem' },
+                  fontSize: { xs: '1.25rem', md: '1.775rem' },
                   fontWeight: 700
                 }}>
                   + Create Criteria
@@ -142,7 +142,7 @@ export default function CriteriaSimple() {
                     sx={{
                       backgroundColor: 'grey.100',
                       borderRadius: '16px',
-                      p: 4,
+                      p: 2,
                       boxShadow: 1,
                       transition: 'background-color 0.3s',
                       '&:hover': {
@@ -150,7 +150,7 @@ export default function CriteriaSimple() {
                       },
                     }}
                   >
-                    <Stack direction="row" alignItems="center" spacing={3}>
+                    <Stack direction="row" alignItems="center" spacing={1}>
                       <Grid container columns={2} spacing={0.5} sx={{ width: '24px' }}>
                         {[...Array(6)].map((_, i) => (
                           <Grid key={i}>
@@ -161,7 +161,7 @@ export default function CriteriaSimple() {
                       <Typography sx={{
                         color: 'text.secondary',
                         fontFamily: 'Montserrat',
-                        fontSize: '1.125rem',
+                        fontSize: '1.025rem',
                         fontWeight: 500,
                         mr: 'auto'
                       }}>

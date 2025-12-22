@@ -18,9 +18,9 @@ const InputField = forwardRef<HTMLInputElement, InputProps>(
         inputRef={ref}
         sx={{
           '& .MuiOutlinedInput-root': {
-            height: { xs: '64px', md: '80px' },
+            height: { xs: '44px', md: '60px' },
             borderRadius: '16px',
-            fontSize: { xs: '1.125rem', md: '1.25rem', lg: '1.5rem' },
+            fontSize: { xs: '1.1025rem', md: '1.125rem', lg: '1.15rem' },
             fontFamily: 'Montserrat',
             backgroundColor: 'background.paper',
             '& fieldset': {
@@ -40,7 +40,7 @@ const InputField = forwardRef<HTMLInputElement, InputProps>(
             }),
           },
           '& .MuiInputLabel-root': {
-            fontSize: { xs: '1rem', md: '1.25rem' },
+            fontSize: { xs: '0.8rem', md: '1.125rem' },
             color: '#C1C1C1',
             fontFamily: 'Montserrat',
           },

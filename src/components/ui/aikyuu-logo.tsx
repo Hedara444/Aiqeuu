@@ -12,8 +12,8 @@ export function AikyuuLogo() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         sx={{
-          width: { xs: '20px', md: '27px' },
-          height: { xs: '32px', md: '44px' },
+          width: { xs: '18px', md: '22px' },
+          height: { xs: '23px', md: '40px' },
           fill: 'primary.main'
         }}
       >

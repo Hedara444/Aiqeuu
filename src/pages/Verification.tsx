@@ -180,7 +180,7 @@ export default function Verification() {
         <Typography
           variant="h6"
           sx={{
-            fontSize: "1.5rem", // 24px
+            fontSize: "22px", // 24px
             fontWeight: 500,
             lineHeight: "normal",
             mb: "50px",

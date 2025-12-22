@@ -64,9 +64,9 @@ export default function SignIn() {
           sx={{
             color: 'primary.dark',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '1.5rem', md: '2.5rem', lg: '2.8125rem' },
+            fontSize: { xs: '1.25rem', md: '2.25rem', lg: '2.1125rem' },
             fontWeight: 700,
-            lineHeight: 'normal',
+            lineHeight: '4px',
             mb: { xs: 2, md: '23px' }
           }}
         >
@@ -80,7 +80,7 @@ export default function SignIn() {
           fontSize: { xs: '1.125rem', md: '1.25rem', lg: '1.5rem' },
           fontWeight: 500,
           lineHeight: 'normal',
-          mb: { xs: 4, md: 8, lg: 10 }
+          mb: { xs: 2, md: 4, lg: '40px' }
         }}>
           Sign in to Aikyuu
         </Typography>
@@ -103,7 +103,7 @@ export default function SignIn() {
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
-          sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: 3 } }}
+          sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: 2 } }}
         >
           <InputField
             {...register('email')}
@@ -121,15 +121,15 @@ export default function SignIn() {
             label="Password"
             error={!!errors.password}
             helperText={errors.password?.message}
-            sx={{ mb: { xs: 4, md: 8, lg: 10 } }}
+            sx={{ mb: { xs: 4, md: 8, lg: '10px' } }}
             disabled={isLoading}
           />
 
           {/* Forgot Password Links */}
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: 2, sm: 4 }}
-            sx={{ mb: { xs: 4, md: 8, lg: 10 } }}
+            spacing={{ xs: 1, sm: 2 }}
+            sx={{ mb: { xs: 4, md: 4, lg: '23px' } }}
           >
             <Typography
               component={Link}
@@ -137,7 +137,7 @@ export default function SignIn() {
               sx={{
                 color: 'primary.main',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1.125rem', lg: '1.25rem' },
+                fontSize: { xs: '1rem', md: '1.225rem', lg: '1.25rem' },
                 fontWeight: 500,
                 textDecoration: 'underline',
                 '&:hover': { textDecoration: 'none' }
@@ -150,7 +150,7 @@ export default function SignIn() {
           {/* Submit Button */}
           <AikyuuButton
             type="submit"
-            sx={{ mb: { xs: 4, md: 8, lg: 10 } }}
+            sx={{ mb: { xs: 4, md: 8, lg: '27px' } }}
             disabled={isLoading}
             loading={isLoading}
           >

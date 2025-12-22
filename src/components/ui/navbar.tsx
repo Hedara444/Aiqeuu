@@ -63,13 +63,13 @@ export function Navbar() {
   }
 
   return (
-    <Box sx={{ width: '100%', backgroundColor: 'background.default', px: { xs: 1.5, md: 6 }, py: 6 }}>
+    <Box sx={{ width: '100%', backgroundColor: 'background.default', px: { xs: 1.05, md: 2 }, py: 2.6 }}>
       <Paper sx={{
         // maxWidth: '1280px',
         mx: 'auto',
         borderRadius: '50px',
-        px: { xs: 3, md: 6 },
-        py: 3,
+        px: { xs: 1, md: 2 },
+        py: 1,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -81,16 +81,16 @@ export function Navbar() {
         </Box>
 
         {/* Navigation Links & Profile */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 3, md: 6 } }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 3, md: 2 } }}>
           {/* Navigation Links */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: 4 }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: 3 }}>
             <Button
               component={Link}
               to="/use-cases"
               sx={{
                 color: 'text.primary',
                 fontFamily: 'Montserrat',
-                fontSize: { md: '1.125rem', lg: '1.5rem' },
+                fontSize: { md: '0.725rem', lg: '1.00rem' },
                 fontWeight: 700,
                 textTransform: 'none',
                 '&:hover': { color: 'primary.main' }
@@ -104,7 +104,7 @@ export function Navbar() {
               sx={{
                 color: 'text.primary',
                 fontFamily: 'Montserrat',
-                fontSize: { md: '1.125rem', lg: '1.5rem' },
+                fontSize: {  md: '0.725rem', lg: '1.0rem'  },
                 fontWeight: 700,
                 textTransform: 'none',
                 '&:hover': { color: 'primary.main' }
@@ -115,7 +115,7 @@ export function Navbar() {
             <Typography sx={{
               color: 'text.primary',
               fontFamily: 'Montserrat',
-              fontSize: { md: '1.125rem', lg: '1.5rem' },
+              fontSize: {  md: '0.725rem', lg: '1.0rem'  },
               fontWeight: 700
             }}>
               Your Credits :{balance}
@@ -129,8 +129,8 @@ export function Navbar() {
               sx={{
                 p: 0,
                 minWidth: 0,
-                width: { xs: '48px', md: '64px' },
-                height: { xs: '48px', md: '64px' },
+                width: { xs: '40px', md: '50px' },
+                height: { xs: '40px', md: '50px' },
                 borderRadius: '50%',
                 overflow: 'hidden',
                 outline: '2px solid',
@@ -172,16 +172,16 @@ export function Navbar() {
                 borderRadius: '38px',
                 boxShadow: 3,
                 zIndex: 50,
-                p: 3
+                p: 2
               }}>
                 {/* User Info */}
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 , ml:1 }}>
                   <Avatar
                     src={profile.imageUrl || "/avatar.jpg"}
                     alt={profile.name}
                     sx={{
-                      width: '80px',
-                      height: '80px',
+                      width: '60px',
+                      height: '60px',
                       backgroundColor: 'primary.dark'
                     }}
                   >
@@ -197,7 +197,7 @@ export function Navbar() {
                   <Typography sx={{
                     color: 'text.primary',
                     fontFamily: 'Quicksand',
-                    fontSize: '1.125rem',
+                    fontSize: '1.025rem',
                     fontWeight: 500
                   }}>
                     {profile.name}
@@ -215,7 +215,7 @@ export function Navbar() {
                       justifyContent: 'flex-start',
                       color: 'text.primary',
                       fontFamily: 'Quicksand',
-                      fontSize: '1.125rem',
+                      fontSize: '0.95rem',
                       fontWeight: 500,
                       textTransform: 'none',
                       '&:hover': { color: 'primary.main' }
@@ -235,7 +235,7 @@ export function Navbar() {
                       justifyContent: 'flex-start',
                       color: 'text.primary',
                       fontFamily: 'Quicksand',
-                      fontSize: '1.125rem',
+                      fontSize: '0.95rem',
                       fontWeight: 500,
                       textTransform: 'none',
                       '&:hover': { color: 'primary.main' }
@@ -255,7 +255,7 @@ export function Navbar() {
                       justifyContent: 'flex-start',
                       color: 'text.primary',
                       fontFamily: 'Quicksand',
-                      fontSize: '1.125rem',
+                      fontSize: '0.95rem',
                       fontWeight: 500,
                       textTransform: 'none',
                       '&:hover': { color: 'primary.main' }
@@ -275,7 +275,7 @@ export function Navbar() {
                       justifyContent: 'flex-start',
                       color: 'text.primary',
                       fontFamily: 'Quicksand',
-                      fontSize: '1.125rem',
+                      fontSize: '0.95rem',
                       fontWeight: 500,
                       textTransform: 'none',
                       '&:hover': { color: 'primary.main' }
@@ -295,7 +295,7 @@ export function Navbar() {
                         justifyContent: 'flex-start',
                         color: 'text.primary',
                         fontFamily: 'Quicksand',
-                        fontSize: '1.125rem',
+                        fontSize: '0.95rem',
                         fontWeight: 500,
                         textTransform: 'none',
                         width: '100%',
@@ -344,7 +344,7 @@ export function Navbar() {
                           >
                             <Typography sx={{ fontSize: '1.5rem' }}>🇺🇸</Typography>
                             <Box sx={{ textAlign: 'left', flex: 1 }}>
-                              <Typography sx={{ fontFamily: 'Quicksand', fontSize: '1.125rem', fontWeight: 500 }}>
+                              <Typography sx={{ fontFamily: 'Quicksand', fontSize: '0.95rem', fontWeight: 500 }}>
                                 English
                               </Typography>
                               <Typography sx={{ fontFamily: 'Quicksand', fontSize: '0.875rem', color: 'text.secondary' }}>
@@ -378,7 +378,7 @@ export function Navbar() {
                           >
                             <Typography sx={{ fontSize: '1.5rem' }}>🇯🇵</Typography>
                             <Box sx={{ textAlign: 'left', flex: 1 }}>
-                              <Typography sx={{ fontFamily: 'Quicksand', fontSize: '1.125rem', fontWeight: 500 }}>
+                              <Typography sx={{ fontFamily: 'Quicksand', fontSize: '0.95rem', fontWeight: 500 }}>
                                 日本語
                               </Typography>
                               <Typography sx={{ fontFamily: 'Quicksand', fontSize: '0.875rem', color: 'text.secondary' }}>
@@ -402,7 +402,7 @@ export function Navbar() {
                       justifyContent: 'flex-start',
                       color: 'text.primary',
                       fontFamily: 'Quicksand',
-                      fontSize: '1.125rem',
+                      fontSize: '0.95rem',
                       fontWeight: 500,
                       textTransform: 'none',
                       '&:hover': { color: 'primary.main' }

@@ -17,12 +17,12 @@ export function AuthLayout({ children, rightContent }: AuthLayoutProps) {
       flexDirection: { xs: 'column', lg: 'row' }
     }}>
       {/* Left Side - Form */}
-      <Box sx={{ flex: 1, maxWidth: { lg: '960px' }, position: 'relative' }}>
+      <Box sx={{ flex: 1.2, maxWidth: { lg: '960px' }, position: 'relative' }}>
         {/* Logo */}
         <Box sx={{
           position: 'absolute',
           left: { xs: 2, md: '77px' },
-          top: { xs: 2, md: '63px' },
+          top: { xs: 2, md: '13px' },
           zIndex: 10
         }}>
           <AikyuuLogo />
@@ -31,8 +31,8 @@ export function AuthLayout({ children, rightContent }: AuthLayoutProps) {
         {/* Form Content */}
         <Container sx={{
           px: { xs: 2, md: '77px' },
-          pt: { xs: 12, md: '243px' },
-          pb: { xs: 2, md: '77px' },
+          pt: { xs: 12, md: '75px' },
+          pb: { xs: 2, md: '37px' },
           minHeight: { xs: '100vh', lg: 0 }
         }}>
           {children}
@@ -43,7 +43,7 @@ export function AuthLayout({ children, rightContent }: AuthLayoutProps) {
       <Box sx={{
         display: { xs: 'none', lg: 'flex' },
         flex: 1,
-        minWidth: '960px',
+        minWidth: '360px',
         position: 'relative',
         // backgroundColor: 'background.paper',
         boxShadow: '0 4px 4px 0 rgba(0,0,0,0.25)'
@@ -94,8 +94,8 @@ export function AuthLayout({ children, rightContent }: AuthLayoutProps) {
             {/* Person illustration placeholder */}
             <Box sx={{
               position: 'absolute',
-              top: '433px',
-              right: '326px',
+              top: '43px',
+              right: '116px',
               // width: '353px',
               // height: '364px'
             }}>

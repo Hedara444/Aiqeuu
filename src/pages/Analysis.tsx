@@ -71,7 +71,7 @@ export default function Analysis() {
 
         {/* Processing Section */}
         <Container maxWidth="lg" sx={{ mb: 8 }}>
-          <Paper sx={{ backgroundColor: 'primary.dark', borderRadius: '16px', p: 9, boxShadow: 1 }}>
+          <Paper sx={{ backgroundColor: 'primary.dark', borderRadius: '16px', p: 5, boxShadow: 1 }}>
             <Stack alignItems="center" spacing={3.5}>
               {/* Progress Bar */}
               <LinearProgress
@@ -108,7 +108,7 @@ export default function Analysis() {
                 <Typography sx={{
                   color: 'primary.main',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
                   fontWeight: 700
                 }}>
                   Processing
@@ -116,7 +116,7 @@ export default function Analysis() {
                 <Typography sx={{
                   color: 'primary.main',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
                   fontWeight: 700
                 }}>
                   {Math.round(progress)}%

@@ -12,22 +12,22 @@ export default function Dashboard() {
       <Navbar />
 
       {/* Main Content */}
-      <Box sx={{ px: { xs: 1.5, md: 6 } }}>
+      <Box sx={{ px: { xs: 1.5, md: 3 } }}>
         {/* Process Flow Section */}
         <Stepper step={1} />
 
-        {/* Create New Position Button */}
-        <Box sx={{ mb: 30 }}>
+        {/* Create New Position Button background */}
+        <Box sx={{ mb: 30  }}>
           <Box
             component={Link}
             to="/create-position"
-            sx={{ display: 'block', width: '100%', maxWidth: '1152px', mx: 'auto', textDecoration: 'none' }}
+            sx={{ display: 'block', width: '100%', maxWidth: '1952px', mx: 'auto', textDecoration: 'none' }}
           >
             <Paper sx={{
               backgroundColor: 'primary.main',
               borderRadius: '16px',
-              py: 4,
-              px: { xs: 4, md: '176px' },
+              py: 3,
+              px: { xs: 4, md: '176px'  },
               '&:hover': { opacity: 0.9 },
               transition: 'background-color 0.3s'
             }}>
@@ -35,7 +35,7 @@ export default function Dashboard() {
                 <Typography sx={{
                   color: 'white',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.5rem', md: '1.875rem' },
+                  fontSize: { xs: '1.05rem', md: '1.175rem' },
                   fontWeight: 700
                 }}>
                   + Create New Position
