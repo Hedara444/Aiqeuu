@@ -296,20 +296,34 @@ export const usePositionsStore = create<PositionsState>()(
 
         addCriteria: async (positionId: string, description: string) => {
           set({ isLoading: true, error: null });
+
           try {
             const response = await api.post(endPoint.positionCriterias, {
               positionId,
-              description
+              description,
             });
-            set({ isLoading: false, error: null });
+
+            set((state) => ({
+              isLoading: false,
+              error: null,
+              currentPosition: state.currentPosition
+                ? {
+                  ...state.currentPosition,
+                  criterias: [
+                    ...state.currentPosition.criterias,
+                    response.data, // 👈 append new criterion
+                  ],
+                }
+                : state.currentPosition,
+            }));
+
             toast.success('Criteria added successfully!');
             return response.data;
           } catch (error: any) {
-            const errorMessage = error.response?.data?.message || 'Failed to add criteria';
-            set({
-              isLoading: false,
-              error: errorMessage
-            });
+            const errorMessage =
+              error.response?.data?.message || 'Failed to add criteria';
+
+            set({ isLoading: false, error: errorMessage });
             toast.error(errorMessage);
             throw error;
           }
@@ -317,16 +331,29 @@ export const usePositionsStore = create<PositionsState>()(
 
         deleteCriteria: async (id: string) => {
           set({ isLoading: true, error: null });
+
           try {
             await api.delete(endPoint.criteriaById(id));
-            set({ isLoading: false, error: null });
+
+            set((state) => ({
+              isLoading: false,
+              error: null,
+              currentPosition: state.currentPosition
+                ? {
+                  ...state.currentPosition,
+                  criterias: state.currentPosition.criterias.filter(
+                    (c) => c.id !== id
+                  ),
+                }
+                : state.currentPosition,
+            }));
+
             toast.success('Criteria deleted successfully!');
           } catch (error: any) {
-            const errorMessage = error.response?.data?.message || 'Failed to delete criteria';
-            set({
-              isLoading: false,
-              error: errorMessage
-            });
+            const errorMessage =
+              error.response?.data?.message || 'Failed to delete criteria';
+
+            set({ isLoading: false, error: errorMessage });
             toast.error(errorMessage);
             throw error;
           }

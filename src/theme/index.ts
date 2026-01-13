@@ -45,47 +45,47 @@ export const theme = createTheme({
     h1: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '4.5rem', // 72px
+      fontSize: '3.5rem', // 72px
       color: palette.aikyuu.text,
     },
     h2: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '2.5rem', // 40px
+      fontSize: '2.25rem', // 40px
       color: palette.aikyuu.text,
     },
     h3: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '1.875rem', // 30px
+      fontSize: '1.475rem',
       color: palette.aikyuu.text,
     },
     h4: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '1.5rem', // 24px
+      fontSize: '1.25rem',
       color: palette.aikyuu.text,
     },
     h5: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '1.25rem', // 20px
+      fontSize: '1.125rem',
       color: palette.aikyuu.text,
     },
     h6: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '1.125rem', // 18px
+      fontSize: '1.0025rem',
       color: palette.aikyuu.text,
     },
     body1: {
       fontFamily: 'Montserrat',
-      fontSize: '1.25rem', // 20px
+      fontSize: '1.0125rem',
       color: palette.aikyuu.text,
     },
     body2: {
       fontFamily: 'Montserrat',
-      fontSize: '1.125rem', // 18px
+      fontSize: '1.0125rem',
       color: palette.aikyuu.text,
     },
     button: {
@@ -166,11 +166,11 @@ export const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
-          paddingLeft: '24px',
-          paddingRight: '24px',
+          paddingLeft: '22px',
+          paddingRight: '22px',
           '@media (min-width: 768px)': {
-            paddingLeft: '48px',
-            paddingRight: '48px',
+            paddingLeft: '38px',
+            paddingRight: '38px',
           },
         },
       },

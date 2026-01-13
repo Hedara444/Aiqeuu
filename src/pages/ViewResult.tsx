@@ -205,13 +205,13 @@ export default function ViewResult() {
           {/* Header */}
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 6 }}>
             <Box>
-              <MUILink component={RouterLink} to={`/position/${id}`} underline="hover" color="primary" sx={{ display: 'inline-block', mb: 1 }}>
+              <MUILink component={RouterLink} to={`/position/${id}`} underline="hover" color="primary" sx={{ display: 'inline-block', mb: 2 , fontSize:'1.2rem' }}>
                 ← Back to Position
               </MUILink>
               <Typography variant="h4" fontWeight={600}>{currentPosition.title} - Analysis Results</Typography>
             </Box>
             <Box>
-              <Button variant="contained" sx={{ color: "white" }} endIcon={<DownloadIcon />} onClick={handleOpenMenu}>
+              <Button variant="contained" sx={{ color: "white"  , fontSize:"0.9rem" }} endIcon={<DownloadIcon />} onClick={handleOpenMenu}>
                 Export
               </Button>
               <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
@@ -232,18 +232,26 @@ export default function ViewResult() {
 
           {/* Analysis Results */}
           <Stack sx={{ mb: 4 }}>
-            <ToggleSwitch isActive={showAnalysis} label="Analysis cv" onToggle={() => setShowAnalysis(!showAnalysis)} />
+            <ToggleSwitch
+              isActive={showAnalysis}
+              label="Analysis cv"
+              onToggle={() => setShowAnalysis(!showAnalysis)}
+            />
+
           </Stack>
 
-          {showAnalysis && (
+
             <Grid container spacing={3}>
               {currentPosition.resumes.map((result) => (
                 <Grid size={6} key={result.id}>
-                  <AnalysisCard result={result} />
+                  <AnalysisCard
+                    result={result}
+                    showAnalysisGlobal={showAnalysis}
+                  />
                 </Grid>
               ))}
             </Grid>
-          )}
+
         </Container>
       </Box>
 
@@ -280,9 +288,12 @@ const CriteriaCard: React.FC<{
   );
 };
 
-const AnalysisCard: React.FC<{ result: Resume }> = ({ result }) => {
+const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean }> = ({ result , showAnalysisGlobal  }) => {
   const progressPercentage = result.score;
+  const [showAnalysisLocal, setShowAnalysisLocal] = useState(true);
 
+
+  const shouldShowExplanation = showAnalysisGlobal && showAnalysisLocal;
   return (
     <Card variant="outlined">
       <CardContent>
@@ -296,7 +307,19 @@ const AnalysisCard: React.FC<{ result: Resume }> = ({ result }) => {
             <LinearProgress variant="determinate" value={progressPercentage} sx={{ height: 8, borderRadius: 4 }} />
           </Box>
 
-          <ToggleSwitch isActive={true} label="Analysis cv" />
+          {/* LOCAL toggle */}
+          <ToggleSwitch
+            isActive={showAnalysisLocal}
+            label="Analysis cv"
+            onToggle={() => setShowAnalysisLocal(prev => !prev)}
+          />
+
+          {/* Explanation (controlled by BOTH toggles) */}
+          {shouldShowExplanation && (
+            <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2 }}>
+              <ListItemText >{result.explanation}</ListItemText>
+            </Paper>
+          )}
 
           <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2 }}>
             <List disablePadding>

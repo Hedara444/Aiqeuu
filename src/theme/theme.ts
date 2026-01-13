@@ -37,7 +37,7 @@ export const theme = createTheme({
     h1: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '4.5rem',
+      fontSize: '3.5rem',
       '@media (max-width:768px)': {
         fontSize: '3rem',
       },
@@ -48,7 +48,7 @@ export const theme = createTheme({
     h2: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '2.5rem',
+      fontSize: '2.25rem',
       '@media (max-width:768px)': {
         fontSize: '2rem',
       },
@@ -56,20 +56,20 @@ export const theme = createTheme({
     h3: {
       fontFamily: 'Montserrat',
       fontWeight: 700,
-      fontSize: '2rem',
+      fontSize: '1.75rem',
       '@media (max-width:768px)': {
-        fontSize: '1.5rem',
+        fontSize: '1.25rem',
       },
     },
     h4: {
       fontFamily: 'Montserrat',
       fontWeight: 600,
-      fontSize: '1.5rem',
+      fontSize: '1.25rem',
     },
     h5: {
       fontFamily: 'Montserrat',
       fontWeight: 600,
-      fontSize: '1.25rem',
+      fontSize: '1.125rem',
     },
     h6: {
       fontFamily: 'Montserrat',
@@ -78,7 +78,7 @@ export const theme = createTheme({
     },
     body1: {
       fontFamily: 'Montserrat',
-      fontSize: '1.25rem',
+      fontSize: '1.125rem',
       '@media (max-width:768px)': {
         fontSize: '1rem',
       },
@@ -101,12 +101,12 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: '100px',
-          height: '64px',
-          fontSize: '1.25rem',
+          height: '54px',
+          fontSize: '1.125rem',
           fontWeight: 700,
           textTransform: 'none',
           '@media (max-width:768px)': {
-            height: '56px',
+            height: '46px',
             fontSize: '1rem',
           },
         },
@@ -132,7 +132,7 @@ export const theme = createTheme({
           '& .MuiOutlinedInput-root': {
             borderRadius: '16px',
             height: '80px',
-            fontSize: '1.25rem',
+            fontSize: '1.125rem',
             '@media (max-width:768px)': {
               height: '64px',
               fontSize: '1rem',
@@ -149,7 +149,7 @@ export const theme = createTheme({
             },
           },
           '& .MuiInputLabel-root': {
-            fontSize: '1.25rem',
+            fontSize: '1.125rem',
             color: '#C1C1C1',
             '@media (max-width:768px)': {
               fontSize: '1rem',

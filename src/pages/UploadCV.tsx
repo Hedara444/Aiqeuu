@@ -397,7 +397,7 @@ export default function UploadCV() {
       />
 
       {/* Footer */}
-      <Box component="footer" sx={{ backgroundColor: 'grey.800', py: 10 }}>
+      <Box component="footer" sx={{ backgroundColor: 'grey.900', py: 10 }}>
         <Container maxWidth="xl" sx={{ px: 6 }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
             {/* Logo */}

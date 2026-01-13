@@ -41,20 +41,20 @@ export default function CriteriaSimple() {
     if (!currentPosition) {
       fetchData()
     }
-  }, [])
+  }, [id])
 
 
 
   const handleAddCriteria = async () => {
     if (!newCriteriaText.trim()) return;
     await addCriteria(id, newCriteriaText)
-    await fetchData()
+   // await fetchData()
     setNewCriteriaText('');
   };
 
   const handleDeleteCriteria = async (critiriaId: string) => {
     await deleteCriteria(critiriaId)
-    await fetchData()
+    //await fetchData()
   };
 
   const handleSave = () => {

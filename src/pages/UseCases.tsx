@@ -312,7 +312,7 @@ export default function UseCases() {
           </Button>
         </Stack>
 
-        <Stack spacing={2} sx={{ mb: 3 }}>
+        <Stack spacing={2} sx={{ mb: 8 }}>
           {positions.map((position) => (
             <PositionCard
               key={position.id}

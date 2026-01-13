@@ -104,13 +104,13 @@ export default function Feedback() {
       <Navbar />
 
       {/* Main Content */}
-      <Container maxWidth="lg" sx={{ pb: { xs: 8, md: 16 } }}>
+      <Container maxWidth="lg" sx={{ pb: { xs: 8, md: 12 } }}>
         {/* Header */}
         <Box textAlign="center" sx={{ mb: 4 }}>
           <Typography
             variant="h5"
             sx={{
-              fontSize: { xs: "2rem", md: "3.5rem" },
+              fontSize: { xs: "1rem", md: "2.5rem" },
               fontWeight: 700,
               mb: 0.1,
               color: "text.primary",
@@ -136,26 +136,26 @@ export default function Feedback() {
                   variant="h4"
                   sx={{
                     fontWeight: 500,
-                    mb: 4,
+                    mb: 2,
                     color: "text.primary",
-                    fontSize: { xs: "1.25rem", md: "1.775rem" },
+                    fontSize: { xs: "1.125rem", md: "1.375rem" },
                   }}
                 >
                   Submit Feedback
                 </Typography>
-                <Divider sx={{ height: 1.5, bgcolor: "grey.200" }} />
+                <Divider sx={{ height: 1.25, bgcolor: "grey.200" }} />
               </Box>
 
               {/* Form Fields */}
               <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={{ xs: 4, md: 6 }}>
+                <Stack spacing={{ xs: 2 , md: 4 }}>
                   {/* Title Field */}
                   <Box>
                     <FormLabel
                       sx={{
                         display: "block",
                         color: "grey.500",
-                        fontSize: { xs: "1.125rem", md: "1.25rem" },
+                        fontSize: { xs: "1.025rem", md: "1.125rem" },
                         fontWeight: 400,
                         mb: 1.05,
                         textTransform: "capitalize",
@@ -171,14 +171,14 @@ export default function Feedback() {
                       helperText={errors.title?.message}
                       sx={{
                         '& .MuiOutlinedInput-root': {
-                          height: { xs: "60px", md: "65px" },
+                          height: { xs: "40px", md: "45px" },
                           borderRadius: "16px",
                           '& fieldset': {
                             borderColor: errors.title ? "error.main" : "grey.400",
                           },
                         },
                         '& .MuiOutlinedInput-input': {
-                          fontSize: { xs: "1.125rem", md: "1.25rem" },
+                          fontSize: { xs: "1.0125rem", md: "1.125rem" },
                           color: "text.primary",
                         },
                       }}
@@ -191,7 +191,7 @@ export default function Feedback() {
                       sx={{
                         display: "block",
                         color: "grey.500",
-                        fontSize: { xs: "1.125rem", md: "1.25rem" },
+                        fontSize: { xs: "1.0125rem", md: "1.125rem" },
                         fontWeight: 400,
                         mb: 1.25,
                         textTransform: "capitalize",
@@ -209,14 +209,14 @@ export default function Feedback() {
                       helperText={errors.description?.message}
                       sx={{
                         '& .MuiOutlinedInput-root': {
-                          minHeight: { xs: "128px", md: "140px" },
+                          minHeight: { xs: "118px", md: "120px" },
                           borderRadius: "16px",
                           '& fieldset': {
                             borderColor: errors.description ? "error.main" : "grey.400",
                           },
                         },
                         '& .MuiOutlinedInput-input': {
-                          fontSize: { xs: "1.125rem", md: "1.25rem" },
+                          fontSize: { xs: "1.0125rem", md: "1.125rem" },
                           color: "text.primary",
                         },
                       }}
@@ -229,7 +229,7 @@ export default function Feedback() {
                       sx={{
                         display: "block",
                         color: "grey.500",
-                        fontSize: { xs: "1.125rem", md: "1.125rem" },
+                        fontSize: { xs: "1.0125rem", md: "1.0125rem" },
                         fontWeight: 400,
                         mb: 1.5,
                         textTransform: "capitalize",
@@ -245,14 +245,14 @@ export default function Feedback() {
                         tabIndex={-1}
                         startIcon={<CloudUploadIcon />}
                         sx={{
-                          height: { xs: "60px", md: "65px" },
-                          px: { xs: 2, md: 3 },
+                          height: { xs: "50px", md: "55px" },
+                          px: { xs: 1, md: 2 },
                           backgroundColor: "background.default",
                           border: "1px solid white",
                           borderRadius: "14px",
                           boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
                           color: "grey.500",
-                          fontSize: { xs: "1.025rem", md: "1.25rem" },
+                          fontSize: { xs: "1.025rem", md: "1.15rem" },
                           fontWeight: 400,
                           textTransform: "capitalize",
                           letterSpacing: "0.025em",
@@ -310,7 +310,7 @@ export default function Feedback() {
                       minWidth: { xs: 180, md: 200 },
                       height: { xs: 48, md: 56 },
                       borderRadius: "25px",
-                      fontSize: { xs: "1rem", md: "1.125rem" },
+                      fontSize: { xs: "0.9rem", md: "1.0125rem" },
                       fontWeight: 700,
                       borderColor: "grey.200",
                       color: "text.primary",
@@ -331,7 +331,7 @@ export default function Feedback() {
                       minWidth: { xs: 180, md: 200 },
                       height: { xs: 48, md: 56 },
                       borderRadius: "25px",
-                      fontSize: { xs: "1rem", md: "1.125rem" },
+                      fontSize: { xs: "0.9rem", md: "1.0125rem" },
                       fontWeight: 700,
                       color: "white"
                     }}
