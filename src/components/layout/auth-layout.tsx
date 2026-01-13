@@ -21,7 +21,7 @@ export function AuthLayout({ children, rightContent }: AuthLayoutProps) {
         {/* Logo */}
         <Box sx={{
           position: 'absolute',
-          left: { xs: 2, md: '77px' },
+          left: { xs: 2, md: '60px' },
           top: { xs: 2, md: '13px' },
           zIndex: 10
         }}>
@@ -30,7 +30,7 @@ export function AuthLayout({ children, rightContent }: AuthLayoutProps) {
 
         {/* Form Content */}
         <Container sx={{
-          px: { xs: 2, md: '77px' },
+          px: { xs: 2, md: '60px' },
           pt: { xs: 12, md: '75px' },
           pb: { xs: 2, md: '37px' },
           minHeight: { xs: '100vh', lg: 0 }
@@ -65,7 +65,7 @@ export function AuthLayout({ children, rightContent }: AuthLayoutProps) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            p: 4
+            p: 5
           }}>
             {rightContent}
           </Box>

@@ -80,8 +80,8 @@ export default function Verification() {
           src="/verify.png"
           alt="Young person with phone"
           sx={{
-            width: "100%",
-            height: "100%",
+            width: "90%",
+            height: "90%",
             objectFit: "cover"
           }}
         />
@@ -166,7 +166,7 @@ export default function Verification() {
         <Typography
           variant="h1"
           sx={{
-            fontSize: "2.8125rem", // 45px
+            fontSize: "2.025rem", // 45px
             fontWeight: 700,
             lineHeight: "normal",
             mb: "23px",
@@ -180,10 +180,10 @@ export default function Verification() {
         <Typography
           variant="h6"
           sx={{
-            fontSize: "22px", // 24px
+            fontSize: "21px", // 24px
             fontWeight: 500,
             lineHeight: "normal",
-            mb: "50px",
+            mb: "30px",
             color: "text.primary"
           }}
         >
@@ -192,13 +192,13 @@ export default function Verification() {
 
         {/* Form */}
         <Box component="form" onSubmit={handleSubmit}>
-          <Stack spacing={3}>
+          <Stack spacing={2}>
             <Box>
               <FormLabel
                 sx={{
                   display: "block",
                   color: "grey.500",
-                  fontSize: "1.125rem",
+                  fontSize: "1.25rem",
                   fontWeight: 500,
                   mb: 2
                 }}
@@ -214,7 +214,7 @@ export default function Verification() {
                 sx={{
                   mb: 2, // Reduced margin to make space for resend button
                   '& .MuiOutlinedInput-root': {
-                    height: "60px",
+                    height: "50px",
                     borderRadius: "16px"
                   }
                 }}

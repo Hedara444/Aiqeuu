@@ -84,10 +84,10 @@ export default function ResetPassword() {
         <Typography
           variant="h1"
           sx={{
-            fontSize: "2.125rem",
+            fontSize: "2.025rem",
             fontWeight: 700,
             lineHeight: "normal",
-            mb: "23px",
+            mb: "18px",
             color: "text.primary"
           }}
         >
@@ -98,10 +98,10 @@ export default function ResetPassword() {
         <Typography
           variant="h6"
           sx={{
-            fontSize: "1.5rem",
+            fontSize: "1.15rem",
             fontWeight: 500,
-            lineHeight: 1.375,
-            mb: 7,
+            lineHeight: 1.1375,
+            mb: 4,
             maxWidth: 807,
             color: "text.secondary"
           }}
@@ -134,6 +134,7 @@ export default function ResetPassword() {
                   color: "grey.500",
                   fontSize: "1.125rem",
                   fontWeight: 500,
+                  mb:2
                 }}
               >
                 Email *
@@ -145,9 +146,9 @@ export default function ResetPassword() {
                 error={!!errors.email}
                 helperText={errors.email?.message}
                 sx={{
-                  mb: 5,
+                  mb: 3,
                   '& .MuiOutlinedInput-root': {
-                    height: "60px",
+                    height: "50px",
                     borderRadius: "16px"
                   }
                 }}
@@ -158,7 +159,7 @@ export default function ResetPassword() {
             {/* Submit Button */}
             <AikyuuButton
               type="submit"
-              sx={{ mb: 10 }}
+              sx={{ mb: 5 }}
               disabled={isLoading}
               loading={isLoading}
             >

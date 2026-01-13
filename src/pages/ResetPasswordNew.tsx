@@ -117,8 +117,8 @@ export default function ResetPasswordNew() {
         src="/signup.png"
         alt="Person working on laptop"
         sx={{
-          width: "100%",
-          height: "100%",
+          width: "80%",
+          height: "80%",
           objectFit: "cover",
           borderRadius: 1
         }}
@@ -128,15 +128,15 @@ export default function ResetPasswordNew() {
 
   return (
     <AuthLayout rightContent={rightContent}>
-      <Box sx={{ maxWidth: 807 }}>
+      <Box sx={{ maxWidth: 907 }}>
         {/* Heading */}
         <Typography
           variant="h1"
           sx={{
-            fontSize: "2.8125rem",
+            fontSize: "2.025rem",
             fontWeight: 700,
             lineHeight: "normal",
-            mb: 10,
+            mb: 2,
             color: "text.primary"
           }}
         >
@@ -147,11 +147,11 @@ export default function ResetPasswordNew() {
         <Typography
           variant="h6"
           sx={{
-            fontSize: "1.5rem",
+            fontSize: "1.05rem",
             fontWeight: 500,
             lineHeight: 1.375,
-            mb: 10,
-            maxWidth: 807,
+            mb: 3,
+            maxWidth: 907,
             color: "text.secondary"
           }}
         >
@@ -174,16 +174,16 @@ export default function ResetPasswordNew() {
 
         {/* Form */}
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={3}>
+          <Stack spacing={2}>
             {/* Verification Code */}
             <Box>
               <FormLabel
                 sx={{
                   display: "block",
                   color: "grey.500",
-                  fontSize: "1.125rem",
+                  fontSize: "1.025rem",
                   fontWeight: 500,
-                  mb: 2
+                  mb: 1
                 }}
               >
                 Code *
@@ -196,9 +196,9 @@ export default function ResetPasswordNew() {
                 helperText={errors.verificationCode?.message}
                 disabled={isLoading}
                 sx={{
-                  mb: 2,
+                  mb: 1,
                   '& .MuiOutlinedInput-root': {
-                    height: "60px",
+                    height: "50px",
                     borderRadius: "16px"
                   }
                 }}
@@ -211,9 +211,9 @@ export default function ResetPasswordNew() {
                 sx={{
                   display: "block",
                   color: "grey.500",
-                  fontSize: "1.125rem",
+                  fontSize: "1.025rem",
                   fontWeight: 500,
-                  mb: 2
+                  mb: 1
                 }}
               >
                 New Password *
@@ -226,9 +226,9 @@ export default function ResetPasswordNew() {
                 helperText={errors.newPassword?.message}
                 disabled={isLoading}
                 sx={{
-                  mb: 3,
+                  mb: 1,
                   '& .MuiOutlinedInput-root': {
-                    height: "60px",
+                    height: "50px",
                     borderRadius: "16px"
                   }
                 }}
@@ -241,9 +241,9 @@ export default function ResetPasswordNew() {
                 sx={{
                   display: "block",
                   color: "grey.500",
-                  fontSize: "1.125rem",
+                  fontSize: "1.025rem",
                   fontWeight: 500,
-                  mb: 2
+                  mb: 1
                 }}
               >
                 Confirm the new password *
@@ -256,9 +256,9 @@ export default function ResetPasswordNew() {
                 helperText={errors.confirmPassword?.message}
                 disabled={isLoading}
                 sx={{
-                  mb: 3,
+                  mb: 0,
                   '& .MuiOutlinedInput-root': {
-                    height: "60px",
+                    height: "50px",
                     borderRadius: "16px"
                   }
                 }}
@@ -266,11 +266,12 @@ export default function ResetPasswordNew() {
             </Box>
 
             {/* Resend Code Button */}
-            <Box sx={{ textAlign: 'center', mb: 3 }}>
+            <Box sx={{ textAlign: 'center', mb: 2 }}>
               <Button
                 onClick={handleResendCode}
                 disabled={isResending || resendCountdown > 0 || !verificationId || isLoading}
                 sx={{
+                  mb:0,
                   color: 'primary.main',
                   textTransform: 'none',
                   fontSize: '1rem',
@@ -296,7 +297,7 @@ export default function ResetPasswordNew() {
             {/* Submit Button */}
             <AikyuuButton
               type="submit"
-              sx={{ mb: 10 }}
+              sx={{ mb: 5 }}
               disabled={isLoading}
               loading={isLoading}
             >
@@ -309,7 +310,7 @@ export default function ResetPasswordNew() {
                 component="span"
                 variant="h6"
                 sx={{
-                  fontSize: "1.25rem",
+                  fontSize: "1.125rem",
                   fontWeight: 500,
                   color: "text.primary"
                 }}
@@ -321,7 +322,7 @@ export default function ResetPasswordNew() {
                 to="/signin"
                 variant="h6"
                 sx={{
-                  fontSize: "1.25rem",
+                  fontSize: "1.125rem",
                   fontWeight: 500,
                   color: "primary.main",
                   textDecoration: "underline",
