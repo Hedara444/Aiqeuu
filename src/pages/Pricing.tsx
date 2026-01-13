@@ -37,9 +37,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
   <Card sx={{
     position: 'relative',
     width: '100%',
-    maxWidth: '512px',
-    borderRadius: '50px',
-    p: { xs: 4, md: 6 },
+    maxWidth: '380px',
+    borderRadius: '30px',
+    p: { xs: 4, md: 4 },
     display: 'flex',
     flexDirection: 'column',
     border: highlighted ? '2px solid' : 'none',
@@ -52,7 +52,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography variant="h3" sx={{
           color: 'primary.main',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.875rem', md: '2.5rem' },
+          fontSize: { xs: '1.375rem', md: '2.15rem' },
           fontWeight: 700,
           mb: 2
         }}>
@@ -61,7 +61,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.5rem', md: '1.875rem' },
+          fontSize: { xs: '1.125rem', md: '1.375rem' },
           fontWeight: 700,
           mb: 3
         }}>
@@ -70,7 +70,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.125rem', md: '1.25rem' },
+          fontSize: { xs: '1.025rem', md: '1.15rem' },
           lineHeight: 1.6
         }}>
           {description}
@@ -97,7 +97,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.125rem', md: '1.25rem' },
+          fontSize: { xs: '1.025rem', md: '1.15rem' },
           flex: 1
         }}>
           CV Credits:Process up to {points} CVs
@@ -110,7 +110,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <Typography sx={{
             color: 'primary.dark',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '1.125rem', md: '1.25rem' }
+            fontSize: { xs: '1.025rem', md: '1.15rem' }
           }}>
             You pay:
           </Typography>
@@ -118,7 +118,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.5rem', md: '1.875rem' },
+          fontSize: { xs: '1.25rem', md: '1.575rem' },
           fontWeight: 700,
           mb: 1
         }}>
@@ -133,12 +133,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         variant="contained"
         fullWidth
         sx={{
-          height: { xs: '64px', md: '72px' },
+          height: { xs: '54px', md: '52px' },
           borderRadius: '50px',
           backgroundColor: 'primary.main',
           color: 'white',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.2rem', md: '1.5rem' },
+          fontSize: { xs: '1.12rem', md: '1.25rem' },
           fontWeight: 700,
           textTransform: 'none',
           '&:hover': {
@@ -278,9 +278,9 @@ export default function Pricing() {
           <Typography variant="h1" sx={{
             color: 'primary.dark',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '3rem', md: '3.75rem', lg: '4.5rem' },
+            fontSize: { xs: '2rem', md: '2.75rem', lg: '3.5rem' },
             fontWeight: 700,
-            mb: 3
+            mb: 2
           }}>
             Pricing
           </Typography>
@@ -288,7 +288,7 @@ export default function Pricing() {
             <Typography sx={{
               color: 'primary.dark',
               fontFamily: 'Montserrat',
-              fontSize: { xs: '1.25rem', md: '1.5rem', lg: '1.5625rem' },
+              fontSize: { xs: '1.15rem', md: '1.25rem', lg: '1.3625rem' },
               lineHeight: 1.6
             }}>
               Choose Your Plan
@@ -299,7 +299,7 @@ export default function Pricing() {
         </Box>
 
         {/* Pricing Cards */}
-        <Grid container spacing={{ xs: 4, lg: 6 }} justifyContent="center" sx={{ mx: 'auto' }}>
+        <Grid container spacing={{ xs: 4, lg: 4 }} justifyContent="center" sx={{ mx: 'auto' }}>
           {products.reverse().map((product, index) => (
             <Grid key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
               <ProductCard

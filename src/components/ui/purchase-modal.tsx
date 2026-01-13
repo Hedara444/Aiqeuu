@@ -60,14 +60,14 @@ export function PurchaseModal({
         sx: { borderRadius: '30px', maxHeight: '90vh' }
       }}
     >
-      <DialogContent sx={{ p: { xs: 4, md: 6 } }}>
+      <DialogContent sx={{ p: { xs: 2, md: 4 } }}>
         <Box>
           {/* Header */}
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
             <DialogTitle sx={{
               color: 'primary.dark',
               fontFamily: 'Montserrat',
-              fontSize: { xs: '1.5rem', md: '1.875rem' },
+              fontSize: { xs: '1.15rem', md: '1.375rem' },
               fontWeight: 700,
               p: 0
             }}>
@@ -86,7 +86,7 @@ export function PurchaseModal({
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' }
+                  fontSize: { xs: '1.125rem', md: '1.25rem' }
                 }}>
                   Price per package:
                 </Typography>
@@ -104,14 +104,14 @@ export function PurchaseModal({
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' }
+                  fontSize: { xs: '1.125rem', md: '1.25rem' }
                 }}>
                   Credits per package:
                 </Typography>
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
                   fontWeight: 700
                 }}>
                   {creditsPerPackage} CVs
@@ -133,19 +133,19 @@ export function PurchaseModal({
               <Typography sx={{
                 color: 'primary.dark',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1.25rem', md: '1.5rem' }
+                fontSize: { xs: '1.125rem', md: '1.25rem' }
               }}>
                 Select Quantity:
               </Typography>
 
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 {/* Decrease Button */}
                 <IconButton
                   onClick={decrementQuantity}
                   disabled={quantity <= 1}
                   sx={{
-                    width: { xs: '48px', md: '64px' },
-                    height: { xs: '48px', md: '64px' },
+                    width: { xs: '38px', md: '44px' },
+                    height: { xs: '38px', md: '44px' },
                     borderRadius: '12px',
                     backgroundColor: quantity <= 1 ? 'grey.200' : 'grey.200',
                     color: quantity <= 1 ? 'grey.400' : 'primary.dark',
@@ -174,7 +174,7 @@ export function PurchaseModal({
                   <Typography sx={{
                     color: 'primary.dark',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    fontSize: { xs: '1.125rem', md: '1.25rem' },
                     fontWeight: 700
                   }}>
                     {quantity}
@@ -185,8 +185,8 @@ export function PurchaseModal({
                 <IconButton
                   onClick={incrementQuantity}
                   sx={{
-                    width: { xs: '48px', md: '64px' },
-                    height: { xs: '48px', md: '64px' },
+                    width: { xs: '38px', md: '54px' },
+                    height: { xs: '38px', md: '54px' },
                     borderRadius: '12px',
                     backgroundColor: 'grey.200',
                     color: 'primary.dark',
@@ -195,7 +195,7 @@ export function PurchaseModal({
                     },
                   }}
                 >
-                  <AddIcon sx={{ fontSize: { xs: '1.5rem', md: '1.875rem' } }} />
+                  <AddIcon sx={{ fontSize: { xs: '1.25rem', md: '1.375rem' } }} />
                 </IconButton>
               </Box>
             </Box>
@@ -204,19 +204,19 @@ export function PurchaseModal({
             <Divider />
 
             {/* Totals */}
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' }
+                  fontSize: { xs: '1.125rem', md: '1.25rem' }
                 }}>
                   Total Credits:
                 </Typography>
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
                   fontWeight: 700
                 }}>
                   {totalCredits} CVs
@@ -227,14 +227,14 @@ export function PurchaseModal({
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' }
+                  fontSize: { xs: '1.125rem', md: '1.25rem' }
                 }}>
                   Total Price:
                 </Typography>
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
                   fontWeight: 700
                 }}>
                   {totalPrice.toFixed(2)} $
@@ -249,12 +249,12 @@ export function PurchaseModal({
               fullWidth
               disabled={isLoading} // Disable button when loading
               sx={{
-                height: { xs: '64px', md: '80px' },
-                borderRadius: '50px',
+                height: { xs: '44px', md: '50px' },
+                borderRadius: '30px',
                 backgroundColor: isLoading ? 'grey.400' : 'primary.main', // Change color when loading
                 color: 'white',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1.25rem', md: '1.5rem' },
+                fontSize: { xs: '1.125rem', md: '1.25rem' },
                 fontWeight: 700,
                 '&:hover': {
                   backgroundColor: isLoading ? 'grey.400' : 'primary.dark', // Prevent hover effect when loading
@@ -266,7 +266,7 @@ export function PurchaseModal({
             >
               {isLoading ? (
                 // Show loading indicator when isLoading is true
-                <CircularProgress size={24} sx={{ color: 'white' }} />
+                <CircularProgress size={22} sx={{ color: 'white' }} />
               ) : (
                 // Show normal text when not loading
                 `Purchase for ${totalPrice.toFixed(2)}$`

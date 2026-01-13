@@ -193,7 +193,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.5rem', md: '1.875rem' },
+          fontSize: { xs: '1.15rem', md: '1.575rem' },
           fontWeight: 700,
           mb: 3
         }}>
