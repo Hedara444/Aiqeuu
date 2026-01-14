@@ -101,11 +101,11 @@ const EditPositionModal: React.FC<EditPositionModalProps> = ({ isOpen, onClose, 
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" fullWidth>
+        <Stack direction="row"  spacing={0} sx={{ width: '100%' , justifyContent:"space-between" }}>
+          <Button onClick={onClose} variant="outlined" color="inherit" sx={{ width:'30%' }} >
             Cancel
           </Button>
-          <Button onClick={handleSave} variant="contained" sx={{ color: "white" }} fullWidth loading={isLoading}>
+          <Button onClick={handleSave} variant="contained" sx={{ color: "white", width:'30%'  }}  loading={isLoading}>
             Save changes
           </Button>
         </Stack>

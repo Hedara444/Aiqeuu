@@ -244,25 +244,25 @@ export function Navbar() {
                     Feedback
                   </Button>
 
-                  <Divider />
+                  {/*<Divider />*/}
 
-                  <Button
-                    component={Link}
-                    to="/history"
-                    onClick={() => setShowProfileDropdown(false)}
-                    startIcon={<HistoryIcon />}
-                    sx={{
-                      justifyContent: 'flex-start',
-                      color: 'text.primary',
-                      fontFamily: 'Quicksand',
-                      fontSize: '0.95rem',
-                      fontWeight: 500,
-                      textTransform: 'none',
-                      '&:hover': { color: 'primary.main' }
-                    }}
-                  >
-                    History
-                  </Button>
+                  {/*<Button*/}
+                  {/*  component={Link}*/}
+                  {/*  to="/history"*/}
+                  {/*  onClick={() => setShowProfileDropdown(false)}*/}
+                  {/*  startIcon={<HistoryIcon />}*/}
+                  {/*  sx={{*/}
+                  {/*    justifyContent: 'flex-start',*/}
+                  {/*    color: 'text.primary',*/}
+                  {/*    fontFamily: 'Quicksand',*/}
+                  {/*    fontSize: '0.95rem',*/}
+                  {/*    fontWeight: 500,*/}
+                  {/*    textTransform: 'none',*/}
+                  {/*    '&:hover': { color: 'primary.main' }*/}
+                  {/*  }}*/}
+                  {/*>*/}
+                  {/*  History*/}
+                  {/*</Button>*/}
 
                   <Divider />
 
