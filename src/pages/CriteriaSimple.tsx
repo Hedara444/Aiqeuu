@@ -91,20 +91,20 @@ export default function CriteriaSimple() {
       <Navbar />
 
       {/* Main Content */}
-      <Box sx={{ px: { xs: 1.5, md: 6 } }}>
+      <Box sx={{ px: { xs: 1, md: 4 } }}>
         {/* Process Flow Section */}
         <Stepper step={1} />
 
         {/* Position and Criteria Section */}
-        <Container maxWidth="xl" sx={{ mb: 8 }}>
-          <Stack spacing={3.5}>
+        <Container maxWidth="xl" sx={{ mb: 10 }}>
+          <Stack spacing={2.5}>
             {/* Position Display */}
-            <Paper sx={{ borderRadius: '14px', px: { xs: 3, md: 4 }, py: 2, boxShadow: 1 }}>
-              <Stack direction="row" alignItems="center" spacing={4}>
+            <Paper sx={{ borderRadius: '12px', px: { xs: 2, md: 3 }, py: 1.5, boxShadow: 1 }}>
+              <Stack direction="row" alignItems="center" spacing={3}>
                 <Typography sx={{
                   color: 'text.secondary',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1rem', md: '1.125rem' },
+                  fontSize: { xs: '0.875rem', md: '1rem' },
                   fontWeight: 500
                 }}>
                   Position:
@@ -112,7 +112,7 @@ export default function CriteriaSimple() {
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1rem', md: '1.125rem' },
+                  fontSize: { xs: '0.875rem', md: '1rem' },
                   fontWeight: 700
                 }}>
                   {currentPosition.title}
@@ -121,13 +121,13 @@ export default function CriteriaSimple() {
             </Paper>
 
             {/* Criteria Management Section */}
-            <Paper sx={{ borderRadius: '16px', overflow: 'hidden', boxShadow: 1 }}>
+            <Paper sx={{ borderRadius: '12px', overflow: 'hidden', boxShadow: 1 }}>
               {/* Header */}
-              <Box sx={{ backgroundColor: 'primary.main', px: { xs: 3, md: 4 }, py: 2 }}>
+              <Box sx={{ backgroundColor: 'primary.main', px: { xs: 2, md: 3 }, py: 1.5 }}>
                 <Typography variant="h1" sx={{
                   color: 'white',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1rem', md: '1.25rem' },
+                  fontSize: { xs: '0.875rem', md: '1rem' },
                   fontWeight: 700
                 }}>
                   + Create Criteria
@@ -135,14 +135,14 @@ export default function CriteriaSimple() {
               </Box>
 
               {/* Add Criteria Form */}
-              <Box sx={{ p: { xs: 3, md: 4 } }}>
-                <Stack spacing={4}>
+              <Box sx={{ p: { xs: 2, md: 3 } }}>
+                <Stack spacing={3}>
                   {/* Add New Criteria Row */}
                   <Paper
                     sx={{
                       backgroundColor: 'grey.100',
                       borderRadius: '12px',
-                      p: 1,
+                      p: 0.75,
                       boxShadow: 1,
                       transition: 'background-color 0.3s',
                       '&:hover': {
@@ -151,17 +151,17 @@ export default function CriteriaSimple() {
                     }}
                   >
                     <Stack direction="row" alignItems="center" spacing={1}>
-                      <Grid container columns={2} spacing={0.5} sx={{ width: '20px' }}>
+                      <Grid container columns={2} spacing={0.5} sx={{ width: '16px' }}>
                         {[...Array(6)].map((_, i) => (
                           <Grid key={i}>
-                            <Box sx={{ width: '4px', height: '4px', backgroundColor: 'grey.400', borderRadius: '50%' }} />
+                            <Box sx={{ width: '3px', height: '3px', backgroundColor: 'grey.400', borderRadius: '50%' }} />
                           </Grid>
                         ))}
                       </Grid>
                       <Typography sx={{
                         color: 'text.secondary',
                         fontFamily: 'Montserrat',
-                        fontSize: '0.875rem',
+                        fontSize: '0.8rem',
                         fontWeight: 500,
                         mr: 'auto'
                       }}>
@@ -170,14 +170,14 @@ export default function CriteriaSimple() {
                       <Box sx={{
                         backgroundColor: 'background.paper',
                         borderRadius: '8px',
-                        p: 0.5,
+                        p: 0.25,
                         boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
                         border: '1px solid',
                         borderColor: 'grey.300',
                         minWidth: 0,
                         flex: 1,
                         // maxWidth: '512px',
-                        ml: 2
+                        ml: 1.5
                       }}>
 
                         <TextField
@@ -187,8 +187,11 @@ export default function CriteriaSimple() {
                           fullWidth
                           required
                           placeholder="ui/ux designer"
+                          size="small"
                           sx={{
                             '& .MuiOutlinedInput-root': {
+                              height: '32px',
+                              fontSize: '0.875rem',
                               border: "none",
                               outline: "none",
                               '& fieldset': {
@@ -226,14 +229,14 @@ export default function CriteriaSimple() {
 
                   {/* Existing Criteria */}
                   {currentPosition.criterias?.map((criterion, index) => (
-                    <Paper key={criterion.id} sx={{ backgroundColor: 'grey.50', borderRadius: '12px', p: 2, boxShadow: 1 }}>
-                      <Stack direction="row" alignItems="center" spacing={2}>
+                    <Paper key={criterion.id} sx={{ backgroundColor: 'grey.50', borderRadius: '12px', p: 1, boxShadow: 1 }}>
+                      <Stack direction="row" alignItems="center" spacing={1.5}>
                         <Typography sx={{
                           color: 'text.secondary',
                           fontFamily: 'Montserrat',
-                          fontSize: '0.875rem',
+                          fontSize: '0.8rem',
                           fontWeight: 500,
-                          width: '80px'
+                          width: '70px'
                         }}>
                           {`Criteria-${index + 1}`}
                         </Typography>
@@ -241,7 +244,7 @@ export default function CriteriaSimple() {
                           <Typography sx={{
                             color: 'primary.dark',
                             fontFamily: 'Montserrat',
-                            fontSize: '0.9rem',
+                            fontSize: '0.875rem',
                             fontWeight: 700,
                             flex: 1
                           }}>
@@ -250,8 +253,8 @@ export default function CriteriaSimple() {
                           <Typography sx={{
                             color: 'primary.dark',
                             fontFamily: 'Montserrat',
-                            fontSize: '0.8rem',
-                            mx: 2
+                            fontSize: '0.75rem',
+                            mx: 1.5
                           }}>
                             {new Date(criterion.createdAt).toLocaleString()}
                           </Typography>
@@ -261,7 +264,7 @@ export default function CriteriaSimple() {
                             onClick={() => handleDeleteCriteria(criterion.id)}
                             size="small"
                             sx={{
-                              p: 0.5,
+                              p: 0.25,
                               borderRadius: '8px',
                               '&:hover': {
                                 backgroundColor: 'rgba(255, 0, 0, 0.1)',

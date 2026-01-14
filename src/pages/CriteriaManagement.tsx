@@ -93,19 +93,19 @@ export default function CriteriaManagement() {
       <Navbar />
 
       {/* Main Content */}
-      <Box sx={{ px: { xs: 1.5, md: 6 } }}>
+      <Box sx={{ px: { xs: 1.5, md: 4 } }}>
         {/* Process Flow Section */}
-        <Paper sx={{ borderRadius: '40px', p: { xs: 4, md: 7 }, mb: 7 }}>
+        <Paper sx={{ borderRadius: '24px', p: { xs: 2, md: 4 }, mb: 4 }}>
           {/* Process Steps Indicator */}
 
-          <Container maxWidth="xl" sx={{ position: 'relative', mb: 8 }}>
+          <Container maxWidth="xl" sx={{ position: 'relative', mb: 4 }}>
             {/* Progress Line */}
             <Box sx={{
               position: 'absolute',
-              top: '24px',
-              left: '48px',
-              right: '48px',
-              height: '4px',
+              top: '18px',
+              left: '36px',
+              right: '36px',
+              height: '3px',
               backgroundColor: 'grey.300',
               borderRadius: '2px'
             }}>
@@ -122,38 +122,38 @@ export default function CriteriaManagement() {
               {/* Step 1 - Active */}
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Box sx={{
-                  width: '48px',
-                  height: '48px',
+                  width: '36px',
+                  height: '36px',
                   backgroundColor: 'primary.main',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  mb: 1,
+                  mb: 0.75,
                   position: 'relative',
                   zIndex: 10
                 }}>
                   <Box sx={{
-                    width: '24px',
-                    height: '24px',
+                    width: '18px',
+                    height: '18px',
                     backgroundColor: 'white',
                     borderRadius: '50%'
                   }} />
                 </Box>
-                <Box sx={{ textAlign: 'center', maxWidth: '240px' }}>
+                <Box sx={{ textAlign: 'center', maxWidth: '200px' }}>
                   <Typography variant="h6" sx={{
                     color: 'primary.dark',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.15rem', md: '1.175rem'  },
+                    fontSize: { xs: '0.9rem', md: '1rem'  },
                     fontWeight: 700,
-                    mb: 1
+                    mb: 0.5
                   }}>
                     New Position
                   </Typography>
                   <Typography sx={{
                     color: 'text.secondary',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.125rem', md: '1rem' },
+                    fontSize: { xs: '0.8rem', md: '0.875rem' },
                     fontWeight: 500
                   }}>
                     Create New Position
@@ -164,31 +164,31 @@ export default function CriteriaManagement() {
               {/* Step 2 - Inactive */}
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Box sx={{
-                  width: '48px',
-                  height: '48px',
+                  width: '36px',
+                  height: '36px',
                   backgroundColor: 'grey.300',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  mb: 1,
+                  mb: 0.75,
                   position: 'relative',
                   zIndex: 10
                 }} />
-                <Box sx={{ textAlign: 'center', maxWidth: '240px' }}>
+                <Box sx={{ textAlign: 'center', maxWidth: '200px' }}>
                   <Typography variant="h6" sx={{
                     color: 'primary.dark',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.15rem', md: '1.175rem' },
+                    fontSize: { xs: '0.9rem', md: '1rem' },
                     fontWeight: 700,
-                    mb: 1
+                    mb: 0.5
                   }}>
                     Upload CV
                   </Typography>
                   <Typography sx={{
                     color: 'text.secondary',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.125rem', md: '1rem' },
+                    fontSize: { xs: '0.8rem', md: '0.875rem' },
                     fontWeight: 500
                   }}>
                     Download one or more CVs

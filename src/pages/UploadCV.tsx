@@ -341,9 +341,10 @@ export default function UploadCV() {
               onClick={handleCancel}
               variant="outlined"
               sx={{
-                px: 4,
+                px: 5,
                 py: 2,
-                borderRadius: '26px',
+                height:'52px' ,
+                borderRadius: '22px',
                 borderColor: 'grey.400',
                 color: 'primary.dark',
                 fontFamily: 'Montserrat',
@@ -365,9 +366,10 @@ export default function UploadCV() {
               loading={isLoading}
               disabled={isLoading}
               sx={{
-                px: 4,
+                px: 5,
                 py: 2,
-                borderRadius: '26px',
+                 height:'52px' ,
+                borderRadius: '22px',
                 backgroundColor: 'primary.main',
                 color: 'white',
                 fontFamily: 'Montserrat',

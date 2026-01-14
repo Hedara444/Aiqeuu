@@ -63,13 +63,13 @@ export function Navbar() {
   }
 
   return (
-    <Box sx={{ width: '100%', backgroundColor: 'background.default', px: { xs: 1.05, md: 2 }, py: 2.6 }}>
+    <Box sx={{ width: '100%', backgroundColor: 'background.default', px: { xs: 0.75, md: 1.5 }, py: 1.5 }}>
       <Paper sx={{
         // maxWidth: '1280px',
         mx: 'auto',
-        borderRadius: '50px',
-        px: { xs: 1, md: 2 },
-        py: 1,
+        borderRadius: '24px',
+        px: { xs: 1, md: 1.5 },
+        py: 0.75,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -90,7 +90,7 @@ export function Navbar() {
               sx={{
                 color: 'text.primary',
                 fontFamily: 'Montserrat',
-                fontSize: { md: '0.725rem', lg: '1.00rem' },
+                fontSize: { md: '0.65rem', lg: '0.875rem' },
                 fontWeight: 700,
                 textTransform: 'none',
                 '&:hover': { color: 'primary.main' }
