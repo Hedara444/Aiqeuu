@@ -102,7 +102,7 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           sx={{
-            height: 240,
+            height: 220,
             border: '2px dashed',
             borderColor: isDragOver ? 'primary.main' : 'grey.300',
             borderRadius: 2,
@@ -111,16 +111,16 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 2,
-            mb: 2,
+            gap: 1,
+            mb: 1,
           }}
           {
           ...(isDragOver ? { boxShadow: 0 } : {})
           }
         >
-          <PictureAsPdfIcon color="action" sx={{ fontSize: 48 }} />
+          <PictureAsPdfIcon color="action" sx={{ fontSize: 38 }} />
           <Stack direction="row" spacing={1} alignItems="center">
-            <Button component="label" variant="text" color="primary" sx={{ textDecoration: 'underline', fontWeight: 700 }}>
+            <Button component="label" variant="text" color="primary" sx={{ textDecoration: 'underline', fontWeight: 700  , fontSize:'1rem' }}>
               Click to upload
               <input hidden multiple accept=".pdf,.doc,.docx" type="file" onChange={handleFileSelect} />
             </Button>
@@ -131,11 +131,11 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
         </Box>
       </DialogContent>
       <DialogActions>
-        <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" fullWidth>
+        <Stack direction="row" spacing={2} sx={{ width: '100%' , justifyContent:'space-evenly' , mb:1 , mt:1}}>
+          <Button onClick={onClose} variant="outlined" color="inherit"  sx={{ width:'25%' , fontSize:'0.8rem'}} >
             Cancel
           </Button>
-          <Button onClick={onClose} variant="contained" color="primary" fullWidth loading={isLoading}>
+          <Button onClick={onClose} variant="contained" color="primary" sx={{ width:'25%' , fontSize:'0.8rem'}}  loading={isLoading}>
             Upload Resumes
           </Button>
         </Stack>
@@ -216,16 +216,16 @@ const CriteriaItem: React.FC<{
   index: number
 }> = ({ criteria, onDelete, index }) => {
   return (
-    <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
+    <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 ,  }}>
       <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2}>
         <Stack direction="row" spacing={2} alignItems="center">
           <DragIndicatorIcon color="disabled" />
-          <Typography variant="body1" color="text.secondary" fontWeight={500}>
+          <Typography variant="body1" color="text.secondary" fontWeight={500} sx={{fontSize:'0.9rem'}}>
             {`Criteria- ${index + 1}`}:
           </Typography>
           <Stack direction="row" spacing={5} alignItems="center">
-            <Typography variant="body2" color="text.secondary">Created: {new Date(criteria.createdAt).toLocaleDateString()}</Typography>
-            <Typography variant="body2" fontWeight={700}>{criteria.description}</Typography>
+            <Typography  variant="body2" color="text.secondary" sx={{fontSize:'0.9rem'}}>Created: {new Date(criteria.createdAt).toLocaleDateString()}</Typography>
+            <Typography variant="body2" fontWeight={700} sx={{fontSize:'0.9rem'}} >{criteria.description}</Typography>
           </Stack>
         </Stack>
         {status === "created" &&
@@ -249,8 +249,8 @@ const ResumeCard: React.FC<{
     <Paper variant="outlined" sx={{ p: 1.5, borderRadius: 2, width: 320, display: 'flex', alignItems: 'center', gap: 2 }}>
       <PictureAsPdfIcon color="action" sx={{ fontSize: 40 }} />
       <Box sx={{ flex: 1 }}>
-        <Typography variant="subtitle1" fontWeight={600}>{resume.title}</Typography>
-        <Typography variant="body2" color="text.secondary">{resume.createdAt}</Typography>
+        <Typography variant="subtitle1" fontWeight={600} sx={{fontSize:'1rem'}} >{resume.title}</Typography>
+        <Typography variant="body2" color="text.secondary" sx={{fontSize:'0.9rem'}}>{resume.createdAt}</Typography>
       </Box>
       <Tooltip title="Delete">
         <IconButton color="default" onClick={onDelete} size="small">
@@ -405,15 +405,15 @@ export default function PositionView() {
 
       <Container maxWidth="lg" sx={{ pb: 8 }}>
         {/* Header */}
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 4 }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 , mt:3 }}>
           <Typography variant="h4" fontWeight={600}>{currentPosition.title}:</Typography>
-          <Stack direction="row" spacing={2}>
-            <Button variant="contained" sx={{ color: "white" }} startIcon={<UploadFileIcon />} onClick={() => setIsUploadModalOpen(true)}>
+          <Stack direction="row" spacing={1}>
+            <Button variant="contained" sx={{ color: "white" , width:"240px"  , height :'40px' , fontSize:'0.7rem'}}   startIcon={<UploadFileIcon />} onClick={() => setIsUploadModalOpen(true)}>
               Upload Resume
             </Button>
             {
               currentPosition.status === "created" &&
-              <Button variant="contained" sx={{ color: "white" }} startIcon={<AddIcon />} onClick={() => setIsAddCriteriaModalOpen(true)}>
+              <Button variant="contained" sx={{ color: "white" , fontSize:'0.9rem' }} startIcon={<AddIcon />} onClick={() => setIsAddCriteriaModalOpen(true)}>
                 Add Criteria
               </Button>
             }
@@ -436,7 +436,7 @@ export default function PositionView() {
 
         {/* Criteria */}
         <Stack spacing={2} sx={{ mb: 4 }}>
-          <Typography variant="h6" fontWeight={700}>Criteria</Typography>
+          <Typography variant="h6" fontWeight={700} sx={{}} >Criteria</Typography>
           <Stack spacing={1.5}>
             {currentPosition.criterias.map((c, index) => (
               <CriteriaItem status={currentPosition.status} index={index} key={c.id} criteria={c} onDelete={() => handleDeleteCriteria(c)} />
@@ -446,7 +446,7 @@ export default function PositionView() {
 
         {/* Resumes */}
         <Stack spacing={2} sx={{ mb: 4 }}>
-          <Typography variant="h6" fontWeight={700}>Resumes</Typography>
+          <Typography variant="h6" fontWeight={700}>Resumes </Typography>
           <Grid container spacing={2}>
             {currentPosition.resumes.map((r) => (
               <Grid key={r.id}>
@@ -458,7 +458,7 @@ export default function PositionView() {
 
         {/* Actions */}
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <Button variant="contained" color="success" sx={{ color: "white" }} onClick={handleStartAnalysis} disabled={isAnalyzing}>
+          <Button variant="contained" color="success" sx={{ color: "white" ,width:"240px"  , height :'40px' , fontSize:'0.7rem' }} onClick={handleStartAnalysis} disabled={isAnalyzing}>
             {isAnalyzing ? 'Analyzing...' : 'Start Analysis'}
           </Button>
           {/* <Button component={RouterLink} to="/use-cases" variant="outlined">Back to Use Cases</Button> */}

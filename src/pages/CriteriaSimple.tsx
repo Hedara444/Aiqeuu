@@ -104,7 +104,7 @@ export default function CriteriaSimple() {
                 <Typography sx={{
                   color: 'text.secondary',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '0.875rem', md: '1rem' },
+                  fontSize: { xs: '0.875rem', md: '0.9rem' },
                   fontWeight: 500
                 }}>
                   Position:
@@ -112,7 +112,7 @@ export default function CriteriaSimple() {
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '0.875rem', md: '1rem' },
+                  fontSize: { xs: '0.875rem', md: '0.9rem' },
                   fontWeight: 700
                 }}>
                   {currentPosition.title}
@@ -127,7 +127,7 @@ export default function CriteriaSimple() {
                 <Typography variant="h1" sx={{
                   color: 'white',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '0.875rem', md: '1rem' },
+                  fontSize: { xs: '0.71rem', md: '0.8rem'},
                   fontWeight: 700
                 }}>
                   + Create Criteria
@@ -176,7 +176,7 @@ export default function CriteriaSimple() {
                         borderColor: 'grey.300',
                         minWidth: 0,
                         flex: 1,
-                        // maxWidth: '512px',
+                        maxWidth: '1012px',
                         ml: 1.5
                       }}>
 
@@ -295,11 +295,13 @@ export default function CriteriaSimple() {
                       sx={{
                         px: 3,
                         py: 1,
+                        height:"28px",
+                        width:"63px",
                         borderRadius: '26px',
                         borderColor: 'grey.400',
                         color: 'primary.dark',
                         fontFamily: 'Montserrat',
-                        fontSize: '1rem',
+                        fontSize: '0.7rem',
                         fontWeight: 700,
                         textTransform: 'none',
                         boxShadow: 1,
@@ -319,11 +321,13 @@ export default function CriteriaSimple() {
                       sx={{
                         px: 3,
                         py: 1,
+                        height:"28px",
+                        width:"63px",
                         borderRadius: '26px',
                         backgroundColor: 'primary.main',
                         color: 'white',
                         fontFamily: 'Montserrat',
-                        fontSize: '1rem',
+                        fontSize: '0.7rem',
                         fontWeight: 700,
                         textTransform: 'none',
                         boxShadow: 1,

@@ -7,12 +7,12 @@ import Stepper from '@/components/ui/Stepper';
 
 export default function Dashboard() {
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'background.default' }}>
       {/* Navigation */}
       <Navbar />
 
       {/* Main Content */}
-      <Box sx={{ px: { xs: 1.5, md: 3 }  }}>
+      <Box sx={{ px: { xs: 1.5, md: 3 }, flex: 1 }}>
         {/* Process Flow Section */}
         <Stepper step={1} />
 
@@ -40,6 +40,7 @@ export default function Dashboard() {
                 }}>
                   + Create New Position
                 </Typography>
+                
               </Box>
             </Paper>
           </Box>

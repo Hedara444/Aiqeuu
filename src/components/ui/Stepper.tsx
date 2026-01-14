@@ -7,14 +7,14 @@ import {
 
 const Stepper = ({ step }: { step: number }) => {
     return (
-        <Paper sx={{ borderRadius: '14px' , paddingTop:{xs:"12px"  ,  md:"33px"} ,paddingBottom:{ xs:"7px" ,  md:"18px"}  , mb: 2    }}>
+        <Paper sx={{ borderRadius: '14px' , paddingTop:{xs:"12px"  ,  md:"33px"} ,paddingBottom:{ xs:"4px" ,  md:"10px"}  , mb: 2    }}>
             <Container maxWidth="xl" sx={{ position: 'relative', mb: 1.4 }}>
                 {/* Progress Line */}
                 <Box sx={{
                     position: 'absolute',
-                    top: '13px',
-                    left: '34px',
-                    right: '34px',
+                    top: '10px',
+                    left: { xs: '36px', md: '64px' },
+                    right: { xs: '36px', md: '64px' },
                     height: '3px',
                     backgroundColor: 'grey.300',
                     borderRadius: '1.4px'
@@ -30,10 +30,16 @@ const Stepper = ({ step }: { step: number }) => {
                 {/* Step Circles */}
                 <Box sx={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     {/* Step 1 - Active */}
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Box sx={{ 
+                        width: { xs: '90px', md: '160px' }, 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        alignItems: 'center', 
+                        transform: 'translateX(-10%)' 
+                    }}>
                         <Box sx={{
-                            width: '27px',
-                            height: '27px',
+                            width: '22px',
+                            height: '22px',
                             backgroundColor: step >= 1 ? "primary.main" : "grey.300",
                             borderRadius: '50%',
                             display: 'flex',
@@ -44,8 +50,8 @@ const Stepper = ({ step }: { step: number }) => {
                             zIndex: 10
                         }}>
                             {step >= 1 && <Box sx={{
-                                width: '14px',
-                                height: '14px',
+                                width: '11px',
+                                height: '11px',
                                 backgroundColor: 'white',
                                 borderRadius: '50%'
                             }} />}
@@ -72,10 +78,15 @@ const Stepper = ({ step }: { step: number }) => {
                     </Box>
 
                     {/* Step 2 - Inactive */}
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Box sx={{ 
+                        width: { xs: '90px', md: '160px' },
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        alignItems: 'center' 
+                    }}>
                         <Box sx={{
-                            width: '27px',
-                            height: '27px',
+                            width: '22px',
+                            height: '22px',
                             backgroundColor: step >= 2 ? "primary.main" : "grey.300",
                             borderRadius: '50%',
                             display: 'flex',
@@ -86,8 +97,8 @@ const Stepper = ({ step }: { step: number }) => {
                             zIndex: 10
                         }}>
                             {step >= 2 && <Box sx={{
-                                width: '14px',
-                                height: '14px',
+                                width: '11px',
+                                height: '11px',
                                 backgroundColor: 'white',
                                 borderRadius: '50%'
                             }} />}
@@ -114,10 +125,16 @@ const Stepper = ({ step }: { step: number }) => {
                     </Box>
 
                     {/* Step 3 - Inactive */}
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Box sx={{ 
+                        width: { xs: '90px', md: '160px' },
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        alignItems: 'center', 
+                        transform: 'translateX(10%)' 
+                    }}>
                         <Box sx={{
-                            width: '27px',
-                            height: '27px',
+                            width: '22px',
+                            height: '22px',
                             backgroundColor: step >= 3 ? "primary.main" : "grey.300",
                             borderRadius: '50%',
                             display: 'flex',
@@ -128,8 +145,8 @@ const Stepper = ({ step }: { step: number }) => {
                             zIndex: 10
                         }}>
                             {step >= 3 && <Box sx={{
-                                width: '14px',
-                                height: '14px',
+                                width: '11px',
+                                height: '11px',
                                 backgroundColor: 'white',
                                 borderRadius: '50%'
                             }} />}

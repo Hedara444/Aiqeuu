@@ -6,7 +6,7 @@ import {
 
 export function Footer() {
     return (
-        <Box component="footer" sx={{ backgroundColor: '#1F1F1F', py: 1.4, position: 'fixed', bottom: 0, width: '100%', zIndex: 10 }}>
+        <Box component="footer" sx={{ backgroundColor: '#1F1F1F', py: 2 , bottom: 0, width: '100%', zIndex: 10 }}>
             <Container maxWidth="xl" sx={{ px: 1.4 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 }}>
                     {/* Logo */}
@@ -27,7 +27,7 @@ export function Footer() {
                         <Typography sx={{
                             color: 'primary.main',
                             fontFamily: 'Poppins',
-                            fontSize: { xs: '1.3rem', md: '1.72rem' },
+                            fontSize: { xs: '1.0rem', md: '1.32rem' },
                             fontWeight: 700
                         }}>
                             Aikyuu

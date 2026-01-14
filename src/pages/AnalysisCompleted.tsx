@@ -38,9 +38,9 @@ const ToggleSwitch: React.FC<{
   onToggle?: () => void;
 }> = ({ isActive, label, onToggle }) => {
   return (
-    <Stack direction="row" spacing={2} alignItems="center">
-      <Switch checked={isActive} onChange={onToggle} />
-      <Typography variant="h5" fontWeight={700}>{label}</Typography>
+    <Stack direction="row" spacing={1.5} alignItems="center">
+      <Switch checked={isActive} onChange={onToggle} size="small" />
+      <Typography fontWeight={700} sx={{ fontSize: '0.9rem' }}>{label}</Typography>
     </Stack>
   );
 };
@@ -53,14 +53,14 @@ const CriteriaCard: React.FC<{
 
 
   return (
-    <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 3 }}>
-      <Grid container spacing={3}>
+    <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2 }}>
+      <Grid container spacing={1.5}>
         {criterias.map((criterion, index) => (
           <Grid key={index} size={6}>
             <Paper key={criterion.id} elevation={0} variant="outlined" sx={{ borderRadius: 2 }}>
-              <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 2 }}>
+              <Stack direction="row" spacing={1.5} alignItems="center" sx={{ p: 1.5 }}>
                 <ToggleSwitch isActive={true} label={`Criteria-${index + 1}`} onToggle={() => console.log("d")} />
-                <Typography variant="body1" fontWeight={700}>{criterion.description}</Typography>
+                <Typography variant="body2" fontWeight={600} sx={{ fontSize: '0.875rem' }}>{criterion.description}</Typography>
               </Stack>
             </Paper>
           </Grid >
@@ -76,35 +76,35 @@ const AnalysisCard: React.FC<{ result: Resume }> = ({ result }) => {
   const progressPercentage = result.score;
 
   return (
-    <Card variant="outlined">
-      <CardContent>
-        <Stack spacing={3} alignItems="stretch">
+    <Card variant="outlined" sx={{ borderRadius: 2 }}>
+      <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
+        <Stack spacing={1.5} alignItems="stretch">
           <Stack direction="row" alignItems="center" justifyContent="space-between">
-            <Typography variant="h6" fontWeight={700}>{result.title}</Typography>
-            <Typography variant="subtitle1">Score: {result.score}%</Typography>
+            <Typography variant="subtitle1" fontWeight={700} sx={{ fontSize: '1rem' }}>{result.title}</Typography>
+            <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>Score: {result.score}%</Typography>
           </Stack>
 
           <Box>
-            <LinearProgress variant="determinate" value={progressPercentage} sx={{ height: 8, borderRadius: 4 }} />
+            <LinearProgress variant="determinate" value={progressPercentage} sx={{ height: 6, borderRadius: 3 }} />
           </Box>
 
           <ToggleSwitch isActive={true} label="Analysis cv" />
 
-          <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2 }}>
+          <Paper elevation={0} variant="outlined" sx={{ borderRadius: 2, p: 1.5 }}>
             <List disablePadding>
               {result.criteriaResults?.map((criteriaResult, index) => (
                 <>
-                  <ListItem key={criteriaResult.id} sx={{ py: 1.5 }}>
-                    <ListItemIcon sx={{ minWidth: 36 }}>
+                  <ListItem key={criteriaResult.id} sx={{ py: 0.75, px: 1 }}>
+                    <ListItemIcon sx={{ minWidth: 28 }}>
                       {criteriaResult.passed ? (
-                        <CheckCircle color="success" fontSize="small" />
+                        <CheckCircle color="success" sx={{ fontSize: 18 }} />
                       ) : (
-                        <Cancel color="error" fontSize="small" />
+                        <Cancel color="error" sx={{ fontSize: 18 }} />
                       )}
                     </ListItemIcon>
                     <ListItemText
-                      primaryTypographyProps={{ variant: 'body1', fontWeight: 500 }}
-                      secondaryTypographyProps={{ variant: 'caption', color: 'text.secondary' }}
+                      primaryTypographyProps={{ variant: 'body2', fontWeight: 500, fontSize: '0.8125rem' }}
+                      secondaryTypographyProps={{ variant: 'caption', color: 'text.secondary', fontSize: '0.7rem' }}
                       primary={criteriaResult.text}
                       secondary={`Confidence: ${Math.round(criteriaResult.confidence * 100)}%`}
                     />
@@ -163,7 +163,7 @@ export default function AnalysisCompleted() {
     return (
       <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
         <Navbar />
-        <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Container maxWidth="lg" sx={{ py: 3 }}>
           <Stack alignItems="center" spacing={2}>
             <Typography variant="h4" fontWeight={700}>Position Not Found</Typography>
             <Typography color="text.secondary">The position you're looking for doesn't exist.</Typography>
@@ -193,42 +193,42 @@ export default function AnalysisCompleted() {
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
       <Navbar />
 
-      <Container maxWidth="xl" sx={{ pb: 8 }}>
+      <Container maxWidth="xl" sx={{ pb: 4, mt: 2 }}>
         {/* Header */}
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 6 }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 4 }}>
           <Box>
-            <MUILink component={RouterLink} to={`/position/${id}`} underline="hover" color="primary" sx={{ display: 'inline-block', mb: 1 }}>
+            <MUILink component={RouterLink} to={`/position/${id}`} underline="hover" color="primary" sx={{ display: 'inline-block', mb: 0.5, fontSize: '0.875rem' }}>
               ← Back to Position
             </MUILink>
-            <Typography variant="h4" fontWeight={600}>{currentPosition.title} - Analysis Results</Typography>
+            <Typography variant="h5" fontWeight={600} sx={{ fontSize: '1.25rem' }}>{currentPosition.title} - Analysis Results</Typography>
           </Box>
           <Box>
-            <Button variant="contained" sx={{ color: "white" }} endIcon={<DownloadIcon />} onClick={handleOpenMenu}>
+            <Button variant="contained" sx={{ color: "white"  , width:'130px' , height:'42px' , fontSize:'0.7rem' }} endIcon={<DownloadIcon sx={{ fontSize: '1.1rem' }} />} onClick={handleOpenMenu} size="small">
               Export
             </Button>
             <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
-              <MenuItem onClick={handleExportCSV}>Export as CSV</MenuItem>
-              <MenuItem onClick={handleExportExcel}>Export as Excel</MenuItem>
-              <MenuItem onClick={handleExportJSON}>Export as JSON</MenuItem>
+              <MenuItem onClick={handleExportCSV} sx={{ fontSize: '0.875rem' }}>Export as CSV</MenuItem>
+              <MenuItem onClick={handleExportExcel} sx={{ fontSize: '0.875rem' }}>Export as Excel</MenuItem>
+              <MenuItem onClick={handleExportJSON} sx={{ fontSize: '0.875rem' }}>Export as JSON</MenuItem>
             </Menu>
           </Box>
         </Stack>
 
         {/* Criteria */}
-        <Stack sx={{ mb: 6 }}>
+        <Stack sx={{ mb: 3 }}>
           <ToggleSwitch isActive={showCriteria} label="Criteria" onToggle={() => setShowCriteria(!showCriteria)} />
-          <Box sx={{ mt: 3 }}>
-            <CriteriaCard criterias={currentPosition.criterias} isVisible={showCriteria} />
+          <Box sx={{ mt: 2 ,fontSize:'0.9rem' }}>
+            <CriteriaCard  criterias={currentPosition.criterias} isVisible={showCriteria} />
           </Box>
         </Stack>
 
         {/* Analysis Results */}
-        <Stack sx={{ mb: 4 }}>
+        <Stack sx={{ mb: 2 }}>
           <ToggleSwitch isActive={showAnalysis} label="Analysis cv" onToggle={() => setShowAnalysis(!showAnalysis)} />
         </Stack>
 
         {showAnalysis && (
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
             {currentPosition.resumes.map((result) => (
               <Grid size={6} key={result.id}>
                 <AnalysisCard result={result} />

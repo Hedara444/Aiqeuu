@@ -53,9 +53,9 @@ export default function CriteriaSelection() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh',display: 'flex', flexDirection: 'column', backgroundColor: 'background.default' }}>
       <Navbar />
-      <Box sx={{ px: { xs: 0.7, md: 2.8 } }}>
+      <Box sx={{ px: { xs: 0.7, md: 2.8  , flex:1} }}>
         <Stepper step={1} />
         <Container maxWidth="xl" sx={{ mb: 2.8 }}>
           <Stack spacing={1.75}>
@@ -179,7 +179,9 @@ export default function CriteriaSelection() {
                     sx={{
                         px: 2.1,
                         py: 0.7,
-                        borderRadius: '18.2px',
+                      height:"28px",
+                      width:"63px",
+                        borderRadius: '14.2px',
                         borderColor: 'grey.400',
                         color: 'primary.dark',
                         fontFamily: 'Montserrat',
@@ -198,7 +200,9 @@ export default function CriteriaSelection() {
                     sx={{
                         px: 2.1,
                         py: 0.7,
-                        borderRadius: '18.2px',
+                      height:"28px",
+                      width:"63px",
+                        borderRadius: '14.2px',
                         backgroundColor: 'primary.main',
                         color: 'white',
                         fontFamily: 'Montserrat',

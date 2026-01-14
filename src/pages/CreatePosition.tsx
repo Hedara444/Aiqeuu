@@ -10,7 +10,7 @@ import {
   Stack
 } from '@mui/material';
 import { Navbar } from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/Footer';
+  import { Footer } from '@/components/ui/Footer';
 import { usePositionsStore } from '@/store/positionsStore';
 import Stepper from '@/components/ui/Stepper';
 
@@ -83,7 +83,8 @@ export default function CreatePosition() {
                     color: 'text.primary',
                     fontFamily: 'Montserrat',
                     fontSize: { xs: '0.7rem', md: '0.7rem' },
-                    fontWeight: 700
+                    fontWeight: 700,
+                    py:1
                   }}>
                     Title
                   </Typography>
@@ -122,7 +123,8 @@ export default function CreatePosition() {
                     color: 'text.primary',
                     fontFamily: 'Montserrat',
                     fontSize: { xs: '0.7rem', md: '0.7rem' },
-                    fontWeight: 700
+                    fontWeight: 700,
+                    py:1
                   }}>
                     Description
                   </Typography>
