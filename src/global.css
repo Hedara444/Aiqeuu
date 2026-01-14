@@ -11,6 +11,7 @@ body {
   font-family: 'Montserrat', 'Poppins', 'Quicksand', sans-serif;
   background-color: #F8F7F7;
   color: #1E1E1E;
+  padding-bottom: 90px; /* Add padding to accommodate fixed footer */
 }
 
 /* Custom scrollbar */

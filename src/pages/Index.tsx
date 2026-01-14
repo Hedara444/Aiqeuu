@@ -10,26 +10,26 @@ export default function Index() {
       alignItems: 'center',
       justifyContent: 'center'
     }}>
-      <Container maxWidth="md" sx={{ textAlign: 'center', px: 3 }}>
+      <Container maxWidth="sm" sx={{ textAlign: 'center', px: 2.1 }}>
         <Typography variant="h1" sx={{
-          fontSize: { xs: '2rem', md: '3rem' },
+          fontSize: { xs: '1.4rem', md: '2.1rem' },
           fontWeight: 700,
           color: '#1E293B',
-          mb: 3
+          mb: 2.1
         }}>
           Welcome to Aikyuu
         </Typography>
         <Typography variant="h5" sx={{
-          fontSize: '1.125rem',
+          fontSize: '0.79rem',
           color: '#475569',
-          mb: 4
+          mb: 2.8
         }}>
           Your AI-powered recruitment platform for smarter hiring decisions
         </Typography>
         <Box sx={{
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
-          gap: 2,
+          gap: 1.4,
           justifyContent: 'center'
         }}>
           <Button
@@ -39,10 +39,11 @@ export default function Index() {
             sx={{
               backgroundColor: '#2563EB',
               color: 'white',
-              px: 3,
-              py: 1,
-              borderRadius: '8px',
+              px: 2.1,
+              py: 0.7,
+              borderRadius: '5.6px',
               fontWeight: 600,
+              fontSize: '0.7rem',
               '&:hover': { backgroundColor: '#1D4ED8' }
             }}
           >
@@ -55,10 +56,11 @@ export default function Index() {
             sx={{
               backgroundColor: 'white',
               color: '#1E293B',
-              px: 3,
-              py: 1,
-              borderRadius: '8px',
+              px: 2.1,
+              py: 0.7,
+              borderRadius: '5.6px',
               fontWeight: 600,
+              fontSize: '0.7rem',
               borderColor: '#CBD5E1',
               '&:hover': { backgroundColor: '#F8FAFC' }
             }}

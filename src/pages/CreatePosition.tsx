@@ -55,19 +55,19 @@ export default function CreatePosition() {
       <Navbar />
 
       {/* Main Content */}
-      <Box sx={{ px: { xs: 1.5, md: 3 }}}>
+      <Box sx={{ px: { xs: 1.05, md: 2.1 }}}>
         {/* Process Flow Section */}
         <Stepper step={1} />
 
         {/* Create Position Form */}
-        <Container maxWidth="lg" sx={{ mb: 20 }} >
-          <Paper sx={{ borderRadius: '14px', overflow: 'hidden', boxShadow: 1 , maxHeight:"500px" }}>
+        <Container maxWidth="lg" sx={{ mb: 14 }} >
+          <Paper sx={{ borderRadius: '9.8px', overflow: 'hidden', boxShadow: 1 , maxHeight:"350px" }}>
             {/* Header */}
-            <Box sx={{ backgroundColor: 'primary.main', px: { xs:1.2, md: 2.9 }, py: 2 }}>
+            <Box sx={{ backgroundColor: 'primary.main', px: { xs:0.84, md: 2.03 }, py: 1.4 }}>
               <Typography variant="h1" sx={{
                 color: 'white',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1rem' },
+                fontSize: { xs: '0.7rem', md: '0.7rem' },
                 fontWeight: 700
               }}>
                 + Create New Position
@@ -75,14 +75,14 @@ export default function CreatePosition() {
             </Box>
 
             {/* Form */}
-            <Box sx={{ p: { xs: 0.9, md: 2.9 } }}>
-              <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+            <Box sx={{ p: { xs: 0.63, md: 2.03 } }}>
+              <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 1.05 }}>
                 {/* Position Field */}
-                <Stack spacing={2}>
+                <Stack spacing={1.4}>
                   <Typography sx={{
                     color: 'text.primary',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1rem', md: '1rem' },
+                    fontSize: { xs: '0.7rem', md: '0.7rem' },
                     fontWeight: 700
                   }}>
                     Title
@@ -96,10 +96,10 @@ export default function CreatePosition() {
                     placeholder="ui/ux designer"
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        height: { xs: '44px', md: '50px' },
-                        borderRadius: '14px',
+                        height: { xs: '30.8px', md: '35px' },
+                        borderRadius: '9.8px',
                         backgroundColor: 'grey.100',
-                        fontSize: { xs: '1rem', md: '1rem' },
+                        fontSize: { xs: '0.7rem', md: '0.7rem' },
                         fontFamily: 'Montserrat',
                         '& fieldset': {
                           border: 'none',
@@ -108,7 +108,7 @@ export default function CreatePosition() {
                           border: 'none',
                         },
                         '&.Mui-focused fieldset': {
-                          border: '2px solid',
+                          border: '1.4px solid',
                           borderColor: 'primary.main',
                         },
                       },
@@ -117,11 +117,11 @@ export default function CreatePosition() {
                 </Stack>
 
                 {/* Description Field */}
-                <Stack spacing={2}>
+                <Stack spacing={1.4}>
                   <Typography sx={{
                     color: 'text.primary',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1rem', md: '1rem' },
+                    fontSize: { xs: '0.7rem', md: '0.7rem' },
                     fontWeight: 700
                   }}>
                     Description
@@ -132,13 +132,13 @@ export default function CreatePosition() {
                     onChange={handleInputChange}
                     fullWidth
                     multiline
-                    rows={4}
+                    rows={3}
                     placeholder="lomer ipsm"
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        borderRadius: '17px',
+                        borderRadius: '11.9px',
                         backgroundColor: 'grey.100',
-                        fontSize: { xs: '0.875rem', md: '1rem' },
+                        fontSize: { xs: '0.61rem', md: '0.7rem' },
                         fontFamily: 'Montserrat',
                         '& fieldset': {
                           border: 'none',
@@ -147,7 +147,7 @@ export default function CreatePosition() {
                           border: 'none',
                         },
                         '&.Mui-focused fieldset': {
-                          border: '2px solid',
+                          border: '1.4px solid',
                           borderColor: 'primary.main',
                         },
                       },
@@ -156,21 +156,21 @@ export default function CreatePosition() {
                 </Stack>
 
                 {/* Action Buttons */}
-                <Stack direction="row" spacing={2} sx={{ justifyContent: 'flex-end', mt: 4 }}>
+                <Stack direction="row" spacing={1.4} sx={{ justifyContent: 'flex-end', mt: 2.8 }}>
                   <Button
                     type="button"
                     onClick={handleCancel}
                     variant="outlined"
                     sx={{
-                      height:"40px",
-                      width:"90px",
-                      px: 2,
-                      py: 1,
-                      borderRadius: '14px',
+                      height:"28px",
+                      width:"63px",
+                      px: 1.4,
+                      py: 0.7,
+                      borderRadius: '9.8px',
                       borderColor: 'grey.400',
                       color: 'primary.dark',
                       fontFamily: 'Montserrat',
-                      fontSize: '0.875rem',
+                      fontSize: '0.61rem',
                       fontWeight: 700,
                       textTransform: 'none',
                       boxShadow: 1,
@@ -187,15 +187,15 @@ export default function CreatePosition() {
                     variant="contained"
                     loading={isLoading}
                     sx={{
-                      height:"40px",
-                      width:"90px",
-                      px: 2,
-                      py: 1,
-                      borderRadius: '14px',
+                      height:"28px",
+                      width:"63px",
+                      px: 1.4,
+                      py: 0.7,
+                      borderRadius: '9.8px',
                       backgroundColor: 'primary.main',
                       color: 'white',
                       fontFamily: 'Montserrat',
-                      fontSize: '0.875rem',
+                      fontSize: '0.61rem',
                       fontWeight: 700,
                       textTransform: 'none',
                       boxShadow: 1,

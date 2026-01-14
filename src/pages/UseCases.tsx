@@ -67,7 +67,7 @@ const EditPositionModal: React.FC<EditPositionModalProps> = ({ isOpen, onClose, 
 
   return (
     <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="md" PaperProps={{
-      sx: { borderRadius: "50px", p: "40px" }
+      sx: { borderRadius: "35px", p: "28px" }
     }}>
       <DialogTitle>
         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
@@ -117,27 +117,27 @@ const EditPositionModal: React.FC<EditPositionModalProps> = ({ isOpen, onClose, 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose, onConfirm, title, message, confirmText, isLoading }) => {
   return (
     <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="md" PaperProps={{
-      sx: { borderRadius: "50px", p: "40px" }
+      sx: { borderRadius: "35px", p: "28px" }
     }}>
       <DialogTitle>
-        <Typography variant="h6" fontWeight={700} textAlign="center" sx={{fontSize:"1.125rem"}} >
+        <Typography variant="h6" fontWeight={700} textAlign="center" sx={{fontSize:"0.79rem"}} >
           {title}
         </Typography>
       </DialogTitle>
 
       <Divider />
 
-      <DialogContent sx={{ px: 4 }}>
-        <Typography variant="body1" textAlign="center">
+      <DialogContent sx={{ px: 2.8 }}>
+        <Typography variant="body1" textAlign="center" sx={{ fontSize: "0.79rem" }}>
           {message}
         </Typography>
       </DialogContent>
-      <DialogActions sx={{ mt: 4 }}>
-        <Stack direction="row" spacing={2} sx={{ width: '100%' , justifyContent:"space-around"  }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" sx={{width:'40%' , height:'50px'}} >
+      <DialogActions sx={{ mt: 2.8 }}>
+        <Stack direction="row" spacing={1.4} sx={{ width: '100%' , justifyContent:"space-around"  }}>
+          <Button onClick={onClose} variant="outlined" color="inherit" sx={{width:'40%' , height:'35px', fontSize: "0.7rem"}} >
             Cancel
           </Button>
-          <Button onClick={onConfirm} variant="contained" sx={{ color: "white" ,  width:'40%' , height:'50px' }} fullWidth loading={isLoading}>
+          <Button onClick={onConfirm} variant="contained" sx={{ color: "white" ,  width:'40%' , height:'35px', fontSize: "0.7rem" }} fullWidth loading={isLoading}>
             {confirmText}
           </Button>
         </Stack>
@@ -161,28 +161,28 @@ const PositionCard: React.FC<{
   const config = statusConfig[position.status];
 
   return (
-    <Card variant="outlined">
-      <CardContent>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2}>
-          <Stack spacing={1} flex={1}>
-            <Stack direction="row" alignItems="center" spacing={1.5}>
+    <Card variant="outlined" sx={{ borderRadius: "5.6px" }}>
+      <CardContent sx={{ padding: "10.5px" }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1.4}>
+          <Stack spacing={0.7} flex={1}>
+            <Stack direction="row" alignItems="center" spacing={1.05}>
               <MUILink
                 component={RouterLink}
                 to={`/position/${position.id}`}
                 underline="hover"
                 color="text.primary"
-                sx={{ fontWeight: 700, typography: 'h6' }}
+                sx={{ fontWeight: 700, typography: 'h6', fontSize: "0.84rem" }}
               >
                 {position.title}
               </MUILink>
-              <Chip label={config.label} sx={{ color: "white" }} color={config.color} size="small" />
+              <Chip label={config.label} sx={{ color: "white", height: "18px", fontSize: "0.61rem" }} color={config.color} size="small" />
             </Stack>
-            <Typography variant="body1" color="text.secondary">
+            <Typography variant="body1" color="text.secondary" sx={{ fontSize: "0.7rem" }}>
               {position.description}
             </Typography>
           </Stack>
 
-          <Stack direction="row" spacing={1.5} alignItems="center">
+          <Stack direction="row" spacing={1.05} alignItems="center">
             {/* {position.status === 'completed' && (
               <Button
                 component={RouterLink}
@@ -196,20 +196,20 @@ const PositionCard: React.FC<{
             )} */}
 
             <Tooltip title="Duplicate">
-              <IconButton onClick={onDuplicate} color="default" size="small">
-                <ContentCopyIcon fontSize="small" />
+              <IconButton onClick={onDuplicate} color="default" size="small" sx={{ padding: "3.5px" }}>
+                <ContentCopyIcon sx={{ fontSize: "1.05rem" }} />
               </IconButton>
             </Tooltip>
 
             <Tooltip title="Edit">
-              <IconButton onClick={onEdit} color="default" size="small">
-                <EditIcon fontSize="small" />
+              <IconButton onClick={onEdit} color="default" size="small" sx={{ padding: "3.5px" }}>
+                <EditIcon sx={{ fontSize: "1.05rem" }} />
               </IconButton>
             </Tooltip>
 
             <Tooltip title="Delete">
-              <IconButton onClick={onDelete} color="default" size="small">
-                <DeleteIcon fontSize="small" />
+              <IconButton onClick={onDelete} color="default" size="small" sx={{ padding: "3.5px" }}>
+                <DeleteIcon sx={{ fontSize: "1.05rem" }} />
               </IconButton>
             </Tooltip>
           </Stack>
@@ -296,23 +296,23 @@ export default function UseCases() {
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
       <Navbar />
 
-      <Container maxWidth="xl" sx={{ pb: 3 }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 4 }}>
-          <Typography variant="h4" fontWeight={600}>
+      <Container maxWidth="xl" sx={{ pb: 2.1 }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2.8 }}>
+          <Typography variant="h4" fontWeight={600} sx={{ fontSize: "1.4rem" }}>
             Use Cases
           </Typography>
           <Button
             component={RouterLink}
             to="/create-position"
             variant="contained"
-            sx={{ color: "white" , fontSize:"0.875rem" }}
+            sx={{ color: "white", fontSize:"0.61rem", py: 0.7, px: 1.4, borderRadius: "5.6px" }}
             size='small'
           >
             + Add Use Cases 
           </Button>
         </Stack>
 
-        <Stack spacing={2} sx={{ mb: 8 }}>
+        <Stack spacing={1.4} sx={{ mb: 5.6 }}>
           {positions.map((position) => (
             <PositionCard
               key={position.id}
@@ -325,7 +325,7 @@ export default function UseCases() {
         </Stack>
 
         <Stack alignItems="center">
-          <Button variant="contained" color="primary" onClick={() => setShowAll(true)} sx={{ borderRadius: 6, color: "white" }}>
+          <Button variant="contained" color="primary" onClick={() => setShowAll(true)} sx={{ borderRadius: 4.2, color: "white", fontSize: "0.7rem", py: 0.7, px: 1.4 }}>
             See more
           </Button>
         </Stack>

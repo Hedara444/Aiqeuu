@@ -21,13 +21,13 @@ export default function Dashboard() {
           <Box
             component={Link}
             to="/create-position"
-            sx={{ display: 'block', width: '100%', maxWidth: '952px', mx: 'auto', textDecoration: 'none' }}
+            sx={{ display: 'block', width: '100%', maxWidth: '666.4px', mx: 'auto', textDecoration: 'none' }}
           >
             <Paper sx={{
               backgroundColor: 'primary.main',
-              borderRadius: '16px',
-              py: 2,
-              px: { xs: 3, md: '16px'  },
+              borderRadius: '11.2px',
+              py: 1.4,
+              px: { xs: 2.1, md: '11.2px'  },
               '&:hover': { opacity: 0.9 },
               transition: 'background-color 0.3s'
             }}>
@@ -35,7 +35,7 @@ export default function Dashboard() {
                 <Typography sx={{
                   color: 'white',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1rem', md: '1rem' },
+                  fontSize: { xs: '0.7rem', md: '0.7rem' },
                   fontWeight: 700
                 }}>
                   + Create New Position
