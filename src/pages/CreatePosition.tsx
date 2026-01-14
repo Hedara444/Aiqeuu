@@ -35,7 +35,7 @@ export default function CreatePosition() {
 
     const { id: positionId } = await createPosition(data)
 
-    navigate(`/create-criteria/${positionId}`);
+    navigate(`/criteria-selection/${positionId}`);
   };
 
   const handleCancel = () => {

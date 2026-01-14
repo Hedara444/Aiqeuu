@@ -15,6 +15,7 @@ import ResetPasswordNew from "./pages/ResetPasswordNew";
 import Verification from "./pages/Verification";
 import Dashboard from "./pages/Dashboard";
 import CreatePosition from "./pages/CreatePosition";
+import CriteriaSelection from "./pages/CriteriaSelection";
 import CriteriaManagement from "./pages/CriteriaManagement";
 import CriteriaSimple from "./pages/CriteriaSimple";
 import UploadCV from "./pages/UploadCV";
@@ -71,6 +72,7 @@ const App = () => (
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-position" element={<CreatePosition />} />
+            <Route path="/criteria-selection/:id" element={<CriteriaSelection />} />
             <Route path="/create-criteria/:id" element={<CriteriaSimple />} />
             <Route path="/upload-cv/:id" element={<UploadCV />} />
             <Route path="/analysis/:id" element={<Analysis />} />
