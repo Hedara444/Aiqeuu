@@ -71,7 +71,7 @@ export default function Analysis() {
 
         {/* Processing Section */}
         <Container maxWidth="lg" sx={{ mb: 8 }}>
-          <Paper sx={{ backgroundColor: 'primary.dark', borderRadius: '16px', p: 5, boxShadow: 1 }}>
+          <Paper sx={{ backgroundColor: 'primary.dark', borderRadius: '16px', p: 3, boxShadow: 1 }}>
             <Stack alignItems="center" spacing={3.5}>
               {/* Progress Bar */}
               <LinearProgress
@@ -79,7 +79,7 @@ export default function Analysis() {
                 value={progress}
                 sx={{
                   width: '100%',
-                  height: '24px',
+                  height: '12px',
                   borderRadius: '12px',
                   backgroundColor: 'grey.300',
                   position: 'relative',
@@ -108,7 +108,7 @@ export default function Analysis() {
                 <Typography sx={{
                   color: 'primary.main',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.125rem', md: '1.25rem' },
+                  fontSize: { xs: '1rem', md: '1.125rem' },
                   fontWeight: 700
                 }}>
                   Processing
@@ -116,7 +116,7 @@ export default function Analysis() {
                 <Typography sx={{
                   color: 'primary.main',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.125rem', md: '1.25rem' },
+                  fontSize: { xs: '1rem', md: '1.125rem' },
                   fontWeight: 700
                 }}>
                   {Math.round(progress)}%
@@ -182,7 +182,7 @@ export default function Analysis() {
               <Typography sx={{
                 color: 'primary.main',
                 fontFamily: 'Poppins',
-                fontSize: { xs: '2.5rem', md: '3.75rem' },
+                fontSize: { xs: '2rem', md: '2.5rem' },
                 fontWeight: 700
               }}>
                 Aikyuu
@@ -193,7 +193,7 @@ export default function Analysis() {
             <Typography sx={{
               color: 'grey.300',
               fontFamily: 'Poppins',
-              fontSize: { xs: '1.125rem', md: '1.25rem' },
+              fontSize: { xs: '0.875rem', md: '1rem' },
               textAlign: 'center'
             }}>
               Copyright © Resumate. All rights reserved.

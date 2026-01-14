@@ -12,7 +12,7 @@ export default function Index() {
     }}>
       <Container maxWidth="md" sx={{ textAlign: 'center', px: 3 }}>
         <Typography variant="h1" sx={{
-          fontSize: { xs: '2.5rem', md: '3.75rem' },
+          fontSize: { xs: '2rem', md: '3rem' },
           fontWeight: 700,
           color: '#1E293B',
           mb: 3
@@ -20,7 +20,7 @@ export default function Index() {
           Welcome to Aikyuu
         </Typography>
         <Typography variant="h5" sx={{
-          fontSize: '1.25rem',
+          fontSize: '1.125rem',
           color: '#475569',
           mb: 4
         }}>
@@ -39,8 +39,8 @@ export default function Index() {
             sx={{
               backgroundColor: '#2563EB',
               color: 'white',
-              px: 4,
-              py: 1.5,
+              px: 3,
+              py: 1,
               borderRadius: '8px',
               fontWeight: 600,
               '&:hover': { backgroundColor: '#1D4ED8' }
@@ -55,8 +55,8 @@ export default function Index() {
             sx={{
               backgroundColor: 'white',
               color: '#1E293B',
-              px: 4,
-              py: 1.5,
+              px: 3,
+              py: 1,
               borderRadius: '8px',
               fontWeight: 600,
               borderColor: '#CBD5E1',

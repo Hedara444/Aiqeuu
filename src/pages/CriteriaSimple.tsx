@@ -99,12 +99,12 @@ export default function CriteriaSimple() {
         <Container maxWidth="xl" sx={{ mb: 8 }}>
           <Stack spacing={3.5}>
             {/* Position Display */}
-            <Paper sx={{ borderRadius: '14px', px: { xs: 4, md:8 }, py: 2, boxShadow: 1 }}>
-              <Stack direction="row" alignItems="center" spacing={8}>
+            <Paper sx={{ borderRadius: '14px', px: { xs: 3, md: 4 }, py: 2, boxShadow: 1 }}>
+              <Stack direction="row" alignItems="center" spacing={4}>
                 <Typography sx={{
                   color: 'text.secondary',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.5rem', md: '1.875rem' },
+                  fontSize: { xs: '1rem', md: '1.125rem' },
                   fontWeight: 500
                 }}>
                   Position:
@@ -112,7 +112,7 @@ export default function CriteriaSimple() {
                 <Typography sx={{
                   color: 'primary.dark',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.875rem' },
+                  fontSize: { xs: '1rem', md: '1.125rem' },
                   fontWeight: 700
                 }}>
                   {currentPosition.title}
@@ -123,11 +123,11 @@ export default function CriteriaSimple() {
             {/* Criteria Management Section */}
             <Paper sx={{ borderRadius: '16px', overflow: 'hidden', boxShadow: 1 }}>
               {/* Header */}
-              <Box sx={{ backgroundColor: 'primary.main', px: { xs: 4, md: 8 }, py: 3 }}>
+              <Box sx={{ backgroundColor: 'primary.main', px: { xs: 3, md: 4 }, py: 2 }}>
                 <Typography variant="h1" sx={{
                   color: 'white',
                   fontFamily: 'Montserrat',
-                  fontSize: { xs: '1.25rem', md: '1.775rem' },
+                  fontSize: { xs: '1rem', md: '1.25rem' },
                   fontWeight: 700
                 }}>
                   + Create Criteria
@@ -135,14 +135,14 @@ export default function CriteriaSimple() {
               </Box>
 
               {/* Add Criteria Form */}
-              <Box sx={{ p: { xs: 4, md: 7 } }}>
-                <Stack spacing={7}>
+              <Box sx={{ p: { xs: 3, md: 4 } }}>
+                <Stack spacing={4}>
                   {/* Add New Criteria Row */}
                   <Paper
                     sx={{
                       backgroundColor: 'grey.100',
-                      borderRadius: '16px',
-                      p: 2,
+                      borderRadius: '12px',
+                      p: 1,
                       boxShadow: 1,
                       transition: 'background-color 0.3s',
                       '&:hover': {
@@ -151,7 +151,7 @@ export default function CriteriaSimple() {
                     }}
                   >
                     <Stack direction="row" alignItems="center" spacing={1}>
-                      <Grid container columns={2} spacing={0.5} sx={{ width: '24px' }}>
+                      <Grid container columns={2} spacing={0.5} sx={{ width: '20px' }}>
                         {[...Array(6)].map((_, i) => (
                           <Grid key={i}>
                             <Box sx={{ width: '4px', height: '4px', backgroundColor: 'grey.400', borderRadius: '50%' }} />
@@ -161,7 +161,7 @@ export default function CriteriaSimple() {
                       <Typography sx={{
                         color: 'text.secondary',
                         fontFamily: 'Montserrat',
-                        fontSize: '1.025rem',
+                        fontSize: '0.875rem',
                         fontWeight: 500,
                         mr: 'auto'
                       }}>
@@ -170,7 +170,7 @@ export default function CriteriaSimple() {
                       <Box sx={{
                         backgroundColor: 'background.paper',
                         borderRadius: '8px',
-                        p: 1,
+                        p: 0.5,
                         boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
                         border: '1px solid',
                         borderColor: 'grey.300',
@@ -211,13 +211,14 @@ export default function CriteriaSimple() {
                         onClick={handleAddCriteria}
                         loading={isLoading}
                         disabled={isLoading}
+                        size="small"
                         sx={{
-                          p: 1,
+                          p: 0.5,
                           borderRadius: '50%',
                           '&:hover': { backgroundColor: 'grey.300' },
                           transition: 'background-color 0.3s'
                         }}>
-                        <AddIcon sx={{ color: 'grey.600' }} />
+                        <AddIcon sx={{ color: 'grey.600', fontSize: '1.25rem' }} />
                       </IconButton>
                     </Stack>
                   </Paper>
@@ -225,14 +226,14 @@ export default function CriteriaSimple() {
 
                   {/* Existing Criteria */}
                   {currentPosition.criterias?.map((criterion, index) => (
-                    <Paper key={criterion.id} sx={{ backgroundColor: 'grey.50', borderRadius: '16px', p: 4, boxShadow: 1 }}>
-                      <Stack direction="row" alignItems="center" spacing={3}>
+                    <Paper key={criterion.id} sx={{ backgroundColor: 'grey.50', borderRadius: '12px', p: 2, boxShadow: 1 }}>
+                      <Stack direction="row" alignItems="center" spacing={2}>
                         <Typography sx={{
                           color: 'text.secondary',
                           fontFamily: 'Montserrat',
-                          fontSize: '1.125rem',
+                          fontSize: '0.875rem',
                           fontWeight: 500,
-                          width: '100px'
+                          width: '80px'
                         }}>
                           {`Criteria-${index + 1}`}
                         </Typography>
@@ -240,7 +241,7 @@ export default function CriteriaSimple() {
                           <Typography sx={{
                             color: 'primary.dark',
                             fontFamily: 'Montserrat',
-                            fontSize: '1rem',
+                            fontSize: '0.9rem',
                             fontWeight: 700,
                             flex: 1
                           }}>
@@ -249,8 +250,8 @@ export default function CriteriaSimple() {
                           <Typography sx={{
                             color: 'primary.dark',
                             fontFamily: 'Montserrat',
-                            fontSize: '1rem',
-                            mx: 4
+                            fontSize: '0.8rem',
+                            mx: 2
                           }}>
                             {new Date(criterion.createdAt).toLocaleString()}
                           </Typography>
@@ -258,9 +259,10 @@ export default function CriteriaSimple() {
                             loading={isLoading}
                             disabled={isLoading}
                             onClick={() => handleDeleteCriteria(criterion.id)}
+                            size="small"
                             sx={{
-                              p: 1,
-                              borderRadius: '16px',
+                              p: 0.5,
+                              borderRadius: '8px',
                               '&:hover': {
                                 backgroundColor: 'rgba(255, 0, 0, 0.1)',
                               },
@@ -270,8 +272,8 @@ export default function CriteriaSimple() {
                           >
                             <Delete
                               sx={{
-                                width: '36px',
-                                height: '36px',
+                                width: '18px',
+                                height: '18px',
                                 color: 'primary.dark',
                                 '&:hover': { color: 'error.main' },
                                 transition: 'color 0.3s'
@@ -288,13 +290,13 @@ export default function CriteriaSimple() {
                       onClick={handleCancel}
                       variant="outlined"
                       sx={{
-                        px: 4,
-                        py: 2,
+                        px: 3,
+                        py: 1,
                         borderRadius: '26px',
                         borderColor: 'grey.400',
                         color: 'primary.dark',
                         fontFamily: 'Montserrat',
-                        fontSize: '1.125rem',
+                        fontSize: '1rem',
                         fontWeight: 700,
                         textTransform: 'none',
                         boxShadow: 1,
@@ -312,13 +314,13 @@ export default function CriteriaSimple() {
                       variant="contained"
                       disabled={isLoading}
                       sx={{
-                        px: 4,
-                        py: 2,
+                        px: 3,
+                        py: 1,
                         borderRadius: '26px',
                         backgroundColor: 'primary.main',
                         color: 'white',
                         fontFamily: 'Montserrat',
-                        fontSize: '1.125rem',
+                        fontSize: '1rem',
                         fontWeight: 700,
                         textTransform: 'none',
                         boxShadow: 1,

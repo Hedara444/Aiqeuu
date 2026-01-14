@@ -155,7 +155,7 @@ export default function UploadCV() {
 
         {/* Upload Section */}
         <Container maxWidth="lg" sx={{ mb: 8 }}>
-          <Paper sx={{ borderRadius: '16px', p: { xs: 4, md: 10 }, boxShadow: 1 }}>
+          <Paper sx={{ borderRadius: '16px', p: { xs: 3, md: 5 }, boxShadow: 1 }}>
             <Stack spacing={2.5}>
               {/* Upload Area */}
               <Box
@@ -164,7 +164,7 @@ export default function UploadCV() {
                   borderColor: isDragOver ? 'primary.main' : 'grey.300',
                   backgroundColor: isDragOver ? 'rgba(0, 235, 189, 0.05)' : 'background.paper',
                   borderRadius: '16px',
-                  p: 4,
+                  p: 3,
                   textAlign: 'center',
                   transition: 'all 0.3s ease',
                   cursor: 'pointer',
@@ -176,15 +176,15 @@ export default function UploadCV() {
               >
                 <Stack alignItems="center" spacing={1.25}>
                   <Box sx={{
-                    width: '60px',
-                    height: '60px',
+                    width: '48px',
+                    height: '48px',
                     backgroundColor: 'grey.200',
                     borderRadius: '50%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}>
-                    <CloudUploadIcon sx={{ width: '48px', height: '48px', color: 'text.primary' }} />
+                    <CloudUploadIcon sx={{ width: '32px', height: '32px', color: 'text.primary' }} />
                   </Box>
                   <Box>
                     <Typography
@@ -192,7 +192,7 @@ export default function UploadCV() {
                       sx={{
                         color: 'text.primary',
                         fontFamily: 'Montserrat',
-                        fontSize: '1.25rem',
+                        fontSize: '1rem',
                         fontWeight: 700,
                         textDecoration: 'underline',
                         cursor: 'pointer',
@@ -207,7 +207,7 @@ export default function UploadCV() {
                       sx={{
                         color: 'text.primary',
                         fontFamily: 'Montserrat',
-                        fontSize: '1.25rem',
+                        fontSize: '1rem',
                         fontWeight: 400,
                         ml: 1
                       }}
@@ -220,17 +220,17 @@ export default function UploadCV() {
 
               {/* Uploaded Files List */}
               {uploadedFiles.map((file) => (
-                <Paper key={file.id} variant="outlined" sx={{ borderRadius: '16px', p: 3 }}>
-                  <Stack direction="row" alignItems="center" spacing={3}>
-                    <Box sx={{ minWidth: '56px' }}>
+                <Paper key={file.id} variant="outlined" sx={{ borderRadius: '16px', p: 2 }}>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <Box sx={{ minWidth: '40px' }}>
                       <Box
                         component="svg"
-                        width="56"
-                        height="60"
+                        width="40"
+                        height="43"
                         viewBox="0 0 56 60"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        sx={{ width: '56px', height: '60px' }}
+                        sx={{ width: '40px', height: '43px' }}
                       >
                         <path d="M15.7411 40.8262H13.9006C13.85 40.8262 13.8065 40.846 13.7699 40.8848C13.7333 40.9244 13.7148 40.9709 13.7148 41.0244V45.7791C13.7148 45.8325 13.7333 45.879 13.7699 45.9187C13.8065 45.9583 13.85 45.9773 13.9006 45.9773H14.4567C14.507 45.9773 14.5504 45.9583 14.5874 45.9187C14.624 45.879 14.6421 45.8325 14.6421 45.7791V44.1376H15.7411C16.2952 44.1376 16.7259 43.9954 17.0327 43.711C17.3391 43.4267 17.4927 43.014 17.4927 42.4745C17.4927 41.9351 17.3391 41.525 17.0327 41.2458C16.7259 40.9658 16.2952 40.8262 15.7411 40.8262ZM16.3318 43.0519C16.1762 43.1622 15.9679 43.2182 15.7069 43.2182H14.6421V41.7456H15.7069C15.9679 41.7456 16.1762 41.799 16.3318 41.9041C16.4874 42.0101 16.5654 42.1997 16.5654 42.4745C16.5654 42.7494 16.4874 42.9416 16.3318 43.0519Z" fill="black" />
                         <path d="M21.632 41.3776C21.4647 41.201 21.2564 41.0649 21.0071 40.9692C20.7574 40.8736 20.4631 40.8262 20.1245 40.8262H18.428C18.3773 40.8262 18.3339 40.846 18.2973 40.8848C18.2607 40.9244 18.2422 40.9709 18.2422 41.0244V45.7791C18.2422 45.8325 18.2607 45.879 18.2973 45.9187C18.3339 45.9583 18.3773 45.9773 18.428 45.9773H20.1587C20.4884 45.9773 20.7755 45.9299 21.0208 45.8342C21.2657 45.7386 21.4708 45.6024 21.6356 45.4258C21.8001 45.2491 21.9272 45.0354 22.0168 44.7856C22.1061 44.5348 22.1596 44.2556 22.1781 43.9463C22.1962 43.5835 22.1962 43.2199 22.1781 42.8571C22.1596 42.5478 22.1061 42.2686 22.0168 42.0179C21.9272 41.768 21.7993 41.5543 21.632 41.3776ZM21.2508 43.9463C21.2416 44.1031 21.213 44.2505 21.1648 44.3875C21.1169 44.5253 21.0469 44.6434 20.9553 44.7407C20.864 44.839 20.7494 44.9165 20.6119 44.9725C20.4747 45.0294 20.3119 45.0578 20.1245 45.0578H19.1695V41.7456H20.0899C20.2869 41.7456 20.4562 41.774 20.5982 41.8309C20.7401 41.8869 20.8579 41.9653 20.952 42.0661C21.0457 42.1669 21.1169 42.2841 21.1648 42.4194C21.213 42.5547 21.2416 42.7003 21.2508 42.8571C21.2689 43.2199 21.2689 43.5835 21.2508 43.9463Z" fill="black" />
@@ -247,7 +247,7 @@ export default function UploadCV() {
                         <Typography sx={{
                           color: 'text.primary',
                           fontFamily: 'Montserrat',
-                          fontSize: '1.25rem',
+                          fontSize: '1rem',
                           fontWeight: 500
                         }}>
                           {file.title}
@@ -258,14 +258,14 @@ export default function UploadCV() {
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              width: '40px',
-                              height: '32px',
+                              width: '32px',
+                              height: '24px',
                               backgroundColor: 'text.primary',
                               borderRadius: '50%'
                             }}>
                               <CheckCircleIcon sx={{
-                                width: '28px',
-                                height: '24px',
+                                width: '20px',
+                                height: '20px',
                                 color: 'primary.main'
                               }} />
                             </Box>
@@ -282,8 +282,8 @@ export default function UploadCV() {
                               }}
                             >
                               <DeleteIcon sx={{
-                                width: '32px',
-                                height: '32px',
+                                width: '24px',
+                                height: '24px',
                                 color: 'text.white',
                                 '&:hover': { color: 'error.main' },
                                 transition: 'color 0.3s'
@@ -293,7 +293,7 @@ export default function UploadCV() {
                           <Typography sx={{
                             color: 'text.primary',
                             fontFamily: 'Montserrat',
-                            fontSize: '1.25rem',
+                            fontSize: '1rem',
                             fontWeight: 500,
                             minWidth: '48px',
                             textAlign: 'right'

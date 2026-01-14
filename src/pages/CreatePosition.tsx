@@ -63,11 +63,11 @@ export default function CreatePosition() {
         <Container maxWidth="lg" sx={{ mb: 20 }} >
           <Paper sx={{ borderRadius: '14px', overflow: 'hidden', boxShadow: 1 , maxHeight:"500px" }}>
             {/* Header */}
-            <Box sx={{ backgroundColor: 'primary.main', px: { xs:1.2, md: 2.9 }, py: 3 }}>
+            <Box sx={{ backgroundColor: 'primary.main', px: { xs:1.2, md: 2.9 }, py: 2 }}>
               <Typography variant="h1" sx={{
                 color: 'white',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1.005rem', md: '1.075rem' },
+                fontSize: { xs: '1rem', md: '1rem' },
                 fontWeight: 700
               }}>
                 + Create New Position
@@ -82,7 +82,7 @@ export default function CreatePosition() {
                   <Typography sx={{
                     color: 'text.primary',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.15rem', md: '1.25rem' },
+                    fontSize: { xs: '1rem', md: '1rem' },
                     fontWeight: 700
                   }}>
                     Title
@@ -96,10 +96,10 @@ export default function CreatePosition() {
                     placeholder="ui/ux designer"
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        height: { xs: '50px', md: '62px' },
+                        height: { xs: '44px', md: '50px' },
                         borderRadius: '14px',
                         backgroundColor: 'grey.100',
-                        fontSize: { xs: '1.125rem', md: '1.25rem' },
+                        fontSize: { xs: '1rem', md: '1rem' },
                         fontFamily: 'Montserrat',
                         '& fieldset': {
                           border: 'none',
@@ -121,7 +121,7 @@ export default function CreatePosition() {
                   <Typography sx={{
                     color: 'text.primary',
                     fontFamily: 'Montserrat',
-                    fontSize: { xs: '1.025rem', md: '1.125rem' },
+                    fontSize: { xs: '1rem', md: '1rem' },
                     fontWeight: 700
                   }}>
                     Description
@@ -138,7 +138,7 @@ export default function CreatePosition() {
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '17px',
                         backgroundColor: 'grey.100',
-                        fontSize: { xs: '1.025rem', md: '1.025rem' },
+                        fontSize: { xs: '0.875rem', md: '1rem' },
                         fontFamily: 'Montserrat',
                         '& fieldset': {
                           border: 'none',
@@ -162,7 +162,7 @@ export default function CreatePosition() {
                     onClick={handleCancel}
                     variant="outlined"
                     sx={{
-                      height:"50px",
+                      height:"40px",
                       width:"90px",
                       px: 2,
                       py: 1,
@@ -170,7 +170,7 @@ export default function CreatePosition() {
                       borderColor: 'grey.400',
                       color: 'primary.dark',
                       fontFamily: 'Montserrat',
-                      fontSize: '0.9rem',
+                      fontSize: '0.875rem',
                       fontWeight: 700,
                       textTransform: 'none',
                       boxShadow: 1,
@@ -187,7 +187,7 @@ export default function CreatePosition() {
                     variant="contained"
                     loading={isLoading}
                     sx={{
-                      height:"50px",
+                      height:"40px",
                       width:"90px",
                       px: 2,
                       py: 1,
@@ -195,7 +195,7 @@ export default function CreatePosition() {
                       backgroundColor: 'primary.main',
                       color: 'white',
                       fontFamily: 'Montserrat',
-                      fontSize: '0.9rem',
+                      fontSize: '0.875rem',
                       fontWeight: 700,
                       textTransform: 'none',
                       boxShadow: 1,

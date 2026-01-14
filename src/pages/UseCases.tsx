@@ -120,7 +120,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose, onConfirm,
       sx: { borderRadius: "50px", p: "40px" }
     }}>
       <DialogTitle>
-        <Typography variant="h6" fontWeight={700} textAlign="center">
+        <Typography variant="h6" fontWeight={700} textAlign="center" sx={{fontSize:"1.125rem"}} >
           {title}
         </Typography>
       </DialogTitle>
@@ -133,11 +133,11 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose, onConfirm,
         </Typography>
       </DialogContent>
       <DialogActions sx={{ mt: 4 }}>
-        <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" fullWidth>
+        <Stack direction="row" spacing={2} sx={{ width: '100%' , justifyContent:"space-around"  }}>
+          <Button onClick={onClose} variant="outlined" color="inherit" sx={{width:'40%' , height:'50px'}} >
             Cancel
           </Button>
-          <Button onClick={onConfirm} variant="contained" sx={{ color: "white" }} fullWidth loading={isLoading}>
+          <Button onClick={onConfirm} variant="contained" sx={{ color: "white" ,  width:'40%' , height:'50px' }} fullWidth loading={isLoading}>
             {confirmText}
           </Button>
         </Stack>
@@ -296,7 +296,7 @@ export default function UseCases() {
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
       <Navbar />
 
-      <Container maxWidth="xl" sx={{ pb: 8 }}>
+      <Container maxWidth="xl" sx={{ pb: 3 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 4 }}>
           <Typography variant="h4" fontWeight={600}>
             Use Cases
@@ -305,10 +305,10 @@ export default function UseCases() {
             component={RouterLink}
             to="/create-position"
             variant="contained"
-            sx={{ color: "white" }}
-            size="medium"
+            sx={{ color: "white" , fontSize:"0.875rem" }}
+            size='small'
           >
-            + Add Use Cases
+            + Add Use Cases 
           </Button>
         </Stack>
 

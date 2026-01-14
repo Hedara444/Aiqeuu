@@ -16,11 +16,11 @@ export function AikyuuButton({
       variant={variant === 'primary' ? 'contained' : 'outlined'}
       fullWidth
       sx={{
-        height: { xs: '39px', md: '48px' },
+        height: { xs: '36px', md: '44px' },
         borderRadius: '100px',
         fontFamily: 'Montserrat',
-        fontSize: { xs: '22px', md: '21px', lg: '22' },
-        fontWeight: 400,
+        fontSize: { xs: '0.875rem', md: '1rem' },
+        fontWeight: 600,
         textTransform: 'none',
         ...(variant === 'primary' && {
           backgroundColor: 'primary.main',

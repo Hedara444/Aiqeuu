@@ -7,13 +7,13 @@ import {
 export function Footer() {
     return (
         <Box component="footer" sx={{ backgroundColor: '#1F1F1F', py: 2 }}>
-            <Container maxWidth="xl" sx={{ px: 6 }}>
+            <Container maxWidth="xl" sx={{ px: 2 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 }}>
                     {/* Logo */}
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         <svg
                             width="52"
-                            height="86"
+                            height="36"
                             viewBox="0 0 53 87"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ export function Footer() {
                     <Typography sx={{
                         color: 'grey.300',
                         fontFamily: 'Poppins',
-                        fontSize: { xs: '1.025rem', md: '1.125rem' },
+                        fontSize: { xs: '0.875rem', md: '1rem' },
                         textAlign: 'center'
                     }}>
                         Copyright © Resumate. All rights reserved.

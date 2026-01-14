@@ -7,7 +7,7 @@ import {
 
 const Stepper = ({ step }: { step: number }) => {
     return (
-        <Paper sx={{ borderRadius: '20px', paddingTop:{xs:"17px"  ,  md:"37px"} ,paddingBottom:{ xs:"10px" ,  md:"15px"}  , mb: 3    }}>
+        <Paper sx={{ borderRadius: '20px' , paddingTop:{xs:"17px"  ,  md:"47px"} ,paddingBottom:{ xs:"10px" ,  md:"25px"}  , mb: 3    }}>
             <Container maxWidth="xl" sx={{ position: 'relative', mb: 2 }}>
                 {/* Progress Line */}
                 <Box sx={{
