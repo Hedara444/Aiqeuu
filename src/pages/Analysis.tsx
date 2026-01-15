@@ -8,8 +8,6 @@ import {
   LinearProgress,
   Stack
 } from '@mui/material';
-import { Navbar } from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/Footer';
 import { usePositionsStore } from '@/store/positionsStore';
 import Stepper from '@/components/ui/Stepper';
 
@@ -73,9 +71,6 @@ export default function Analysis() {
 
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
-      {/* Navigation */}
-      <Navbar />
-
       {/* Main Content */}
       <Box sx={{ px: { xs: 1.5, md: 6 } }}>
         {/* Process Flow Section */}
@@ -168,9 +163,6 @@ export default function Analysis() {
           </Box>
         </Container>
       </Box>
-
-      {/* Footer */}
-      <Footer/>
     </Box>
   );
 }

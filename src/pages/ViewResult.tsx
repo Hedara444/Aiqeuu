@@ -25,9 +25,7 @@ import {
 
 import { CheckCircle, Cancel, Work as WorkIcon, Download as DownloadIcon } from '@mui/icons-material';
 import LinearProgress from '@mui/material/LinearProgress';
-import { Navbar } from '../components/ui/navbar';
 import Stepper from '@/components/ui/Stepper';
-import { Footer } from '@/components/ui/Footer';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 import { usePositionsStore } from '@/store/positionsStore';
 import { useUIStore } from '@/store/uiStore';
@@ -193,7 +191,6 @@ export default function ViewResult() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
-      <Navbar />
 
       <Box sx={{ px: { xs: 1.5, md: 6 } }}>
         {/* Progress Steps */}
@@ -254,9 +251,6 @@ export default function ViewResult() {
 
         </Container>
       </Box>
-
-      {/* Footer */}
-      <Footer />
     </Box>
   );
 }

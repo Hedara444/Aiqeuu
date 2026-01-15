@@ -27,10 +27,8 @@ import {
   Work as WorkIcon,
   Brush as BrushIcon,
 } from '@mui/icons-material';
-import { Navbar } from '../components/ui/navbar';
 import { usePositionsStore } from '@/store/positionsStore';
 import { useUIStore } from '@/store/uiStore';
-import { Footer } from '@/components/ui/Footer';
 
 interface EditPositionModalProps {
   isOpen: boolean;
@@ -306,7 +304,7 @@ const PositionCard: React.FC<{
 };
 
 export default function UseCases() {
-  const { positions, getPositions, updatePosition, deletePosition, duplicatePosition, isLoading } = usePositionsStore();
+  const { positions, getPositions, updatePosition, deletePosition, duplicatePosition, isLoading, pagination } = usePositionsStore();
   const { showAll, setShowAll } = useUIStore();
   const [isLoadingPage, setIsLoadingPage] = useState(true);
 
@@ -315,15 +313,19 @@ export default function UseCases() {
   const [isDuplicateModalOpen, setIsDuplicateModalOpen] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState<Position | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = async (page = 0, size = 5) => {
     setIsLoadingPage(true)
-    await getPositions(0, 10)
+    await getPositions(page, size)
     setIsLoadingPage(false)
   }
 
   useEffect(() => {
-    fetchData()
+    fetchData(0, 5)
   }, [])
+
+  const handlePageChange = async (newPage: number) => {
+    await getPositions(newPage, 5);
+  };
 
   const handleEdit = (position: Position) => {
     setSelectedPosition(position);
@@ -343,14 +345,14 @@ export default function UseCases() {
   const handleSaveEdit = async (title: string, description: string) => {
     if (selectedPosition) {
       await updatePosition(selectedPosition.id, { title, description });
-      await fetchData()
+      await fetchData(pagination?.pageNumber || 0, 5)
     }
   };
 
   const confirmDelete = async () => {
     if (selectedPosition) {
       await deletePosition(selectedPosition.id);
-      await fetchData()
+      await fetchData(pagination?.pageNumber || 0, 5)
     }
     setIsDeleteModalOpen(false);
     setSelectedPosition(null);
@@ -359,7 +361,7 @@ export default function UseCases() {
   const confirmDuplicate = async () => {
     if (selectedPosition) {
       await duplicatePosition(selectedPosition.id);
-      await fetchData()
+      await fetchData(pagination?.pageNumber || 0, 5)
     }
     setIsDuplicateModalOpen(false);
     setSelectedPosition(null);
@@ -380,7 +382,6 @@ export default function UseCases() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
-      <Navbar />
 
       <Container maxWidth="xl" sx={{ pb: 2.1 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2.8 }}>
@@ -410,15 +411,59 @@ export default function UseCases() {
           ))}
         </Stack>
 
-        <Stack alignItems="center">
-          <Button variant="contained" color="primary" onClick={() => setShowAll(true)} sx={{ borderRadius: 4.2, color: "white", fontSize: "0.7rem", py: 0.7, px: 1.4 }}>
-            See more
+        <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} sx={{ mt: 4 }}>
+          <Button
+            variant="outlined"
+            disabled={!pagination || pagination.pageNumber === 0}
+            onClick={() => handlePageChange((pagination?.pageNumber || 0) - 1)}
+            sx={{
+               width:'154px',
+               height:'43px',
+               fontSize:"0.8rem",
+              borderRadius: "50px",
+              textTransform: "none",
+              borderColor: 'primary.main',
+              color: 'primary.main',
+              '&:disabled': {
+                borderColor: 'grey.300',
+                color: 'grey.400'
+              }
+            }}
+          >
+            Previous
+          </Button>
+
+          {pagination && (
+            <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 , fontSize:'0.7rem' }}>
+              Page {pagination.pageNumber + 1} of {pagination.totalPages || 1}
+            </Typography>
+          )}
+
+          <Button
+            variant="outlined"
+            disabled={!pagination || (pagination.pageNumber + 1) >= pagination.totalPages}
+            onClick={() => handlePageChange((pagination?.pageNumber || 0) + 1)}
+            sx={{
+               width:'154px',
+                      height:'43px',
+                      fontSize:"0.8rem",
+              borderRadius: "50px",
+              textTransform: "none",
+              borderColor: 'primary.main',
+              color: 'primary.main',
+              '&:disabled': {
+                borderColor: 'grey.300',
+                color: 'grey.400'
+              }
+            }}
+          >
+            Next
           </Button>
         </Stack>
 
       </Container>
 
-      <Footer />
+     
 
       <EditPositionModal
         isOpen={isEditModalOpen}

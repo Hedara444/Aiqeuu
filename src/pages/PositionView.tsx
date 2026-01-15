@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Navbar } from '../components/ui/navbar';
 import { useParams, Link as RouterLink, useNavigate } from 'react-router-dom';
 import { usePositionsStore } from '@/store/positionsStore';
 import { useCriteriaStore } from '@/store/criteriaStore';
@@ -35,7 +34,6 @@ import {
   DragIndicator as DragIndicatorIcon,
   Brush as BrushIcon,
 } from '@mui/icons-material';
-import { Footer } from '@/components/ui/Footer';
 
 interface UploadResumeModalProps {
   isOpen: boolean;
@@ -417,7 +415,7 @@ export default function PositionView() {
   if (!currentPosition) {
     return (
       <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
-        <Navbar />
+    
         <Container maxWidth="lg" sx={{ py: 8 }}>
           <Stack alignItems="center" spacing={2}>
             <Typography variant="h4" fontWeight={700}>Position Not Found</Typography>
@@ -510,7 +508,6 @@ export default function PositionView() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
-      <Navbar />
 
       <Container maxWidth="lg" sx={{ pb: 8 }}>
         {/* Header */}
@@ -573,8 +570,6 @@ export default function PositionView() {
           {/* <Button component={RouterLink} to="/use-cases" variant="outlined">Back to Use Cases</Button> */}
         </Stack>
       </Container>
-
-      <Footer />
 
       {/* Modals */}
       <UploadResumeModal

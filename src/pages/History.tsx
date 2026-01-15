@@ -11,9 +11,7 @@ import {
   CircularProgress
 } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
-import { Navbar } from '@/components/ui/navbar';
 import { useProfileStore } from '@/store/profileStore';
-import { Footer } from '@/components/ui/Footer';
 
 export default function History() {
   const { history, getHistory, isLoading } = useProfileStore();
@@ -61,9 +59,6 @@ export default function History() {
 
   return (
     <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
-      {/* Navigation */}
-      <Navbar />
-
       {/* Main Content */}
       <Container maxWidth="xl" sx={{ pb: { xs: 8, md: 25 } }}>
         {/* Header */}
@@ -164,9 +159,6 @@ export default function History() {
           )}
         </Container>
       </Container>
-
-      {/* Footer */}
-      <Footer />
     </Box>
   );
 }

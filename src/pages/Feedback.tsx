@@ -22,8 +22,7 @@ import { styled } from '@mui/material/styles';
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Navbar } from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/Footer';
+
 import { useProfileStore } from '@/store/profileStore';
 
 const VisuallyHiddenInput = styled('input')({
@@ -100,8 +99,6 @@ export default function Feedback() {
 
   return (
     <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
-      {/* Navigation */}
-      <Navbar />
 
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ pb: { xs: 8, md: 12 } }}>
@@ -345,8 +342,6 @@ export default function Feedback() {
         </Container>
       </Container>
 
-      {/* Footer */}
-      <Footer />
     </Box>
   );
 }

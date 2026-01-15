@@ -4,6 +4,8 @@ import { useAuthStore } from '../store/authStore';
 import { CircularProgress, Box } from '@mui/material';
 import { useProfileStore } from '@/store/profileStore';
 
+import { MainLayout } from './layout/MainLayout';
+
 const ProtectedRoute = () => {
     const { isAuthenticated } = useAuthStore();
     const { getProfileData, getBalance } = useProfileStore()
@@ -45,7 +47,11 @@ const ProtectedRoute = () => {
     }
 
     // If authenticated, render the child routes
-    return <Outlet />;
+    return (
+        <MainLayout>
+            <Outlet />
+        </MainLayout>
+    );
 };
 
 export default ProtectedRoute;

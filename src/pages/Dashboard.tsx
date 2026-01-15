@@ -1,16 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, Paper, Container } from '@mui/material';
-import { Navbar } from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/Footer';
 import Stepper from '@/components/ui/Stepper';
 
 export default function Dashboard() {
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'background.default' }}>
-      {/* Navigation */}
-      <Navbar />
-
+    <>
       {/* Main Content */}
       <Box sx={{ px: { xs: 1.5, md: 3 }, flex: 1 }}>
         {/* Process Flow Section */}
@@ -46,9 +41,6 @@ export default function Dashboard() {
           </Box>
         </Box>
       </Box>
-
-      {/* Footer */}
-      <Footer />
-    </Box>
+    </>
   );
 }

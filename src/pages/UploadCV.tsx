@@ -16,8 +16,7 @@ import {
   CheckCircle as CheckCircleIcon,
   Delete as DeleteIcon
 } from '@mui/icons-material';
-import { Navbar } from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/Footer';
+
 
 import Stepper from '@/components/ui/Stepper';
 import { usePositionsStore } from '@/store/positionsStore';
@@ -147,8 +146,7 @@ export default function UploadCV() {
 
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
-      {/* Navigation */}
-      <Navbar />
+
 
       {/* Main Content */}
       <Box sx={{ px: { xs: 1.5, md: 6 } }}>
@@ -402,8 +400,7 @@ export default function UploadCV() {
         style={{ display: 'none' }}
       />
 
-      {/* Footer */}
-     <Footer />
+
     </Box>
   );
 }

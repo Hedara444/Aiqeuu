@@ -11,8 +11,6 @@ import {
   CircularProgress
 } from '@mui/material';
 import { AutoFixHigh, DriveFileRenameOutline } from '@mui/icons-material';
-import { Navbar } from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/Footer';
 import Stepper from '@/components/ui/Stepper';
 import { usePositionsStore } from '@/store/positionsStore';
 
@@ -54,7 +52,6 @@ export default function CriteriaSelection() {
 
   return (
     <Box sx={{ minHeight: '100vh',display: 'flex', flexDirection: 'column', backgroundColor: 'background.default' }}>
-      <Navbar />
       <Box sx={{ px: { xs: 0.7, md: 2.8  , flex:1} }}>
         <Stepper step={1} />
         <Container maxWidth="xl" sx={{ mb: 2.8 }}>
@@ -219,7 +216,6 @@ export default function CriteriaSelection() {
           </Stack>
         </Container>
       </Box>
-      <Footer />
     </Box>
   );
 }

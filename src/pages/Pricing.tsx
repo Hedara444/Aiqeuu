@@ -11,9 +11,7 @@ import {
   CircularProgress
 } from '@mui/material';
 import { Check as CheckIcon } from '@mui/icons-material';
-import { Navbar } from '@/components/ui/navbar';
 import { PurchaseModal } from '@/components/ui/purchase-modal';
-import { Footer } from '@/components/ui/Footer';
 import { useProfileStore } from '@/store/profileStore';
 import { number } from 'zod';
 
@@ -268,8 +266,7 @@ export default function Pricing() {
 
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
-      {/* Navigation */}
-      <Navbar />
+
 
       {/* Main Content */}
       <Box sx={{ px: { xs: 2, md: 6 }, pb: 8 }}>
@@ -315,8 +312,7 @@ export default function Pricing() {
         </Grid>
       </Box>
 
-      {/* Footer */}
-      <Footer />
+
 
       {/* Purchase Modal */}
       {

@@ -9,8 +9,6 @@ import {
   Button,
   Stack
 } from '@mui/material';
-import { Navbar } from '@/components/ui/navbar';
-  import { Footer } from '@/components/ui/Footer';
 import { usePositionsStore } from '@/store/positionsStore';
 import Stepper from '@/components/ui/Stepper';
 
@@ -51,9 +49,6 @@ export default function CreatePosition() {
 
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default'  , width:'100%'}}>
-      {/* Navigation */}
-      <Navbar />
-
       {/* Main Content */}
       <Box sx={{ px: { xs: 1.05, md: 2.1 }}}>
         {/* Process Flow Section */}
@@ -214,9 +209,6 @@ export default function CreatePosition() {
           </Paper>
         </Container>
       </Box>
-
-      {/* Footer */}
-      <Footer />
     </Box>
   );
 }

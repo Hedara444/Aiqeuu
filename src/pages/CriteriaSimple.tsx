@@ -15,10 +15,8 @@ import {
   CircularProgress
 } from '@mui/material';
 import { Add as AddIcon, Delete } from '@mui/icons-material';
-import { Navbar } from '@/components/ui/navbar';
 import { usePositionsStore } from '@/store/positionsStore';
 import { toast } from 'react-toastify';
-import { Footer } from '@/components/ui/Footer';
 import Stepper from '@/components/ui/Stepper';
 
 export default function CriteriaSimple() {
@@ -87,9 +85,6 @@ export default function CriteriaSimple() {
 
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
-      {/* Navigation */}
-      <Navbar />
-
       {/* Main Content */}
       <Box sx={{ px: { xs: 1, md: 4 } }}>
         {/* Process Flow Section */}
@@ -345,10 +340,6 @@ export default function CriteriaSimple() {
           </Stack>
         </Container>
       </Box>
-
-
-      {/* Footer */}
-      <Footer />
     </Box>
   );
 }

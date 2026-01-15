@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
-import { Navbar } from '../components/ui/navbar';
 import { usePositionsStore } from '@/store/positionsStore';
 import { useCriteriaStore } from '@/store/criteriaStore';
 import { useAnalysisStore } from '@/store/analysisStore';
@@ -30,7 +29,6 @@ import {
 } from '@mui/material';
 import { Download as DownloadIcon, CheckCircle, Cancel } from '@mui/icons-material';
 import LinearProgress from '@mui/material/LinearProgress';
-import { Footer } from '@/components/ui/Footer';
 
 const ToggleSwitch: React.FC<{
   isActive: boolean;
@@ -178,7 +176,6 @@ export default function AnalysisCompleted() {
   if (!currentPosition) {
     return (
       <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
-        <Navbar />
         <Container maxWidth="lg" sx={{ py: 3 }}>
           <Stack alignItems="center" spacing={2}>
             <Typography variant="h4" fontWeight={700}>Position Not Found</Typography>
@@ -207,7 +204,6 @@ export default function AnalysisCompleted() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
-      <Navbar />
 
       <Container maxWidth="xl" sx={{ pb: 4, mt: 2 ,minheight:'100vh' }}>
         {/* Header */}
@@ -257,8 +253,6 @@ export default function AnalysisCompleted() {
 
       </Container>
 
-      {/* Footer */}
-      <Footer />
     </Box>
   );
 }

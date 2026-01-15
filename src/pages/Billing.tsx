@@ -18,9 +18,7 @@ import {
   ExpandMore as ExpandMoreIcon,
   Check
 } from '@mui/icons-material';
-import { Navbar } from '@/components/ui/navbar';
 import { PurchaseModal } from '@/components/ui/purchase-modal';
-import { Footer } from '@/components/ui/Footer';
 import { useProfileStore } from '@/store/profileStore';
 import { useBillingStore } from '@/store/billingStore';
 
@@ -339,8 +337,7 @@ export default function   Billing() {
 
   return (
     <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
-      {/* Navigation */}
-      <Navbar />
+
 
       {/* Main Content */}
       <Box sx={{ px: { xs: 2, md: 6 }, pb: 8, mb: 1 }}>
@@ -589,8 +586,7 @@ export default function   Billing() {
         </Stack>
       </Box>
 
-      {/* Footer */}
-      <Footer />
+
 
       {/* Purchase Modal */}
       {

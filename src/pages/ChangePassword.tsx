@@ -30,8 +30,7 @@ import {
   Check as CheckIcon
 } from '@mui/icons-material';
 import { AikyuuLogo } from '@/components/ui/aikyuu-logo';
-import { Navbar } from '@/components/ui/navbar';
-import { Footer } from '@/components/ui/Footer';
+
 import { useProfileStore } from '@/store/profileStore';
 
 // Define validation schema with Zod
@@ -135,8 +134,7 @@ export default function ChangePassword() {
 
   return (
     <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
-      {/* Navigation */}
-      <Navbar />
+
 
       {/* Main Content */}
       <Container maxWidth="xl" sx={{ px: { xs: 2, md: 6 }, mb: 10 }}>
@@ -425,8 +423,7 @@ export default function ChangePassword() {
         </Grid>
       </Container>
 
-      {/* Footer */}
-      <Footer />
+
     </Box>
   );
 }
