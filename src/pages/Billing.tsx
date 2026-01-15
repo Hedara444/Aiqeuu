@@ -373,7 +373,7 @@ export default function   Billing() {
         </Box>
 
         <Stack spacing={9} alignItems="center">
-          <Container maxWidth="xl" sx={{mb:42}}>
+          <Container maxWidth="xl" sx={{mb:42 , p:'16px'}}>
             {/* Past Bills Section */}
             <Box>
               <Typography
@@ -399,7 +399,7 @@ export default function   Billing() {
                     boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
                   }}
                 >
-                  <Grid container spacing={4} alignItems="center" justifyContent="space-between">
+                  <Grid container spacing={3} alignItems="center" justifyContent="space-between">
                     <Grid sx={{ minWidth: 240 }}>
                       <Typography variant="h6" sx={{ fontWeight: 700, color: "text.primary" }}>
                         Plan

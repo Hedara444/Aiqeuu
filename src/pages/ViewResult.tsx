@@ -321,7 +321,7 @@ const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean }> 
             </Paper>
           )}
 
-          <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2 }}>
+          {/* <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2 }}>
             <List disablePadding>
               {result.criteriaResults?.map((criteriaResult, index) => (
                 <>
@@ -344,7 +344,7 @@ const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean }> 
                 </>
               ))}
             </List>
-          </Paper>
+          </Paper> */}
         </Stack>
       </CardContent>
     </Card>

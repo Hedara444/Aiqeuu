@@ -22,21 +22,32 @@ export default function Analysis() {
   const { currentPosition, getPositionById } = usePositionsStore();
 
   useEffect(() => {
-    const interval = setInterval(async () => {
-      const updatedPosition = await getPositionById(id!);
+    // Polling for status
+    const statusInterval = setInterval(async () => {
+      if (!id) return;
+      const updatedPosition = await getPositionById(id);
 
       if (updatedPosition?.status === "completed") {
-        clearInterval(interval);
+        setProgress(100);
+        clearInterval(statusInterval);
         setTimeout(() => {
           navigate(`/view-result/${id}`);
         }, 1000);
-        return;
       }
+    }, 3000);
 
-      setProgress(prev => Math.min(prev + Math.random() * 20, 100));
-    }, 5000);
+    // Smooth dummy progress animation
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 90) return prev; // Hold at 90% until completion
+        return Math.min(prev + Math.random() * 1.5, 90);
+      });
+    }, 200);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(statusInterval);
+      clearInterval(progressInterval);
+    };
   }, [navigate, id, getPositionById]);
 
   // useEffect(() => {
@@ -83,13 +94,10 @@ export default function Analysis() {
                   height: '12px',
                   borderRadius: '12px',
                   backgroundColor: 'grey.300',
-                  position: 'relative',
-                  overflow: 'hidden',
                   '& .MuiLinearProgress-bar': {
                     backgroundColor: 'primary.main',
                     borderRadius: '12px',
-                    transition: 'transform 0.7s ease-out',
-                    position: 'relative',
+                    transition: 'transform 0.2s linear',
                     '&::after': {
                       content: '""',
                       position: 'absolute',
