@@ -22,6 +22,7 @@ import { Navbar } from '@/components/ui/navbar';
 import { PurchaseModal } from '@/components/ui/purchase-modal';
 import { Footer } from '@/components/ui/Footer';
 import { useProfileStore } from '@/store/profileStore';
+import { useBillingStore } from '@/store/billingStore';
 
 interface BillRowProps {
   plan: string;
@@ -54,12 +55,12 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
         {/* Plan Info */}
         <Grid sx={{ minWidth: { md: 220 } }}>
           <Stack direction="row" alignItems="center" spacing={1.5}>
-            <ReceiptIcon sx={{ fontSize: "2.15rem", color: "text.primary" }} />
+            <ReceiptIcon sx={{ fontSize: "1.15rem", color: "text.primary" }} />
             <Typography
               variant="h6"
               sx={{
                 fontWeight: 700,
-                fontSize: { xs: "1.0125rem", md: "1.125rem" },
+                fontSize: { xs: "1.0125rem", md: "1rem" },
                 color: "text.primary"
               }}
             >
@@ -77,7 +78,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
             <Typography
               variant="body1"
               sx={{
-                fontSize: { xs: "1.0125rem", md: "1.125rem" },
+                fontSize: { xs: "1rem", md: "1rem" },
                 color: "text.primary"
               }}
             >
@@ -87,7 +88,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
             <Typography
               variant="body1"
               sx={{
-                fontSize: { xs: "1.025rem", md: "1.125rem" },
+                fontSize: { xs: "1rem", md: "1rem" },
                 color: "text.primary"
               }}
             >
@@ -102,7 +103,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
           <Typography
             variant="body1"
             sx={{
-              fontSize: { xs: "1.0125rem", md: "1.125rem" },
+              fontSize: { xs: "1rem", md: "1rem" },
               color: "text.primary",
               textAlign: { xs: "left", md: "center" }
             }}
@@ -116,7 +117,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
           <Typography
             variant="body1"
             sx={{
-              fontSize: { xs: "1.0125rem", md: "1.125rem" },
+              fontSize: { xs: "1rem", md: "1rem" },
               color: "text.primary",
               textAlign: { xs: "left", md: "center" }
             }}
@@ -133,7 +134,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
               sx={{
                 px: 2.25,
                 py: 1,
-                fontSize: "1.0125rem",
+                fontSize: "1rem",
                 fontWeight: 700,
                 backgroundColor: status === 'active' ? 'rgba(0, 235, 189, 0.1)' : 'rgba(255, 70, 86, 0.1)',
                 color: status === 'active' ? 'primary.main' : '#FF4656',
@@ -169,9 +170,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
   <Card sx={{
     position: 'relative',
     width: '100%',
-    maxWidth: '512px',
-    borderRadius: '50px',
-    p: { xs: 4, md: 6 },
+    maxWidth: '342px',
+    borderRadius: '30px',
+    p: { xs: 1, md: 2 },
     display: 'flex',
     flexDirection: 'column',
     border: highlighted ? '2px solid' : 'none',
@@ -184,7 +185,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography variant="h3" sx={{
           color: 'primary.main',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.575rem', md: '2.15rem' },
+          fontSize: { xs: '1.1rem', md: '1.25rem' },
           fontWeight: 700,
           mb: 3
         }}>
@@ -193,7 +194,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.015rem', md: '1.375rem' },
+          fontSize: { xs: '0.85rem', md: '0.95rem' },
           fontWeight: 700,
           mb: 3
         }}>
@@ -202,8 +203,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.0125rem', md: '1.125rem' },
-          lineHeight: 1.6
+          fontSize: { xs: '0.8rem', md: '0.9rem' },
+          lineHeight: 1.3
         }}>
           {description}
         </Typography>
@@ -229,7 +230,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.025rem', md: '1.125rem' },
+          fontSize: { xs: '0.95rem', md: '1rem' },
           flex: 1
         }}>
           CV Credits:Process up to {points} CVs
@@ -242,7 +243,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <Typography sx={{
             color: 'primary.dark',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '1.0125rem', md: '1.125rem' }
+            fontSize: { xs: '0.95rem', md: '1rem' }
           }}>
             You pay:
           </Typography>
@@ -250,7 +251,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.25rem', md: '1.575rem' },
+          fontSize: { xs: '0.9rem', md: '1rem' },
           fontWeight: 700,
           mb: 1
         }}>
@@ -265,12 +266,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         variant="contained"
         fullWidth
         sx={{
-          height: { xs: '54px', md: '62px' },
+          height: { xs: '44px', md: '52px' },
           borderRadius: '50px',
           backgroundColor: 'primary.main',
           color: 'white',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.2rem', md: '1.25rem' },
+          fontSize: { xs: '0.95rem', md: '1rem' },
           fontWeight: 700,
           textTransform: 'none',
           '&:hover': {
@@ -284,11 +285,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
   </Card>
 );
 
-export default function Billing() {
+export default function   Billing() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Product>(null);
   const { products, buyProduct, getProducts, isLoading } = useProfileStore()
+  const { bills, getBillingHistory, pagination } = useBillingStore();
   const [isLoadingPage, setIsLoadingPage] = useState(true);
 
 
@@ -302,55 +304,13 @@ export default function Billing() {
     setSelectedPlan(null);
   };
 
-  const pastBills = [
-    {
-      plan: "Ultimate Vault",
-      startDate: "12.01.2024",
-      endDate: "12.01.2025",
-      package: "1000 CVs",
-      price: "$100.00",
-      status: 'active' as const
-    },
-    {
-      plan: "Ultimate Vault",
-      startDate: "12.01.2024",
-      endDate: "12.01.2025",
-      package: "1000 CVs",
-      price: "$100.00",
-      status: 'finished' as const
-    },
-    {
-      plan: "Ultimate Vault",
-      startDate: "12.01.2024",
-      endDate: "12.01.2025",
-      package: "1000 CVs",
-      price: "$100.00",
-      status: 'finished' as const
-    },
-    {
-      plan: "Ultimate Vault",
-      startDate: "12.01.2024",
-      endDate: "12.01.2025",
-      package: "1000 CVs",
-      price: "$100.00",
-      status: 'finished' as const
-    },
-    {
-      plan: "Ultimate Vault",
-      startDate: "12.01.2024",
-      endDate: "12.01.2025",
-      package: "1000 CVs",
-      price: "$100.00",
-      status: 'finished' as const
-    }
-  ];
-
-
-
   useEffect(() => {
     const fetchData = async () => {
       setIsLoadingPage(true)
-      await getProducts()
+      await Promise.all([
+        getProducts(),
+        getBillingHistory()
+      ]);
       setIsLoadingPage(false)
     }
 
@@ -383,13 +343,13 @@ export default function Billing() {
       <Navbar />
 
       {/* Main Content */}
-      <Box sx={{ px: { xs: 2, md: 6 }, pb: 8, mb: 20 }}>
+      <Box sx={{ px: { xs: 2, md: 6 }, pb: 8, mb: 1 }}>
         {/* Header */}
         <Box textAlign="center" sx={{ mb: { xs: 8, md: 12 } }}>
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: "2rem", md: "3rem", lg: "3.5rem" },
+              fontSize: { xs: "1rem", md: "2rem", lg: "2.5rem" },
               fontWeight: 700,
               mb: 3,
               color: "text.primary",
@@ -402,7 +362,7 @@ export default function Billing() {
               variant="h5"
               sx={{
                 color: "text.primary",
-                fontSize: { xs: "1.125rem", md: "1.25rem" },
+                fontSize: { xs: "1.025rem", md: "1.125rem" },
                 lineHeight: 1.6,
               }}
             >
@@ -412,16 +372,16 @@ export default function Billing() {
           </Container>
         </Box>
 
-        <Stack spacing={8} alignItems="center">
-          <Container maxWidth="xl">
+        <Stack spacing={9} alignItems="center">
+          <Container maxWidth="xl" sx={{mb:42}}>
             {/* Past Bills Section */}
             <Box>
               <Typography
                 variant="h2"
                 sx={{
-                  fontSize: { xs: "1.375rem", md: "2.05rem" },
+                  fontSize: { xs: "1rem", md: "1.25rem" },
                   fontWeight: 700,
-                  mb: 3,
+                  mb: 2,
                   color: "text.primary"
                 }}
               >
@@ -469,9 +429,61 @@ export default function Billing() {
                 </Card>
 
                 {/* Bills List */}
-                {pastBills.map((bill, index) => (
-                  <BillRow key={index} {...bill} />
+                {bills.map((bill, index) => (
+                  <BillRow key={bill.id || index} {...bill} />
                 ))}
+
+                {/* Pagination Controls */}
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 7, gap: 2, alignItems: 'center' }}>
+                  <Button
+                    variant="outlined"
+                    disabled={!pagination || pagination.pageNumber === 0}
+                    onClick={() => getBillingHistory((pagination?.pageNumber || 0) - 1, pagination?.pageSize || 10)}
+                    sx={{
+                     width:'154px',
+                      height:'43px',
+                      fontSize:"0.9rem",
+                      borderRadius: '50px',
+                      textTransform: 'none',
+                      borderColor: 'primary.main',
+                      color: 'primary.main',
+                      '&:disabled': {
+                        borderColor: 'grey.300',
+                        color: 'grey.400'
+                      }
+                    }}
+                  >
+                    Previous
+                  </Button>
+                  
+                  {pagination && (
+                    <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                      Page {pagination.pageNumber + 1} of {Math.ceil(pagination.totalCount / pagination.pageSize) || 1}
+                    </Typography>
+                  )}
+
+                  <Button
+                    variant="outlined"
+                    disabled={!pagination || (pagination.pageNumber + 1) * pagination.pageSize >= pagination.totalCount}
+                    onClick={() => getBillingHistory((pagination?.pageNumber || 0) + 1, pagination?.pageSize || 10)}
+                    sx={{
+                      width:'154px',
+                      height:'43px',
+                      fontSize:"0.9rem",
+                      borderRadius: '50px',
+                      textTransform: 'none',
+                      borderColor: 'primary.main',
+                      color: 'primary.main',
+                      '&:disabled': {
+                        borderColor: 'grey.300',
+                        color: 'grey.400'
+                      }
+
+                    }}
+                  >
+                    Next
+                  </Button>
+                </Box>
               </Stack>
             </Box>
 
@@ -560,7 +572,7 @@ export default function Billing() {
           </Container>
 
           {/* Pricing Plans */}
-          <Grid container spacing={{ xs: 4, lg: 6 }} justifyContent="center" sx={{ mx: 'auto' }}>
+          <Grid container spacing={{ xs: 4, lg: 6 }} justifyContent="center" sx={{ mx: '20px' , mt:3 }}>
             {products.reverse().map((product, index) => (
               <Grid key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
                 <ProductCard
