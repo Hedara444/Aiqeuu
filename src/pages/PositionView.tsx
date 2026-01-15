@@ -33,6 +33,7 @@ import {
   Add as AddIcon,
   PictureAsPdf as PictureAsPdfIcon,
   DragIndicator as DragIndicatorIcon,
+  Brush as BrushIcon,
 } from '@mui/icons-material';
 import { Footer } from '@/components/ui/Footer';
 
@@ -61,6 +62,7 @@ interface ConfirmDeleteModalProps {
 
 const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, onUpload, isLoading }) => {
   const [isDragOver, setIsDragOver] = useState(false);
+  const fileInputRef = useState<HTMLInputElement | null>(null);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -89,53 +91,78 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>
-        <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="center">
-          <UploadFileIcon color="primary" />
-          <Typography variant="h6" fontWeight={700}>Upload Resumes </Typography>
+    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth PaperProps={{
+      sx: { borderRadius: "14px", p: 2.5 }
+    }}>
+      <DialogTitle sx={{ p: 0, mb: 1.2 }}>
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+          <BrushIcon sx={{ fontSize: '1rem', color: 'text.primary' }} />
+          <Typography variant="subtitle1" fontWeight={700}>Upload Resumes</Typography>
         </Stack>
       </DialogTitle>
-      <DialogContent dividers>
+
+      <Divider sx={{ mb: 2.5 }} />
+
+      <DialogContent sx={{ p: 0, mb: 2.5, overflowY: 'visible' }}>
         <Box
+          component="label"
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           sx={{
-            height: 220,
-            border: '2px dashed',
+            height: 140,
+            border: '1.5px dashed',
             borderColor: isDragOver ? 'primary.main' : 'grey.300',
-            borderRadius: 2,
+            borderRadius: '12px',
             bgcolor: isDragOver ? 'success.lighter' : 'background.paper',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             gap: 1,
-            mb: 1,
+            cursor: 'pointer',
+            transition: 'all 0.2s'
           }}
-          {
-          ...(isDragOver ? { boxShadow: 0 } : {})
-          }
         >
-          <PictureAsPdfIcon color="action" sx={{ fontSize: 38 }} />
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Button component="label" variant="text" color="primary" sx={{ textDecoration: 'underline', fontWeight: 700  , fontSize:'1rem' }}>
-              Click to upload
-              <input hidden multiple accept=".pdf,.doc,.docx" type="file" onChange={handleFileSelect} />
-            </Button>
-            <Typography variant="h6" fontWeight={600}>
-              or drag and drop
-            </Typography>
-          </Stack>
+          <input hidden multiple accept=".pdf,.doc,.docx" type="file" onChange={handleFileSelect} id="resume-upload-input" />
+          <UploadFileIcon sx={{ fontSize: 24, color: 'text.secondary' }} />
+          <Typography variant="caption" color="text.secondary">
+            <span style={{ textDecoration: 'underline', fontWeight: 700, color: 'black' }}>Click to upload</span> or drag and drop
+          </Typography>
         </Box>
       </DialogContent>
-      <DialogActions>
-        <Stack direction="row" spacing={2} sx={{ width: '100%' , justifyContent:'space-evenly' , mb:1 , mt:1}}>
-          <Button onClick={onClose} variant="outlined" color="inherit"  sx={{ width:'25%' , fontSize:'0.8rem'}} >
+      <DialogActions sx={{ p: 0 }}>
+        <Stack direction="row" spacing={1.5} sx={{ width: '100%' }}>
+          <Button
+            onClick={onClose}
+            variant="outlined"
+            color="inherit"
+            fullWidth
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              borderColor: 'grey.300'
+            }}
+          >
             Cancel
           </Button>
-          <Button onClick={onClose} variant="contained" color="primary" sx={{ width:'25%' , fontSize:'0.8rem'}}  loading={isLoading}>
+          <Button
+            onClick={() => document.getElementById('resume-upload-input')?.click()}
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              color: "white",
+              boxShadow: 'none'
+            }}
+            loading={isLoading}
+          >
             Upload Resumes
           </Button>
         </Stack>
@@ -156,28 +183,74 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>
-        <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="center">
-          <AddIcon color="primary" />
-          <Typography variant="h6" fontWeight={700}>Add New Criteria</Typography>
+    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth PaperProps={{
+      sx: { borderRadius: "14px", p: 2.5 }
+    }}>
+      <DialogTitle sx={{ p: 0, mb: 1.2 }}>
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+          <BrushIcon sx={{ fontSize: '1rem', color: 'text.primary' }} />
+          <Typography variant="subtitle1" fontWeight={700}>Add New Criteria</Typography>
         </Stack>
       </DialogTitle>
-      <DialogContent dividers>
-        <TextField
-          label="Description"
-          placeholder="Type Your text"
-          fullWidth
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+
+      <Divider sx={{ mb: 2.5 }} />
+
+      <DialogContent sx={{ p: 0, mb: 2.5, overflowY: 'visible' }}>
+        <Box>
+          <Typography variant="caption" sx={{ fontWeight: 700, mb: 0.5, ml: 0.5, fontSize: '0.75rem' }}>
+            Description
+          </Typography>
+          <TextField
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Type Your text"
+            fullWidth
+            variant="standard"
+            InputProps={{
+              disableUnderline: true,
+              sx: {
+                backgroundColor: '#FAFAFA',
+                borderRadius: '8px',
+                p: 1.2,
+                fontSize: '0.8rem',
+                '& input': { p: 0 }
+              }
+            }}
+          />
+        </Box>
       </DialogContent>
-      <DialogActions>
-        <Stack direction="row" spacing={2} sx={{ width: '100%'  , justifyContent:'space-evenly' , mb:1 , mt:1 }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" sx={{width:'45%' , fontSize:'0.8rem' }} >
+      <DialogActions sx={{ p: 0 }}>
+        <Stack direction="row" spacing={1.5} sx={{ width: '100%' }}>
+          <Button
+            onClick={onClose}
+            variant="outlined"
+            color="inherit"
+            fullWidth
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              borderColor: 'grey.300'
+            }}
+          >
             Cancel
           </Button>
-          <Button onClick={handleAdd} variant="contained" color="primary"  sx={{width:'45%' , fontSize:'0.8rem'}} loading={isLoading}>
+          <Button
+            onClick={handleAdd}
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              color: "white",
+              boxShadow: 'none'
+            }}
+            loading={isLoading}
+          >
             Add Criteria
           </Button>
         </Stack>
@@ -188,19 +261,55 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
 
 const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose, onConfirm, title, message, isLoading }) => {
   return (
-    <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>
-        <Typography fontWeight={700} textAlign="center">{title}</Typography>
+    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth PaperProps={{
+      sx: { borderRadius: "14px", p: 2.5 }
+    }}>
+      <DialogTitle sx={{ p: 0, mb: 1.2 }}>
+        <Typography variant="subtitle1" fontWeight={700} textAlign="center">
+          {title}
+        </Typography>
       </DialogTitle>
-      <DialogContent dividers>
-        <Typography variant="body1" textAlign="center">{message}</Typography>
+
+      <Divider sx={{ mb: 2.5 }} />
+
+      <DialogContent sx={{ p: 0, mb: 2.5 }}>
+        <Typography variant="body2" textAlign="center" sx={{ fontSize: "0.85rem", fontWeight: 500 }}>
+          {message}
+        </Typography>
       </DialogContent>
-      <DialogActions>
-        <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" fullWidth>
+
+      <DialogActions sx={{ p: 0 }}>
+        <Stack direction="row" spacing={1.5} sx={{ width: '100%' }}>
+          <Button
+            onClick={onClose}
+            variant="outlined"
+            color="inherit"
+            fullWidth
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              borderColor: 'grey.300'
+            }}
+          >
             Cancel
           </Button>
-          <Button onClick={onConfirm} sx={{ color: "white" }} variant="contained" color="primary" fullWidth loading={isLoading}>
+          <Button
+            onClick={onConfirm}
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              color: "white",
+              boxShadow: 'none'
+            }}
+            variant="contained"
+            color="primary"
+            fullWidth
+            loading={isLoading}
+          >
             Delete
           </Button>
         </Stack>
