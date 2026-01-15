@@ -25,6 +25,7 @@ import {
   Delete as DeleteIcon,
   ContentCopy as ContentCopyIcon,
   Work as WorkIcon,
+  Brush as BrushIcon,
 } from '@mui/icons-material';
 import { Navbar } from '../components/ui/navbar';
 import { usePositionsStore } from '@/store/positionsStore';
@@ -66,47 +67,106 @@ const EditPositionModal: React.FC<EditPositionModalProps> = ({ isOpen, onClose, 
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="md" PaperProps={{
-      sx: { borderRadius: "35px", p: "28px" }
+    <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="xs" PaperProps={{
+      sx: { borderRadius: "14px", p: 2.5 }
     }}>
-      <DialogTitle>
-        <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
-          <WorkIcon color="primary" fontSize="large" />
-          <Typography variant="h6" fontWeight={700}>
+      <DialogTitle sx={{ p: 0, mb: 1.2 }}>
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+          <BrushIcon sx={{ fontSize: '1rem', color: 'text.primary' }} />
+          <Typography variant="subtitle1" fontWeight={700}>
             Edit Position
           </Typography>
         </Stack>
       </DialogTitle>
 
-      <Divider />
+      <Divider sx={{ mb: 2.5 }} />
 
-      <DialogContent>
-        <Stack spacing={3} sx={{ mt: 1 }}>
-          <TextField
-            label="Position title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Type Your text"
-            fullWidth
-          />
-          <TextField
-            label="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Type Your text"
-            fullWidth
-            multiline
-            minRows={4}
-          />
+      <DialogContent sx={{ p: 0, overflowY: 'visible' }}>
+        <Stack spacing={2}>
+          <Box>
+            <Typography variant="caption" sx={{ fontWeight: 700, mb: 0.5, ml: 0.5, fontSize: '0.75rem' }}>
+              Position name
+            </Typography>
+            <TextField
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Type Your text"
+              fullWidth
+              variant="standard"
+              InputProps={{
+                disableUnderline: true,
+                sx: {
+                  backgroundColor: '#FAFAFA',
+                  borderRadius: '8px',
+                  p: 1.2,
+                  fontSize: '0.8rem',
+                  '& input': {
+                    p: 0
+                  }
+                }
+              }}
+            />
+          </Box>
+
+          <Box>
+            <Typography variant="caption" sx={{ fontWeight: 700, mb: 0.5, ml: 0.5, fontSize: '0.75rem' }}>
+              Description
+            </Typography>
+            <TextField
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Type Your text"
+              fullWidth
+              multiline
+              minRows={3}
+              variant="standard"
+              InputProps={{
+                disableUnderline: true,
+                sx: {
+                  backgroundColor: '#FAFAFA',
+                  borderRadius: '8px',
+                  p: 1.2,
+                  fontSize: '0.8rem',
+                  alignItems: 'flex-start'
+                }
+              }}
+            />
+          </Box>
         </Stack>
       </DialogContent>
-      <DialogActions>
-        <Stack direction="row"  spacing={0} sx={{ width: '100%' , justifyContent:"space-between" }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" sx={{ width:'30%' }} >
+
+      <DialogActions sx={{ p: 0, mt: 2.5 }}>
+        <Stack direction="row" spacing={1.5} sx={{ width: '100%' }}>
+          <Button
+            onClick={onClose}
+            variant="outlined"
+            color="inherit"
+            fullWidth
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              borderColor: 'grey.300'
+            }}
+          >
             Cancel
           </Button>
-          <Button onClick={handleSave} variant="contained" sx={{ color: "white", width:'30%'  }}  loading={isLoading}>
-            Save changes
+          <Button
+            onClick={handleSave}
+            variant="contained"
+            fullWidth
+            loading={isLoading}
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              color: "white",
+              boxShadow: 'none'
+            }}
+          >
+            save changes
           </Button>
         </Stack>
       </DialogActions>
@@ -116,28 +176,54 @@ const EditPositionModal: React.FC<EditPositionModalProps> = ({ isOpen, onClose, 
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose, onConfirm, title, message, confirmText, isLoading }) => {
   return (
-    <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="md" PaperProps={{
-      sx: { borderRadius: "35px", p: "28px" }
+    <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="xs" PaperProps={{
+      sx: { borderRadius: "14px", p: 2.5 }
     }}>
-      <DialogTitle>
-        <Typography variant="h6" fontWeight={700} textAlign="center" sx={{fontSize:"0.79rem"}} >
+      <DialogTitle sx={{ p: 0, mb: 1.2 }}>
+        <Typography variant="subtitle1" fontWeight={700} textAlign="center">
           {title}
         </Typography>
       </DialogTitle>
 
-      <Divider />
+      <Divider sx={{ mb: 2.5 }} />
 
-      <DialogContent sx={{ px: 2.8 }}>
-        <Typography variant="body1" textAlign="center" sx={{ fontSize: "0.79rem" }}>
+      <DialogContent sx={{ p: 0, mb: 2.5 }}>
+        <Typography variant="body2" textAlign="center" sx={{ fontSize: "0.85rem", fontWeight: 500 }}>
           {message}
         </Typography>
       </DialogContent>
-      <DialogActions sx={{ mt: 2.8 }}>
-        <Stack direction="row" spacing={1.4} sx={{ width: '100%' , justifyContent:"space-around"  }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" sx={{width:'40%' , height:'35px', fontSize: "0.7rem"}} >
+
+      <DialogActions sx={{ p: 0 }}>
+        <Stack direction="row" spacing={1.5} sx={{ width: '100%' }}>
+          <Button
+            onClick={onClose}
+            variant="outlined"
+            color="inherit"
+            fullWidth
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              borderColor: 'grey.300'
+            }}
+          >
             Cancel
           </Button>
-          <Button onClick={onConfirm} variant="contained" sx={{ color: "white" ,  width:'40%' , height:'35px', fontSize: "0.7rem" }} fullWidth loading={isLoading}>
+          <Button
+            onClick={onConfirm}
+            variant="contained"
+            fullWidth
+            loading={isLoading}
+            sx={{
+              height: '32px',
+              borderRadius: '30px',
+              textTransform: 'none',
+              fontSize: "0.8rem",
+              color: "white",
+              boxShadow: 'none'
+            }}
+          >
             {confirmText}
           </Button>
         </Stack>
