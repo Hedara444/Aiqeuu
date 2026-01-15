@@ -93,7 +93,7 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
       <DialogTitle>
         <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="center">
           <UploadFileIcon color="primary" />
-          <Typography variant="h6" fontWeight={700}>Upload Resumes</Typography>
+          <Typography variant="h6" fontWeight={700}>Upload Resumes </Typography>
         </Stack>
       </DialogTitle>
       <DialogContent dividers>
@@ -173,11 +173,11 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
         />
       </DialogContent>
       <DialogActions>
-        <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
-          <Button onClick={onClose} variant="outlined" color="inherit" fullWidth>
+        <Stack direction="row" spacing={2} sx={{ width: '100%'  , justifyContent:'space-evenly' , mb:1 , mt:1 }}>
+          <Button onClick={onClose} variant="outlined" color="inherit" sx={{width:'45%' , fontSize:'0.8rem' }} >
             Cancel
           </Button>
-          <Button onClick={handleAdd} variant="contained" color="primary" fullWidth loading={isLoading}>
+          <Button onClick={handleAdd} variant="contained" color="primary"  sx={{width:'45%' , fontSize:'0.8rem'}} loading={isLoading}>
             Add Criteria
           </Button>
         </Stack>
@@ -413,7 +413,7 @@ export default function PositionView() {
             </Button>
             {
               currentPosition.status === "created" &&
-              <Button variant="contained" sx={{ color: "white" , fontSize:'0.9rem' }} startIcon={<AddIcon />} onClick={() => setIsAddCriteriaModalOpen(true)}>
+              <Button variant="contained" sx={{ color: "white"  , width:"240px"  , height :'40px' , fontSize:'0.7rem' }} startIcon={<AddIcon />} onClick={() => setIsAddCriteriaModalOpen(true)}>
                 Add Criteria
               </Button>
             }

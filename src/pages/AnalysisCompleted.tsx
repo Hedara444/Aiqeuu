@@ -72,8 +72,12 @@ const CriteriaCard: React.FC<{
   );
 };
 
-const AnalysisCard: React.FC<{ result: Resume }> = ({ result }) => {
+const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean; }> = ({ result , showAnalysisGlobal }) => {
   const progressPercentage = result.score;
+  const [showAnalysisLocal, setShowAnalysisLocal] = useState(true);
+
+  const shouldShowExplanation = showAnalysisGlobal && showAnalysisLocal;
+
 
   return (
     <Card variant="outlined" sx={{ borderRadius: 2 }}>
@@ -88,32 +92,44 @@ const AnalysisCard: React.FC<{ result: Resume }> = ({ result }) => {
             <LinearProgress variant="determinate" value={progressPercentage} sx={{ height: 6, borderRadius: 3 }} />
           </Box>
 
-          <ToggleSwitch isActive={true} label="Analysis cv" />
+          {/* LOCAL toggle */}
+          <ToggleSwitch
+            isActive={showAnalysisLocal}
+            label="Analysis cv2"
+            onToggle={() => setShowAnalysisLocal(prev => !prev)}
+          />
 
-          <Paper elevation={0} variant="outlined" sx={{ borderRadius: 2, p: 1.5 }}>
-            <List disablePadding>
-              {result.criteriaResults?.map((criteriaResult, index) => (
-                <>
-                  <ListItem key={criteriaResult.id} sx={{ py: 0.75, px: 1 }}>
-                    <ListItemIcon sx={{ minWidth: 28 }}>
-                      {criteriaResult.passed ? (
-                        <CheckCircle color="success" sx={{ fontSize: 18 }} />
-                      ) : (
-                        <Cancel color="error" sx={{ fontSize: 18 }} />
-                      )}
-                    </ListItemIcon>
-                    <ListItemText
-                      primaryTypographyProps={{ variant: 'body2', fontWeight: 500, fontSize: '0.8125rem' }}
-                      secondaryTypographyProps={{ variant: 'caption', color: 'text.secondary', fontSize: '0.7rem' }}
-                      primary={criteriaResult.text}
-                      secondary={`Confidence: ${Math.round(criteriaResult.confidence * 100)}%`}
-                    />
-                  </ListItem>
-                  {index !== result.criteriaResults.length - 1 && <Divider component="li" />}
-                </>
-              ))}
-            </List>
-          </Paper>
+          {/* Explanation (controlled by BOTH toggles) */}
+          {shouldShowExplanation && (
+            <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2 }}>
+              <ListItemText>{result.explanation}</ListItemText>
+            </Paper>
+          )}
+
+          {/*<Paper elevation={0} variant="outlined" sx={{ borderRadius: 2, p: 1.5 }}>*/}
+          {/*  <List disablePadding>*/}
+          {/*    {result.criteriaResults?.map((criteriaResult, index) => (*/}
+          {/*      <>*/}
+          {/*        <ListItem key={criteriaResult.id} sx={{ py: 0.75, px: 1 }}>*/}
+          {/*          <ListItemIcon sx={{ minWidth: 28 }}>*/}
+          {/*            {criteriaResult.passed ? (*/}
+          {/*              <CheckCircle color="success" sx={{ fontSize: 18 }} />*/}
+          {/*            ) : (*/}
+          {/*              <Cancel color="error" sx={{ fontSize: 18 }} />*/}
+          {/*            )}*/}
+          {/*          </ListItemIcon>*/}
+          {/*          <ListItemText*/}
+          {/*            primaryTypographyProps={{ variant: 'body2', fontWeight: 500, fontSize: '0.8125rem' }}*/}
+          {/*            secondaryTypographyProps={{ variant: 'caption', color: 'text.secondary', fontSize: '0.7rem' }}*/}
+          {/*            primary={criteriaResult.text}*/}
+          {/*            secondary={`Confidence: ${Math.round(criteriaResult.confidence * 100)}%`}*/}
+          {/*          />*/}
+          {/*        </ListItem>*/}
+          {/*        {index !== result.criteriaResults.length - 1 && <Divider component="li" />}*/}
+          {/*      </>*/}
+          {/*    ))}*/}
+          {/*  </List>*/}
+          {/*</Paper>*/}
         </Stack>
       </CardContent>
     </Card>
@@ -193,9 +209,9 @@ export default function AnalysisCompleted() {
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
       <Navbar />
 
-      <Container maxWidth="xl" sx={{ pb: 4, mt: 2 }}>
+      <Container maxWidth="xl" sx={{ pb: 4, mt: 2 ,minheight:'100vh' }}>
         {/* Header */}
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 4 }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 4   }}>
           <Box>
             <MUILink component={RouterLink} to={`/position/${id}`} underline="hover" color="primary" sx={{ display: 'inline-block', mb: 0.5, fontSize: '0.875rem' }}>
               ← Back to Position
@@ -227,15 +243,18 @@ export default function AnalysisCompleted() {
           <ToggleSwitch isActive={showAnalysis} label="Analysis cv" onToggle={() => setShowAnalysis(!showAnalysis)} />
         </Stack>
 
-        {showAnalysis && (
-          <Grid container spacing={2}>
-            {currentPosition.resumes.map((result) => (
-              <Grid size={6} key={result.id}>
-                <AnalysisCard result={result} />
-              </Grid>
-            ))}
-          </Grid>
-        )}
+        <Grid container spacing={3}>
+          {currentPosition.resumes.map((result) => (
+            <Grid size={6} key={result.id}>
+              <AnalysisCard
+                result={result}
+                showAnalysisGlobal={showAnalysis}
+              />
+            </Grid>
+          ))}
+        </Grid>
+
+
       </Container>
 
       {/* Footer */}

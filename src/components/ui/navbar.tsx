@@ -90,7 +90,7 @@ export function Navbar() {
               sx={{
                 color: 'text.primary',
                 fontFamily: 'Montserrat',
-                fontSize: { md: '0.455rem', lg: '0.613rem' },
+                fontSize: { md: '0.455rem', lg: '0.7rem' },
                 fontWeight: 700,
                 textTransform: 'none',
                 '&:hover': { color: 'primary.main' }
