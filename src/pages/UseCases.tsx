@@ -245,28 +245,39 @@ const PositionCard: React.FC<{
   const config = statusConfig[position.status];
 
   return (
-    <Card variant="outlined" sx={{ borderRadius: "5.6px" }}>
-      <CardContent sx={{ padding: "10.5px" }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1.4}>
-          <Stack spacing={0.7} flex={1}>
-            <Stack direction="row" alignItems="center" spacing={1.05}>
+    <Card sx={{ borderRadius: "12px", border: "none", boxShadow: "none", mb: 1.2 }}>
+      <CardContent sx={{ p: 1.8, '&:last-child': { pb: 1.8 } }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1.2}>
+          <Stack spacing={0.6} flex={1}>
+            <Stack direction="row" alignItems="center" spacing={1}>
               <MUILink
                 component={RouterLink}
                 to={`/position/${position.id}`}
                 underline="hover"
                 color="text.primary"
-                sx={{ fontWeight: 700, typography: 'h6', fontSize: "0.84rem" }}
+                sx={{ fontWeight: 700, typography: 'h6', fontSize: "0.75rem" }}
               >
                 {position.title}
               </MUILink>
-              <Chip label={config.label} sx={{ color: "white", height: "18px", fontSize: "0.61rem" }} color={config.color} size="small" />
+              <Chip 
+                label={config.label} 
+                sx={{ 
+                  color: "white", 
+                  height: "16px", 
+                  fontSize: "0.6rem",
+                  fontWeight: 600,
+                  borderRadius: "8px"
+                }} 
+                color={config.color} 
+                size="small" 
+              />
             </Stack>
-            <Typography variant="body1" color="text.secondary" sx={{ fontSize: "0.7rem" }}>
+            <Typography variant="body1" color="text.secondary" sx={{ fontSize: "0.65rem", maxWidth: '90%' }}>
               {position.description}
             </Typography>
           </Stack>
 
-          <Stack direction="row" spacing={1.05} alignItems="center">
+          <Stack direction="row" spacing={1.2} alignItems="center">
             {/* {position.status === 'completed' && (
               <Button
                 component={RouterLink}
@@ -280,20 +291,20 @@ const PositionCard: React.FC<{
             )} */}
 
             <Tooltip title="Duplicate">
-              <IconButton onClick={onDuplicate} color="default" size="small" sx={{ padding: "3.5px" }}>
-                <ContentCopyIcon sx={{ fontSize: "1.05rem" }} />
+              <IconButton onClick={onDuplicate} color="default" size="small" sx={{ padding: "2px" }}>
+                <ContentCopyIcon sx={{ fontSize: "0.9rem" }} />
               </IconButton>
             </Tooltip>
 
             <Tooltip title="Edit">
-              <IconButton onClick={onEdit} color="default" size="small" sx={{ padding: "3.5px" }}>
-                <EditIcon sx={{ fontSize: "1.05rem" }} />
+              <IconButton onClick={onEdit} color="default" size="small" sx={{ padding: "2px" }}>
+                <EditIcon sx={{ fontSize: "0.9rem" }} />
               </IconButton>
             </Tooltip>
 
             <Tooltip title="Delete">
-              <IconButton onClick={onDelete} color="default" size="small" sx={{ padding: "3.5px" }}>
-                <DeleteIcon sx={{ fontSize: "1.05rem" }} />
+              <IconButton onClick={onDelete} color="default" size="small" sx={{ padding: "2px" }}>
+                <DeleteIcon sx={{ fontSize: "0.9rem" }} />
               </IconButton>
             </Tooltip>
           </Stack>
@@ -324,7 +335,9 @@ export default function UseCases() {
   }, [])
 
   const handlePageChange = async (newPage: number) => {
+    setIsLoadingPage(true);
     await getPositions(newPage, 5);
+    setIsLoadingPage(false);
   };
 
   const handleEdit = (position: Position) => {
@@ -383,23 +396,32 @@ export default function UseCases() {
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
 
-      <Container maxWidth="xl" sx={{ pb: 2.1 }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2.8 }}>
-          <Typography variant="h4" fontWeight={600} sx={{ fontSize: "1.4rem" }}>
+      <Container maxWidth="lg" sx={{ pb: 6, mt: 5 }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 4 }}>
+          <Typography variant="h4" fontWeight={600} sx={{ fontSize: "1rem" }}>
             Use Cases
           </Typography>
           <Button
             component={RouterLink}
             to="/create-position"
             variant="contained"
-            sx={{ color: "white", fontSize:"0.61rem", py: 0.7, px: 1.4, borderRadius: "5.6px" }}
-            size='small'
+            sx={{ 
+              color: "white", 
+              fontSize: "0.75rem", 
+              py: 0.8, 
+              px: 2.2, 
+              borderRadius: "10px",
+              textTransform: "none",
+              fontWeight: 600,
+              boxShadow: "none"
+            }}
+            size='medium'
           >
             + Add Use Cases 
           </Button>
         </Stack>
 
-        <Stack spacing={1.4} sx={{ mb: 5.6 }}>
+        <Stack spacing={1.2} sx={{ mb: 4 }}>
           {positions.map((position) => (
             <PositionCard
               key={position.id}
