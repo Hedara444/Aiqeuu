@@ -101,62 +101,82 @@ export default function Feedback() {
     <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
 
       {/* Main Content */}
-      <Container maxWidth="lg" sx={{ pb: { xs: 8, md: 12 } }}>
+      <Container maxWidth="lg" sx={{ pb: { xs: 5, md: 8 }, mt: 3 }}>
         {/* Header */}
         <Box textAlign="center" sx={{ mb: 4 }}>
           <Typography
-            variant="h5"
+            variant="h3"
             sx={{
-              fontSize: { xs: "1rem", md: "2.5rem" },
               fontWeight: 700,
-              mb: 0.1,
+              mb: 0.8,
               color: "text.primary",
+              fontSize: { xs: "1.4rem", md: "1.75rem" },
             }}
           >
             feedback
           </Typography>
+          <Typography
+             variant="h6"
+             sx={{
+               fontWeight: 500,
+               color: "text.primary",
+               mb: 0.4,
+               fontSize: { xs: "0.8rem", md: "0.9rem" }
+             }}
+          >
+            Choose Your Plan
+          </Typography>
+          <Typography
+             variant="body1"
+             sx={{
+               color: "text.secondary",
+               fontSize: { xs: "0.7rem", md: "0.8rem" }
+             }}
+          >
+            Select the perfect package for your recruitment needs
+          </Typography>
         </Box>
 
         {/* Feedback Form */}
-        <Container maxWidth="lg">
-          <Card
-            sx={{
-              borderRadius: "30px",
-              p: { xs: 2 , md:1 },
-              boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <CardContent sx={{ p: { xs: 2, md: 4   } }}>
-              {/* Form Header */}
-              <Box sx={{ mb: 4 }}>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    fontWeight: 500,
-                    mb: 2,
-                    color: "text.primary",
-                    fontSize: { xs: "1.125rem", md: "1.375rem" },
-                  }}
-                >
-                  Submit Feedback
-                </Typography>
-                <Divider sx={{ height: 1.25, bgcolor: "grey.200" }} />
-              </Box>
+        <Container maxWidth="md">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Card
+              sx={{
+                borderRadius: "14px",
+                p: { xs: 1.5, md: 2 },
+                boxShadow: "0px 3px 14px rgba(0, 0, 0, 0.05)",
+                border: "none",
+                mb: 3
+              }}
+            >
+              <CardContent sx={{ p: { xs: 0.8, md: 1.5 } }}>
+                {/* Form Header */}
+                <Box sx={{ mb: 2 }}>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      fontWeight: 500,
+                      mb: 1.5,
+                      color: "text.primary",
+                      fontSize: { xs: "0.9rem", md: "1rem" },
+                    }}
+                  >
+                    Submit Feedback
+                  </Typography>
+                  <Divider sx={{ bgcolor: "grey.200" }} />
+                </Box>
 
-              {/* Form Fields */}
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={{ xs: 2 , md: 4 }}>
+                {/* Form Fields */}
+                <Stack spacing={2}>
                   {/* Title Field */}
                   <Box>
                     <FormLabel
                       sx={{
                         display: "block",
-                        color: "grey.500",
-                        fontSize: { xs: "1.025rem", md: "1.125rem" },
-                        fontWeight: 400,
-                        mb: 1.05,
-                        textTransform: "capitalize",
-                        letterSpacing: "0.025em",
+                        color: "text.secondary",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        mb: 0.8,
                       }}
                     >
                       Title
@@ -168,15 +188,19 @@ export default function Feedback() {
                       helperText={errors.title?.message}
                       sx={{
                         '& .MuiOutlinedInput-root': {
-                          height: { xs: "40px", md: "45px" },
-                          borderRadius: "16px",
+                          borderRadius: "10px",
+                          backgroundColor: "#fff",
+                          fontSize: "0.85rem",
                           '& fieldset': {
-                            borderColor: errors.title ? "error.main" : "grey.400",
+                            borderColor: "grey.200",
                           },
-                        },
-                        '& .MuiOutlinedInput-input': {
-                          fontSize: { xs: "1.0125rem", md: "1.125rem" },
-                          color: "text.primary",
+                          '&:hover fieldset': {
+                            borderColor: "grey.300",
+                          },
+                          '& input': {
+                            py: 1.2,
+                            px: 1.5
+                          }
                         },
                       }}
                     />
@@ -187,12 +211,10 @@ export default function Feedback() {
                     <FormLabel
                       sx={{
                         display: "block",
-                        color: "grey.500",
-                        fontSize: { xs: "1.0125rem", md: "1.125rem" },
-                        fontWeight: 400,
-                        mb: 1.25,
-                        textTransform: "capitalize",
-                        letterSpacing: "0.025em",
+                        color: "text.secondary",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        mb: 0.8,
                       }}
                     >
                       Description
@@ -200,145 +222,130 @@ export default function Feedback() {
                     <TextField
                       fullWidth
                       multiline
-                      rows={6}
+                      rows={3}
                       {...register("description")}
                       error={!!errors.description}
                       helperText={errors.description?.message}
                       sx={{
                         '& .MuiOutlinedInput-root': {
-                          minHeight: { xs: "118px", md: "120px" },
-                          borderRadius: "16px",
+                          borderRadius: "10px",
+                          backgroundColor: "#fff",
+                          fontSize: "0.85rem",
                           '& fieldset': {
-                            borderColor: errors.description ? "error.main" : "grey.400",
+                            borderColor: "grey.200",
                           },
-                        },
-                        '& .MuiOutlinedInput-input': {
-                          fontSize: { xs: "1.0125rem", md: "1.125rem" },
-                          color: "text.primary",
+                          '&:hover fieldset': {
+                            borderColor: "grey.300",
+                          },
+                          '& textarea': {
+                             py: 0.5,
+                             px: 0.5
+                          }
                         },
                       }}
                     />
                   </Box>
 
                   {/* File Upload Field */}
-                  <Box sx={{ maxWidth: "400px" }}>
+                  <Box>
                     <FormLabel
                       sx={{
                         display: "block",
-                        color: "grey.500",
-                        fontSize: { xs: "1.0125rem", md: "1.0125rem" },
-                        fontWeight: 400,
-                        mb: 1.5,
-                        textTransform: "capitalize",
-                        letterSpacing: "0.025em",
+                        color: "text.secondary",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        mb: 0.8,
                       }}
                     >
-                      Attach Image (optional)
+                      Attach Image (Optional)
                     </FormLabel>
-                    <Box sx={{ position: "relative" }}>
-                      <Button
-                        variant="outlined"
-                        component="label"
-                        tabIndex={-1}
-                        startIcon={<CloudUploadIcon />}
-                        sx={{
-                          height: { xs: "50px", md: "55px" },
-                          px: { xs: 1, md: 2 },
-                          backgroundColor: "background.default",
-                          border: "1px solid white",
-                          borderRadius: "14px",
-                          boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-                          color: "grey.500",
-                          fontSize: { xs: "1.025rem", md: "1.15rem" },
-                          fontWeight: 400,
-                          textTransform: "capitalize",
-                          letterSpacing: "0.025em",
-                          width: "100%",
-                          justifyContent: "flex-start",
-                          '&:hover': {
-                            backgroundColor: "grey.100",
-                            borderColor: "white",
-                          },
-                        }}
-                      >
-                        {/* <Input
-                          type="file"
-                          inputProps={{ accept: "image/*" }}
-                          onChange={handleFileChange}
-                          hidden
-                          sx={{
-                            bgcolor: "red",
-                            // inset: 0,
-                            width: "100%",
-                            height: "100%",
-                            // opacity: 0,
-                            cursor: "pointer",
-                          }}
-                        /> */}
-                        {watchedFile ? watchedFile.name : 'choose file'}
-
-                        <VisuallyHiddenInput
-                          type="file"
-                          onChange={handleFileChange}
-                        />
-                      </Button>
-                    </Box>
+                    <Button
+                      component="label"
+                      sx={{
+                        bgcolor: "grey.100",
+                        color: "text.secondary",
+                        textTransform: "none",
+                        borderRadius: "8px",
+                        px: 2.5,
+                        py: 0.8,
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        boxShadow: "none",
+                        '&:hover': {
+                          bgcolor: "grey.200",
+                        }
+                      }}
+                    >
+                      {watchedFile ? watchedFile.name : 'Choose File'}
+                      <VisuallyHiddenInput
+                        type="file"
+                        onChange={handleFileChange}
+                        accept="image/*"
+                      />
+                    </Button>
                     {errors.attachedFile && (
-                      <Typography color="error" variant="caption" sx={{ mt: 1 }}>
+                      <Typography color="error" variant="caption" display="block" sx={{ mt: 0.5 }}>
                         {errors.attachedFile.message}
                       </Typography>
                     )}
                   </Box>
                 </Stack>
+              </CardContent>
+            </Card>
 
-                {/* Action Buttons */}
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  justifyContent="flex-end"
-                  sx={{ mt: { xs: 4, md: 6 } }}
-                >
-                  <Button
-                    variant="outlined"
-                    onClick={handleCancel}
-                    startIcon={<CancelIcon />}
-                    disabled={isLoading}
-                    sx={{
-                      minWidth: { xs: 180, md: 200 },
-                      height: { xs: 48, md: 56 },
-                      borderRadius: "25px",
-                      fontSize: { xs: "0.9rem", md: "1.0125rem" },
-                      fontWeight: 700,
-                      borderColor: "grey.200",
-                      color: "text.primary",
-                      '&:hover': {
-                        backgroundColor: "grey.50",
-                        borderColor: "grey.200",
-                      },
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    disabled={isLoading}
-                    endIcon={isLoading ? <CircularProgress size={20} /> : <SendIcon />}
-                    sx={{
-                      minWidth: { xs: 180, md: 200 },
-                      height: { xs: 48, md: 56 },
-                      borderRadius: "25px",
-                      fontSize: { xs: "0.9rem", md: "1.0125rem" },
-                      fontWeight: 700,
-                      color: "white"
-                    }}
-                  >
-                    {isLoading ? 'Submitting...' : 'Submit Feedback'}
-                  </Button>
-                </Stack>
-              </form>
-            </CardContent>
-          </Card>
+            {/* Action Buttons */}
+            <Stack
+              direction="row"
+              spacing={1.5}
+              justifyContent="flex-end"
+            >
+              <Button
+                variant="contained"
+                onClick={handleCancel}
+                disabled={isLoading}
+                sx={{
+                  minWidth: 100,
+                  height: 36,
+                  borderRadius: "35px",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  bgcolor: "white",
+                  color: "text.primary",
+                  boxShadow: "0px 2px 6px rgba(0,0,0,0.05)",
+                  textTransform: "none",
+                  '&:hover': {
+                    bgcolor: "grey.50",
+                    boxShadow: "0px 3px 8px rgba(0,0,0,0.1)",
+                  },
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={isLoading}
+                color="primary"
+                sx={{
+                  minWidth: 120,
+                  height: 36,
+                  borderRadius: "35px",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "white",
+                  boxShadow: "none",
+                  textTransform: "none",
+                  bgcolor: "#00E6C3",
+                  '&:hover': {
+                    bgcolor: "#00D1B2",
+                    boxShadow: "none",
+                  }
+                }}
+              >
+                {isLoading ? <CircularProgress size={18} color="inherit" /> : 'Submit Feedback'}
+              </Button>
+            </Stack>
+          </form>
         </Container>
       </Container>
 
