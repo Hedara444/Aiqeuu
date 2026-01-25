@@ -88,90 +88,22 @@ export default function Register() {
     navigate(`/verification?verificationId=${verificationId}`);
   };
 
-  const rightContent = (
-    <Box sx={{ position: 'relative', width: '567px', height: '505px' }}>
-      {/* Professional person with floating UI elements */}
-      <Box
-        component="img"
-        src="/signup.png"
-        alt="Professional person with phone"
-        sx={{
-          width: '90%',
-          height: '90%',
-          objectFit: 'cover',
-          borderRadius: '8px',
-        }}
-      />
 
-      {/* Floating register icon */}
-      {/* <Box sx={{
-        position: 'absolute',
-        top: 4,
-        right: 4,
-        width: '64px',
-        height: '64px',
-        backgroundColor: 'primary.dark',
-        borderRadius: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <Typography sx={{ color: 'primary.main', fontSize: '0.75rem', fontWeight: 700 }}>
-          Register ✓
-        </Typography>
-      </Box> */}
-
-      {/* Floating ID card icon */}
-      {/* <Box sx={{
-        position: 'absolute',
-        bottom: 8,
-        left: 4,
-        width: '80px',
-        height: '64px',
-        backgroundColor: 'primary.dark',
-        borderRadius: '8px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <Typography sx={{ color: 'primary.main', fontSize: '1.5rem' }}>
-          📋
-        </Typography>
-      </Box> */}
-
-      {/* Floating chart icon */}
-      {/* <Box sx={{
-        position: 'absolute',
-        bottom: 16,
-        right: 8,
-        width: '64px',
-        height: '64px',
-        backgroundColor: 'primary.dark',
-        borderRadius: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <Typography sx={{ color: 'primary.main', fontSize: '1.5rem' }}>
-          📊
-        </Typography>
-      </Box> */}
-    </Box>
-  );
 
   return (
-    <AuthLayout rightContent={rightContent}>
-      <Box sx={{ maxWidth: { xs: '100%', lg: '807px' , p:'0' } }}>
+    <AuthLayout   >
+      <Box sx={{ maxWidth: { xs: '100%', lg: '807px' }, p:'0', mx: 'auto' }}>
         {/* Heading */}
         <Typography
           variant="h1"
           sx={{
-            color: 'primary.dark',
+            color: 'text.primary',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '1rem', md: '2.15rem', lg: '2.125rem' },
+            fontSize: { xs: '1rem', md: '1.25rem', lg: '1.6rem' },
             fontWeight: 700,
             lineHeight: 'normal',
-            mb: { xs: 2, md: '12px' }
+            mb: { xs: 1.5, md: 1.5 },
+            mt: { xs: 3, md: 6, lg: 5 }
           }}
         >
           Join Aikyuu, Let's Do it!
@@ -179,18 +111,18 @@ export default function Register() {
 
         {/* Subheading */}
         <Typography sx={{
-          color: 'text.primary',
+          color: 'text.secondary',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.125rem', md: '1.25rem', lg: '1.5rem' },
+          fontSize: { xs: '0.75rem', md: '0.875rem' },
           fontWeight: 500,
           lineHeight: 'normal',
-          mb: { xs: 4, md: 8, lg: '50px' }
+          mb: { xs: 3, md: 7 }
         }}>
           Enter below details to create an account
         </Typography>
 
         {/* Form */}
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <InputField
             {...register('name')}
             name="name"
@@ -200,7 +132,13 @@ export default function Register() {
             onChange={handleInputChange}
             error={!!errors.name}
             helperText={errors.name?.message}
-            sx={{ mb: 2 }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                height: { xs: '40px', md: '48px' },
+                borderRadius: '10px',
+                fontSize: { xs: '0.75rem', md: '0.875rem' }
+              }
+            }}
           />
 
           <InputField
@@ -212,11 +150,17 @@ export default function Register() {
             onChange={handleInputChange}
             error={!!errors.email}
             helperText={errors.email?.message}
-            sx={{ mb: 2 }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                height: { xs: '40px', md: '48px' },
+                borderRadius: '10px',
+                fontSize: { xs: '0.75rem', md: '0.875rem' }
+              }
+            }}
           />
 
           {/* Password Row */}
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 3 }}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
             <InputField
               {...register('password')}
               name="password"
@@ -226,7 +170,14 @@ export default function Register() {
               onChange={handleInputChange}
               error={!!errors.password}
               helperText={errors.password?.message}
-              sx={{ flex: 1 }}
+              sx={{
+                flex: 1,
+                '& .MuiOutlinedInput-root': {
+                  height: { xs: '40px', md: '48px' },
+                  borderRadius: '10px',
+                  fontSize: { xs: '0.75rem', md: '0.875rem' }
+                }
+              }}
             />
 
             <InputField
@@ -238,7 +189,14 @@ export default function Register() {
               onChange={handleInputChange}
               error={!!errors.confirmPassword}
               helperText={errors.confirmPassword?.message}
-              sx={{ flex: 1 }}
+              sx={{
+                flex: 1,
+                '& .MuiOutlinedInput-root': {
+                  height: { xs: '40px', md: '48px' },
+                  borderRadius: '10px',
+                  fontSize: { xs: '0.75rem', md: '0.875rem' }
+                }
+              }}
             />
           </Stack>
 
@@ -250,6 +208,7 @@ export default function Register() {
                 name="agreeToTerms"
                 checked={formData.agreeToTerms}
                 onChange={handleInputChange}
+                size="small"
                 sx={{
                   color: 'primary.dark',
                   '&.Mui-checked': {
@@ -262,20 +221,20 @@ export default function Register() {
               <Typography sx={{
                 color: 'primary.dark',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1.15rem' },
+                fontSize: { xs: '0.8rem', md: '0.95rem' },
                 fontWeight: 400,
                 lineHeight: 'normal'
               }}>
                 I agree to the terms of service and{' '}
-                <Link to='/privacy-policy' >
+                <Typography component="span" sx={{ fontWeight: 600, fontSize: 'inherit' }}>
                   privacy policy
-                </Link>
+                </Typography>
               </Typography>
             }
-            sx={{ mb: { xs: 4, md: 8, lg: '15px' } }}
+            sx={{ mb: { xs: 2, md: 4 } }}
           />
           {errors.agreeToTerms && (
-            <Typography color="error" sx={{ mt: -2, mb: 2 }}>
+            <Typography color="error" sx={{ mt: 0.5, mb: 1.5, fontSize: '0.75rem' }}>
               {errors.agreeToTerms.message}
             </Typography>
           )}
@@ -284,7 +243,11 @@ export default function Register() {
           <AikyuuButton
             type="submit"
             loading={isLoading}
-            sx={{ mb: { xs: 4, md: 8, lg: '47px' } }}
+            sx={{
+              mb: 0,
+              height: { xs: '38px', md: '49px' },
+             
+            }}
           >
             Sign Up
           </AikyuuButton>
@@ -296,7 +259,7 @@ export default function Register() {
               sx={{
                 color: 'primary.dark',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1.125rem', lg: '1.25rem' },
+                fontSize: { xs: '0.875rem', md: '0.95rem' },
                 fontWeight: 500
               }}
             >
@@ -308,7 +271,7 @@ export default function Register() {
               sx={{
                 color: 'primary.main',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1.125rem', lg: '1.25rem' },
+                fontSize: { xs: '0.875rem', md: '0.95rem' },
                 fontWeight: 500,
                 textDecoration: 'underline',
                 '&:hover': { textDecoration: 'none' }

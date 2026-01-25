@@ -7,10 +7,7 @@ import {
   FormLabel,
   Stack
 } from '@mui/material';
-import {
-  Lock as LockIcon,
-  Security as SecurityIcon
-} from '@mui/icons-material';
+
 import { AuthLayout } from '@/components/layout/auth-layout';
 import { AikyuuButton } from '@/components/ui/aikyuu-button';
 import { useAuthStore } from '@/store/authStore';
@@ -59,35 +56,20 @@ export default function ResetPassword() {
     }
   };
 
-  const rightContent = (
-    <Box sx={{
-      position: "relative",
-    }}>
-      <Box
-        component="img"
-        src="/signup.png"
-        alt="Person working on laptop"
-        sx={{
-          width: "90%",
-          height: "90%",
-          objectFit: "cover",
-          borderRadius: 1
-        }}
-      />
-    </Box>
-  );
+
 
   return (
-    <AuthLayout rightContent={rightContent}>
-      <Box sx={{ maxWidth: 807 }}>
+    <AuthLayout >
+      <Box sx={{ maxWidth: { xs: '100%', lg: '807px' }, mx: 'auto' }}>
         {/* Heading */}
         <Typography
           variant="h1"
           sx={{
-            fontSize: "2.025rem",
+            fontSize: { xs: '1.5rem', md: '1.75rem', lg: '2rem' },
             fontWeight: 700,
             lineHeight: "normal",
-            mb: "18px",
+            mb: { xs: 2, md: 3 },
+            mt: { xs: 4, md: 8, lg: 10 },
             color: "text.primary"
           }}
         >
@@ -98,11 +80,10 @@ export default function ResetPassword() {
         <Typography
           variant="h6"
           sx={{
-            fontSize: "1.15rem",
+            fontSize: { xs: '0.875rem', md: '1rem' },
             fontWeight: 500,
-            lineHeight: 1.1375,
-            mb: 4,
-            maxWidth: 807,
+            lineHeight: 1.5,
+            mb: { xs: 4, md: 8 },
             color: "text.secondary"
           }}
         >
@@ -126,30 +107,21 @@ export default function ResetPassword() {
 
         {/* Form */}
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={3}>
+          <Stack spacing={2}>
             <Box>
-              <FormLabel
-                sx={{
-                  display: "block",
-                  color: "grey.500",
-                  fontSize: "1.125rem",
-                  fontWeight: 500,
-                  mb:2
-                }}
-              >
-                Email *
-              </FormLabel>
               <TextField
                 fullWidth
                 type="email"
+                placeholder="Email *"
                 {...register('email')}
                 error={!!errors.email}
                 helperText={errors.email?.message}
                 sx={{
-                  mb: 3,
+                  mb: 14,
                   '& .MuiOutlinedInput-root': {
-                    height: "50px",
-                    borderRadius: "16px"
+                    height: { xs: '48px', md: '52px' },
+                    borderRadius: "10px",
+                    fontSize: { xs: '0.875rem', md: '1rem' }
                   }
                 }}
                 disabled={isLoading}
@@ -159,7 +131,10 @@ export default function ResetPassword() {
             {/* Submit Button */}
             <AikyuuButton
               type="submit"
-              sx={{ mb: 5 }}
+              sx={{
+                mb: 5,
+                height: { xs: '44px', md: '48px' },
+              }}
               disabled={isLoading}
               loading={isLoading}
             >
@@ -170,9 +145,8 @@ export default function ResetPassword() {
             <Box textAlign="center">
               <Typography
                 component="span"
-                variant="h6"
                 sx={{
-                  fontSize: "1.25rem",
+                  fontSize: { xs: '0.875rem', md: '0.95rem' },
                   fontWeight: 500,
                   color: "text.primary"
                 }}
@@ -182,9 +156,8 @@ export default function ResetPassword() {
               <Typography
                 component={Link}
                 to="/signin"
-                variant="h6"
                 sx={{
-                  fontSize: "1.25rem",
+                  fontSize: { xs: '0.875rem', md: '0.95rem' },
                   fontWeight: 500,
                   color: "primary.main",
                   textDecoration: "underline",

@@ -16,7 +16,7 @@ export function AikyuuButton({
       variant={variant === 'primary' ? 'contained' : 'outlined'}
       fullWidth
       sx={{
-        height: { xs: '36px', md: '44px' },
+        height: { xs: '36px', md: '47px' },
         borderRadius: '100px',
         fontFamily: 'Montserrat',
         fontSize: { xs: '0.875rem', md: '1rem' },

@@ -57,17 +57,18 @@ export default function SignIn() {
 
   return (
     <AuthLayout>
-      <Box sx={{ maxWidth: { xs: '100%', lg: '807px' } }}>
+      <Box sx={{ maxWidth: { xs: '100%', lg: '807px' }, mx: 'auto' }}>
         {/* Heading */}
         <Typography
           variant="h1"
           sx={{
-            color: 'primary.dark',
+            color: 'text.primary',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '1.25rem', md: '2.25rem', lg: '2.1125rem' },
+            fontSize: { xs: '1.5rem', md: '1.75rem', lg: '2rem' },
             fontWeight: 700,
-            lineHeight: '4px',
-            mb: { xs: 2, md: '23px' }
+            lineHeight: 1.2,
+            mb: 1,
+            mt: { xs: 6, md: 8, lg: 8 }
           }}
         >
           Always Welcome, Aikyuu!
@@ -75,12 +76,11 @@ export default function SignIn() {
 
         {/* Subheading */}
         <Typography sx={{
-          color: 'text.primary',
+          color: 'text.secondary',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.125rem', md: '1.25rem', lg: '1.5rem' },
-          fontWeight: 500,
-          lineHeight: 'normal',
-          mb: { xs: 2, md: 4, lg: '40px' }
+          fontSize: { xs: '0.875rem', md: '1rem' },
+          fontWeight: 400,
+          mb: { xs: 6, md: 8 }
         }}>
           Sign in to Aikyuu
         </Typography>
@@ -103,7 +103,7 @@ export default function SignIn() {
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
-          sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: 2 } }}
+          sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
         >
           <InputField
             {...register('email')}
@@ -111,8 +111,13 @@ export default function SignIn() {
             label="E-mail or username"
             error={!!errors.email}
             helperText={errors.email?.message}
-            sx={{ mb: { xs: 2, md: 3 } }}
             disabled={isLoading}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                height: { xs: '48px', md: '52px' },
+                borderRadius: '10px',
+              }
+            }}
           />
 
           <InputField
@@ -121,23 +126,24 @@ export default function SignIn() {
             label="Password"
             error={!!errors.password}
             helperText={errors.password?.message}
-            sx={{ mb: { xs: 4, md: 8, lg: '10px' } }}
             disabled={isLoading}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                height: { xs: '48px', md: '52px' },
+                borderRadius: '10 px',
+              }
+            }}
           />
 
           {/* Forgot Password Links */}
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: 1, sm: 2 }}
-            sx={{ mb: { xs: 4, md: 4, lg: '23px' } }}
-          >
+          <Box sx={{ mt: 1 }}>
             <Typography
               component={Link}
               to="/forgot-password"
               sx={{
                 color: 'primary.main',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1.225rem', lg: '1.25rem' },
+                fontSize: { xs: '0.875rem', md: '0.9rem' },
                 fontWeight: 500,
                 textDecoration: 'underline',
                 '&:hover': { textDecoration: 'none' }
@@ -145,12 +151,16 @@ export default function SignIn() {
             >
               Forgot password
             </Typography>
-          </Stack>
+          </Box>
 
           {/* Submit Button */}
           <AikyuuButton
             type="submit"
-            sx={{ mb: { xs: 4, md: 8, lg: '27px' } }}
+            sx={{
+              mt: 4,
+              mb: 2,
+              height: { xs: '44px', md: '48px' },
+            }}
             disabled={isLoading}
             loading={isLoading}
           >
@@ -162,9 +172,9 @@ export default function SignIn() {
             <Typography
               component="span"
               sx={{
-                color: 'primary.dark',
+                color: 'text.secondary',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1.125rem', lg: '1.25rem' },
+                fontSize: { xs: '0.875rem', md: '0.95rem' },
                 fontWeight: 500
               }}
             >
@@ -176,7 +186,7 @@ export default function SignIn() {
               sx={{
                 color: 'primary.main',
                 fontFamily: 'Montserrat',
-                fontSize: { xs: '1rem', md: '1.125rem', lg: '1.25rem' },
+                fontSize: { xs: '0.875rem', md: '0.95rem' },
                 fontWeight: 500,
                 textDecoration: 'underline',
                 '&:hover': { textDecoration: 'none' }

@@ -110,33 +110,20 @@ export default function ResetPasswordNew() {
     }
   };
 
-  const rightContent = (
-    <Box sx={{ position: "relative" }}>
-      <Box
-        component="img"
-        src="/signup.png"
-        alt="Person working on laptop"
-        sx={{
-          width: "80%",
-          height: "80%",
-          objectFit: "cover",
-          borderRadius: 1
-        }}
-      />
-    </Box>
-  );
+
 
   return (
-    <AuthLayout rightContent={rightContent}>
-      <Box sx={{ maxWidth: 907 }}>
+    <AuthLayout >
+      <Box sx={{ maxWidth: 807 }}>
         {/* Heading */}
         <Typography
           variant="h1"
           sx={{
-            fontSize: "2.025rem",
+            fontSize: "2rem",
             fontWeight: 700,
             lineHeight: "normal",
             mb: 2,
+            mt:1,
             color: "text.primary"
           }}
         >
@@ -150,7 +137,7 @@ export default function ResetPasswordNew() {
             fontSize: "1.05rem",
             fontWeight: 500,
             lineHeight: 1.375,
-            mb: 3,
+            mb: 7,
             maxWidth: 907,
             color: "text.secondary"
           }}
@@ -174,7 +161,7 @@ export default function ResetPasswordNew() {
 
         {/* Form */}
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={2}>
+          <Stack spacing={1}>
             {/* Verification Code */}
             <Box>
               <FormLabel
@@ -183,23 +170,26 @@ export default function ResetPasswordNew() {
                   color: "grey.500",
                   fontSize: "1.025rem",
                   fontWeight: 500,
-                  mb: 1
+                  mb: 1,
+                  
                 }}
               >
-                Code *
+             
               </FormLabel>
               <TextField
                 fullWidth
                 type="text"
+                placeholder='Code *'
                 {...register('verificationCode')}
                 error={!!errors.verificationCode}
                 helperText={errors.verificationCode?.message}
                 disabled={isLoading}
                 sx={{
-                  mb: 1,
+                
                   '& .MuiOutlinedInput-root': {
                     height: "50px",
-                    borderRadius: "16px"
+                    borderRadius: "10px",
+              
                   }
                 }}
               />
@@ -216,11 +206,12 @@ export default function ResetPasswordNew() {
                   mb: 1
                 }}
               >
-                New Password *
+                
               </FormLabel>
               <TextField
                 fullWidth
                 type="password"
+                placeholder='New Password *'
                 {...register('newPassword')}
                 error={!!errors.newPassword}
                 helperText={errors.newPassword?.message}
@@ -229,7 +220,7 @@ export default function ResetPasswordNew() {
                   mb: 1,
                   '& .MuiOutlinedInput-root': {
                     height: "50px",
-                    borderRadius: "16px"
+                    borderRadius: "10px"
                   }
                 }}
               />
@@ -243,23 +234,24 @@ export default function ResetPasswordNew() {
                   color: "grey.500",
                   fontSize: "1.025rem",
                   fontWeight: 500,
-                  mb: 1
+               
                 }}
               >
-                Confirm the new password *
+                
               </FormLabel>
               <TextField
                 fullWidth
                 type="password"
+                placeholder='Confirm the new password *'
                 {...register('confirmPassword')}
                 error={!!errors.confirmPassword}
                 helperText={errors.confirmPassword?.message}
                 disabled={isLoading}
                 sx={{
-                  mb: 0,
+                  mb: 5,
                   '& .MuiOutlinedInput-root': {
                     height: "50px",
-                    borderRadius: "16px"
+                    borderRadius: "10px"
                   }
                 }}
               />
@@ -297,7 +289,7 @@ export default function ResetPasswordNew() {
             {/* Submit Button */}
             <AikyuuButton
               type="submit"
-              sx={{ mb: 5 }}
+              sx={{ mb: 0 }}
               disabled={isLoading}
               loading={isLoading}
             >
@@ -310,7 +302,7 @@ export default function ResetPasswordNew() {
                 component="span"
                 variant="h6"
                 sx={{
-                  fontSize: "1.125rem",
+                  fontSize: "0.95rem",
                   fontWeight: 500,
                   color: "text.primary"
                 }}
@@ -322,7 +314,7 @@ export default function ResetPasswordNew() {
                 to="/signin"
                 variant="h6"
                 sx={{
-                  fontSize: "1.125rem",
+                  fontSize: "0.95rem",
                   fontWeight: 500,
                   color: "primary.main",
                   textDecoration: "underline",

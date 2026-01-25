@@ -56,79 +56,31 @@ export function AuthLayout({ children, rightContent }: AuthLayoutProps) {
         }} />
 
         {/* Content */}
-        {rightContent && (
-          <Box sx={{
-            position: 'relative',
-            zIndex: 10,
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            p: 5
-          }}>
-            {rightContent}
-          </Box>
-        )}
-
-        {/* Default illustration elements if no content provided */}
-        {!rightContent && (
-          <Box sx={{ position: 'relative', zIndex: 10, width: '100%', height: '100%' }}>
-            {/* Decorative circles and shapes */}
-            {/* <Box sx={{
-              position: 'absolute',
-              top: '320px',
-              right: '231px',
-              width: '190px',
-              height: '196px',
-              opacity: 0.2
-            }}>
-              <Box sx={{
+        <Box sx={{
+          position: 'relative',
+          zIndex: 10,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          p: 4
+        }}>
+          {rightContent || (
+            <Box
+              component="img"
+              src="/signup.png"
+              alt="Professional person"
+              sx={{
                 width: '100%',
-                height: '100%',
-                backgroundColor: 'primary.main',
-                borderRadius: '50%'
-              }} />
-            </Box> */}
-
-            {/* Person illustration placeholder */}
-            <Box sx={{
-              position: 'absolute',
-              top: '43px',
-              right: '116px',
-              // width: '353px',
-              // height: '364px'
-            }}>
-              <img
-                src="/signup.png"
-                alt="Professional person"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
-              />
-            </Box>
-
-            {/* Floating UI elements */}
-            {/* <Box sx={{
-              position: 'absolute',
-              top: '650px',
-              left: '180px',
-              width: '114px',
-              height: '123px',
-              backgroundColor: 'primary.dark',
-              borderRadius: '12px',
-              boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
-            }} /> */}
-            {/* <Box sx={{
-              position: 'absolute',
-              top: '390px',
-              left: '237px',
-              width: '80px',
-              height: '86px',
-              backgroundColor: 'primary.dark',
-              borderRadius: '12px',
-              boxShadow: '0 0 4px 0 rgba(0,0,0,0.25)'
-            }} /> */}
-          </Box>
-        )}
+                maxWidth: '500px',
+                height: 'auto',
+                objectFit: 'contain',
+                borderRadius: '8px'
+              }}
+            />
+          )}
+        </Box>
       </Box>
     </Box>
   );

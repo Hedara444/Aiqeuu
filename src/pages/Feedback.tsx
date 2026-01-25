@@ -335,9 +335,9 @@ export default function Feedback() {
                   color: "white",
                   boxShadow: "none",
                   textTransform: "none",
-                  bgcolor: "#00E6C3",
+                  bgcolor: "primary.main",
                   '&:hover': {
-                    bgcolor: "#00D1B2",
+                    bgcolor: "primary.secondary",
                     boxShadow: "none",
                   }
                 }}

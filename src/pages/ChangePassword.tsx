@@ -49,7 +49,7 @@ const passwordSchema = z.object({
 
 type PasswordFormData = z.infer<typeof passwordSchema>;
 
-export default function ChangePassword() {
+export default function   ChangePassword() {
   const navigate = useNavigate();
   const { changePassword, isLoading, error } = useProfileStore();
 
@@ -133,44 +133,45 @@ export default function ChangePassword() {
   };
 
   return (
-    <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
+    <Box sx={{  minHeight: "100vh", backgroundColor: "background.default" }}>
 
 
       {/* Main Content */}
-      <Container maxWidth="xl" sx={{ px: { xs: 2, md: 6 }, mb: 10 }}>
-        <Grid container spacing={{ xs: 4, lg: 8 }}>
+      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 }, mb: 6, mt: 4 }}>
+        <Grid container spacing={{ xs: 4, lg: 16 }}>
           {/* Left Side - Form */}
-          <Grid>
-            <Stack spacing={4}>
+          <Box  >
+            <Stack  spacing={3}>
               {/* Header */}
-              <Stack direction="row" alignItems="center" spacing={5}>
-                <IconButton onClick={() => navigate(-1)} sx={{ flexShrink: 0 }}>
-                  <ArrowBackIcon sx={{ fontSize: "1.75rem" }} />
-                </IconButton>
+              <Box>
                 <Typography
                   variant="h1"
                   sx={{
-                    fontSize: { xs: "2.5rem", md: "3rem", lg: "4.5rem" },
+                    fontSize: { xs: "1.75rem", md: "2.25rem" },
                     fontWeight: 700,
                     lineHeight: 1.2,
-                    color: "text.primary"
+                    color: "text.primary",
+                    mb: 1
                   }}
                 >
                   Change Password
                 </Typography>
-              </Stack>
-
-              {/* Subtitle */}
-              <Typography
-                variant="h5"
-                sx={{
-                  fontSize: { xs: "1.25rem", md: "1.5rem" },
-                  fontWeight: 400,
-                  color: "text.primary"
-                }}
-              >
-                Give Yourself A Great New Password
-              </Typography>
+                <Stack direction="row" alignItems="center" spacing={1}>
+                  <IconButton onClick={() => navigate(-1)} sx={{ p: 0.5 }}>
+                    <ArrowBackIcon sx={{ fontSize: "1.1rem" }} />
+                  </IconButton>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontSize: { xs: "0.9rem", md: "1rem" },
+                      color: "text.secondary",
+                      fontWeight: 500
+                    }}
+                  >
+                    Give Yourself A Great New Password
+                  </Typography>
+                </Stack>
+              </Box>
 
               {/* Error Alert */}
               {error && (
@@ -180,8 +181,8 @@ export default function ChangePassword() {
               )}
 
               {/* Form */}
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={3}>
+              <form  onSubmit={handleSubmit(onSubmit)}>
+                <Stack width={{lg:600 , xs:400 }} spacing={2.5}>
                   {/* Current Password */}
                   <TextField
                     fullWidth
@@ -195,22 +196,24 @@ export default function ChangePassword() {
                         <IconButton
                           onClick={() => togglePasswordVisibility('current')}
                           edge="end"
+                          size="small"
                         >
-                          {showPasswords.current ? <VisibilityOff /> : <Visibility />}
+                          {showPasswords.current ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
                         </IconButton>
                       ),
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        height: { xs: "64px", md: "80px" },
-                        borderRadius: "16px",
+                        height: { xs: "48px", md: "52px" },
+                        borderRadius: "12px",
+                        backgroundColor: "#fff",
                         '& fieldset': {
-                          borderColor: errors.oldPassword ? "error.main" : "grey.400",
+                          borderColor: errors.oldPassword ? "error.main" : "grey.300",
                         },
                       },
                       '& .MuiOutlinedInput-input': {
-                        fontSize: { xs: "1.125rem", md: "1.5rem" },
-                        color: "grey.500",
+                        fontSize: { xs: "0.9rem", md: "1rem" },
+                        color: "text.primary",
                       },
                     }}
                   />
@@ -228,39 +231,41 @@ export default function ChangePassword() {
                         <IconButton
                           onClick={() => togglePasswordVisibility('new')}
                           edge="end"
+                          size="small"
                         >
-                          {showPasswords.new ? <VisibilityOff /> : <Visibility />}
+                          {showPasswords.new ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
                         </IconButton>
                       ),
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        height: { xs: "64px", md: "80px" },
-                        borderRadius: "16px",
+                        height: { xs: "48px", md: "52px" },
+                        borderRadius: "12px",
+                        backgroundColor: "#fff",
                         '& fieldset': {
-                          borderColor: errors.newPassword ? "error.main" : "grey.400",
+                          borderColor: errors.newPassword ? "error.main" : "grey.300",
                         },
                       },
                       '& .MuiOutlinedInput-input': {
-                        fontSize: { xs: "1.125rem", md: "1.5rem" },
-                        color: "grey.500",
+                        fontSize: { xs: "0.9rem", md: "1rem" },
+                        color: "text.primary",
                       },
                     }}
                   />
 
                   {/* Password Strength Indicator */}
                   <Box>
-                    <Stack direction="row" spacing={1.5}>
+                    <Stack direction="row" spacing={1}>
                       {[...Array(4)].map((_, index) => (
                         <LinearProgress
                           key={index}
                           variant="determinate"
                           value={index < passwordStrength.strength ? 100 : 0}
                           sx={{
-                            height: 12,
-                            width: 80,
-                            borderRadius: "6px",
-                            backgroundColor: "grey.300",
+                            height: 6,
+                            width: 60,
+                            borderRadius: "3px",
+                            backgroundColor: "grey.200",
                             '& .MuiLinearProgress-bar': {
                               backgroundColor: getPasswordStrengthColor(index + 1),
                             },
@@ -268,12 +273,12 @@ export default function ChangePassword() {
                         />
                       ))}
                     </Stack>
-                    <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 1 }}>
-                      <Typography variant="body2" color="grey.500">
+                    <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 0.8 }}>
+                      <Typography variant="caption" color="grey.500">
                         Password Strength:
                       </Typography>
                       <Typography
-                        variant="body2"
+                        variant="caption"
                         color={getPasswordStrengthColor(passwordStrength.strength)}
                         sx={{ fontWeight: 600 }}
                       >
@@ -295,22 +300,24 @@ export default function ChangePassword() {
                         <IconButton
                           onClick={() => togglePasswordVisibility('confirm')}
                           edge="end"
+                          size="small"
                         >
-                          {showPasswords.confirm ? <VisibilityOff /> : <Visibility />}
+                          {showPasswords.confirm ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
                         </IconButton>
                       ),
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        height: { xs: "64px", md: "80px" },
-                        borderRadius: "16px",
+                        height: { xs: "48px", md: "52px" },
+                        borderRadius: "12px",
+                        backgroundColor: "#fff",
                         '& fieldset': {
-                          borderColor: errors.confirmPassword ? "error.main" : "grey.400",
+                          borderColor: errors.confirmPassword ? "error.main" : "grey.300",
                         },
                       },
                       '& .MuiOutlinedInput-input': {
-                        fontSize: { xs: "1.125rem", md: "1.5rem" },
-                        color: "grey.500",
+                        fontSize: { xs: "0.9rem", md: "1rem" },
+                        color: "text.primary",
                       },
                     }}
                   />
@@ -323,14 +330,15 @@ export default function ChangePassword() {
                     onClick={handleCancel}
                     disabled={isLoading}
                     sx={{
-                      px: 4,
-                      py: 2,
-                      height: 56,
-                      borderRadius: "25px",
+                      px: 3,
+                      height: 42,
+                      borderRadius: "21px",
                       borderColor: "#DAD2D2",
                       color: "text.primary",
-                      fontSize: "1.125rem",
-                      fontWeight: 700,
+                      fontSize: "0.9rem",
+                      fontWeight: 600,
+                      textTransform: "none",
+                      bgcolor: "white",
                       '&:hover': {
                         backgroundColor: "grey.50",
                         borderColor: "#DAD2D2",
@@ -343,41 +351,40 @@ export default function ChangePassword() {
                     type="submit"
                     variant="contained"
                     disabled={isLoading}
+                    color="primary"
                     sx={{
                       px: 4,
-                      py: 2,
-                      height: 56,
-                      borderRadius: "25px",
-                      fontSize: "1.125rem",
-                      fontWeight: 700,
+                      height: 42,
+                      borderRadius: "21px",
+                      fontSize: "0.9rem",
+                      fontWeight: 600,
                       color: "white",
-                      minWidth: 120
+                      minWidth: 120,
+                      textTransform: "none",
+                      boxShadow: "none",
+                      bgcolor: "primary.main",
+                      '&:hover': {
+                        bgcolor: "primary.secondary",
+                        boxShadow: "none",
+                      }
                     }}
                   >
-                    {isLoading ? <CircularProgress size={24} color="inherit" /> : "Change"}
+                    {isLoading ? <CircularProgress size={20} color="inherit" /> : "Change"}
                   </Button>
                 </Stack>
               </form>
             </Stack>
-          </Grid>
+          </Box>
 
           {/* Right Side - Rules */}
-          <Grid sx={{ mt: { xs: 0, lg: 12 } }}>
-            <Card
-              sx={{
-                maxWidth: 512,
-                backgroundColor: "#F6F6F6",
-                borderRadius: "24px",
-                p: { xs: 4, md: 5 },
-              }}
-            >
-              <CardContent>
+          <Grid   sx={{ mt: { xs: 4, lg: 12 } }}>
+            <Box sx={{ pl: { lg: 6 } }}>
                 <Typography
-                  variant="h4"
+                  variant="h6"
                   sx={{
-                    fontSize: { xs: "1.5rem", md: "1.875rem" },
-                    fontWeight: 700,
-                    mb: 4,
+                    fontSize: { xs: "1.1rem", md: "1.25rem" },
+                    fontWeight: 600,
+                    mb: 2,
                     color: "text.primary"
                   }}
                 >
@@ -390,12 +397,12 @@ export default function ChangePassword() {
                     "At least One number",
                     "Can't be the same as a previous"
                   ].map((rule, index) => (
-                    <ListItem key={index} sx={{ px: 0, py: 1.5 }}>
-                      <ListItemIcon sx={{ minWidth: 32 }}>
+                    <ListItem key={index} sx={{ px: 0, py: 0.5 }}>
+                      <ListItemIcon sx={{ minWidth: 24 }}>
                         <Box
                           sx={{
-                            width: 8,
-                            height: 8,
+                            width: 5,
+                            height: 5,
                             backgroundColor: "text.primary",
                             borderRadius: "50%",
                           }}
@@ -404,10 +411,10 @@ export default function ChangePassword() {
                       <ListItemText
                         primary={
                           <Typography
-                            variant="body1"
+                            variant="body2"
                             sx={{
-                              fontSize: { xs: "1.125rem", md: "1.5rem" },
-                              color: "text.primary"
+                              fontSize: { xs: "0.85rem", md: "0.95rem" },
+                              color: "text.secondary"
                             }}
                           >
                             {rule}
@@ -417,8 +424,7 @@ export default function ChangePassword() {
                     </ListItem>
                   ))}
                 </List>
-              </CardContent>
-            </Card>
+            </Box>
           </Grid>
         </Grid>
       </Container>
