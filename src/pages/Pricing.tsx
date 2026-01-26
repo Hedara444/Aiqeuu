@@ -6,14 +6,13 @@ import {
   Button,
   Card,
   CardContent,
-  Stack,
   Grid,
   CircularProgress
 } from '@mui/material';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { PurchaseModal } from '@/components/ui/purchase-modal';
 import { useProfileStore } from '@/store/profileStore';
-import { number } from 'zod';
+
 
 interface ProductCardProps {
   name: string;
@@ -35,9 +34,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
   <Card sx={{
     position: 'relative',
     width: '100%',
-    maxWidth: '380px',
-    borderRadius: '30px',
-    p: { xs: 4, md: 4 },
+    maxWidth: '384px',
+    borderRadius: '24px',
+    p: { xs: 3, md: 3 },
     display: 'flex',
     flexDirection: 'column',
     border: highlighted ? '2px solid' : 'none',
@@ -46,29 +45,29 @@ const ProductCard: React.FC<ProductCardProps> = ({
   }}>
     <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
       {/* Header */}
-      <Box sx={{ textAlign: 'center', mb: 4 }}>
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
         <Typography variant="h3" sx={{
           color: 'primary.main',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.375rem', md: '2.15rem' },
+          fontSize: { xs: '1.1rem', md: '1.7rem' },
           fontWeight: 700,
-          mb: 2
+          mb: 1.5
         }}>
           {name}
         </Typography>
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.125rem', md: '1.375rem' },
+          fontSize: { xs: '0.9rem', md: '1.1rem' },
           fontWeight: 700,
-          mb: 3
+          mb: 2.5
         }}>
           To improve your work
         </Typography>
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.025rem', md: '1.15rem' },
+          fontSize: { xs: '0.82rem', md: '0.92rem' },
           lineHeight: 1.6
         }}>
           {description}
@@ -79,36 +78,36 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <Box sx={{
         display: 'flex',
         alignItems: 'flex-start',
-        gap: 2,
-        py: 1,
+        gap: 1.5,
+        py: 0.8,
         borderTop: '1px solid',
         borderBottom: '1px solid',
         borderColor: 'grey.200'
       }}>
         <CheckIcon sx={{
           color: 'primary.main',
-          width: '28px',
-          height: '28px',
+          width: '22px',
+          height: '22px',
           flexShrink: 0,
-          mt: 0.25
+          mt: 0.2
         }} />
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.025rem', md: '1.15rem' },
+          fontSize: { xs: '0.82rem', md: '0.92rem' },
           flex: 1
         }}>
-          CV Credits:Process up to {points} CVs
+          CV Credits:Process up to {points} CVs
         </Typography>
       </Box>
 
       {/* Pricing */}
-      <Box sx={{ mb: 4 }}>
-        <Box sx={{ mb: 1, mt: 2 }}>
+      <Box sx={{ mb: 3 }}>
+        <Box sx={{ mb: 0.8, mt: 1.6 }}>
           <Typography sx={{
             color: 'primary.dark',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '1.025rem', md: '1.15rem' }
+            fontSize: { xs: '0.82rem', md: '0.92rem' }
           }}>
             You pay:
           </Typography>
@@ -116,9 +115,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography sx={{
           color: 'primary.dark',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.25rem', md: '1.575rem' },
+          fontSize: { xs: '1rem', md: '1.25rem' },
           fontWeight: 700,
-          mb: 1
+          mb: 0.8
         }}>
           ${price}/package
         </Typography>
@@ -131,12 +130,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         variant="contained"
         fullWidth
         sx={{
-          height: { xs: '54px', md: '52px' },
-          borderRadius: '50px',
+          height: { xs: '43px', md: '42px' },
+          borderRadius: '40px',
           backgroundColor: 'primary.main',
           color: 'white',
           fontFamily: 'Montserrat',
-          fontSize: { xs: '1.12rem', md: '1.25rem' },
+          fontSize: { xs: '0.9rem', md: '1rem' },
           fontWeight: 700,
           textTransform: 'none',
           '&:hover': {
@@ -269,15 +268,16 @@ export default function Pricing() {
 
 
       {/* Main Content */}
-      <Box sx={{ px: { xs: 2, md: 6 }, pb: 8 }}>
+      <Box sx={{ px: { xs: 1.5, md: 4.8 }, pb: 6.5 }}>
         {/* Header */}
-        <Box sx={{ textAlign: 'center', mb: { xs: 8, md: 12 } }}>
+        <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 9 } }}>
           <Typography variant="h1" sx={{
             color: 'primary.dark',
             fontFamily: 'Montserrat',
-            fontSize: { xs: '2rem', md: '2.75rem', lg: '3.5rem' },
+            fontSize: { xs: '1.6rem', md: '2.2rem', lg: '2.8rem' },
             fontWeight: 700,
-            mb: 2
+            mb: 1.5,
+            mt: 5
           }}>
             Pricing
           </Typography>
@@ -285,7 +285,7 @@ export default function Pricing() {
             <Typography sx={{
               color: 'primary.dark',
               fontFamily: 'Montserrat',
-              fontSize: { xs: '1.15rem', md: '1.25rem', lg: '1.3625rem' },
+              fontSize: { xs: '0.92rem', md: '1rem', lg: '1.1rem' },
               lineHeight: 1.6
             }}>
               Choose Your Plan
@@ -296,7 +296,7 @@ export default function Pricing() {
         </Box>
 
         {/* Pricing Cards */}
-        <Grid container spacing={{ xs: 4, lg: 4 }} justifyContent="center" sx={{ mx: 'auto' }}>
+        <Grid container spacing={{ xs: 3, lg: 3 }} justifyContent="center" sx={{ mx: 'auto' }}>
           {products.reverse().map((product, index) => (
             <Grid key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
               <ProductCard
