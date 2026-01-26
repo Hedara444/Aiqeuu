@@ -8,16 +8,11 @@ import {
   CardContent,
   TextField,
   Stack,
-  Input,
   FormLabel,
   Divider,
   CircularProgress
 } from '@mui/material';
-import {
-  CloudUpload as CloudUploadIcon,
-  Cancel as CancelIcon,
-  Send as SendIcon
-} from '@mui/icons-material';
+
 import { styled } from '@mui/material/styles';
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -101,16 +96,16 @@ export default function Feedback() {
     <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
 
       {/* Main Content */}
-      <Container maxWidth="lg" sx={{ pb: { xs: 5, md: 8 }, mt: 3 }}>
+      <Container maxWidth="lg" sx={{ pb: { xs: 4, md: 7 }, mt: 2 }}>
         {/* Header */}
-        <Box textAlign="center" sx={{ mb: 4 }}>
+        <Box textAlign="center" sx={{ mb: 3 }}>
           <Typography
             variant="h3"
             sx={{
               fontWeight: 700,
-              mb: 0.8,
+              mb: 0.7,
               color: "text.primary",
-              fontSize: { xs: "1.4rem", md: "1.75rem" },
+              fontSize: { xs: "1.35rem", md: "1.7rem" },
             }}
           >
             feedback
@@ -120,8 +115,8 @@ export default function Feedback() {
              sx={{
                fontWeight: 500,
                color: "text.primary",
-               mb: 0.4,
-               fontSize: { xs: "0.8rem", md: "0.9rem" }
+               mb: 0.3,
+               fontSize: { xs: "0.75rem", md: "0.85rem" }
              }}
           >
             Choose Your Plan
@@ -130,7 +125,7 @@ export default function Feedback() {
              variant="body1"
              sx={{
                color: "text.secondary",
-               fontSize: { xs: "0.7rem", md: "0.8rem" }
+               fontSize: { xs: "0.65rem", md: "0.75rem" }
              }}
           >
             Select the perfect package for your recruitment needs
@@ -143,22 +138,22 @@ export default function Feedback() {
             <Card
               sx={{
                 borderRadius: "14px",
-                p: { xs: 1.5, md: 2 },
+                p: { xs: 1.2, md: 1.8 },
                 boxShadow: "0px 3px 14px rgba(0, 0, 0, 0.05)",
                 border: "none",
-                mb: 3
+                mb: 2.5
               }}
             >
-              <CardContent sx={{ p: { xs: 0.8, md: 1.5 } }}>
+              <CardContent sx={{ p: { xs: 0.6, md: 1.2 } }}>
                 {/* Form Header */}
-                <Box sx={{ mb: 2 }}>
+                <Box sx={{ mb: 1.5 }}>
                   <Typography
                     variant="h5"
                     sx={{
                       fontWeight: 500,
-                      mb: 1.5,
+                      mb: 1,
                       color: "text.primary",
-                      fontSize: { xs: "0.9rem", md: "1rem" },
+                      fontSize: { xs: "0.85rem", md: "0.95rem" },
                     }}
                   >
                     Submit Feedback
@@ -169,75 +164,75 @@ export default function Feedback() {
                 {/* Form Fields */}
                 <Stack spacing={2}>
                   {/* Title Field */}
-                  <Box>
-                    <FormLabel
-                      sx={{
-                        display: "block",
-                        color: "text.secondary",
-                        fontSize: "0.75rem",
-                        fontWeight: 500,
-                        mb: 0.8,
-                      }}
-                    >
-                      Title
-                    </FormLabel>
-                    <TextField
-                      fullWidth
-                      {...register("title")}
-                      error={!!errors.title}
-                      helperText={errors.title?.message}
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: "10px",
-                          backgroundColor: "#fff",
-                          fontSize: "0.85rem",
-                          '& fieldset': {
-                            borderColor: "grey.200",
-                          },
-                          '&:hover fieldset': {
-                            borderColor: "grey.300",
-                          },
-                          '& input': {
-                            py: 1.2,
-                            px: 1.5
-                          }
-                        },
-                      }}
-                    />
-                  </Box>
+              <Box>
+                <FormLabel
+                  sx={{
+                    display: "block",
+                    color: "text.secondary",
+                    fontSize: "0.795rem",
+                    fontWeight: 500,
+                    mb: 0.6,
+                  }}
+                >
+                  Title
+                </FormLabel>
+                <TextField
+                  fullWidth
+                  {...register("title")}
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: "10px",
+                      backgroundColor: "#fff",
+                      fontSize: "0.795rem",
+                      '& fieldset': {
+                        borderColor: "grey.200",
+                      },
+                      '&:hover fieldset': {
+                        borderColor: "grey.300",
+                      },
+                      '& input': {
+                        py: 1,
+                        px: 1.2
+                      }
+                    },
+                  }}
+                />
+              </Box>
 
-                  {/* Description Field */}
-                  <Box>
-                    <FormLabel
-                      sx={{
-                        display: "block",
-                        color: "text.secondary",
-                        fontSize: "0.75rem",
-                        fontWeight: 500,
-                        mb: 0.8,
-                      }}
-                    >
-                      Description
-                    </FormLabel>
-                    <TextField
-                      fullWidth
-                      multiline
-                      rows={3}
-                      {...register("description")}
-                      error={!!errors.description}
-                      helperText={errors.description?.message}
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: "10px",
-                          backgroundColor: "#fff",
-                          fontSize: "0.85rem",
+              {/* Description Field */}
+              <Box>
+                <FormLabel
+                  sx={{
+                    display: "block",
+                    color: "text.secondary",
+                    fontSize: "0.795rem",
+                    fontWeight: 500,
+                    mb: 0.6,
+                  }}
+                >
+                  Description
+                </FormLabel>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={3}
+                  {...register("description")}
+                  error={!!errors.description}
+                  helperText={errors.description?.message}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: "10px",
+                      backgroundColor: "#fff",
+                      fontSize: "0.795rem",
                           '& fieldset': {
                             borderColor: "grey.200",
                           },
                           '&:hover fieldset': {
                             borderColor: "grey.300",
                           },
-                          '& textarea': {
+                            '& textarea': {
                              py: 0.5,
                              px: 0.5
                           }
@@ -247,28 +242,28 @@ export default function Feedback() {
                   </Box>
 
                   {/* File Upload Field */}
-                  <Box>
-                    <FormLabel
-                      sx={{
-                        display: "block",
-                        color: "text.secondary",
-                        fontSize: "0.75rem",
-                        fontWeight: 500,
-                        mb: 0.8,
-                      }}
-                    >
-                      Attach Image (Optional)
-                    </FormLabel>
-                    <Button
-                      component="label"
-                      sx={{
-                        bgcolor: "grey.100",
-                        color: "text.secondary",
-                        textTransform: "none",
-                        borderRadius: "8px",
-                        px: 2.5,
-                        py: 0.8,
-                        fontSize: "0.75rem",
+              <Box>
+                <FormLabel
+                  sx={{
+                    display: "block",
+                    color: "text.secondary",
+                    fontSize: "0.795rem",
+                    fontWeight: 500,
+                    mb: 0.6,
+                  }}
+                >
+                  Attach Image (Optional)
+                </FormLabel>
+                <Button
+                  component="label"
+                  sx={{
+                    bgcolor: "grey.100",
+                    color: "text.secondary",
+                    textTransform: "none",
+                    borderRadius: "8px",
+                    px: 2,
+                    py: 0.6,
+                    fontSize: "0.795rem",
                         fontWeight: 500,
                         boxShadow: "none",
                         '&:hover': {
@@ -304,10 +299,10 @@ export default function Feedback() {
                 onClick={handleCancel}
                 disabled={isLoading}
                 sx={{
-                  minWidth: 100,
+                  minWidth: 90,
                   height: 36,
                   borderRadius: "35px",
-                  fontSize: "0.75rem",
+                  fontSize: "0.795rem",
                   fontWeight: 600,
                   bgcolor: "white",
                   color: "text.primary",
@@ -327,10 +322,10 @@ export default function Feedback() {
                 disabled={isLoading}
                 color="primary"
                 sx={{
-                  minWidth: 120,
+                  minWidth: 100,
                   height: 36,
                   borderRadius: "35px",
-                  fontSize: "0.75rem",
+                  fontSize: "0.795rem",
                   fontWeight: 600,
                   color: "white",
                   boxShadow: "none",
