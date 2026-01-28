@@ -255,7 +255,7 @@ const PositionCard: React.FC<{
                 to={`/position/${position.id}`}
                 underline="hover"
                 color="text.primary"
-                sx={{ fontWeight: 700, typography: 'h6', fontSize: "0.75rem" }}
+                sx={{ fontWeight: 700, typography: 'h1', fontSize: "0.75rem" }}
               >
                 {position.title}
               </MUILink>

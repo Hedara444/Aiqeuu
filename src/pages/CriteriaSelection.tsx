@@ -17,7 +17,7 @@ import { usePositionsStore } from '@/store/positionsStore';
 export default function CriteriaSelection() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { currentPosition, getPositionById } = usePositionsStore();
+  const { currentPosition, getPositionById, addCriteriaFullText, isLoading } = usePositionsStore();
   const [isLoadingPage, setIsLoadingPage] = useState(false);
   const [selection, setSelection] = useState<'full-text' | 'manual' | null>(null);
   const [fullText, setFullText] = useState('');
@@ -34,11 +34,18 @@ export default function CriteriaSelection() {
     }
   }, [id]);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (selection === 'manual') {
       navigate(`/create-criteria/${id}`);
     } else if (selection === 'full-text') {
-      // Do nothing for now as per instructions
+      if (!fullText.trim()) return;
+
+      try {
+        await addCriteriaFullText(id!, fullText);
+        navigate(`/create-criteria/${id}`);
+      } catch (error) {
+        // Error is handled in service layer ; AKA 'PoistionStore.tsx'
+      }
     }
   };
 
@@ -193,7 +200,7 @@ export default function CriteriaSelection() {
                   <Button
                     onClick={handleNext}
                     variant="contained"
-                    disabled={!selection}
+                    disabled={!selection || !fullText  || isLoading}
                     sx={{
                         px: 2.1,
                         py: 0.7,
@@ -208,7 +215,7 @@ export default function CriteriaSelection() {
                         textTransform: 'none',
                     }}
                   >
-                    Next
+                    {isLoading ? <CircularProgress size={16} color="inherit" /> : 'Next'}
                   </Button>
                 </Stack>
               </Box>

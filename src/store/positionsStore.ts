@@ -28,6 +28,7 @@ interface PositionsState {
   deleteResume: (id: string) => Promise<void>;
   getResumeFile: (id: string) => Promise<string>;
   addCriteria: (positionId: string, description: string) => Promise<Criteria>;
+  addCriteriaFullText: (positionId: string, text: string) => Promise<Criteria[]>;
   deleteCriteria: (id: string) => Promise<void>;
   clearError: () => void;
 }
@@ -42,6 +43,7 @@ const endPoint = {
   resumeById: (id: string) => `/v1/user/positions/resumes/${id}`,
   resumeFile: (id: string) => `/v1/user/positions/resumes/${id}/file`,
   positionCriterias: '/v1/user/positions/criterias',
+  criteriasFullText: '/v1/user/positions/criterias-full-text',
   criteriaById: (id: string) => `/v1/user/positions/criterias/${id}`,
 };
 
@@ -311,7 +313,42 @@ export const usePositionsStore = create<PositionsState>()(
                   ...state.currentPosition,
                   criterias: [
                     ...state.currentPosition.criterias,
-                    response.data, // 👈 append new criterion
+                    response.data, 
+                  ],
+                }
+                : state.currentPosition,
+            }));
+
+            toast.success('Criterias added successfully!');
+            return response.data;
+          } catch (error: any) {
+            const errorMessage =
+              error.response?.data?.message || 'Failed to add criteria';
+
+            set({ isLoading: false, error: errorMessage });
+            toast.error(errorMessage);
+            throw error;
+          }
+        },
+
+        addCriteriaFullText: async (positionId: string, text: string) => {
+          set({ isLoading: true, error: null });
+
+          try {
+            const response = await api.post(endPoint.criteriasFullText, {
+              positionId,
+              job_description: text,
+            });
+
+            set((state) => ({
+              isLoading: false,
+              error: null,
+              currentPosition: state.currentPosition
+                ? {
+                  ...state.currentPosition,
+                  criterias: [
+                    ...state.currentPosition.criterias,
+                    ...response.data, // 👈 append new criterias
                   ],
                 }
                 : state.currentPosition,
