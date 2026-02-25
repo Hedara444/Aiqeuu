@@ -4,9 +4,16 @@ import api from '../services/api';
 import { toast } from 'react-toastify';
 
 interface BillingHistoryItem {
-  id: string;
+  id: number;
+  productName: string;
+  quantity: number;
   amount: number;
   createdAt: string;
+  currency: string;
+  status: string;
+  stripePaymentId?: string;
+  stripeCustomerId?: string;
+  productId?: string;
 }
 
 export interface Bill {
@@ -16,7 +23,7 @@ export interface Bill {
   endDate: string;
   package: string;
   price: string;
-  status: 'active' | 'finished';
+  status: string;
 }
 
 interface BillingState {
@@ -33,7 +40,7 @@ interface BillingState {
 }
 
 const endPoint = {
-  billingHistory: '/v1/user/pointsCharges/history',
+  billingHistory: '/v1/user/payment/invoices',
 };
 
 export const useBillingStore = create<BillingState>()(
@@ -58,15 +65,34 @@ export const useBillingStore = create<BillingState>()(
               month: '2-digit',
               year: 'numeric'
             }).replace(/\//g, '.');
+            const endDateObj = new Date(item.createdAt);
+            endDateObj.setFullYear(endDateObj.getFullYear() + 1);
+            const endDate = endDateObj.toLocaleDateString('en-GB', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            }).replace(/\//g, '.');
+
+            const getCurrencySymbol = (currency: string) => {
+              const symbolMap: { [key: string]: string } = {
+                usd: '$',
+                eur: '€',
+                gbp: '£',
+                jpy: '¥',
+              };
+              return symbolMap[currency?.toLowerCase()] || '$';
+            };
+
+            const currencySymbol = getCurrencySymbol(item.currency);
 
             return {
-              id: item.id,
-              plan: "Ultimate Vault",
+              id: item.id.toString(),
+              plan: item.productName ,
               startDate: startDate,
-              endDate: "12.01.2025", // Fake data
-              package: `${item.amount} CVs`,
-              price: "$100.00", // Fake data
-              status: 'finished', // Fake data
+              endDate: endDate , // Fake data
+              package: `${item.quantity} CVs`,
+              price: `${currencySymbol}${item.amount}`,
+              status: item.status,
             };
           });
 

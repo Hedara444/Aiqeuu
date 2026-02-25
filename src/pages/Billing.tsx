@@ -28,7 +28,7 @@ interface BillRowProps {
   endDate: string;
   package: string;
   price: string;
-  status: 'active' | 'finished';
+  status: string;
 }
 
 const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: packageValue, price, status }) => (
@@ -128,7 +128,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
         <Grid sx={{ minWidth: { md: 128 } }}>
           <Box sx={{ display: "flex", justifyContent: { xs: "flex-start", md: "center" } }}>
             <Chip
-              label={status === 'active' ? 'Now' : 'finished'}
+              label={status === 'active' ? 'Now' : status}
               sx={{
                 px: 2.25,
                 py: 1,
@@ -136,6 +136,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
                 fontWeight: 700,
                 backgroundColor: status === 'active' ? 'rgba(0, 235, 189, 0.1)' : 'rgba(255, 70, 86, 0.1)',
                 color: status === 'active' ? 'primary.main' : '#FF4656',
+                textTransform: 'capitalize',
                 '& .MuiChip-label': {
                   px: 1
                 }
