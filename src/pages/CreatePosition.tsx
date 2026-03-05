@@ -130,7 +130,7 @@ export default function CreatePosition() {
                     fullWidth
                     multiline
                     rows={3}
-                    placeholder="lomer ipsm"
+                    placeholder="this position is abot picking up  a ui/ux designer with experince in metrial UI design concept "
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '11.9px',

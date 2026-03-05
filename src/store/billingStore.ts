@@ -20,7 +20,6 @@ export interface Bill {
   id: string;
   plan: string;
   startDate: string;
-  endDate: string;
   package: string;
   price: string;
   status: string;
@@ -65,13 +64,7 @@ export const useBillingStore = create<BillingState>()(
               month: '2-digit',
               year: 'numeric'
             }).replace(/\//g, '.');
-            const endDateObj = new Date(item.createdAt);
-            endDateObj.setFullYear(endDateObj.getFullYear() + 1);
-            const endDate = endDateObj.toLocaleDateString('en-GB', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric'
-            }).replace(/\//g, '.');
+
 
             const getCurrencySymbol = (currency: string) => {
               const symbolMap: { [key: string]: string } = {
@@ -89,7 +82,6 @@ export const useBillingStore = create<BillingState>()(
               id: item.id.toString(),
               plan: item.productName ,
               startDate: startDate,
-              endDate: endDate , // Fake data
               package: `${item.quantity} CVs`,
               price: `${currencySymbol}${item.amount}`,
               status: item.status,

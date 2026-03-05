@@ -13,55 +13,22 @@ const api = axios.create({
 });
 
 
-// // ---------- Token Refresh Coordination ----------
-// let isRefreshing = false;
-// let refreshSubscribers: ((token: string) => void)[] = [];
-
-// function subscribeTokenRefresh(cb: (token: string) => void) {
-//   refreshSubscribers.push(cb);
-// }
-
-// // ---------- Response Interceptor with Token Refresh Logic ----------
-// api.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     const originalRequest = error.config;
-
-//     // Check if response is 401 and hasn't been retried yet
-//     if (error.response?.status === 401 && !originalRequest._retry) {
-//       originalRequest._retry = true;
-
-//       // First request to refresh the token
-//       if (!isRefreshing) {
-//         isRefreshing = true;
-
-//         try {
-//           const response = await refreshToken("ss")
-
-//           return api(originalRequest);
-//         } catch (refreshError) {
-//           isRefreshing = false;
-//           refreshSubscribers = [];
-
-//           // Redirect to login
-//           // store.dispatch(logout());
-//           window.location.href = '/login';
-//           return Promise.reject(refreshError);
-//         } finally {
-//           isRefreshing = false;
-//         }
-//       }
-
-//       // If a refresh is already in progress, wait for it to finish
-//       return new Promise((resolve) => {
-//         subscribeTokenRefresh(() => {
-//           resolve(api(originalRequest));
-//         });
-//       });
-//     }
-
-//     return Promise.reject(error);
-//   }
-// );
+// Response interceptor to handle 401 Unauthorized errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Check if the error is 401 Unauthorized
+    if (error.response?.status === 401) {
+      // Avoid redirecting if already on the signin page to prevent interfering with login errors
+      if (!window.location.pathname.includes('/signin')) {
+        // Clear auth data from local storage
+        localStorage.removeItem('auth-storage');
+        // Redirect to signin page
+        window.location.href = '/signin';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;

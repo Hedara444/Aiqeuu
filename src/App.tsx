@@ -32,6 +32,7 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import Billing from "./pages/Billing";
+import PaymentStatus from "./pages/PaymentStatus";
 
 const queryClient = new QueryClient();
 
@@ -39,12 +40,14 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ToastContainer />
+      <ToastContainer 
+      limit={1}
+       />
       <BrowserRouter>
         <Routes>
 
-          <Route path="/payment-success" element={<Dashboard />} />
-          <Route path="/payment-cancel" element={<Dashboard />} />
+          <Route path="/payment-success" element={<PaymentStatus />} />
+          <Route path="/payment-cancel" element={<PaymentStatus />} />
 
           {/* public routes */}
           <Route element={<PublicRoute />}>

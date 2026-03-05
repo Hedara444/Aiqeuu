@@ -25,33 +25,31 @@ import { useBillingStore } from '@/store/billingStore';
 interface BillRowProps {
   plan: string;
   startDate: string;
-  endDate: string;
   package: string;
   price: string;
   status: string;
 }
 
-const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: packageValue, price, status }) => (
+const BillRow: React.FC<BillRowProps> = ({ plan, startDate,  package: packageValue, price, status }) => (
   <Card
     sx={{
       borderRadius: { xs: "12px", md: "20px" },
-      p: { xs: 3, md: 4 },
+      p: { xs: 3, md: 2 },
       boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.1)",
     }}
   >
-    <CardContent sx={{ p: 0 }}>
+    <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
       <Grid
         container
-        spacing={{ xs: 2, md: 4 }}
+        spacing={{ xs: 2, md: 3 }}
         alignItems="center"
         justifyContent="space-between"
         sx={{
           flexDirection: { xs: "column", md: "row" },
-          gap: { xs: 2, md: 0 }
         }}
       >
         {/* Plan Info */}
-        <Grid sx={{ minWidth: { md: 220 } }}>
+        <Grid sx={{ minWidth: { md: 240 } }}>
           <Stack direction="row" alignItems="center" spacing={1.5}>
             <ReceiptIcon sx={{ fontSize: "1.15rem", color: "text.primary" }} />
             <Typography
@@ -68,7 +66,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
         </Grid>
 
         {/* Date Info */}
-        <Grid sx={{ minWidth: { md: 220 } }}>
+        <Grid sx={{ minWidth: { md: 320 } }}>
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 1, sm: 2.5 }}
@@ -90,8 +88,7 @@ const BillRow: React.FC<BillRowProps> = ({ plan, startDate, endDate, package: pa
                 color: "text.primary"
               }}
             >
-              <Box component="span" sx={{ fontWeight: 400 }}>Ends </Box>
-              <Box component="span" sx={{ fontWeight: 700 }}>{endDate}</Box>
+
             </Typography>
           </Stack>
         </Grid>

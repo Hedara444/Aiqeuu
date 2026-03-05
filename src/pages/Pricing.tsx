@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     borderColor: highlighted ? 'primary.main' : 'transparent',
     boxShadow: 2
   }}>
-    <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
+    <CardContent sx={{ p: 0, '&:last-child': { pb: 1 } }}>
       {/* Header */}
       <Box sx={{ textAlign: 'center', mb: 3 }}>
         <Typography variant="h3" sx={{
@@ -79,7 +79,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         display: 'flex',
         alignItems: 'flex-start',
         gap: 1.5,
-        py: 0.8,
+        py: 0.1,
         borderTop: '1px solid',
         borderBottom: '1px solid',
         borderColor: 'grey.200'
@@ -89,7 +89,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           width: '22px',
           height: '22px',
           flexShrink: 0,
-          mt: 0.2
+          mt: 0.1
         }} />
         <Typography sx={{
           color: 'primary.dark',
@@ -270,14 +270,14 @@ export default function Pricing() {
       {/* Main Content */}
       <Box sx={{ px: { xs: 1.5, md: 4.8 }, pb: 6.5 }}>
         {/* Header */}
-        <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 9 } }}>
+        <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 5 } }}>
           <Typography variant="h1" sx={{
             color: 'primary.dark',
             fontFamily: 'Montserrat',
             fontSize: { xs: '1.6rem', md: '2.2rem', lg: '2.8rem' },
             fontWeight: 700,
             mb: 1.5,
-            mt: 5
+            mt: 2
           }}>
             Pricing
           </Typography>
@@ -286,7 +286,7 @@ export default function Pricing() {
               color: 'primary.dark',
               fontFamily: 'Montserrat',
               fontSize: { xs: '0.92rem', md: '1rem', lg: '1.1rem' },
-              lineHeight: 1.6
+              lineHeight: 1.4
             }}>
               Choose Your Plan
               <br />
