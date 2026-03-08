@@ -168,7 +168,6 @@ export const useProfileStore = create<ProfileState>()(
                             isLoading: false,
                             error: null
                         });
-                        toast.success('Product purchased successfully!');
                         return response.data;
                     } catch (error: any) {
                         const errorMessage = error.response?.data?.message || 'Failed to purchase product';
