@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Typography,
@@ -19,6 +19,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useProfileStore } from '@/store/profileStore';
+
+const injectFeedbackStyles = () => {
+  if (document.getElementById('feedback-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'feedback-ux-styles';
+  s.textContent = `
+    @keyframes fb-fade-up { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes fb-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+  `;
+  document.head.appendChild(s);
+};
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -42,6 +53,7 @@ const feedbackSchema = z.object({
 type FeedbackFormData = z.infer<typeof feedbackSchema>;
 
 export default function Feedback() {
+  useEffect(() => { injectFeedbackStyles(); }, []);
   const { submitFeedback, uploadPhoto, isLoading } = useProfileStore();
 
   const {
@@ -93,42 +105,34 @@ export default function Feedback() {
   };
 
   return (
-    <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
+    <Box sx={{ minHeight: "100vh", background: 'linear-gradient(180deg, #f8fbff 0%, #f7f9fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'fixed', top: '12%', right: '-80px', width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.09), transparent 70%)', animation: 'fb-float 9s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'fixed', bottom: '14%', left: '-70px', width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,168,0.08), transparent 70%)', animation: 'fb-float 11s ease-in-out infinite', pointerEvents: 'none' }} />
 
-      {/* Main Content */}
-      <Container maxWidth="lg" sx={{ pb: { xs: 4, md: 7 }, mt: 2 }}>
-        {/* Header */}
-        <Box textAlign="center" sx={{ mb: 3 }}>
+      <Container maxWidth="lg" sx={{ pb: { xs: 4, md: 7 }, mt: 2, position: 'relative', zIndex: 1 }}>
+        <Box textAlign="center" sx={{ mb: 3, animation: 'fb-fade-up .45s ease-out both' }}>
           <Typography
             variant="h3"
             sx={{
-              fontWeight: 700,
-              mb: 0.7,
-              color: "text.primary",
-              fontSize: { xs: "1.35rem", md: "1.7rem" },
+              fontWeight: 800,
+              mb: 0.8,
+              fontSize: { xs: "1.35rem", md: "1.8rem" },
+              background: 'linear-gradient(135deg, #1776F2 0%, #00D4A8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
             }}
           >
-            feedback
+            Feedback
           </Typography>
           <Typography
-             variant="h6"
-             sx={{
-               fontWeight: 500,
-               color: "text.primary",
-               mb: 0.3,
-               fontSize: { xs: "0.75rem", md: "0.85rem" }
-             }}
+            variant="body1"
+            sx={{
+              color: "text.secondary",
+              fontSize: { xs: "0.75rem", md: "0.9rem" },
+              fontWeight: 500
+            }}
           >
-            Choose Your Plan
-          </Typography>
-          <Typography
-             variant="body1"
-             sx={{
-               color: "text.secondary",
-               fontSize: { xs: "0.65rem", md: "0.75rem" }
-             }}
-          >
-            Select the perfect package for your recruitment needs
+            Share your experience so we can improve Aikyuu for you.
           </Typography>
         </Box>
 
@@ -137,11 +141,16 @@ export default function Feedback() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Card
               sx={{
-                borderRadius: "14px",
+                borderRadius: "18px",
                 p: { xs: 1.2, md: 1.8 },
-                boxShadow: "0px 3px 14px rgba(0, 0, 0, 0.05)",
-                border: "none",
-                mb: 2.5
+                boxShadow: "0 8px 24px rgba(23,118,242,0.08)",
+                border: "1px solid rgba(23,118,242,0.12)",
+                mb: 2.5,
+                transition: 'transform .22s ease, box-shadow .22s ease',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 14px 30px rgba(23,118,242,0.14)'
+                }
               }}
             >
               <CardContent sx={{ p: { xs: 0.6, md: 1.2 } }}>
@@ -311,6 +320,7 @@ export default function Feedback() {
                   '&:hover': {
                     bgcolor: "grey.50",
                     boxShadow: "0px 3px 8px rgba(0,0,0,0.1)",
+                    transform: 'translateY(-1px)'
                   },
                 }}
               >
@@ -326,14 +336,15 @@ export default function Feedback() {
                   height: 36,
                   borderRadius: "35px",
                   fontSize: "0.795rem",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: "white",
-                  boxShadow: "none",
                   textTransform: "none",
-                  bgcolor: "primary.main",
+                  background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)',
+                  boxShadow: "0 8px 18px rgba(23,118,242,0.24)",
                   '&:hover': {
-                    bgcolor: "primary.secondary",
-                    boxShadow: "none",
+                    background: 'linear-gradient(135deg, #1266da 0%, #0b56ba 100%)',
+                    boxShadow: "0 12px 24px rgba(23,118,242,0.34)",
+                    transform: 'translateY(-1px)'
                   }
                 }}
               >

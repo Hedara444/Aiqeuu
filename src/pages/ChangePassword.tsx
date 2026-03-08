@@ -2,7 +2,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -21,7 +21,8 @@ import {
   ListItemIcon,
   ListItemText,
   Alert,
-  CircularProgress
+  CircularProgress,
+  Paper
 } from '@mui/material';
 import {
   Visibility,
@@ -32,6 +33,19 @@ import {
 import { AikyuuLogo } from '@/components/ui/aikyuu-logo';
 
 import { useProfileStore } from '@/store/profileStore';
+
+const injectChangePasswordStyles = () => {
+  if (document.getElementById('cp-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'cp-ux-styles';
+  s.textContent = `
+    @keyframes cp-fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes cp-orb-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .cp-card-hover { transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+    .cp-card-hover:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(23,118,242,.12) !important; border-color: rgba(23,118,242,.22) !important; }
+  `;
+  document.head.appendChild(s);
+};
 
 // Define validation schema with Zod
 const passwordSchema = z.object({
@@ -50,6 +64,7 @@ const passwordSchema = z.object({
 type PasswordFormData = z.infer<typeof passwordSchema>;
 
 export default function   ChangePassword() {
+  useEffect(() => { injectChangePasswordStyles(); }, []);
   const navigate = useNavigate();
   const { changePassword, isLoading, error } = useProfileStore();
 
@@ -133,25 +148,29 @@ export default function   ChangePassword() {
   };
 
   return (
-    <Box sx={{  minHeight: "100vh", backgroundColor: "background.default" }}>
+    <Box sx={{ minHeight: "100vh", background: 'linear-gradient(180deg, #f8fbff 0%, #f7f9fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'fixed', top: '16%', right: '-90px', width: 240, height: 240, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.09), transparent 70%)', animation: 'cp-orb-float 9s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'fixed', bottom: '14%', left: '-80px', width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,168,0.08), transparent 70%)', animation: 'cp-orb-float 11s ease-in-out infinite', pointerEvents: 'none' }} />
 
 
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 }, mb: 6, mt: 4 }}>
-        <Grid container spacing={{ xs: 4, lg: 16 }}>
+        <Grid container spacing={{ xs: 4, lg: 10 }} alignItems="flex-start">
           {/* Left Side - Form */}
-          <Box  >
-            <Stack  spacing={3}>
+          <Grid item xs={12} lg={8}>
+            <Stack spacing={3} sx={{ animation: 'cp-fade-up .45s ease-out both' }}>
               {/* Header */}
               <Box>
                 <Typography
                   variant="h1"
                   sx={{
                     fontSize: { xs: "1.75rem", md: "2.25rem" },
-                    fontWeight: 700,
+                    fontWeight: 800,
                     lineHeight: 1.2,
-                    color: "text.primary",
-                    mb: 1
+                    mb: 1,
+                    background: 'linear-gradient(135deg, #1776F2 0%, #00D4A8 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
                   }}
                 >
                   Change Password
@@ -181,6 +200,7 @@ export default function   ChangePassword() {
               )}
 
               {/* Form */}
+              <Paper className="cp-card-hover" sx={{ p: { xs: 2, md: 3 }, borderRadius: '20px', border: '1px solid rgba(23,118,242,0.12)', background: 'rgba(255,255,255,0.9)', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
               <form  onSubmit={handleSubmit(onSubmit)}>
                 <Stack width={{lg:600 , xs:400 }} spacing={2.5}>
                   {/* Current Password */}
@@ -357,15 +377,16 @@ export default function   ChangePassword() {
                       height: 42,
                       borderRadius: "21px",
                       fontSize: "0.9rem",
-                      fontWeight: 600,
+                      fontWeight: 700,
                       color: "white",
                       minWidth: 120,
                       textTransform: "none",
-                      boxShadow: "none",
-                      bgcolor: "primary.main",
+                      boxShadow: "0 8px 20px rgba(23,118,242,0.25)",
+                      background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)',
                       '&:hover': {
-                        bgcolor: "primary.secondary",
-                        boxShadow: "none",
+                        transform: 'translateY(-1px)',
+                        boxShadow: '0 12px 26px rgba(23,118,242,0.33)',
+                        background: 'linear-gradient(135deg, #1266da 0%, #0b56ba 100%)'
                       }
                     }}
                   >
@@ -373,19 +394,22 @@ export default function   ChangePassword() {
                   </Button>
                 </Stack>
               </form>
+              </Paper>
             </Stack>
-          </Box>
+          </Grid>
 
           {/* Right Side - Rules */}
-          <Grid   sx={{ mt: { xs: 4, lg: 12 } }}>
-            <Box sx={{ pl: { lg: 6 } }}>
+          <Grid item xs={12} lg={4} sx={{ mt: { xs: 4, lg: 12 } }}>
+            <Box className="cp-card-hover" sx={{ pl: { lg: 2 }, p: 3, borderRadius: '20px', border: '1px solid rgba(23,118,242,0.12)', background: 'linear-gradient(135deg, #ffffff 0%, #f8fcff 100%)', boxShadow: '0 4px 16px rgba(0,0,0,0.04)', animation: 'cp-fade-up .55s .08s both' }}>
                 <Typography
                   variant="h6"
                   sx={{
                     fontSize: { xs: "1.1rem", md: "1.25rem" },
-                    fontWeight: 600,
+                    fontWeight: 700,
                     mb: 2,
-                    color: "text.primary"
+                    background: 'linear-gradient(135deg, #1776F2 0%, #00D4A8 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
                   }}
                 >
                   Rules For Passwords

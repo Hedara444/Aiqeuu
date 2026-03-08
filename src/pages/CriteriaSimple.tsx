@@ -19,6 +19,17 @@ import { usePositionsStore } from '@/store/positionsStore';
 import { toast } from 'react-toastify';
 import Stepper from '@/components/ui/Stepper';
 
+const injectCriteriaSimpleStyles = () => {
+  if (document.getElementById('criteria-simple-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'criteria-simple-ux-styles';
+  s.textContent = `
+    @keyframes csm-fade-up { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes csm-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+  `;
+  document.head.appendChild(s);
+};
+
 export default function CriteriaSimple() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
@@ -34,6 +45,8 @@ export default function CriteriaSimple() {
     await getPositionById(id!)
     setIsLoadingPage(false)
   }
+
+  useEffect(() => { injectCriteriaSimpleStyles(); }, []);
 
   useEffect(() => {
     if (!currentPosition) {
@@ -84,9 +97,10 @@ export default function CriteriaSimple() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
-      {/* Main Content */}
-      <Box sx={{ px: { xs: 1, md: 4 } }}>
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(180deg, #f8fbff 0%, #f7f9fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'fixed', top: '14%', right: '-80px', width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.09), transparent 70%)', animation: 'csm-float 9s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'fixed', bottom: '12%', left: '-70px', width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,168,0.08), transparent 70%)', animation: 'csm-float 11s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ px: { xs: 1, md: 4 }, position: 'relative', zIndex: 1 }}>
         {/* Process Flow Section */}
         <Stepper step={1} />
 
@@ -116,9 +130,9 @@ export default function CriteriaSimple() {
             </Paper>
 
             {/* Criteria Management Section */}
-            <Paper sx={{ borderRadius: '12px', overflow: 'hidden', boxShadow: 1 }}>
+            <Paper sx={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 10px 24px rgba(23,118,242,0.12)', border: '1px solid rgba(23,118,242,0.12)', animation: 'csm-fade-up .45s .08s both' }}>
               {/* Header */}
-              <Box sx={{ backgroundColor: 'primary.main', px: { xs: 2, md: 3 }, py: 1.5 }}>
+              <Box sx={{ background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 55%, #00D4A8 100%)', px: { xs: 2, md: 3 }, py: 1.5 }}>
                 <Typography variant="h1" sx={{
                   color: 'white',
                   fontFamily: 'Montserrat',
@@ -135,13 +149,15 @@ export default function CriteriaSimple() {
                   {/* Add New Criteria Row */}
                   <Paper
                     sx={{
-                      backgroundColor: 'grey.100',
+                      backgroundColor: '#f8fbff',
                       borderRadius: '12px',
                       p: 0.75,
-                      boxShadow: 1,
-                      transition: 'background-color 0.3s',
+                      boxShadow: '0 6px 14px rgba(0,0,0,0.05)',
+                      border: '1px solid rgba(23,118,242,0.14)',
+                      transition: 'all 0.3s',
                       '&:hover': {
-                        backgroundColor: 'grey.200',
+                        backgroundColor: '#f3f8ff',
+                        transform: 'translateY(-1px)'
                       },
                     }}
                   >
@@ -263,8 +279,9 @@ export default function CriteriaSimple() {
                               borderRadius: '8px',
                               '&:hover': {
                                 backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                                transform: 'scale(1.06)'
                               },
-                              transition: 'background-color 0.3s',
+                              transition: 'all 0.3s',
                             }}
                             aria-label="Delete criterion"
                           >
@@ -319,16 +336,18 @@ export default function CriteriaSimple() {
                         height:"28px",
                         width:"63px",
                         borderRadius: '26px',
-                        backgroundColor: 'primary.main',
+                        background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)',
                         color: 'white',
                         fontFamily: 'Montserrat',
                         fontSize: '0.7rem',
                         fontWeight: 700,
                         textTransform: 'none',
-                        boxShadow: 1,
-                        // '&:hover': {
-                        //   backgroundColor: 'rgba(0, 235, 189, 0.9)',
-                        // },
+                        boxShadow: '0 8px 16px rgba(23,118,242,0.24)',
+                        '&:hover': {
+                          transform: 'translateY(-1px)',
+                          background: 'linear-gradient(135deg, #1266da 0%, #0b56ba 100%)',
+                          boxShadow: '0 12px 22px rgba(23,118,242,0.33)'
+                        },
                       }}
                     >
                       Next

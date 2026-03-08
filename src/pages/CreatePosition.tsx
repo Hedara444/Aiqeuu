@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -12,7 +12,19 @@ import {
 import { usePositionsStore } from '@/store/positionsStore';
 import Stepper from '@/components/ui/Stepper';
 
+const injectCreatePositionStyles = () => {
+  if (document.getElementById('create-position-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'create-position-ux-styles';
+  s.textContent = `
+    @keyframes cp-fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes cp-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  `;
+  document.head.appendChild(s);
+};
+
 export default function CreatePosition() {
+  useEffect(() => { injectCreatePositionStyles(); }, []);
   const navigate = useNavigate();
 
   const { createPosition, isLoading } = usePositionsStore();
@@ -48,24 +60,24 @@ export default function CreatePosition() {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default'  , width:'100%'}}>
-      {/* Main Content */}
-      <Box sx={{ px: { xs: 1.05, md: 2.1 }}}>
-        {/* Process Flow Section */}
-        <Stepper step={1} />
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(180deg, #f8fbff 0%, #f7f9fc 100%)', width: '100%', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'fixed', top: '14%', right: '-80px', width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.09), transparent 70%)', animation: 'cp-float 9s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'fixed', bottom: '12%', left: '-70px', width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,168,0.08), transparent 70%)', animation: 'cp-float 11s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ px: { xs: 1.05, md: 2.1 }, position: 'relative', zIndex: 1 }}>
+        <Box sx={{ animation: 'cp-fade-up .45s ease-out both' }}>
+          <Stepper step={1} />
+        </Box>
 
-        {/* Create Position Form */}
-        <Container maxWidth="lg" sx={{ mb: 14 }} >
-          <Paper sx={{ borderRadius: '9.8px', overflow: 'hidden', boxShadow: 1 , maxHeight:"350px" }}>
-            {/* Header */}
-            <Box sx={{ backgroundColor: 'primary.main', px: { xs:0.84, md: 2.03 }, py: 1.4 }}>
+        <Container maxWidth="lg" sx={{ mb: 14, animation: 'cp-fade-up .5s .06s both' }}>
+          <Paper sx={{ borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 32px rgba(23,118,242,0.12)', border: '1px solid rgba(23,118,242,0.12)', maxHeight: "350px", transition: 'transform .22s ease, box-shadow .22s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 16px 38px rgba(23,118,242,0.18)' } }}>
+            <Box sx={{ background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 55%, #00D4A8 100%)', px: { xs: 0.84, md: 2.03 }, py: 1.4 }}>
               <Typography variant="h1" sx={{
                 color: 'white',
                 fontFamily: 'Montserrat',
                 fontSize: { xs: '0.7rem', md: '0.7rem' },
                 fontWeight: 700
               }}>
-                + Create New Position
+                + Create New Position 
               </Typography>
             </Box>
 
@@ -92,19 +104,21 @@ export default function CreatePosition() {
                     placeholder="ui/ux designer"
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        height: { xs: '30.8px', md: '35px' },
-                        borderRadius: '9.8px',
-                        backgroundColor: 'grey.100',
-                        fontSize: { xs: '0.7rem', md: '0.7rem' },
+                        height: { xs: '34px', md: '38px' },
+                        borderRadius: '11px',
+                        backgroundColor: '#f8fbff',
+                        fontSize: { xs: '0.7rem', md: '0.74rem' },
                         fontFamily: 'Montserrat',
+                        transition: 'box-shadow .2s ease, border-color .2s ease',
                         '& fieldset': {
-                          border: 'none',
+                          border: '1px solid',
+                          borderColor: 'rgba(23,118,242,0.18)',
                         },
                         '&:hover fieldset': {
-                          border: 'none',
+                          borderColor: 'rgba(23,118,242,0.35)',
                         },
                         '&.Mui-focused fieldset': {
-                          border: '1.4px solid',
+                          borderWidth: '1.4px',
                           borderColor: 'primary.main',
                         },
                       },
@@ -133,18 +147,20 @@ export default function CreatePosition() {
                     placeholder="this position is abot picking up  a ui/ux designer with experince in metrial UI design concept "
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        borderRadius: '11.9px',
-                        backgroundColor: 'grey.100',
-                        fontSize: { xs: '0.61rem', md: '0.7rem' },
+                        borderRadius: '12px',
+                        backgroundColor: '#f8fbff',
+                        fontSize: { xs: '0.64rem', md: '0.72rem' },
                         fontFamily: 'Montserrat',
+                        transition: 'box-shadow .2s ease, border-color .2s ease',
                         '& fieldset': {
-                          border: 'none',
+                          border: '1px solid',
+                          borderColor: 'rgba(23,118,242,0.18)',
                         },
                         '&:hover fieldset': {
-                          border: 'none',
+                          borderColor: 'rgba(23,118,242,0.35)',
                         },
                         '&.Mui-focused fieldset': {
-                          border: '1.4px solid',
+                          borderWidth: '1.4px',
                           borderColor: 'primary.main',
                         },
                       },
@@ -159,21 +175,22 @@ export default function CreatePosition() {
                     onClick={handleCancel}
                     variant="outlined"
                     sx={{
-                      height:"28px",
-                      width:"63px",
+                      height: "30px",
+                      width: "68px",
                       px: 1.4,
                       py: 0.7,
-                      borderRadius: '9.8px',
-                      borderColor: 'grey.400',
+                      borderRadius: '11px',
+                      borderColor: 'rgba(23,118,242,0.28)',
                       color: 'primary.dark',
                       fontFamily: 'Montserrat',
-                      fontSize: '0.61rem',
+                      fontSize: '0.64rem',
                       fontWeight: 700,
                       textTransform: 'none',
-                      boxShadow: 1,
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.06)',
                       '&:hover': {
                         backgroundColor: 'grey.50',
-                        borderColor: 'grey.400',
+                        borderColor: 'rgba(23,118,242,0.45)',
+                        transform: 'translateY(-1px)'
                       },
                     }}
                   >
@@ -184,20 +201,22 @@ export default function CreatePosition() {
                     variant="contained"
                     loading={isLoading}
                     sx={{
-                      height:"28px",
-                      width:"63px",
+                      height: "30px",
+                      width: "68px",
                       px: 1.4,
                       py: 0.7,
-                      borderRadius: '9.8px',
-                      backgroundColor: 'primary.main',
+                      borderRadius: '11px',
+                      background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)',
                       color: 'white',
                       fontFamily: 'Montserrat',
-                      fontSize: '0.61rem',
+                      fontSize: '0.64rem',
                       fontWeight: 700,
                       textTransform: 'none',
-                      boxShadow: 1,
+                      boxShadow: '0 8px 18px rgba(23,118,242,0.26)',
                       '&:hover': {
-                        backgroundColor: 'rgba(0, 235, 189, 0.9)',
+                        transform: 'translateY(-1px)',
+                        background: 'linear-gradient(135deg, #1266da 0%, #0b56ba 100%)',
+                        boxShadow: '0 12px 24px rgba(23,118,242,0.34)'
                       },
                     }}
                   >

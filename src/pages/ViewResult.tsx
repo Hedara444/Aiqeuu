@@ -30,6 +30,17 @@ import { useParams, Link as RouterLink } from 'react-router-dom';
 import { usePositionsStore } from '@/store/positionsStore';
 import { useUIStore } from '@/store/uiStore';
 
+const injectViewResultStyles = () => {
+  if (document.getElementById('view-result-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'view-result-ux-styles';
+  s.textContent = `
+    @keyframes vr-fade-up { from { opacity: 0; transform: translateY(16px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes vr-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+  `;
+  document.head.appendChild(s);
+};
+
 // Mock data for candidates - updated to match Figma design
 const candidates = [
   {
@@ -155,6 +166,7 @@ export default function ViewResult() {
   }
 
   useEffect(() => {
+    injectViewResultStyles();
     fetchData()
   }, [])
 
@@ -190,9 +202,11 @@ export default function ViewResult() {
 
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(180deg, #f8fbff 0%, #f5f8fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'fixed', top: '12%', right: '-90px', width: 240, height: 240, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.11), transparent 70%)', animation: 'vr-float 8s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'fixed', bottom: '12%', left: '-80px', width: 210, height: 210, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,168,0.09), transparent 70%)', animation: 'vr-float 10s ease-in-out infinite', pointerEvents: 'none' }} />
 
-      <Box sx={{ px: { xs: 1.5, md: 6 } }}>
+      <Box sx={{ px: { xs: 1.5, md: 6 }, position: 'relative', zIndex: 1, animation: 'vr-fade-up .45s ease-out both' }}>
         {/* Progress Steps */}
 
         <Stepper step={3} />
@@ -202,13 +216,11 @@ export default function ViewResult() {
           {/* Header */}
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 6 }}>
             <Box>
-              <MUILink component={RouterLink} to={`/position/${id}`} underline="hover" color="primary" sx={{ display: 'inline-block', mb: 2 , fontSize:'1.2rem' }}>
-                ← Back to Position
-              </MUILink>
-              <Typography variant="h4" fontWeight={600}>{currentPosition.title} - Analysis Results</Typography>
+
+              <Typography variant="h4" fontWeight={700} sx={{ background: 'linear-gradient(135deg, #1d2b45 0%, #1776F2 70%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{currentPosition.title} - Analysis Results</Typography>
             </Box>
             <Box>
-              <Button variant="contained" sx={{ color: "white"  , fontSize:"0.9rem" }} endIcon={<DownloadIcon />} onClick={handleOpenMenu}>
+              <Button variant="contained" sx={{ color: 'white', fontSize: '0.9rem', borderRadius: '12px', background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)', boxShadow: '0 10px 24px rgba(23,118,242,0.26)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 28px rgba(23,118,242,0.32)' } }} endIcon={<DownloadIcon />} onClick={handleOpenMenu}>
                 Export
               </Button>
               <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
@@ -261,13 +273,12 @@ const CriteriaCard: React.FC<{
 }> = ({ criterias, isVisible }) => {
   if (!isVisible) return null;
 
-
   return (
-    <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 3 }}>
+    <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 3, borderColor: 'rgba(23,118,242,0.16)', boxShadow: '0 10px 24px rgba(16,36,63,0.08)' }}>
       <Grid container spacing={3}>
         {criterias.map((criterion, index) => (
           <Grid key={index} size={6}>
-            <Paper key={criterion.id} elevation={0} variant="outlined" sx={{ borderRadius: 2 }}>
+            <Paper key={criterion.id} elevation={0} variant="outlined" sx={{ borderRadius: 2, borderColor: 'rgba(23,118,242,0.16)', transition: 'all .22s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 10px 22px rgba(23,118,242,0.12)' } }}>
               <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 2 }}>
                 <ToggleSwitch isActive={true} label={`Criteria-${index + 1}`} onToggle={() => console.log("d")} />
                 <Typography variant="body1" fontWeight={700}>{criterion.description}</Typography>
@@ -286,10 +297,9 @@ const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean }> 
   const progressPercentage = result.score;
   const [showAnalysisLocal, setShowAnalysisLocal] = useState(true);
 
-
   const shouldShowExplanation = showAnalysisGlobal && showAnalysisLocal;
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" sx={{ borderColor: 'rgba(23,118,242,0.18)', borderRadius: '16px', transition: 'all .22s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 12px 24px rgba(23,118,242,0.14)' } }}>
       <CardContent>
         <Stack spacing={3} alignItems="stretch">
           <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -298,7 +308,7 @@ const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean }> 
           </Stack>
 
           <Box>
-            <LinearProgress variant="determinate" value={progressPercentage} sx={{ height: 8, borderRadius: 4 }} />
+            <LinearProgress variant="determinate" value={progressPercentage} sx={{ height: 8, borderRadius: 4, backgroundColor: 'rgba(23,118,242,0.14)', '& .MuiLinearProgress-bar': { background: 'linear-gradient(90deg, #1776F2 0%, #00D4A8 100%)' } }} />
           </Box>
 
           {/* LOCAL toggle */}

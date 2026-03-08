@@ -9,6 +9,7 @@ interface MainLayoutProps {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
+    
     <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
       <Box component="main" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>

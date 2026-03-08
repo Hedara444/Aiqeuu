@@ -14,6 +14,17 @@ import { AutoFixHigh, DriveFileRenameOutline } from '@mui/icons-material';
 import Stepper from '@/components/ui/Stepper';
 import { usePositionsStore } from '@/store/positionsStore';
 
+const injectCriteriaSelectionStyles = () => {
+  if (document.getElementById('criteria-selection-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'criteria-selection-ux-styles';
+  s.textContent = `
+    @keyframes cs-fade-up { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes cs-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+  `;
+  document.head.appendChild(s);
+};
+
 export default function CriteriaSelection() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
@@ -27,6 +38,8 @@ export default function CriteriaSelection() {
     await getPositionById(id!);
     setIsLoadingPage(false);
   };
+
+  useEffect(() => { injectCriteriaSelectionStyles(); }, []);
 
   useEffect(() => {
     if (!currentPosition) {
@@ -58,8 +71,10 @@ export default function CriteriaSelection() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh',display: 'flex', flexDirection: 'column', backgroundColor: 'background.default' }}>
-      <Box sx={{ px: { xs: 0.7, md: 2.8  , flex:1} }}>
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'linear-gradient(180deg, #f8fbff 0%, #f7f9fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'fixed', top: '14%', right: '-80px', width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.09), transparent 70%)', animation: 'cs-float 9s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'fixed', bottom: '12%', left: '-70px', width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,168,0.08), transparent 70%)', animation: 'cs-float 11s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ px: { xs: 0.7, md: 2.8, flex: 1 }, position: 'relative', zIndex: 1 }}>
         <Stepper step={1} />
         <Container maxWidth="xl" sx={{ mb: 2.8 }}>
           <Stack spacing={1.75}>
@@ -78,8 +93,8 @@ export default function CriteriaSelection() {
             )}
 
             {/* Selection Section */}
-            <Paper sx={{ borderRadius: '8.4px', overflow: 'hidden', boxShadow: 1 }}>
-              <Box sx={{ backgroundColor: 'primary.main', px: { xs: 1.4, md: 2.1 }, py: 1.05 }}>
+            <Paper sx={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 24px rgba(23,118,242,0.12)', border: '1px solid rgba(23,118,242,0.12)', animation: 'cs-fade-up .45s .08s both' }}>
+              <Box sx={{ background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 55%, #00D4A8 100%)', px: { xs: 1.4, md: 2.1 }, py: 1.05 }}>
                 <Typography variant="h1" sx={{ color: 'white', fontFamily: 'Montserrat', fontSize: { xs: '0.61rem', md: '0.7rem' }, fontWeight: 700 }}>
                   + Create Criteria
                 </Typography>
@@ -104,7 +119,9 @@ export default function CriteriaSelection() {
                       gap: 1.05,
                       backgroundColor: selection === 'full-text' ? 'rgba(23, 118, 242, 0.04)' : 'white',
                       transition: 'all 0.3s ease',
+                      boxShadow: selection === 'full-text' ? '0 10px 22px rgba(23,118,242,0.14)' : '0 4px 10px rgba(0,0,0,0.05)',
                       '&:hover': {
+                        transform: 'translateY(-2px)',
                         borderColor: 'primary.main',
                         backgroundColor: 'rgba(23, 118, 242, 0.02)'
                       }
@@ -136,7 +153,9 @@ export default function CriteriaSelection() {
                       gap: 1.05,
                       backgroundColor: selection === 'manual' ? 'rgba(23, 118, 242, 0.04)' : 'white',
                       transition: 'all 0.3s ease',
+                      boxShadow: selection === 'manual' ? '0 10px 22px rgba(23,118,242,0.14)' : '0 4px 10px rgba(0,0,0,0.05)',
                       '&:hover': {
+                        transform: 'translateY(-2px)',
                         borderColor: 'primary.main',
                         backgroundColor: 'rgba(23, 118, 242, 0.02)'
                       }
@@ -204,15 +223,21 @@ export default function CriteriaSelection() {
                     sx={{
                         px: 2.1,
                         py: 0.7,
-                      height:"28px",
-                      width:"63px",
+                        height:"28px",
+                        width:"63px",
                         borderRadius: '14.2px',
-                        backgroundColor: 'primary.main',
+                        background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)',
                         color: 'white',
                         fontFamily: 'Montserrat',
                         fontSize: '0.7rem',
                         fontWeight: 700,
                         textTransform: 'none',
+                        boxShadow: '0 8px 16px rgba(23,118,242,0.24)',
+                        '&:hover': {
+                          transform: 'translateY(-1px)',
+                          background: 'linear-gradient(135deg, #1266da 0%, #0b56ba 100%)',
+                          boxShadow: '0 12px 22px rgba(23,118,242,0.33)'
+                        }
                     }}
                   >
                     {isLoading ? <CircularProgress size={16} color="inherit" /> : 'Next'}

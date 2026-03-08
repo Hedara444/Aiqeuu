@@ -20,6 +20,18 @@ import {
 
 import Stepper from '@/components/ui/Stepper';
 import { usePositionsStore } from '@/store/positionsStore';
+import { toast } from 'react-toastify';
+
+const injectUploadCVStyles = () => {
+  if (document.getElementById('upload-cv-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'upload-cv-ux-styles';
+  s.textContent = `
+    @keyframes ucv-fade-up { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes ucv-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+  `;
+  document.head.appendChild(s);
+};
 
 interface UploadedFile {
   id: string;
@@ -46,6 +58,8 @@ export default function UploadCV() {
     setIsLoadingPage(false)
   }
 
+  useEffect(() => { injectUploadCVStyles(); }, []);
+
   useEffect(() => {
     if (!currentPosition) {
       fetchData()
@@ -56,40 +70,67 @@ export default function UploadCV() {
   const handleFileUpload = async (files: FileList | null) => {
     if (!files) return;
 
-    Array.from(files).forEach(async (file) => {
-      const newFile: Partial<Resume> = {
-        id: Date.now().toString() + Math.random(),
-        title: file.name,
-        size: `${(file.size / 1024 / 1024).toFixed(1)} MB . uploading`,
-        progress: 10,
-        isComplete: false
-      };
+    const fileArray = Array.from(files);
+    const pendingItems: Partial<Resume>[] = fileArray.map((file, index) => ({
+      id: `${Date.now()}-${index}-${Math.random()}`,
+      title: file.name,
+      size: `${(file.size / 1024 / 1024).toFixed(1)} MB . uploading`,
+      progress: 10,
+      isComplete: false
+    }));
 
-      setUploadedFiles(prev => [...prev, newFile]);
+    setUploadedFiles(prev => [...prev, ...pendingItems]);
 
-      const resume = await addResume(file, id)
+    const results = await Promise.allSettled(
+      fileArray.map(file => addResume(file, id, { showToast: false }))
+    );
 
-      setUploadedFiles(prev => {
-        const index = prev.findIndex(file => file.id === newFile.id);
-        if (index === -1) return prev;
+    let successCount = 0;
+    let failCount = 0;
 
+    setUploadedFiles(prev => {
+      const updatedFiles = [...prev];
 
-        const updatedFiles = [...prev];
-        updatedFiles[index] = {
-          id: resume.id,
-          title: resume.title,
-          size: `${(file.size / 1024 / 1024).toFixed(1)} MB . uploading`,
-          progress: 100,
-          isComplete: true
-        };
+      pendingItems.forEach((item, index) => {
+        const result = results[index];
+        const file = fileArray[index];
+        const fileIndex = updatedFiles.findIndex((f) => f.id === item.id);
+        if (fileIndex === -1) return;
 
-        return updatedFiles;
-
+        if (result.status === 'fulfilled') {
+          successCount += 1;
+          updatedFiles[fileIndex] = {
+            id: result.value.id,
+            title: result.value.title,
+            size: `${(file.size / 1024 / 1024).toFixed(1)} MB . uploaded`,
+            progress: 100,
+            isComplete: true
+          };
+        } else {
+          failCount += 1;
+          updatedFiles[fileIndex] = {
+            ...updatedFiles[fileIndex],
+            size: `${(file.size / 1024 / 1024).toFixed(1)} MB . failed`,
+            progress: 0,
+            isComplete: false
+          };
+        }
       });
 
+      return updatedFiles;
     });
 
-    // await fetchData()
+    toast.dismiss();
+    toast.clearWaitingQueue();
+    if (successCount === fileArray.length) {
+      toast.success(`${successCount} resume${successCount > 1 ? 's' : ''} uploaded successfully!`);
+      return;
+    }
+    if (successCount > 0) {
+      toast.warning(`${successCount} uploaded, ${failCount} failed.`);
+      return;
+    }
+    toast.error('Failed to upload resumes.');
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -145,29 +186,36 @@ export default function UploadCV() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(180deg, #f8fbff 0%, #f7f9fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'fixed', top: '14%', right: '-80px', width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.09), transparent 70%)', animation: 'ucv-float 9s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'fixed', bottom: '12%', left: '-70px', width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,168,0.08), transparent 70%)', animation: 'ucv-float 11s ease-in-out infinite', pointerEvents: 'none' }} />
 
 
       {/* Main Content */}
-      <Box sx={{ px: { xs: 1.5, md: 6 } }}>
+      <Box sx={{ px: { xs: 1.5, md: 6 }, position: 'relative', zIndex: 1, animation: 'ucv-fade-up .45s ease-out both' }}>
         {/* Process Flow Section */}
         <Stepper step={2} />
 
         {/* Upload Section */}
         <Container maxWidth="lg" sx={{ mb: 8 }}>
-          <Paper sx={{ borderRadius: '16px', p: { xs: 3, md: 5 }, boxShadow: 1 }}>
+          <Paper sx={{ borderRadius: '18px', p: { xs: 3, md: 5 }, boxShadow: '0 12px 30px rgba(23,118,242,0.12)', border: '1px solid rgba(23,118,242,0.12)' }}>
             <Stack spacing={2.5}>
               {/* Upload Area */}
               <Box
                 sx={{
                   border: '2px dashed',
-                  borderColor: isDragOver ? 'primary.main' : 'grey.300',
-                  backgroundColor: isDragOver ? 'rgba(0, 235, 189, 0.05)' : 'background.paper',
+                  borderColor: isDragOver ? 'primary.main' : 'rgba(23,118,242,0.25)',
+                  backgroundColor: isDragOver ? 'rgba(23,118,242,0.06)' : 'rgba(255,255,255,0.8)',
                   borderRadius: '16px',
                   p: 3,
                   textAlign: 'center',
                   transition: 'all 0.3s ease',
                   cursor: 'pointer',
+                  boxShadow: isDragOver ? '0 10px 24px rgba(23,118,242,0.14)' : 'none',
+                  '&:hover': {
+                    borderColor: 'primary.main',
+                    backgroundColor: 'rgba(23,118,242,0.03)'
+                  },
                 }}
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
@@ -220,7 +268,7 @@ export default function UploadCV() {
 
               {/* Uploaded Files List */}
               {uploadedFiles.map((file) => (
-                <Paper key={file.id} variant="outlined" sx={{ borderRadius: '16px', p: 2 }}>
+                <Paper key={file.id} variant="outlined" sx={{ borderRadius: '16px', p: 2, borderColor: 'rgba(23,118,242,0.16)', transition: 'all .22s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 10px 22px rgba(23,118,242,0.12)' } }}>
                   <Stack direction="row" alignItems="center" spacing={2}>
                     <Box sx={{ minWidth: '40px' }}>
                       <Box
@@ -372,7 +420,7 @@ export default function UploadCV() {
                 height:"38px",
                 width:"103px",
                 borderRadius: '22px',
-                backgroundColor: 'primary.main',
+                background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)',
                 color: 'white',
                 fontFamily: 'Montserrat',
                 fontSize: '0.9rem',
@@ -380,7 +428,9 @@ export default function UploadCV() {
                 textTransform: 'none',
                 boxShadow: 1,
                 '&:hover': {
-                  backgroundColor: 'rgba(0, 235, 189, 0.9)',
+                  transform: 'translateY(-1px)',
+                  background: 'linear-gradient(135deg, #1266da 0%, #0b56ba 100%)',
+                  boxShadow: '0 12px 22px rgba(23,118,242,0.33)'
                 },
               }}
             >

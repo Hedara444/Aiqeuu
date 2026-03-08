@@ -135,7 +135,7 @@ export function Navbar() {
       }}>
         {/* Gradient accent line at top */}
         <Box sx={{
-          height: 3,
+          height: 9,
           background: 'linear-gradient(90deg, #1776F2 0%, #00C6FF 50%, #00D4A8 100%)',
           borderTopLeftRadius: '18px',
           borderTopRightRadius: '18px',

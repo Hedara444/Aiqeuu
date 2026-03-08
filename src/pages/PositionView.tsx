@@ -35,6 +35,18 @@ import {
   Brush as BrushIcon,
 } from '@mui/icons-material';
 
+const injectPositionViewStyles = () => {
+  if (document.getElementById('position-view-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'position-view-ux-styles';
+  s.textContent = `
+    @keyframes pv-fade-up { from { opacity: 0; transform: translateY(14px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes pv-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+    @keyframes pv-modal-in { from { opacity: 0; transform: translateY(16px) scale(0.98);} to { opacity: 1; transform: translateY(0) scale(1);} }
+  `;
+  document.head.appendChild(s);
+};
+
 interface UploadResumeModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -89,8 +101,8 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth PaperProps={{
-      sx: { borderRadius: "14px", p: 2.5 }
+    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth transitionDuration={220} PaperProps={{
+      sx: { borderRadius: '16px', p: 2.5, border: '1px solid rgba(23,118,242,0.18)', background: 'linear-gradient(180deg, #ffffff 0%, #f7fbff 100%)', boxShadow: '0 16px 34px rgba(16,36,63,0.18)', animation: 'pv-modal-in .22s ease-out both' }
     }}>
       <DialogTitle sx={{ p: 0, mb: 1.2 }}>
         <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
@@ -110,16 +122,17 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
           sx={{
             height: 140,
             border: '1.5px dashed',
-            borderColor: isDragOver ? 'primary.main' : 'grey.300',
+            borderColor: isDragOver ? 'primary.main' : 'rgba(23,118,242,0.28)',
             borderRadius: '12px',
-            bgcolor: isDragOver ? 'success.lighter' : 'background.paper',
+            bgcolor: isDragOver ? 'rgba(23,118,242,0.08)' : 'rgba(255,255,255,0.8)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             gap: 1,
             cursor: 'pointer',
-            transition: 'all 0.2s'
+            transition: 'all 0.25s ease',
+            '&:hover': { borderColor: 'primary.main', boxShadow: '0 10px 22px rgba(23,118,242,0.14)' }
           }}
         >
           <input hidden multiple accept=".pdf,.doc,.docx" type="file" onChange={handleFileSelect} id="resume-upload-input" />
@@ -155,9 +168,11 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
               height: '32px',
               borderRadius: '30px',
               textTransform: 'none',
-              fontSize: "0.8rem",
-              color: "white",
-              boxShadow: 'none'
+              fontSize: '0.8rem',
+              color: 'white',
+              background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)',
+              boxShadow: '0 8px 18px rgba(23,118,242,0.28)',
+              '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 12px 22px rgba(23,118,242,0.32)' }
             }}
             loading={isLoading}
           >
@@ -181,8 +196,8 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth PaperProps={{
-      sx: { borderRadius: "14px", p: 2.5 }
+    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth transitionDuration={220} PaperProps={{
+      sx: { borderRadius: '16px', p: 2.5, border: '1px solid rgba(23,118,242,0.18)', background: 'linear-gradient(180deg, #ffffff 0%, #f7fbff 100%)', boxShadow: '0 16px 34px rgba(16,36,63,0.18)', animation: 'pv-modal-in .22s ease-out both' }
     }}>
       <DialogTitle sx={{ p: 0, mb: 1.2 }}>
         <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
@@ -211,7 +226,10 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
                 borderRadius: '8px',
                 p: 1.2,
                 fontSize: '0.8rem',
-                '& input': { p: 0 }
+                border: '1px solid transparent',
+                transition: 'all .2s ease',
+                '& input': { p: 0 },
+                '&:focus-within': { borderColor: 'rgba(23,118,242,0.45)', boxShadow: '0 0 0 3px rgba(23,118,242,0.12)' }
               }
             }}
           />
@@ -243,9 +261,11 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
               height: '32px',
               borderRadius: '30px',
               textTransform: 'none',
-              fontSize: "0.8rem",
-              color: "white",
-              boxShadow: 'none'
+              fontSize: '0.8rem',
+              color: 'white',
+              background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)',
+              boxShadow: '0 8px 18px rgba(23,118,242,0.28)',
+              '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 12px 22px rgba(0 46 212 / 0.34)' }
             }}
             loading={isLoading}
           >
@@ -259,8 +279,8 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
 
 const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose, onConfirm, title, message, isLoading }) => {
   return (
-    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth PaperProps={{
-      sx: { borderRadius: "14px", p: 2.5 }
+    <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth transitionDuration={220} PaperProps={{
+      sx: { borderRadius: '16px', p: 2.5, border: '1px solid rgba(23,118,242,0.18)', background: 'linear-gradient(180deg, #ffffff 0%, #f7fbff 100%)', boxShadow: '0 16px 34px rgba(16,36,63,0.18)', animation: 'pv-modal-in .22s ease-out both' }
     }}>
       <DialogTitle sx={{ p: 0, mb: 1.2 }}>
         <Typography variant="subtitle1" fontWeight={700} textAlign="center">
@@ -323,7 +343,7 @@ const CriteriaItem: React.FC<{
   index: number
 }> = ({ criteria, onDelete, index }) => {
   return (
-    <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 ,  }}>
+    <Paper variant="outlined" sx={{ p: 2, borderRadius: 2, borderColor: 'rgba(23,118,242,0.2)', transition: 'all 0.25s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 10px 24px rgba(23,118,242,0.12)' } }}>
       <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2}>
         <Stack direction="row" spacing={2} alignItems="center">
           <DragIndicatorIcon color="disabled" />
@@ -353,8 +373,8 @@ const ResumeCard: React.FC<{
   onDelete: () => void;
 }> = ({ resume, onDelete }) => {
   return (
-    <Paper variant="outlined" sx={{ p: 1.5, borderRadius: 2, width: 320, display: 'flex', alignItems: 'center', gap: 2 }}>
-      <PictureAsPdfIcon color="action" sx={{ fontSize: 40 }} />
+    <Paper variant="outlined" sx={{ p: 1.5, borderRadius: 2, width: 320, display: 'flex', alignItems: 'center', gap: 2, borderColor: 'rgba(23,118,242,0.2)', transition: 'all 0.25s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 10px 24px rgba(23,118,242,0.12)' } }}>
+      <PictureAsPdfIcon color="action" sx={{ fontSize: 40, color: 'primary.main' }} />
       <Box sx={{ flex: 1 }}>
         <Typography variant="subtitle1" fontWeight={600} sx={{fontSize:'1rem'}} >{resume.title}</Typography>
         <Typography variant="body2" color="text.secondary" sx={{fontSize:'0.9rem'}}>{resume.createdAt}</Typography>
@@ -387,6 +407,9 @@ export default function PositionView() {
   const [deletingResume, setDeletingResume] = useState<Resume | null>(null);
   const [isLoadingPage, setIsLoadingPage] = useState(true);
 
+  useEffect(() => {
+    injectPositionViewStyles();
+  }, []);
 
   const fetchData = async () => {
     setIsLoadingPage(true)
@@ -474,10 +497,28 @@ export default function PositionView() {
     setDeletingResume(null);
   };
 
-  const statusConfig: Record<Position['status'], { color: 'default' | 'primary' | 'success' | 'warning' | 'info' | 'error'; label: string }> = {
-    created: { color: 'success', label: 'created' },
-    in_progress: { color: 'warning', label: 'analyzing' },
-    completed: { color: 'primary', label: 'completed' },
+  const statusConfig: Record<Position['status'], { label: string; chipSx: any }> = {
+    created: {
+      label: 'created',
+      chipSx: {
+        background: 'linear-gradient(135deg, #00D4A8 0%, #12b886 100%)',
+        boxShadow: '0 8px 18px rgba(0,212,168,0.28)'
+      }
+    },
+    in_progress: {
+      label: 'analyzing',
+      chipSx: {
+        background: 'linear-gradient(135deg, #ffb347 0%, #ff8c42 100%)',
+        boxShadow: '0 8px 18px rgba(255,140,66,0.26)'
+      }
+    },
+    completed: {
+      label: 'completed',
+      chipSx: {
+        background: 'linear-gradient(135deg, #1776F2 0%, #00D4A8 100%)',
+        boxShadow: '0 8px 18px rgba(23,118,242,0.28)'
+      }
+    },
   };
   const config = statusConfig[currentPosition.status];
 
@@ -507,19 +548,18 @@ export default function PositionView() {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
-
-      <Container maxWidth="lg" sx={{ pb: 8 }}>
-        {/* Header */}
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 , mt:3 }}>
-          <Typography variant="h4" fontWeight={600}>{currentPosition.title}:</Typography>
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(180deg, #f8fbff 0%, #f5f8fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'absolute', top: -80, right: -80, width: 240, height: 240, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.14) 0%, rgba(23,118,242,0) 70%)', animation: 'pv-float 6s ease-in-out infinite' }} />
+      <Container maxWidth="lg" sx={{ pb: 8, position: 'relative', zIndex: 1, animation: 'pv-fade-up 0.45s ease-out both' }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3, mt: 3 }}>
+          <Typography variant="h4" fontWeight={700} sx={{ background: 'linear-gradient(135deg, #1d2b45 0%, #1776F2 70%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{currentPosition.title}:</Typography>
           <Stack direction="row" spacing={1}>
-            <Button variant="contained" sx={{ color: "white" , width:"240px"  , height :'40px' , fontSize:'0.7rem'}}   startIcon={<UploadFileIcon />} onClick={() => setIsUploadModalOpen(true)}>
+            <Button variant="contained" sx={{ color: 'white', width: '240px', height: '40px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)', boxShadow: '0 10px 24px rgba(23,118,242,0.26)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 28px rgba(23,118,242,0.3)' } }} startIcon={<UploadFileIcon />} onClick={() => setIsUploadModalOpen(true)}>
               Upload Resume
             </Button>
             {
               currentPosition.status === "created" &&
-              <Button variant="contained" sx={{ color: "white"  , width:"240px"  , height :'40px' , fontSize:'0.7rem' }} startIcon={<AddIcon />} onClick={() => setIsAddCriteriaModalOpen(true)}>
+              <Button variant="contained" sx={{ color: 'white', width: '240px', height: '40px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)', boxShadow: '0 10px 22px rgba(23,118,242,0.26)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 28px rgba(23,118,242,0.3)' } }} startIcon={<AddIcon />} onClick={() => setIsAddCriteriaModalOpen(true)}>
                 Add Criteria
               </Button>
             }
@@ -528,11 +568,20 @@ export default function PositionView() {
         </Stack>
 
         {/* Position Details */}
-        <Paper variant="outlined" sx={{ p: 3, mb: 4, borderRadius: 2 }}>
+        <Paper variant="outlined" sx={{ p: 3, mb: 4, borderRadius: 2, borderColor: 'rgba(23,118,242,0.2)', boxShadow: '0 10px 24px rgba(16,36,63,0.08)' }}>
           <Stack spacing={2}>
             <Stack direction="row" alignItems="center" spacing={2}>
               <Typography variant="h6" fontWeight={700}>{currentPosition.title}</Typography>
-              <Chip label={config.label} sx={{ color: "white" }} color={config.color} size="small" />
+              <Chip
+                label={config?.label}
+                size="small"
+                sx={{
+                  color: 'white',
+                  fontWeight: 700,
+                  border: '1px solid rgba(255,255,255,0.26)',
+                  ...config.chipSx
+                }}
+              />
             </Stack>
             {currentPosition.description && (
               <Typography color="text.secondary">{currentPosition.description}</Typography>
@@ -564,7 +613,7 @@ export default function PositionView() {
 
         {/* Actions */}
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <Button variant="contained" color="success" sx={{ color: "white" ,width:"240px"  , height :'40px' , fontSize:'0.7rem' }} onClick={handleStartAnalysis} disabled={isAnalyzing}>
+          <Button variant="contained" color="success" sx={{ color: 'white', width: '240px', height: '40px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #0dbf8c 0%, #0aa675 100%)', boxShadow: '0 10px 22px rgba(13,191,140,0.28)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 26px rgba(13,191,140,0.32)' } }} onClick={handleStartAnalysis} disabled={isAnalyzing}>
             {isAnalyzing ? 'Analyzing...' : 'Start Analysis'}
           </Button>
           {/* <Button component={RouterLink} to="/use-cases" variant="outlined">Back to Use Cases</Button> */}

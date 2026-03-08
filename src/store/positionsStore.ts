@@ -24,7 +24,7 @@ interface PositionsState {
   duplicatePosition: (id: string) => Promise<void>;
   deletePosition: (id: string) => Promise<void>;
   startProcessing: (id: string) => Promise<void>;
-  addResume: (file: File, positionId: string) => Promise<Resume>;
+  addResume: (file: File, positionId: string, options?: { showToast?: boolean }) => Promise<Resume>;
   deleteResume: (id: string) => Promise<void>;
   getResumeFile: (id: string) => Promise<string>;
   addCriteria: (positionId: string, description: string) => Promise<Criteria>;
@@ -92,7 +92,9 @@ export const usePositionsStore = create<PositionsState>()(
               isLoading: false,
               error: errorMessage
             });
-            toast.error(errorMessage);
+            // if (options?.showToast !== false) {
+            //   toast.error(errorMessage);
+            // }
             throw error;
           }
         },
@@ -226,7 +228,7 @@ export const usePositionsStore = create<PositionsState>()(
           }
         },
 
-        addResume: async (file: File, positionId: string) => {
+        addResume: async (file: File, positionId: string, options?: { showToast?: boolean }) => {
           set({ isLoading: true, error: null });
           try {
             const formData = new FormData();
@@ -248,7 +250,9 @@ export const usePositionsStore = create<PositionsState>()(
             });
 
             set({ isLoading: false, error: null });
-            toast.success('Resume added successfully!');
+            if (options?.showToast !== false) {
+              toast.success('Resume added successfully!');
+            }
             return response.data;
           } catch (error: any) {
             const errorMessage = error.response?.data?.message || 'Failed to add resume';

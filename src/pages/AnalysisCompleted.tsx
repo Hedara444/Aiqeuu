@@ -30,6 +30,17 @@ import {
 import { Download as DownloadIcon, CheckCircle, Cancel } from '@mui/icons-material';
 import LinearProgress from '@mui/material/LinearProgress';
 
+const injectAnalysisCompletedStyles = () => {
+  if (document.getElementById('analysis-completed-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'analysis-completed-ux-styles';
+  s.textContent = `
+    @keyframes ac-fade-up { from { opacity: 0; transform: translateY(16px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes ac-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+  `;
+  document.head.appendChild(s);
+};
+
 const ToggleSwitch: React.FC<{
   isActive: boolean;
   label: string;
@@ -51,11 +62,11 @@ const CriteriaCard: React.FC<{
 
 
   return (
-    <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2 }}>
+    <Paper elevation={0} variant="outlined" sx={{ borderRadius: 3, p: 2, borderColor: 'rgba(23,118,242,0.16)', boxShadow: '0 10px 24px rgba(16,36,63,0.08)' }}>
       <Grid container spacing={1.5}>
         {criterias.map((criterion, index) => (
           <Grid key={index} size={6}>
-            <Paper key={criterion.id} elevation={0} variant="outlined" sx={{ borderRadius: 2 }}>
+            <Paper key={criterion.id} elevation={0} variant="outlined" sx={{ borderRadius: 2, borderColor: 'rgba(23,118,242,0.16)', transition: 'all .22s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 10px 22px rgba(23,118,242,0.12)' } }}>
               <Stack direction="row" spacing={1.5} alignItems="center" sx={{ p: 1.5 }}>
                 <ToggleSwitch isActive={true} label={`Criteria-${index + 1}`} onToggle={() => console.log("d")} />
                 <Typography variant="body2" fontWeight={600} sx={{ fontSize: '0.875rem' }}>{criterion.description}</Typography>
@@ -78,7 +89,7 @@ const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean; }>
 
 
   return (
-    <Card variant="outlined" sx={{ borderRadius: 2 }}>
+    <Card variant="outlined" sx={{ borderRadius: 2, borderColor: 'rgba(23,118,242,0.18)', transition: 'all .22s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 12px 24px rgba(23,118,242,0.14)' } }}>
       <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
         <Stack spacing={1.5} alignItems="stretch">
           <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -87,7 +98,7 @@ const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean; }>
           </Stack>
 
           <Box>
-            <LinearProgress variant="determinate" value={progressPercentage} sx={{ height: 6, borderRadius: 3 }} />
+            <LinearProgress variant="determinate" value={progressPercentage} sx={{ height: 6, borderRadius: 3, backgroundColor: 'rgba(23,118,242,0.14)', '& .MuiLinearProgress-bar': { background: 'linear-gradient(90deg, #1776F2 0%, #00D4A8 100%)' } }} />
           </Box>
 
           {/* LOCAL toggle */}
@@ -156,6 +167,7 @@ export default function AnalysisCompleted() {
   }
 
   useEffect(() => {
+    injectAnalysisCompletedStyles();
     fetchData()
   }, [])
 
@@ -203,19 +215,19 @@ export default function AnalysisCompleted() {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(180deg, #f8fbff 0%, #f5f8fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'fixed', top: '12%', right: '-90px', width: 240, height: 240, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.11), transparent 70%)', animation: 'ac-float 8s ease-in-out infinite', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'fixed', bottom: '12%', left: '-80px', width: 210, height: 210, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,168,0.09), transparent 70%)', animation: 'ac-float 10s ease-in-out infinite', pointerEvents: 'none' }} />
 
-      <Container maxWidth="xl" sx={{ pb: 4, mt: 2 ,minheight:'100vh' }}>
+      <Container maxWidth="xl" sx={{ pb: 4, mt: 2, minheight: '100vh', position: 'relative', zIndex: 1, animation: 'ac-fade-up .45s ease-out both' }}>
         {/* Header */}
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 4   }}>
           <Box>
-            <MUILink component={RouterLink} to={`/position/${id}`} underline="hover" color="primary" sx={{ display: 'inline-block', mb: 0.5, fontSize: '0.875rem' }}>
-              ← Back to Position
-            </MUILink>
-            <Typography variant="h5" fontWeight={600} sx={{ fontSize: '1.25rem' }}>{currentPosition.title} - Analysis Results</Typography>
+
+            <Typography variant="h5" fontWeight={700} sx={{ fontSize: '1.25rem', background: 'linear-gradient(135deg, #1d2b45 0%, #1776F2 70%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{currentPosition.title} - Analysis Results</Typography>
           </Box>
           <Box>
-            <Button variant="contained" sx={{ color: "white"  , width:'130px' , height:'42px' , fontSize:'0.7rem' }} endIcon={<DownloadIcon sx={{ fontSize: '1.1rem' }} />} onClick={handleOpenMenu} size="small">
+            <Button variant="contained" sx={{ color: 'white', width: '130px', height: '42px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)', boxShadow: '0 10px 24px rgba(23,118,242,0.26)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 28px rgba(23,118,242,0.32)' } }} endIcon={<DownloadIcon sx={{ fontSize: '1.1rem' }} />} onClick={handleOpenMenu} size="small">
               Export
             </Button>
             <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} transformOrigin={{ vertical: 'top', horizontal: 'right' }}>

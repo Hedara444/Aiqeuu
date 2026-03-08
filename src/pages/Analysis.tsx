@@ -11,6 +11,17 @@ import {
 import { usePositionsStore } from '@/store/positionsStore';
 import Stepper from '@/components/ui/Stepper';
 
+const injectAnalysisStyles = () => {
+  if (document.getElementById('analysis-ux-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'analysis-ux-styles';
+  s.textContent = `
+    @keyframes analysis-fade-up { from { opacity: 0; transform: translateY(16px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes analysis-float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+  `;
+  document.head.appendChild(s);
+};
+
 export default function Analysis() {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(55);
@@ -20,7 +31,10 @@ export default function Analysis() {
   const { currentPosition, getPositionById } = usePositionsStore();
 
   useEffect(() => {
-    // Polling for status
+    injectAnalysisStyles();
+  }, []);
+
+  useEffect(() => {
     const statusInterval = setInterval(async () => {
       if (!id) return;
       const updatedPosition = await getPositionById(id);
@@ -70,15 +84,13 @@ export default function Analysis() {
 
 
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
-      {/* Main Content */}
-      <Box sx={{ px: { xs: 1.5, md: 6 } }}>
-        {/* Process Flow Section */}
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(180deg, #f8fbff 0%, #f5f8fc 100%)', position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'absolute', top: -70, right: -70, width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, rgba(23,118,242,0.14) 0%, rgba(23,118,242,0) 70%)', animation: 'analysis-float 6s ease-in-out infinite' }} />
+      <Box sx={{ px: { xs: 1.5, md: 6 }, position: 'relative', zIndex: 1 }}>
         <Stepper step={2} />
 
-        {/* Processing Section */}
-        <Container maxWidth="lg" sx={{ mb: 8 }}>
-          <Paper sx={{ backgroundColor: 'primary.dark', borderRadius: '16px', p: 3, boxShadow: 1 }}>
+        <Container maxWidth="lg" sx={{ mb: 8, animation: 'analysis-fade-up 0.5s ease-out both' }}>
+          <Paper sx={{ background: 'linear-gradient(135deg, #10243f 0%, #14355f 58%, #1776F2 100%)', borderRadius: '18px', p: 3, boxShadow: '0 18px 42px rgba(16,36,63,0.2)' }}>
             <Stack alignItems="center" spacing={3.5}>
               {/* Progress Bar */}
               <LinearProgress
@@ -88,41 +100,21 @@ export default function Analysis() {
                   width: '100%',
                   height: '12px',
                   borderRadius: '12px',
-                  backgroundColor: 'grey.300',
+                  backgroundColor: 'rgba(255,255,255,0.28)',
                   '& .MuiLinearProgress-bar': {
-                    backgroundColor: 'primary.main',
+                    background: 'linear-gradient(90deg, #00D4A8 0%, #4fc3ff 45%, #ffffff 100%)',
                     borderRadius: '12px',
                     transition: 'transform 0.2s linear',
-                    '&::after': {
-                      content: '""',
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      bottom: 0,
-                      right: 0,
-                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
-                      animation: 'pulse 2s ease-in-out infinite',
-                    },
                   },
                 }}
               />
 
               {/* Processing Text */}
               <Stack direction="row" alignItems="center" spacing={1}>
-                <Typography sx={{
-                  color: 'primary.main',
-                  fontFamily: 'Montserrat',
-                  fontSize: { xs: '1rem', md: '1.125rem' },
-                  fontWeight: 700
-                }}>
+                <Typography sx={{ color: 'white', fontFamily: 'Montserrat', fontSize: { xs: '1rem', md: '1.125rem' }, fontWeight: 700 }}>
                   Processing
                 </Typography>
-                <Typography sx={{
-                  color: 'primary.main',
-                  fontFamily: 'Montserrat',
-                  fontSize: { xs: '1rem', md: '1.125rem' },
-                  fontWeight: 700
-                }}>
+                <Typography sx={{ color: '#c5f7eb', fontFamily: 'Montserrat', fontSize: { xs: '1rem', md: '1.125rem' }, fontWeight: 700 }}>
                   {Math.round(progress)}%
                 </Typography>
               </Stack>
