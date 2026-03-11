@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Box, Typography, Stack } from '@mui/material';
 import { AuthLayout } from '@/components/layout/auth-layout';
@@ -8,22 +7,28 @@ import { useAuthStore } from '@/store/authStore';
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from 'react-i18next';
 
-// Define validation schema
-const signInSchema = z.object({
-  email: z.string()
-    .min(1, "Email or username is required")
-    .email("Please enter a valid email address"),
-  password: z.string()
-    .min(1, "Password is required")
-    .min(6, "Password must be at least 6 characters")
-});
-
-type SignInFormData = z.infer<typeof signInSchema>;
+type SignInFormData = {
+  email: string;
+  password: string;
+};
 
 export default function SignIn() {
   const navigate = useNavigate();
   const { login, isLoading } = useAuthStore();
+  const { t } = useTranslation();
+
+  const signInSchema = z.object({
+    email: z
+      .string()
+      .min(1, t('signin.validation.emailOrUsernameRequired'))
+      .email(t('signin.validation.emailInvalid')),
+    password: z
+      .string()
+      .min(1, t('signin.validation.passwordRequired'))
+      .min(6, t('signin.validation.passwordMin')),
+  });
 
   const {
     register,
@@ -43,13 +48,13 @@ export default function SignIn() {
       await login(data);
       navigate('/dashboard');
     } catch (error: any) {
-      // Handle authentication errors
       if (error.response?.status === 401) {
-        setError('email', { message: 'Invalid email or password' });
-        setError('password', { message: 'Invalid email or password' });
+        const msg = t('signin.errors.invalidCredentials');
+        setError('email', { message: msg });
+        setError('password', { message: msg });
       } else {
         setError('root', {
-          message: error.response?.data?.message || 'An error occurred during login'
+          message: error.response?.data?.message || t('signin.errors.generic')
         });
       }
     }
@@ -71,7 +76,7 @@ export default function SignIn() {
             mt: { xs: 6, md: 8, lg: 8 }
           }}
         >
-          Always Welcome, Aikyuu!
+          {t('signin.heading')}
         </Typography>
 
         {/* Subheading */}
@@ -82,7 +87,7 @@ export default function SignIn() {
           fontWeight: 400,
           mb: { xs: 6, md: 8 }
         }}>
-          Sign in to Aikyuu
+          {t('signin.subheading')}
         </Typography>
 
         {/* Error message */}
@@ -108,7 +113,7 @@ export default function SignIn() {
           <InputField
             {...register('email')}
             type="text"
-            label="E-mail or username"
+            label={t('signin.fields.emailOrUsername')}
             error={!!errors.email}
             helperText={errors.email?.message}
             disabled={isLoading}
@@ -123,7 +128,7 @@ export default function SignIn() {
           <InputField
             {...register('password')}
             type="password"
-            label="Password"
+            label={t('signin.fields.password')}
             error={!!errors.password}
             helperText={errors.password?.message}
             disabled={isLoading}
@@ -149,7 +154,7 @@ export default function SignIn() {
                 '&:hover': { textDecoration: 'none' }
               }}
             >
-              Forgot password
+              {t('signin.forgotPassword')}
             </Typography>
           </Box>
 
@@ -164,7 +169,7 @@ export default function SignIn() {
             disabled={isLoading}
             loading={isLoading}
           >
-            Log in
+            {t('signin.actions.login')}
           </AikyuuButton>
 
           {/* Sign Up Link */}
@@ -178,7 +183,7 @@ export default function SignIn() {
                 fontWeight: 500
               }}
             >
-              Don't have an account?{' '}
+              {t('signin.noAccount')}{' '}
             </Typography>
             <Typography
               component={Link}
@@ -192,7 +197,7 @@ export default function SignIn() {
                 '&:hover': { textDecoration: 'none' }
               }}
             >
-              Sign up
+              {t('signin.actions.signUp')}
             </Typography>
           </Box>
         </Box>

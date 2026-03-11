@@ -14,24 +14,13 @@ import { useAuthStore } from '@/store/authStore';
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from 'react-i18next';
 
-// Define validation schema
-const resetPasswordNewSchema = z.object({
-  verificationCode: z.string()
-    .min(1, "Verification code is required")
-    .min(4, "Verification code must be at least 4 characters")
-    .max(4, "Verification code must be 4 characters"),
-  newPassword: z.string()
-    .min(1, "New password is required")
-    .min(6, "Password must be at least 6 characters"),
-  confirmPassword: z.string()
-    .min(1, "Please confirm your password")
-}).refine((data) => data.newPassword === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
-
-type ResetPasswordNewFormData = z.infer<typeof resetPasswordNewSchema>;
+type ResetPasswordNewFormData = {
+  verificationCode: string;
+  newPassword: string;
+  confirmPassword: string;
+};
 
 export default function ResetPasswordNew() {
   const [searchParams] = useSearchParams();
@@ -40,6 +29,25 @@ export default function ResetPasswordNew() {
   const { resetPassword, resendVerificationCode, isLoading } = useAuthStore();
   const [isResending, setIsResending] = React.useState(false);
   const [resendCountdown, setResendCountdown] = React.useState(0);
+  const { t } = useTranslation();
+
+  const resetPasswordNewSchema = z
+    .object({
+      verificationCode: z
+        .string()
+        .min(1, t('resetPasswordNew.validation.codeRequired'))
+        .min(4, t('resetPasswordNew.validation.codeMin'))
+        .max(4, t('resetPasswordNew.validation.codeExact')),
+      newPassword: z
+        .string()
+        .min(1, t('resetPasswordNew.validation.newPasswordRequired'))
+        .min(6, t('resetPasswordNew.validation.passwordMin')),
+      confirmPassword: z.string().min(1, t('resetPasswordNew.validation.confirmPasswordRequired')),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: t('resetPasswordNew.validation.passwordsDontMatch'),
+      path: ['confirmPassword'],
+    });
 
   const {
     register,
@@ -58,7 +66,7 @@ export default function ResetPasswordNew() {
 
   const onSubmit = async (data: ResetPasswordNewFormData) => {
     if (!verificationId) {
-      setError('root', { message: 'Verification ID is missing' });
+      setError('root', { message: t('resetPasswordNew.errors.verificationMissing') });
       return;
     }
 
@@ -71,12 +79,12 @@ export default function ResetPasswordNew() {
       navigate("/dashboard");
     } catch (error: any) {
       if (error.response?.status === 400) {
-        setError('verificationCode', { message: 'Invalid verification code' });
+        setError('verificationCode', { message: t('resetPasswordNew.errors.invalidCode') });
       } else if (error.response?.status === 404) {
-        setError('root', { message: 'Verification session expired or invalid' });
+        setError('root', { message: t('resetPasswordNew.errors.sessionExpired') });
       } else {
         setError('root', {
-          message: error.response?.data?.message || 'An error occurred while resetting password'
+          message: error.response?.data?.message || t('resetPasswordNew.errors.generic')
         });
       }
     }
@@ -103,7 +111,7 @@ export default function ResetPasswordNew() {
       }, 1000);
     } catch (error: any) {
       setError('root', {
-        message: error.response?.data?.message || 'Failed to resend verification code'
+        message: error.response?.data?.message || t('resetPasswordNew.errors.resendFailed')
       });
     } finally {
       setIsResending(false);
@@ -127,7 +135,7 @@ export default function ResetPasswordNew() {
             color: "text.primary"
           }}
         >
-          Reset your password
+          {t('resetPasswordNew.heading')}
         </Typography>
 
         {/* Subheading */}
@@ -142,7 +150,7 @@ export default function ResetPasswordNew() {
             color: "text.secondary"
           }}
         >
-          Enter your new password and verification code to reset your password
+          {t('resetPasswordNew.subheading')}
         </Typography>
 
         {/* Error message */}
@@ -179,7 +187,7 @@ export default function ResetPasswordNew() {
               <TextField
                 fullWidth
                 type="text"
-                placeholder='Code *'
+                placeholder={t('resetPasswordNew.fields.codePlaceholder')}
                 {...register('verificationCode')}
                 error={!!errors.verificationCode}
                 helperText={errors.verificationCode?.message}
@@ -211,7 +219,7 @@ export default function ResetPasswordNew() {
               <TextField
                 fullWidth
                 type="password"
-                placeholder='New Password *'
+                placeholder={t('resetPasswordNew.fields.newPasswordPlaceholder')}
                 {...register('newPassword')}
                 error={!!errors.newPassword}
                 helperText={errors.newPassword?.message}
@@ -242,7 +250,7 @@ export default function ResetPasswordNew() {
               <TextField
                 fullWidth
                 type="password"
-                placeholder='Confirm the new password *'
+                placeholder={t('resetPasswordNew.fields.confirmPasswordPlaceholder')}
                 {...register('confirmPassword')}
                 error={!!errors.confirmPassword}
                 helperText={errors.confirmPassword?.message}
@@ -278,10 +286,10 @@ export default function ResetPasswordNew() {
                 }}
               >
                 {resendCountdown > 0
-                  ? `Resend code in ${resendCountdown}s`
+                  ? t('resetPasswordNew.resend.countdown', { seconds: resendCountdown })
                   : isResending
-                    ? 'Sending...'
-                    : "Didn't receive the code? Resend"
+                    ? t('resetPasswordNew.resend.sending')
+                    : t('resetPasswordNew.resend.prompt')
                 }
               </Button>
             </Box>
@@ -293,7 +301,7 @@ export default function ResetPasswordNew() {
               disabled={isLoading}
               loading={isLoading}
             >
-              Reset Password
+              {t('resetPasswordNew.actions.reset')}
             </AikyuuButton>
 
             {/* Back to Sign In Link */}
@@ -307,7 +315,7 @@ export default function ResetPasswordNew() {
                   color: "text.primary"
                 }}
               >
-                Back to{' '}
+                {t('resetPasswordNew.backTo')}{' '}
               </Typography>
               <Typography
                 component={Link}
@@ -323,7 +331,7 @@ export default function ResetPasswordNew() {
                   }
                 }}
               >
-                Sign In
+                {t('resetPasswordNew.actions.signIn')}
               </Typography>
             </Box>
           </Stack>

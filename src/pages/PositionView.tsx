@@ -34,6 +34,7 @@ import {
   DragIndicator as DragIndicatorIcon,
   Brush as BrushIcon,
 } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 const injectPositionViewStyles = () => {
   if (document.getElementById('position-view-ux-styles')) return;
@@ -73,6 +74,7 @@ interface ConfirmDeleteModalProps {
 const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, onUpload, isLoading }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useState<HTMLInputElement | null>(null);
+  const { t } = useTranslation();
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -107,7 +109,7 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
       <DialogTitle sx={{ p: 0, mb: 1.2 }}>
         <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
           <BrushIcon sx={{ fontSize: '1rem', color: 'text.primary' }} />
-          <Typography variant="subtitle1" fontWeight={700}>Upload Resumes</Typography>
+          <Typography variant="subtitle1" fontWeight={700}>{t('positionView.modals.uploadResumes.title')}</Typography>
         </Stack>
       </DialogTitle>
 
@@ -138,7 +140,7 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
           <input hidden multiple accept=".pdf,.doc,.docx" type="file" onChange={handleFileSelect} id="resume-upload-input" />
           <UploadFileIcon sx={{ fontSize: 24, color: 'text.secondary' }} />
           <Typography variant="caption" color="text.secondary">
-            <span style={{ textDecoration: 'underline', fontWeight: 700, color: 'black' }}>Click to upload</span> or drag and drop
+            <span style={{ textDecoration: 'underline', fontWeight: 700, color: 'black' }}>{t('positionView.modals.uploadResumes.clickToUpload')}</span> {t('positionView.modals.uploadResumes.orDragAndDrop')}
           </Typography>
         </Box>
       </DialogContent>
@@ -157,7 +159,7 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
               borderColor: 'grey.300'
             }}
           >
-            Cancel
+            {t('common.actions.cancel')}
           </Button>
           <Button
             onClick={() => document.getElementById('resume-upload-input')?.click()}
@@ -176,7 +178,7 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
             }}
             loading={isLoading}
           >
-            Upload Resumes
+            {t('positionView.modals.uploadResumes.primaryAction')}
           </Button>
         </Stack>
       </DialogActions>
@@ -186,6 +188,7 @@ const UploadResumeModal: React.FC<UploadResumeModalProps> = ({ isOpen, onClose, 
 
 const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, onAdd, isLoading }) => {
   const [description, setDescription] = useState('');
+  const { t } = useTranslation();
 
   const handleAdd = async () => {
     if (description.trim()) {
@@ -202,7 +205,7 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
       <DialogTitle sx={{ p: 0, mb: 1.2 }}>
         <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
           <BrushIcon sx={{ fontSize: '1rem', color: 'text.primary' }} />
-          <Typography variant="subtitle1" fontWeight={700}>Add New Criteria</Typography>
+          <Typography variant="subtitle1" fontWeight={700}>{t('positionView.modals.addCriteria.title')}</Typography>
         </Stack>
       </DialogTitle>
 
@@ -211,12 +214,12 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
       <DialogContent sx={{ p: 0, mb: 2.5, overflowY: 'visible' }}>
         <Box>
           <Typography variant="caption" sx={{ fontWeight: 700, mb: 0.5, ml: 0.5, fontSize: '0.75rem' }}>
-            Description
+            {t('positionView.modals.addCriteria.descriptionLabel')}
           </Typography>
           <TextField
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Type Your text"
+            placeholder={t('positionView.modals.addCriteria.descriptionPlaceholder')}
             fullWidth
             variant="standard"
             InputProps={{
@@ -250,7 +253,7 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
               borderColor: 'grey.300'
             }}
           >
-            Cancel
+            {t('common.actions.cancel')}
           </Button>
           <Button
             onClick={handleAdd}
@@ -269,7 +272,7 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
             }}
             loading={isLoading}
           >
-            Add Criteria
+            {t('positionView.modals.addCriteria.primaryAction')}
           </Button>
         </Stack>
       </DialogActions>
@@ -278,6 +281,7 @@ const AddCriteriaModal: React.FC<AddCriteriaModalProps> = ({ isOpen, onClose, on
 };
 
 const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose, onConfirm, title, message, isLoading }) => {
+  const { t } = useTranslation();
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="xs" fullWidth transitionDuration={220} PaperProps={{
       sx: { borderRadius: '16px', p: 2.5, border: '1px solid rgba(23,118,242,0.18)', background: 'linear-gradient(180deg, #ffffff 0%, #f7fbff 100%)', boxShadow: '0 16px 34px rgba(16,36,63,0.18)', animation: 'pv-modal-in .22s ease-out both' }
@@ -311,7 +315,7 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
               borderColor: 'grey.300'
             }}
           >
-            Cancel
+            {t('common.actions.cancel')}
           </Button>
           <Button
             onClick={onConfirm}
@@ -328,7 +332,7 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
             fullWidth
             loading={isLoading}
           >
-            Delete
+            {t('common.actions.delete')}
           </Button>
         </Stack>
       </DialogActions>
@@ -391,6 +395,7 @@ const ResumeCard: React.FC<{
 export default function PositionView() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { currentPosition, getPositionById, addCriteria, deleteCriteria, deleteResume, addResume, getResumeFile, startProcessing, isLoading } = usePositionsStore();
   // const { getCriteria, addCriteria, deleteCriteria } = useCriteriaStore();
@@ -441,9 +446,9 @@ export default function PositionView() {
     
         <Container maxWidth="lg" sx={{ py: 8 }}>
           <Stack alignItems="center" spacing={2}>
-            <Typography variant="h4" fontWeight={700}>Position Not Found</Typography>
-            <Typography color="text.secondary">The position you're looking for doesn't exist.</Typography>
-            <Button component={RouterLink} to="/use-cases" variant="contained">Back to Use Cases</Button>
+            <Typography variant="h4" fontWeight={700}>{t('positionView.notFound.title')}</Typography>
+            <Typography color="text.secondary">{t('positionView.notFound.subtitle')}</Typography>
+            <Button component={RouterLink} to="/use-cases" variant="contained">{t('positionView.notFound.back')}</Button>
           </Stack>
         </Container>
       </Box>
@@ -499,21 +504,21 @@ export default function PositionView() {
 
   const statusConfig: Record<Position['status'], { label: string; chipSx: any }> = {
     created: {
-      label: 'created',
+      label: t('positionView.status.created'),
       chipSx: {
         background: 'linear-gradient(135deg, #00D4A8 0%, #12b886 100%)',
         boxShadow: '0 8px 18px rgba(0,212,168,0.28)'
       }
     },
     in_progress: {
-      label: 'analyzing',
+      label: t('positionView.status.inProgress'),
       chipSx: {
         background: 'linear-gradient(135deg, #ffb347 0%, #ff8c42 100%)',
         boxShadow: '0 8px 18px rgba(255,140,66,0.26)'
       }
     },
     completed: {
-      label: 'completed',
+      label: t('positionView.status.completed'),
       chipSx: {
         background: 'linear-gradient(135deg, #1776F2 0%, #00D4A8 100%)',
         boxShadow: '0 8px 18px rgba(23,118,242,0.28)'
@@ -524,11 +529,11 @@ export default function PositionView() {
 
   const handleStartAnalysis = async () => {
     if (currentPosition.criterias.length === 0) {
-      alert('Please add at least one criteria before starting analysis.');
+      alert(t('positionView.alerts.addCriteriaFirst'));
       return;
     }
     if (currentPosition.resumes.length === 0) {
-      alert('Please upload at least one resume before starting analysis.');
+      alert(t('positionView.alerts.uploadResumeFirst'));
       return;
     }
 
@@ -555,12 +560,12 @@ export default function PositionView() {
           <Typography variant="h4" fontWeight={700} sx={{ background: 'linear-gradient(135deg, #1d2b45 0%, #1776F2 70%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{currentPosition.title}:</Typography>
           <Stack direction="row" spacing={1}>
             <Button variant="contained" sx={{ color: 'white', width: '240px', height: '40px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)', boxShadow: '0 10px 24px rgba(23,118,242,0.26)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 28px rgba(23,118,242,0.3)' } }} startIcon={<UploadFileIcon />} onClick={() => setIsUploadModalOpen(true)}>
-              Upload Resume
+              {t('positionView.actions.uploadResume')}
             </Button>
             {
               currentPosition.status === "created" &&
               <Button variant="contained" sx={{ color: 'white', width: '240px', height: '40px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)', boxShadow: '0 10px 22px rgba(23,118,242,0.26)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 28px rgba(23,118,242,0.3)' } }} startIcon={<AddIcon />} onClick={() => setIsAddCriteriaModalOpen(true)}>
-                Add Criteria
+                {t('positionView.actions.addCriteria')}
               </Button>
             }
 
@@ -591,7 +596,7 @@ export default function PositionView() {
 
         {/* Criteria */}
         <Stack spacing={2} sx={{ mb: 4 }}>
-          <Typography variant="h6" fontWeight={700} sx={{}} >Criteria</Typography>
+          <Typography variant="h6" fontWeight={700} sx={{}} >{t('positionView.sections.criteria')}</Typography>
           <Stack spacing={1.5}>
             {currentPosition.criterias.map((c, index) => (
               <CriteriaItem status={currentPosition.status} index={index} key={c.id} criteria={c} onDelete={() => handleDeleteCriteria(c)} />
@@ -601,7 +606,7 @@ export default function PositionView() {
 
         {/* Resumes */}
         <Stack spacing={2} sx={{ mb: 4 }}>
-          <Typography variant="h6" fontWeight={700}>Resumes </Typography>
+          <Typography variant="h6" fontWeight={700}>{t('positionView.sections.resumes')}</Typography>
           <Grid container spacing={2}>
             {currentPosition.resumes.map((r) => (
               <Grid key={r.id}>
@@ -614,7 +619,7 @@ export default function PositionView() {
         {/* Actions */}
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <Button variant="contained" color="success" sx={{ color: 'white', width: '240px', height: '40px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #0dbf8c 0%, #0aa675 100%)', boxShadow: '0 10px 22px rgba(13,191,140,0.28)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 26px rgba(13,191,140,0.32)' } }} onClick={handleStartAnalysis} disabled={isAnalyzing}>
-            {isAnalyzing ? 'Analyzing...' : 'Start Analysis'}
+            {isAnalyzing ? t('positionView.actions.analyzing') : t('positionView.actions.startAnalysis')}
           </Button>
           {/* <Button component={RouterLink} to="/use-cases" variant="outlined">Back to Use Cases</Button> */}
         </Stack>

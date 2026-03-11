@@ -10,6 +10,7 @@ import {
   Stack
 } from '@mui/material';
 import { ArrowBack as ArrowBackIcon } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 interface PlaceholderPageProps {
   title: string;
@@ -17,6 +18,7 @@ interface PlaceholderPageProps {
 }
 
 export default function PlaceholderPage({ title, description }: PlaceholderPageProps) {
+  const { t } = useTranslation();
   return (
     <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
       {/* Navigation */}
@@ -63,7 +65,7 @@ export default function PlaceholderPage({ title, description }: PlaceholderPageP
                   maxWidth: "600px",
                 }}
               >
-                This page is under construction. Continue prompting to have me fill in this page content.
+                {t('placeholder.underConstruction')}
               </Typography>
 
               <Button
@@ -79,7 +81,7 @@ export default function PlaceholderPage({ title, description }: PlaceholderPageP
                   mt: 2,
                 }}
               >
-                Back to Dashboard
+                {t('placeholder.actions.backToDashboard')}
               </Button>
             </Stack>
           </CardContent>

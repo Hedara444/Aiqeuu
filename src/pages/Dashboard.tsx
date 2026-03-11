@@ -7,6 +7,7 @@ import {
 } from '@mui/icons-material';
 import Stepper from '@/components/ui/Stepper';
 import { useProfileStore } from '@/store/profileStore';
+import { Trans, useTranslation } from 'react-i18next';
 
 /* ── Inject styles once ──────────────────────────────────────────────── */
 const injectDashStyles = () => {
@@ -85,18 +86,24 @@ const injectDashStyles = () => {
 
 /* ── Quick tips ───────────────────────────────────────────────────────── */
 const TIPS = [
-  { icon: '📋', title: 'Create a Position', desc: 'Define the job requirements and criteria for your open role.' },
-  { icon: '📤', title: 'Upload CVs', desc: 'Upload candidate CVs — bulk upload supported.' },
-  { icon: '🤖', title: 'AI Evaluation', desc: 'Our AI ranks candidates by fit so you focus on the best.' },
+  { icon: '📋', titleKey: 'dashboard.tips.createPosition.title', descKey: 'dashboard.tips.createPosition.desc' },
+  { icon: '📤', titleKey: 'dashboard.tips.uploadCVs.title', descKey: 'dashboard.tips.uploadCVs.desc' },
+  { icon: '🤖', titleKey: 'dashboard.tips.aiEvaluation.title', descKey: 'dashboard.tips.aiEvaluation.desc' },
 ];
 
 /* ── Component ───────────────────────────────────────────────────────── */
 export default function Dashboard() {
   useEffect(() => { injectDashStyles(); }, []);
   const { profile, balance } = useProfileStore();
+  const { t } = useTranslation();
 
   const hour = new Date().getHours();
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const greeting =
+    hour < 12
+      ? t('dashboard.greeting.morning')
+      : hour < 17
+        ? t('dashboard.greeting.afternoon')
+        : t('dashboard.greeting.evening');
 
   return (
     <Box sx={{
@@ -143,7 +150,7 @@ export default function Dashboard() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              {profile?.name?.split(' ')[0] || 'there'} 👋
+              {profile?.name?.split(' ')[0] || t('dashboard.greeting.fallbackName')} 👋
             </Box>
           </Typography>
           <Typography sx={{
@@ -153,7 +160,11 @@ export default function Dashboard() {
             fontWeight: 500,
             mt: 0.4,
           }}>
-            You have <strong style={{ color: '#1776F2' }}>{balance} credits</strong> — ready to evaluate candidates.
+            <Trans
+              i18nKey="dashboard.creditsLine"
+              values={{ credits: balance }}
+              components={{ strong: <strong style={{ color: '#1776F2' }} /> }}
+            />
           </Typography>
         </Box>
 
@@ -198,7 +209,7 @@ export default function Dashboard() {
               fontWeight: 800,
               letterSpacing: '0.02em',
             }}>
-              Create New Position
+              {t('dashboard.createNewPosition')}
             </Typography>
             <ArrowForwardIcon sx={{ color: 'rgba(255,255,255,0.8)', fontSize: '1.1rem', ml: 'auto' }} />
           </Box>
@@ -215,12 +226,12 @@ export default function Dashboard() {
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
           }}>
-            How it works
+            {t('dashboard.howItWorks')}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.2 }}>
-            {TIPS.map(({ icon, title, desc }, i) => (
+            {TIPS.map(({ icon, titleKey, descKey }, i) => (
               <Paper
-                key={title}
+                key={titleKey}
                 className="tip-card"
                 elevation={0}
                 sx={{
@@ -247,14 +258,14 @@ export default function Dashboard() {
                     fontSize: { xs: '0.75rem', md: '0.82rem' },
                     color: 'text.primary', mb: 0.2,
                   }}>
-                    {title}
+                    {t(titleKey)}
                   </Typography>
                   <Typography sx={{
                     fontFamily: 'Montserrat', fontWeight: 500,
                     fontSize: { xs: '0.65rem', md: '0.72rem' },
                     color: 'text.secondary',
                   }}>
-                    {desc}
+                    {t(descKey)}
                   </Typography>
                 </Box>
                 <Box sx={{ ml: 'auto', color: 'rgba(23,118,242,0.3)', display: { xs: 'none', md: 'flex' } }}>

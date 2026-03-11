@@ -21,6 +21,7 @@ import {
 import Stepper from '@/components/ui/Stepper';
 import { usePositionsStore } from '@/store/positionsStore';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const injectUploadCVStyles = () => {
   if (document.getElementById('upload-cv-ux-styles')) return;
@@ -44,6 +45,7 @@ interface UploadedFile {
 export default function UploadCV() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -74,7 +76,7 @@ export default function UploadCV() {
     const pendingItems: Partial<Resume>[] = fileArray.map((file, index) => ({
       id: `${Date.now()}-${index}-${Math.random()}`,
       title: file.name,
-      size: `${(file.size / 1024 / 1024).toFixed(1)} MB . uploading`,
+      size: `${(file.size / 1024 / 1024).toFixed(1)} MB . ${t('uploadCv.status.uploading')}`,
       progress: 10,
       isComplete: false
     }));
@@ -102,7 +104,7 @@ export default function UploadCV() {
           updatedFiles[fileIndex] = {
             id: result.value.id,
             title: result.value.title,
-            size: `${(file.size / 1024 / 1024).toFixed(1)} MB . uploaded`,
+            size: `${(file.size / 1024 / 1024).toFixed(1)} MB . ${t('uploadCv.status.uploaded')}`,
             progress: 100,
             isComplete: true
           };
@@ -110,7 +112,7 @@ export default function UploadCV() {
           failCount += 1;
           updatedFiles[fileIndex] = {
             ...updatedFiles[fileIndex],
-            size: `${(file.size / 1024 / 1024).toFixed(1)} MB . failed`,
+            size: `${(file.size / 1024 / 1024).toFixed(1)} MB . ${t('uploadCv.status.failed')}`,
             progress: 0,
             isComplete: false
           };
@@ -123,14 +125,14 @@ export default function UploadCV() {
     toast.dismiss();
     toast.clearWaitingQueue();
     if (successCount === fileArray.length) {
-      toast.success(`${successCount} resume${successCount > 1 ? 's' : ''} uploaded successfully!`);
+      toast.success(t('uploadCv.toast.allUploaded', { count: successCount }));
       return;
     }
     if (successCount > 0) {
-      toast.warning(`${successCount} uploaded, ${failCount} failed.`);
+      toast.warning(t('uploadCv.toast.partialUploaded', { successCount, failCount }));
       return;
     }
-    toast.error('Failed to upload resumes.');
+    toast.error(t('uploadCv.toast.allFailed'));
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -248,7 +250,7 @@ export default function UploadCV() {
                         transition: 'color 0.3s'
                       }}
                     >
-                      Click to upload
+                      {t('uploadCv.dropzone.clickToUpload')}
                     </Typography>
                     <Typography
                       component="span"
@@ -260,7 +262,7 @@ export default function UploadCV() {
                         ml: 1
                       }}
                     >
-                      or drag and drop
+                      {t('uploadCv.dropzone.orDragAndDrop')}
                     </Typography>
                   </Box>
                 </Stack>
@@ -407,7 +409,7 @@ export default function UploadCV() {
                 },
               }}
             >
-              Cancel
+              {t('common.actions.cancel')}
             </Button>
             <Button
               onClick={handleAnalysis}
@@ -434,7 +436,7 @@ export default function UploadCV() {
                 },
               }}
             >
-              analysis
+              {t('uploadCv.actions.analysis')}
             </Button>
           </Stack>
         </Container>

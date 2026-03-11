@@ -14,6 +14,7 @@ import {
   IconButton
 } from '@mui/material';
 import { Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 interface Criterion {
   id: string;
@@ -24,6 +25,7 @@ interface Criterion {
 
 export default function CriteriaManagement() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [position] = useState('ui/ux designer');
   const [criteria, setCriteria] = useState<Criterion[]>([
     {
@@ -146,7 +148,7 @@ export default function CriteriaManagement() {
                     fontWeight: 700,
                     mb: 0.5
                   }}>
-                    New Position
+                    {t('criteriaManagement.steps.newPosition.title')}
                   </Typography>
                   <Typography sx={{
                     color: 'text.secondary',
@@ -154,7 +156,7 @@ export default function CriteriaManagement() {
                     fontSize: { xs: '0.8rem', md: '0.875rem' },
                     fontWeight: 500
                   }}>
-                    Create New Position
+                    {t('criteriaManagement.steps.newPosition.subtitle')}
                   </Typography>
                 </Box>
               </Box>
@@ -181,7 +183,7 @@ export default function CriteriaManagement() {
                     fontWeight: 700,
                     mb: 0.5
                   }}>
-                    Upload CV
+                    {t('criteriaManagement.steps.uploadCv.title')}
                   </Typography>
                   <Typography sx={{
                     color: 'text.secondary',
@@ -189,7 +191,7 @@ export default function CriteriaManagement() {
                     fontSize: { xs: '0.8rem', md: '0.875rem' },
                     fontWeight: 500
                   }}>
-                    Download one or more CVs
+                    {t('criteriaManagement.steps.uploadCv.subtitle')}
                   </Typography>
                 </Box>
               </Box>
@@ -216,7 +218,7 @@ export default function CriteriaManagement() {
                     fontWeight: 700,
                     mb: 1
                   }}>
-                    View Result
+                    {t('criteriaManagement.steps.viewResult.title')}
                   </Typography>
                   <Typography sx={{
                     color: 'text.secondary',
@@ -224,7 +226,7 @@ export default function CriteriaManagement() {
                     fontSize: { xs: '1.125rem', md: '1rem' },
                     fontWeight: 500
                   }}>
-                    View Result
+                    {t('criteriaManagement.steps.viewResult.subtitle')}
                   </Typography>
                 </Box>
               </Box>
@@ -245,7 +247,7 @@ export default function CriteriaManagement() {
                   fontSize: { xs: '1.5rem', md: '1.875rem' },
                   fontWeight: 500
                 }}>
-                  Position:
+                  {t('criteriaManagement.positionLabel')}
                 </Typography>
                 <Typography sx={{
                   color: 'primary.dark',
@@ -268,7 +270,7 @@ export default function CriteriaManagement() {
                   fontSize: { xs: '1.5rem', md: '1.875rem' },
                   fontWeight: 700
                 }}>
-                  + Create Criteria
+                  {t('criteriaManagement.header')}
                 </Typography>
               </Box>
 
@@ -305,7 +307,7 @@ export default function CriteriaManagement() {
                         fontWeight: 500,
                         mr: 'auto'
                       }}>
-                        Add Criteria:
+                        {t('criteriaManagement.addCriteriaLabel')}
                       </Typography>
                       <Box sx={{
                         backgroundColor: 'background.paper',
@@ -321,7 +323,7 @@ export default function CriteriaManagement() {
                         ml: 2
                       }}>
                         <Typography sx={{ color: 'grey.400', fontFamily: 'Montserrat', fontSize: '1rem' }}>
-                          Place holder
+                          {t('criteriaManagement.placeholder')}
                         </Typography>
                       </Box>
                       <IconButton sx={{
@@ -413,7 +415,7 @@ export default function CriteriaManagement() {
                       },
                     }}
                   >
-                    Create New Position
+                    {t('criteriaManagement.actions.createNewPosition')}
                   </Button>
                   <Button
                     onClick={handleSave}
@@ -434,7 +436,7 @@ export default function CriteriaManagement() {
                       },
                     }}
                   >
-                    Save
+                    {t('criteriaManagement.actions.save')}
                   </Button>
                 </Stack>
               </Box>
@@ -483,7 +485,7 @@ export default function CriteriaManagement() {
               fontSize: '1.5rem',
               fontWeight: 700
             }}>
-              Add New Criteria
+              {t('criteriaManagement.modal.title')}
             </Typography>
           </Stack>
 
@@ -499,13 +501,13 @@ export default function CriteriaManagement() {
               fontWeight: 700,
               mb: 3.5
             }}>
-              Description
+              {t('criteriaManagement.modal.descriptionLabel')}
             </Typography>
             <Paper sx={{ backgroundColor: 'grey.50', borderRadius: '19px', p: 5 }}>
               <TextField
                 value={newCriteriaText}
                 onChange={(e) => setNewCriteriaText(e.target.value)}
-                placeholder="Type Your text"
+                placeholder={t('criteriaManagement.modal.descriptionPlaceholder')}
                 multiline
                 rows={3}
                 fullWidth
@@ -550,7 +552,7 @@ export default function CriteriaManagement() {
                 },
               }}
             >
-              Cancel
+              {t('common.actions.cancel')}
             </Button>
             <Button
               onClick={handleAddCriteria}
@@ -570,7 +572,7 @@ export default function CriteriaManagement() {
                 },
               }}
             >
-              Add Criteria
+              {t('criteriaManagement.modal.primaryAction')}
             </Button>
           </Stack>
         </Box>

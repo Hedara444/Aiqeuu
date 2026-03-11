@@ -14,19 +14,23 @@ import { useAuthStore } from '@/store/authStore';
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from 'react-i18next';
 
-// Define validation schema
-const resetPasswordSchema = z.object({
-  email: z.string()
-    .min(1, "Email is required")
-    .email("Please enter a valid email address")
-});
-
-type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
+type ResetPasswordFormData = {
+  email: string;
+};
 
 export default function ResetPassword() {
   const navigate = useNavigate();
   const { forgetPassword, isLoading } = useAuthStore();
+  const { t } = useTranslation();
+
+  const resetPasswordSchema = z.object({
+    email: z
+      .string()
+      .min(1, t('resetPassword.validation.emailRequired'))
+      .email(t('resetPassword.validation.emailInvalid')),
+  });
 
   const {
     register,
@@ -45,12 +49,11 @@ export default function ResetPassword() {
       const { verificationId } = await forgetPassword({ email: data.email });
       navigate(`/reset-password?verificationId=${verificationId}`);
     } catch (error: any) {
-      // Handle errors
       if (error.response?.status === 404) {
-        setError('email', { message: 'Email not found' });
+        setError('email', { message: t('resetPassword.errors.emailNotFound') });
       } else {
         setError('root', {
-          message: error.response?.data?.message || 'An error occurred while resetting password'
+          message: error.response?.data?.message || t('resetPassword.errors.generic')
         });
       }
     }
@@ -73,7 +76,7 @@ export default function ResetPassword() {
             color: "text.primary"
           }}
         >
-          Reset your password
+          {t('resetPassword.heading')}
         </Typography>
 
         {/* Subheading */}
@@ -87,8 +90,8 @@ export default function ResetPassword() {
             color: "text.secondary"
           }}
         >
-          We're sorry to hear that's happen, don't worry we're here for you<br />
-          Just enter your e-mail to help you
+          {t('resetPassword.subheading.line1')}<br />
+          {t('resetPassword.subheading.line2')}
         </Typography>
 
         {/* Error message */}
@@ -112,7 +115,7 @@ export default function ResetPassword() {
               <TextField
                 fullWidth
                 type="email"
-                placeholder="Email *"
+                placeholder={t('resetPassword.fields.emailPlaceholder')}
                 {...register('email')}
                 error={!!errors.email}
                 helperText={errors.email?.message}
@@ -138,7 +141,7 @@ export default function ResetPassword() {
               disabled={isLoading}
               loading={isLoading}
             >
-              Reset Password
+              {t('resetPassword.actions.reset')}
             </AikyuuButton>
 
             {/* Back to Sign In Link */}
@@ -151,7 +154,7 @@ export default function ResetPassword() {
                   color: "text.primary"
                 }}
               >
-                Back to{' '}
+                {t('resetPassword.backTo')}{' '}
               </Typography>
               <Typography
                 component={Link}
@@ -166,7 +169,7 @@ export default function ResetPassword() {
                   }
                 }}
               >
-                Sign In
+                {t('resetPassword.actions.signIn')}
               </Typography>
             </Box>
           </Stack>

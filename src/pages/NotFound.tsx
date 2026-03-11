@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, Typography, Button, Container } from "@mui/material";
 import { Home as HomeIcon } from "@mui/icons-material";
+import { useTranslation } from 'react-i18next';
 
 const NotFound = () => {
   const location = useLocation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     console.error(
@@ -44,7 +46,7 @@ const NotFound = () => {
               fontWeight: 500,
             }}
           >
-            Oops! Page not found
+            {t('notFound.title')}
           </Typography>
           <Button
             variant="contained"
@@ -57,7 +59,7 @@ const NotFound = () => {
               fontSize: "1.125rem",
             }}
           >
-            Return to Home
+            {t('notFound.actions.home')}
           </Button>
         </Box>
       </Container>

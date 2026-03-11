@@ -1,5 +1,6 @@
 import "./global.css";
 
+import { useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { theme } from './theme';
@@ -7,6 +8,9 @@ import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
+
+import i18n from '@/utils/i18n';
+import { useLanguageStore } from '@/store/languageStore';
 
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
@@ -36,62 +40,72 @@ import PaymentStatus from "./pages/PaymentStatus";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <ToastContainer 
-      limit={1}
-       />
-      <BrowserRouter>
-        <Routes>
+const App = () => {
+  const language = useLanguageStore((s) => s.language);
 
-          <Route path="/payment-success" element={<PaymentStatus />} />
-          <Route path="/payment-cancel" element={<PaymentStatus />} />
+  useEffect(() => {
+    if (i18n.language !== language) {
+      void i18n.changeLanguage(language);
+    }
+  }, [language]);
 
-          {/* public routes */}
-          <Route element={<PublicRoute />}>
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ResetPassword />} />
-            <Route path="/reset-password" element={<ResetPasswordNew />} />
-            <Route path="/verification" element={<Verification />} />
-          </Route>
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <ToastContainer
+          limit={1}
+        />
+        <BrowserRouter>
+          <Routes>
 
-          {/* private routes */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/history" element={<History />} />
-            <Route path="/feedback" element={<Feedback />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/billing" element={<Billing />} />
-            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/payment-success" element={<PaymentStatus />} />
+            <Route path="/payment-cancel" element={<PaymentStatus />} />
 
+            {/* public routes */}
+            <Route element={<PublicRoute />}>
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ResetPassword />} />
+              <Route path="/reset-password" element={<ResetPasswordNew />} />
+              <Route path="/verification" element={<Verification />} />
+            </Route>
 
-            <Route path="/use-cases" element={<UseCases />} />
-            <Route path="/position/:id" element={<PositionView />} />
-            <Route path="/position/:id/completed" element={<AnalysisCompleted />} />
-
-
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create-position" element={<CreatePosition />} />
-            <Route path="/criteria-selection/:id" element={<CriteriaSelection />} />
-            <Route path="/create-criteria/:id" element={<CriteriaSimple />} />
-            <Route path="/upload-cv/:id" element={<UploadCV />} />
-            <Route path="/analysis/:id" element={<Analysis />} />
-            <Route path="/view-result/:id" element={<ViewResult />} />
-
-            <Route path="/criteria-management" element={<CriteriaManagement />} />
-
-          </Route>
+            {/* private routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/history" element={<History />} />
+              <Route path="/feedback" element={<Feedback />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/billing" element={<Billing />} />
+              <Route path="/change-password" element={<ChangePassword />} />
 
 
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
-  </QueryClientProvider>
-);
+              <Route path="/use-cases" element={<UseCases />} />
+              <Route path="/position/:id" element={<PositionView />} />
+              <Route path="/position/:id/completed" element={<AnalysisCompleted />} />
+
+
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/create-position" element={<CreatePosition />} />
+              <Route path="/criteria-selection/:id" element={<CriteriaSelection />} />
+              <Route path="/create-criteria/:id" element={<CriteriaSimple />} />
+              <Route path="/upload-cv/:id" element={<UploadCV />} />
+              <Route path="/analysis/:id" element={<Analysis />} />
+              <Route path="/view-result/:id" element={<ViewResult />} />
+
+              <Route path="/criteria-management" element={<CriteriaManagement />} />
+
+            </Route>
+
+
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
 
 createRoot(document.getElementById("root")!).render(<App />);

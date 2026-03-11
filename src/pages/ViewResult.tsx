@@ -29,6 +29,7 @@ import Stepper from '@/components/ui/Stepper';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 import { usePositionsStore } from '@/store/positionsStore';
 import { useUIStore } from '@/store/uiStore';
+import { useTranslation } from 'react-i18next';
 
 const injectViewResultStyles = () => {
   if (document.getElementById('view-result-ux-styles')) return;
@@ -148,6 +149,7 @@ export default function ViewResult() {
   const { id } = useParams<{ id: string }>();
   const { currentPosition, getPositionById } = usePositionsStore();
   const { showCriteria, showAnalysis, setShowCriteria, setShowAnalysis } = useUIStore();
+  const { t } = useTranslation();
 
   const [isLoadingPage, setIsLoadingPage] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -217,23 +219,23 @@ export default function ViewResult() {
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 6 }}>
             <Box>
 
-              <Typography variant="h4" fontWeight={700} sx={{ background: 'linear-gradient(135deg, #1d2b45 0%, #1776F2 70%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{currentPosition.title} - Analysis Results</Typography>
+              <Typography variant="h4" fontWeight={700} sx={{ background: 'linear-gradient(135deg, #1d2b45 0%, #1776F2 70%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{t('viewResult.title', { title: currentPosition.title })}</Typography>
             </Box>
             <Box>
               <Button variant="contained" sx={{ color: 'white', fontSize: '0.9rem', borderRadius: '12px', background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)', boxShadow: '0 10px 24px rgba(23,118,242,0.26)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 28px rgba(23,118,242,0.32)' } }} endIcon={<DownloadIcon />} onClick={handleOpenMenu}>
-                Export
+                {t('viewResult.export.button')}
               </Button>
               <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <MenuItem onClick={handleExportCSV}>Export as CSV</MenuItem>
-                <MenuItem onClick={handleExportExcel}>Export as Excel</MenuItem>
-                <MenuItem onClick={handleExportJSON}>Export as JSON</MenuItem>
+                <MenuItem onClick={handleExportCSV}>{t('viewResult.export.csv')}</MenuItem>
+                <MenuItem onClick={handleExportExcel}>{t('viewResult.export.excel')}</MenuItem>
+                <MenuItem onClick={handleExportJSON}>{t('viewResult.export.json')}</MenuItem>
               </Menu>
             </Box>
           </Stack>
 
           {/* Criteria */}
           <Stack sx={{ mb: 6 }}>
-            <ToggleSwitch isActive={showCriteria} label="Criteria" onToggle={() => setShowCriteria(!showCriteria)} />
+            <ToggleSwitch isActive={showCriteria} label={t('viewResult.sections.criteria')} onToggle={() => setShowCriteria(!showCriteria)} />
             <Box sx={{ mt: 3 }}>
               <CriteriaCard criterias={currentPosition.criterias} isVisible={showCriteria} />
             </Box>
@@ -243,7 +245,7 @@ export default function ViewResult() {
           <Stack sx={{ mb: 4 }}>
             <ToggleSwitch
               isActive={showAnalysis}
-              label="Analysis cv"
+              label={t('viewResult.sections.analysis')}
               onToggle={() => setShowAnalysis(!showAnalysis)}
             />
 

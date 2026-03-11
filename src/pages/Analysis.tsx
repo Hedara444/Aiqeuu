@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { usePositionsStore } from '@/store/positionsStore';
 import Stepper from '@/components/ui/Stepper';
+import { useTranslation } from 'react-i18next';
 
 const injectAnalysisStyles = () => {
   if (document.getElementById('analysis-ux-styles')) return;
@@ -25,6 +26,7 @@ const injectAnalysisStyles = () => {
 export default function Analysis() {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(55);
+  const { t } = useTranslation();
 
   const { id } = useParams<{ id: string }>();
 
@@ -131,11 +133,11 @@ export default function Analysis() {
               fontSize: '1.125rem',
               mb: 2
             }}>
-              {progress < 30 && "Analyzing uploaded CVs..."}
-              {progress >= 30 && progress < 60 && "Comparing against criteria..."}
-              {progress >= 60 && progress < 90 && "Generating recommendations..."}
-              {progress >= 90 && progress < 100 && "Finalizing results..."}
-              {progress >= 100 && "Analysis complete!"}
+              {progress < 30 && t('analysis.status.analyzing')}
+              {progress >= 30 && progress < 60 && t('analysis.status.comparing')}
+              {progress >= 60 && progress < 90 && t('analysis.status.generating')}
+              {progress >= 90 && progress < 100 && t('analysis.status.finalizing')}
+              {progress >= 100 && t('analysis.status.complete')}
             </Typography>
 
             {progress >= 100 && (
@@ -148,7 +150,7 @@ export default function Analysis() {
                   fontSize: '1.25rem',
                   fontWeight: 700
                 }}>
-                  Redirecting to results...
+                  {t('analysis.redirecting')}
                 </Typography>
               </Box>
             )}

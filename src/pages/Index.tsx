@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Box, Typography, Button, Container } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export default function Index() {
+  const { t } = useTranslation();
   return (
     <Box sx={{
       minHeight: '100vh',
@@ -17,14 +19,14 @@ export default function Index() {
           color: '#1E293B',
           mb: 2.1
         }}>
-          Welcome to Aikyuu
+          {t('index.heading')}
         </Typography>
         <Typography variant="h5" sx={{
           fontSize: '0.79rem',
           color: '#475569',
           mb: 2.8
         }}>
-          Your AI-powered recruitment platform for smarter hiring decisions
+          {t('index.subheading')}
         </Typography>
         <Box sx={{
           display: 'flex',
@@ -47,7 +49,7 @@ export default function Index() {
               '&:hover': { backgroundColor: '#1D4ED8' }
             }}
           >
-            Get Started
+            {t('index.actions.getStarted')}
           </Button>
           <Button
             component={Link}
@@ -65,7 +67,7 @@ export default function Index() {
               '&:hover': { backgroundColor: '#F8FAFC' }
             }}
           >
-            View Use Cases
+            {t('index.actions.viewUseCases')}
           </Button>
         </Box>
       </Container>

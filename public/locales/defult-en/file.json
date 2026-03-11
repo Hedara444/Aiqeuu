@@ -1,0 +1,387 @@
+{
+  "dashboard": {
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening",
+      "fallbackName": "there"
+    },
+    "creditsLine": "You have <strong>{{credits}} credits</strong> — ready to evaluate candidates.",
+    "createNewPosition": "Create New Position",
+    "howItWorks": "How it works",
+    "tips": {
+      "createPosition": {
+        "title": "Create a Position",
+        "desc": "Define the job requirements and criteria for your open role."
+      },
+      "uploadCVs": {
+        "title": "Upload CVs",
+        "desc": "Upload candidate CVs — bulk upload supported."
+      },
+      "aiEvaluation": {
+        "title": "AI Evaluation",
+        "desc": "Our AI ranks candidates by fit so you focus on the best."
+      }
+    }
+  }
+  ,
+  "signin": {
+    "heading": "Always Welcome, Aikyuu!",
+    "subheading": "Sign in to Aikyuu",
+    "fields": {
+      "emailOrUsername": "E-mail or username",
+      "password": "Password"
+    },
+    "forgotPassword": "Forgot password",
+    "actions": {
+      "login": "Log in",
+      "signUp": "Sign up"
+    },
+    "noAccount": "Don't have an account?",
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "generic": "An error occurred during login"
+    },
+    "validation": {
+      "emailOrUsernameRequired": "Email or username is required",
+      "emailInvalid": "Please enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 6 characters"
+    }
+  },
+  "register": {
+    "heading": "Join Aikyuu, Let's Do it!",
+    "subheading": "Enter below details to create an account",
+    "fields": {
+      "userName": "User Name *",
+      "email": "E-mail *",
+      "password": "Password *",
+      "confirmPassword": "Confirm Password *"
+    },
+    "terms": {
+      "prefix": "I agree to the terms of service and",
+      "privacyPolicy": "privacy policy"
+    },
+    "actions": {
+      "signUp": "Sign Up",
+      "login": "Login"
+    },
+    "haveAccount": "Already have an account ?",
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailInvalid": "Invalid email address",
+      "passwordMin": "Password must be at least 6 characters",
+      "mustAgree": "You must agree to the terms and conditions",
+      "passwordsDontMatch": "Passwords don't match"
+    }
+  },
+  "resetPassword": {
+    "heading": "Reset your password",
+    "subheading": {
+      "line1": "We're sorry to hear that's happen, don't worry we're here for you",
+      "line2": "Just enter your e-mail to help you"
+    },
+    "fields": {
+      "emailPlaceholder": "Email *"
+    },
+    "actions": {
+      "reset": "Reset Password",
+      "signIn": "Sign In"
+    },
+    "backTo": "Back to",
+    "errors": {
+      "emailNotFound": "Email not found",
+      "generic": "An error occurred while resetting password"
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address"
+    }
+  },
+  "resetPasswordNew": {
+    "heading": "Reset your password",
+    "subheading": "Enter your new password and verification code to reset your password",
+    "fields": {
+      "codePlaceholder": "Code *",
+      "newPasswordPlaceholder": "New Password *",
+      "confirmPasswordPlaceholder": "Confirm the new password *"
+    },
+    "resend": {
+      "countdown": "Resend code in {{seconds}}s",
+      "sending": "Sending...",
+      "prompt": "Didn't receive the code? Resend"
+    },
+    "actions": {
+      "reset": "Reset Password",
+      "signIn": "Sign In"
+    },
+    "backTo": "Back to",
+    "errors": {
+      "verificationMissing": "Verification ID is missing",
+      "invalidCode": "Invalid verification code",
+      "sessionExpired": "Verification session expired or invalid",
+      "generic": "An error occurred while resetting password",
+      "resendFailed": "Failed to resend verification code"
+    },
+    "validation": {
+      "codeRequired": "Verification code is required",
+      "codeMin": "Verification code must be at least 4 characters",
+      "codeExact": "Verification code must be 4 characters",
+      "newPasswordRequired": "New password is required",
+      "passwordMin": "Password must be at least 6 characters",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsDontMatch": "Passwords don't match"
+    }
+  },
+  "verification": {
+    "heading": "Verification",
+    "subheading": "Please, enter your verification code",
+    "imageAlt": "Young person with phone",
+    "fields": {
+      "codeLabel": "Code *"
+    },
+    "resend": {
+      "countdown": "Resend code in {{seconds}}s",
+      "sending": "Sending...",
+      "prompt": "Didn't receive the code? Resend"
+    },
+    "actions": {
+      "confirm": "Confirm"
+    }
+  },
+  "common": {
+    "actions": {
+      "cancel": "Cancel",
+      "next": "Next",
+      "back": "Back",
+      "delete": "Delete"
+    }
+  },
+  "createPosition": {
+    "header": "+ Create New Position",
+    "fields": {
+      "title": {
+        "label": "Title",
+        "placeholder": "ui/ux designer"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "this position is abot picking up  a ui/ux designer with experince in metrial UI design concept "
+      }
+    }
+  },
+  "criteriaSelection": {
+    "positionLabel": "Position:",
+    "header": "+ Create Criteria",
+    "options": {
+      "fullText": "Full Text generated by AI.",
+      "manual": "Add criteria manually."
+    },
+    "fullTextLabel": "Enter your criteria text:",
+    "fullTextPlaceholder": "Paste or type the full criteria text here..."
+  },
+  "criteriaSimple": {
+    "positionLabel": "Position:",
+    "header": "+ Create Criteria",
+    "addCriteriaLabel": "Add Criteria:",
+    "newCriteriaPlaceholder": "ui/ux designer",
+    "toast": {
+      "atLeastOne": "Please Create At least one critiria"
+    }
+  },
+  "uploadCv": {
+    "dropzone": {
+      "clickToUpload": "Click to upload",
+      "orDragAndDrop": "or drag and drop"
+    },
+    "status": {
+      "uploading": "uploading",
+      "uploaded": "uploaded",
+      "failed": "failed"
+    },
+    "toast": {
+      "allUploaded_one": "1 resume uploaded successfully!",
+      "allUploaded_other": "{{count}} resumes uploaded successfully!",
+      "partialUploaded": "{{successCount}} uploaded, {{failCount}} failed.",
+      "allFailed": "Failed to upload resumes."
+    },
+    "actions": {
+      "analysis": "analysis"
+    }
+  },
+  "analysis": {
+    "status": {
+      "analyzing": "Analyzing uploaded CVs...",
+      "comparing": "Comparing against criteria...",
+      "generating": "Generating recommendations...",
+      "finalizing": "Finalizing results...",
+      "complete": "Analysis complete!"
+    },
+    "redirecting": "Redirecting to results..."
+  },
+  "positionView": {
+    "modals": {
+      "uploadResumes": {
+        "title": "Upload Resumes",
+        "clickToUpload": "Click to upload",
+        "orDragAndDrop": "or drag and drop",
+        "primaryAction": "Upload Resumes"
+      },
+      "addCriteria": {
+        "title": "Add New Criteria",
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Type Your text",
+        "primaryAction": "Add Criteria"
+      }
+    },
+    "notFound": {
+      "title": "Position Not Found",
+      "subtitle": "The position you're looking for doesn't exist.",
+      "back": "Back to Use Cases"
+    },
+    "status": {
+      "created": "created",
+      "inProgress": "analyzing",
+      "completed": "completed"
+    },
+    "alerts": {
+      "addCriteriaFirst": "Please add at least one criteria before starting analysis.",
+      "uploadResumeFirst": "Please upload at least one resume before starting analysis."
+    },
+    "actions": {
+      "uploadResume": "Upload Resume",
+      "addCriteria": "Add Criteria",
+      "startAnalysis": "Start Analysis",
+      "analyzing": "Analyzing..."
+    },
+    "sections": {
+      "criteria": "Criteria",
+      "resumes": "Resumes"
+    }
+  },
+  "notFound": {
+    "title": "Oops! Page not found",
+    "actions": {
+      "home": "Return to Home"
+    }
+  },
+  "index": {
+    "heading": "Welcome to Aikyuu",
+    "subheading": "Your AI-powered recruitment platform for smarter hiring decisions",
+    "actions": {
+      "getStarted": "Get Started",
+      "viewUseCases": "View Use Cases"
+    }
+  },
+  "placeholder": {
+    "underConstruction": "This page is under construction. Continue prompting to have me fill in this page content.",
+    "actions": {
+      "backToDashboard": "Back to Dashboard"
+    }
+  },
+  "analysisCompleted": {
+    "notFound": {
+      "title": "Position Not Found",
+      "subtitle": "The position you're looking for doesn't exist.",
+      "back": "Back to Use Cases"
+    },
+    "export": {
+      "button": "Export",
+      "csv": "Export as CSV",
+      "excel": "Export as Excel",
+      "json": "Export as JSON"
+    },
+    "sections": {
+      "criteria": "Criteria",
+      "analysis": "Analysis cv"
+    }
+  },
+  "viewResult": {
+    "title": "{{title}} - Analysis Results",
+    "export": {
+      "button": "Export",
+      "csv": "Export as CSV",
+      "excel": "Export as Excel",
+      "json": "Export as JSON"
+    },
+    "sections": {
+      "criteria": "Criteria",
+      "analysis": "Analysis cv"
+    }
+  },
+  "history": {
+    "heading": "History",
+    "empty": "No history found",
+    "item": {
+      "amount": "Amount : {{amount}}",
+      "paidAt": "paid at: {{date}}"
+    },
+    "actions": {
+      "seeMore": "See More",
+      "loading": "Loading..."
+    }
+  },
+  "feedback": {
+    "heading": "Feedback",
+    "subheading": "Share your experience so we can improve Aikyuu for you.",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "attachImageOptional": "Attach Image (Optional)"
+    },
+    "actions": {
+      "chooseFile": "Choose File",
+      "submit": "Submit Feedback"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "titleTooLong": "Title is too long",
+      "descriptionRequired": "Description is required",
+      "descriptionTooLong": "Description is too long"
+    }
+  },
+  "criteriaManagement": {
+    "steps": {
+      "newPosition": { "title": "New Position", "subtitle": "Create New Position" },
+      "uploadCv": { "title": "Upload CV", "subtitle": "Download one or more CVs" },
+      "viewResult": { "title": "View Result", "subtitle": "View Result" }
+    },
+    "positionLabel": "Position:",
+    "header": "+ Create Criteria",
+    "addCriteriaLabel": "Add Criteria:",
+    "placeholder": "Place holder",
+    "actions": {
+      "createNewPosition": "Create New Position",
+      "save": "Save"
+    },
+    "modal": {
+      "title": "Add New Criteria",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Type Your text",
+      "primaryAction": "Add Criteria"
+    }
+  },
+  "paymentStatus": {
+    "title": {
+      "success": "Payment Successful! 🎉",
+      "cancel": "Payment Cancelled"
+    },
+    "subtitle": {
+      "success": "Your credits have been added to your account. You're all set to start evaluating candidates!",
+      "cancel": "No charges were made. You can always return to pricing and choose a plan that fits your needs."
+    },
+    "redirectingPrefix": "Redirecting in",
+    "redirectingSuffix": "s",
+    "actions": {
+      "useCases": "🚀 Go to Use Cases Now",
+      "dashboard": "Go to Dashboard",
+      "viewPricing": "View Pricing Plans",
+      "backToDashboard": "Back to Dashboard"
+    },
+    "features": {
+      "instantCredits": "Instant Credits",
+      "aiMatching": "AI Matching",
+      "secureSafe": "Secure & Safe"
+    }
+  }
+}

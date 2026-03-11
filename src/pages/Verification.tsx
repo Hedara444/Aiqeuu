@@ -16,12 +16,14 @@ import { AuthLayout } from '@/components/layout/auth-layout';
 import { AikyuuButton } from '@/components/ui/aikyuu-button';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
+import { useTranslation } from 'react-i18next';
 
 export default function Verification() {
   const navigate = useNavigate();
   const { verify, resendVerificationCode, isLoading } = useAuthStore();
   const [searchParams] = useSearchParams();
   const verificationId = searchParams.get('verificationId');
+  const { t } = useTranslation();
 
   const [verificationCode, setVerificationCode] = useState('');
   const [isResending, setIsResending] = useState(false);
@@ -78,7 +80,7 @@ export default function Verification() {
         <Box
           component="img"
           src="/verify.png"
-          alt="Young person with phone"
+          alt={t('verification.imageAlt')}
           sx={{
             width: "90%",
             height: "90%",
@@ -173,7 +175,7 @@ export default function Verification() {
             color: "text.primary"
           }}
         >
-          Verification
+          {t('verification.heading')}
         </Typography>
 
         {/* Subheading */}
@@ -187,7 +189,7 @@ export default function Verification() {
             color: "text.primary"
           }}
         >
-          Please, enter your verification code
+          {t('verification.subheading')}
         </Typography>
 
         {/* Form */}
@@ -203,7 +205,7 @@ export default function Verification() {
                   mb: 2
                 }}
               >
-                Code *
+                {t('verification.fields.codeLabel')}
               </FormLabel>
               <TextField
                 fullWidth
@@ -240,10 +242,10 @@ export default function Verification() {
                   }}
                 >
                   {resendCountdown > 0
-                    ? `Resend code in ${resendCountdown}s`
+                    ? t('verification.resend.countdown', { seconds: resendCountdown })
                     : isResending
-                      ? 'Sending...'
-                      : "Didn't receive the code? Resend"
+                      ? t('verification.resend.sending')
+                      : t('verification.resend.prompt')
                   }
                 </Button>
               </Box>
@@ -255,7 +257,7 @@ export default function Verification() {
               loading={isLoading}
               disabled={isLoading}
             >
-              Confirm
+              {t('verification.actions.confirm')}
             </AikyuuButton>
           </Stack>
         </Box>

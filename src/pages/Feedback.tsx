@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useProfileStore } from '@/store/profileStore';
+import { useTranslation } from 'react-i18next';
 
 const injectFeedbackStyles = () => {
   if (document.getElementById('feedback-ux-styles')) return;
@@ -43,18 +44,22 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-// Define validation schema with Zod
-const feedbackSchema = z.object({
-  title: z.string().min(1, "Title is required").max(100, "Title is too long"),
-  description: z.string().min(1, "Description is required").max(1000, "Description is too long"),
-  attachedFile: z.instanceof(File).optional().or(z.null())
-});
-
-type FeedbackFormData = z.infer<typeof feedbackSchema>;
+type FeedbackFormData = {
+  title: string;
+  description: string;
+  attachedFile: File | null | undefined;
+};
 
 export default function Feedback() {
   useEffect(() => { injectFeedbackStyles(); }, []);
   const { submitFeedback, uploadPhoto, isLoading } = useProfileStore();
+  const { t } = useTranslation();
+
+  const feedbackSchema = z.object({
+    title: z.string().min(1, t('feedback.validation.titleRequired')).max(100, t('feedback.validation.titleTooLong')),
+    description: z.string().min(1, t('feedback.validation.descriptionRequired')).max(1000, t('feedback.validation.descriptionTooLong')),
+    attachedFile: z.instanceof(File).optional().or(z.null()),
+  });
 
   const {
     register,
@@ -122,7 +127,7 @@ export default function Feedback() {
               WebkitTextFillColor: 'transparent'
             }}
           >
-            Feedback
+            {t('feedback.heading')}
           </Typography>
           <Typography
             variant="body1"
@@ -132,7 +137,7 @@ export default function Feedback() {
               fontWeight: 500
             }}
           >
-            Share your experience so we can improve Aikyuu for you.
+            {t('feedback.subheading')}
           </Typography>
         </Box>
 
@@ -183,7 +188,7 @@ export default function Feedback() {
                     mb: 0.6,
                   }}
                 >
-                  Title
+                  {t('feedback.fields.title')}
                 </FormLabel>
                 <TextField
                   fullWidth
@@ -221,7 +226,7 @@ export default function Feedback() {
                     mb: 0.6,
                   }}
                 >
-                  Description
+                  {t('feedback.fields.description')}
                 </FormLabel>
                 <TextField
                   fullWidth
@@ -261,7 +266,7 @@ export default function Feedback() {
                     mb: 0.6,
                   }}
                 >
-                  Attach Image (Optional)
+                  {t('feedback.fields.attachImageOptional')}
                 </FormLabel>
                 <Button
                   component="label"
@@ -280,7 +285,7 @@ export default function Feedback() {
                         }
                       }}
                     >
-                      {watchedFile ? watchedFile.name : 'Choose File'}
+                  {watchedFile ? watchedFile.name : t('feedback.actions.chooseFile')}
                       <VisuallyHiddenInput
                         type="file"
                         onChange={handleFileChange}
@@ -324,7 +329,7 @@ export default function Feedback() {
                   },
                 }}
               >
-                Cancel
+            {t('common.actions.cancel')}
               </Button>
               <Button
                 type="submit"
@@ -348,7 +353,7 @@ export default function Feedback() {
                   }
                 }}
               >
-                {isLoading ? <CircularProgress size={18} color="inherit" /> : 'Submit Feedback'}
+            {isLoading ? <CircularProgress size={18} color="inherit" /> : t('feedback.actions.submit')}
               </Button>
             </Stack>
           </form>

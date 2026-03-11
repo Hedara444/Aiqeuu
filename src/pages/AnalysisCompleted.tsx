@@ -29,6 +29,8 @@ import {
 } from '@mui/material';
 import { Download as DownloadIcon, CheckCircle, Cancel } from '@mui/icons-material';
 import LinearProgress from '@mui/material/LinearProgress';
+import { exportCSV, exportExcel, exportJSON } from '@/utils/export';
+import { useTranslation } from 'react-i18next';
 
 const injectAnalysisCompletedStyles = () => {
   if (document.getElementById('analysis-completed-ux-styles')) return;
@@ -150,6 +152,7 @@ export default function AnalysisCompleted() {
   const { currentPosition, getPositionById } = usePositionsStore();
   const { showCriteria, showAnalysis, setShowCriteria, setShowAnalysis } = useUIStore();
   const [isLoadingPage, setIsLoadingPage] = useState(true);
+  const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -190,9 +193,9 @@ export default function AnalysisCompleted() {
       <Box sx={{ minHeight: '100vh', bgcolor: 'grey.50' }}>
         <Container maxWidth="lg" sx={{ py: 3 }}>
           <Stack alignItems="center" spacing={2}>
-            <Typography variant="h4" fontWeight={700}>Position Not Found</Typography>
-            <Typography color="text.secondary">The position you're looking for doesn't exist.</Typography>
-            <Button component={RouterLink} to="/use-cases" variant="contained">Back to Use Cases</Button>
+            <Typography variant="h4" fontWeight={700}>{t('analysisCompleted.notFound.title')}</Typography>
+            <Typography color="text.secondary">{t('analysisCompleted.notFound.subtitle')}</Typography>
+            <Button component={RouterLink} to="/use-cases" variant="contained">{t('analysisCompleted.notFound.back')}</Button>
           </Stack>
         </Container>
       </Box>
@@ -200,17 +203,20 @@ export default function AnalysisCompleted() {
   }
 
   const handleExportCSV = () => {
-    console.log("CSV")
+    if (!currentPosition) return;
+    exportCSV(currentPosition);
     handleCloseMenu();
   };
 
   const handleExportExcel = () => {
-    console.log("Excel")
+    if (!currentPosition) return;
+    exportExcel(currentPosition);
     handleCloseMenu();
   };
 
   const handleExportJSON = () => {
-    console.log("JSON")
+    if (!currentPosition) return;
+    exportJSON(currentPosition);
     handleCloseMenu();
   };
 
@@ -228,19 +234,19 @@ export default function AnalysisCompleted() {
           </Box>
           <Box>
             <Button variant="contained" sx={{ color: 'white', width: '130px', height: '42px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #1776F2 0%, #0d5fcc 100%)', boxShadow: '0 10px 24px rgba(23,118,242,0.26)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 28px rgba(23,118,242,0.32)' } }} endIcon={<DownloadIcon sx={{ fontSize: '1.1rem' }} />} onClick={handleOpenMenu} size="small">
-              Export
+              {t('analysisCompleted.export.button')}
             </Button>
             <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
-              <MenuItem onClick={handleExportCSV} sx={{ fontSize: '0.875rem' }}>Export as CSV</MenuItem>
-              <MenuItem onClick={handleExportExcel} sx={{ fontSize: '0.875rem' }}>Export as Excel</MenuItem>
-              <MenuItem onClick={handleExportJSON} sx={{ fontSize: '0.875rem' }}>Export as JSON</MenuItem>
+              <MenuItem onClick={handleExportCSV} sx={{ fontSize: '0.875rem' }}>{t('analysisCompleted.export.csv')}</MenuItem>
+              <MenuItem onClick={handleExportExcel} sx={{ fontSize: '0.875rem' }}>{t('analysisCompleted.export.excel')}</MenuItem>
+              <MenuItem onClick={handleExportJSON} sx={{ fontSize: '0.875rem' }}>{t('analysisCompleted.export.json')}</MenuItem>
             </Menu>
           </Box>
         </Stack>
 
         {/* Criteria */}
         <Stack sx={{ mb: 3 }}>
-          <ToggleSwitch isActive={showCriteria} label="Criteria" onToggle={() => setShowCriteria(!showCriteria)} />
+          <ToggleSwitch isActive={showCriteria} label={t('analysisCompleted.sections.criteria')} onToggle={() => setShowCriteria(!showCriteria)} />
           <Box sx={{ mt: 2 ,fontSize:'0.9rem' }}>
             <CriteriaCard  criterias={currentPosition.criterias} isVisible={showCriteria} />
           </Box>
@@ -248,7 +254,7 @@ export default function AnalysisCompleted() {
 
         {/* Analysis Results */}
         <Stack sx={{ mb: 2 }}>
-          <ToggleSwitch isActive={showAnalysis} label="Analysis cv" onToggle={() => setShowAnalysis(!showAnalysis)} />
+          <ToggleSwitch isActive={showAnalysis} label={t('analysisCompleted.sections.analysis')} onToggle={() => setShowAnalysis(!showAnalysis)} />
         </Stack>
 
         <Grid container spacing={3}>

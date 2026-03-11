@@ -18,6 +18,7 @@ import { Add as AddIcon, Delete } from '@mui/icons-material';
 import { usePositionsStore } from '@/store/positionsStore';
 import { toast } from 'react-toastify';
 import Stepper from '@/components/ui/Stepper';
+import { useTranslation } from 'react-i18next';
 
 const injectCriteriaSimpleStyles = () => {
   if (document.getElementById('criteria-simple-ux-styles')) return;
@@ -33,6 +34,7 @@ const injectCriteriaSimpleStyles = () => {
 export default function CriteriaSimple() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
 
   const [newCriteriaText, setNewCriteriaText] = useState('');
 
@@ -74,7 +76,7 @@ export default function CriteriaSimple() {
       navigate(`/upload-cv/${id}`);
     }
     else {
-      toast.warning("Please Create At least one critiria");
+      toast.warning(t('criteriaSimple.toast.atLeastOne'));
     }
 
   };
@@ -116,7 +118,7 @@ export default function CriteriaSimple() {
                   fontSize: { xs: '0.875rem', md: '0.9rem' },
                   fontWeight: 500
                 }}>
-                  Position:
+                  {t('criteriaSimple.positionLabel')}
                 </Typography>
                 <Typography sx={{
                   color: 'primary.dark',
@@ -139,7 +141,7 @@ export default function CriteriaSimple() {
                   fontSize: { xs: '0.71rem', md: '0.8rem'},
                   fontWeight: 700
                 }}>
-                  + Create Criteria
+                  {t('criteriaSimple.header')}
                 </Typography>
               </Box>
 
@@ -176,7 +178,7 @@ export default function CriteriaSimple() {
                         fontWeight: 500,
                         mr: 'auto'
                       }}>
-                        Add Criteria:
+                        {t('criteriaSimple.addCriteriaLabel')}
                       </Typography>
                       <Box sx={{
                         backgroundColor: 'background.paper',
@@ -197,7 +199,7 @@ export default function CriteriaSimple() {
                           onChange={(e) => { setNewCriteriaText(e.target.value) }}
                           fullWidth
                           required
-                          placeholder="ui/ux designer"
+                          placeholder={t('criteriaSimple.newCriteriaPlaceholder')}
                           size="small"
                           sx={{
                             '& .MuiOutlinedInput-root': {
@@ -323,7 +325,7 @@ export default function CriteriaSimple() {
                         },
                       }}
                     >
-                      Back
+                      {t('common.actions.back')}
                     </Button>
                     <Button
                       onClick={handleSave}
@@ -350,7 +352,7 @@ export default function CriteriaSimple() {
                         },
                       }}
                     >
-                      Next
+                      {t('common.actions.next')}
                     </Button>
                   </Stack>
                 </Stack>

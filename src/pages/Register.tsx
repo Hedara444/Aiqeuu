@@ -14,26 +14,35 @@ import { useAuthStore } from '@/store/authStore';
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from 'react-i18next';
 
-// Define the validation schema
-const registerSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  confirmPassword: z.string(),
-  agreeToTerms: z.boolean().refine(val => val === true, {
-    message: "You must agree to the terms and conditions"
-  })
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
-
-type RegisterFormData = z.infer<typeof registerSchema>;
+type RegisterFormData = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  agreeToTerms: boolean;
+};
 
 export default function Register() {
   const navigate = useNavigate();
   const { signup, isLoading } = useAuthStore();
+  const { t } = useTranslation();
+
+  const registerSchema = z
+    .object({
+      name: z.string().min(1, t('register.validation.nameRequired')),
+      email: z.string().email(t('register.validation.emailInvalid')),
+      password: z.string().min(6, t('register.validation.passwordMin')),
+      confirmPassword: z.string(),
+      agreeToTerms: z.boolean().refine((val) => val === true, {
+        message: t('register.validation.mustAgree'),
+      }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t('register.validation.passwordsDontMatch'),
+      path: ['confirmPassword'],
+    });
 
   const {
     register,
@@ -106,7 +115,7 @@ export default function Register() {
             mt: { xs: 3, md: 6, lg: 5 }
           }}
         >
-          Join Aikyuu, Let's Do it!
+          {t('register.heading')}
         </Typography>
 
         {/* Subheading */}
@@ -118,7 +127,7 @@ export default function Register() {
           lineHeight: 'normal',
           mb: { xs: 3, md: 7 }
         }}>
-          Enter below details to create an account
+          {t('register.subheading')}
         </Typography>
 
         {/* Form */}
@@ -127,7 +136,7 @@ export default function Register() {
             {...register('name')}
             name="name"
             type="text"
-            label="User Name *"
+            label={t('register.fields.userName')}
             value={formData.name}
             onChange={handleInputChange}
             error={!!errors.name}
@@ -145,7 +154,7 @@ export default function Register() {
             {...register('email')}
             name="email"
             type="email"
-            label="E-mail *"
+            label={t('register.fields.email')}
             value={formData.email}
             onChange={handleInputChange}
             error={!!errors.email}
@@ -165,7 +174,7 @@ export default function Register() {
               {...register('password')}
               name="password"
               type="password"
-              label="Password *"
+              label={t('register.fields.password')}
               value={formData.password}
               onChange={handleInputChange}
               error={!!errors.password}
@@ -184,7 +193,7 @@ export default function Register() {
               {...register('confirmPassword')}
               name="confirmPassword"
               type="password"
-              label="Confirm Password *"
+              label={t('register.fields.confirmPassword')}
               value={formData.confirmPassword}
               onChange={handleInputChange}
               error={!!errors.confirmPassword}
@@ -225,9 +234,9 @@ export default function Register() {
                 fontWeight: 400,
                 lineHeight: 'normal'
               }}>
-                I agree to the terms of service and{' '}
+                {t('register.terms.prefix')}{' '}
                 <Typography component="span" sx={{ fontWeight: 600, fontSize: 'inherit' }}>
-                  privacy policy
+                  {t('register.terms.privacyPolicy')}
                 </Typography>
               </Typography>
             }
@@ -249,7 +258,7 @@ export default function Register() {
              
             }}
           >
-            Sign Up
+            {t('register.actions.signUp')}
           </AikyuuButton>
 
           {/* Sign In Link */}
@@ -263,7 +272,7 @@ export default function Register() {
                 fontWeight: 500
               }}
             >
-              Already have an account ?{' '}
+              {t('register.haveAccount')}{' '}
             </Typography>
             <Typography
               component={Link}
@@ -277,7 +286,7 @@ export default function Register() {
                 '&:hover': { textDecoration: 'none' }
               }}
             >
-              Login
+              {t('register.actions.login')}
             </Typography>
           </Box>
         </Box>

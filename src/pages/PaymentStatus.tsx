@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 /* ─── Keyframe Animations (injected once) ─────────────────────────────── */
 const injectStyles = () => {
@@ -165,6 +166,7 @@ const PaymentStatus: React.FC = () => {
   const isSuccess = location.pathname.includes('/payment-success');
   const [countdown, setCountdown] = useState(5);
   const [confetti] = useState(() => generateConfetti(50));
+  const { t } = useTranslation();
 
   useEffect(() => { injectStyles(); }, []);
 
@@ -284,7 +286,7 @@ const PaymentStatus: React.FC = () => {
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
         }}>
-          {isSuccess ? 'Payment Successful! 🎉' : 'Payment Cancelled'}
+          {isSuccess ? t('paymentStatus.title.success') : t('paymentStatus.title.cancel')}
         </h1>
 
         {/* ── Subtitle ── */}
@@ -296,8 +298,8 @@ const PaymentStatus: React.FC = () => {
           animation: 'fadeInUp 0.5s 0.55s both',
         }}>
           {isSuccess
-            ? 'Your credits have been added to your account. You\'re all set to start evaluating candidates!'
-            : 'No charges were made. You can always return to pricing and choose a plan that fits your needs.'}
+            ? t('paymentStatus.subtitle.success')
+            : t('paymentStatus.subtitle.cancel')}
         </p>
 
         {/* ── Success: countdown progress bar ── */}
@@ -316,7 +318,7 @@ const PaymentStatus: React.FC = () => {
                 }} />
               ))}
               <span style={{ fontSize: '0.85rem', color: '#707070', marginLeft: 4 }}>
-                Redirecting in <strong style={{ color: '#1776F2' }}>{countdown}s</strong>
+                {t('paymentStatus.redirectingPrefix')} <strong style={{ color: '#1776F2' }}>{countdown}{t('paymentStatus.redirectingSuffix')}</strong>
               </span>
             </div>
             <div style={{
@@ -382,7 +384,7 @@ const PaymentStatus: React.FC = () => {
                   boxShadow: '0 8px 24px rgba(0,212,168,0.35)',
                 }}
               >
-                🚀 Go to Use Cases Now
+                {t('paymentStatus.actions.useCases')}
               </button>
               <button
                 onClick={() => navigate('/dashboard')}
@@ -401,7 +403,7 @@ const PaymentStatus: React.FC = () => {
                 onMouseEnter={e => { (e.target as HTMLButtonElement).style.borderColor = '#1776F2'; (e.target as HTMLButtonElement).style.color = '#1776F2'; }}
                 onMouseLeave={e => { (e.target as HTMLButtonElement).style.borderColor = '#DAD2D2'; (e.target as HTMLButtonElement).style.color = '#707070'; }}
               >
-                Go to Dashboard
+                {t('paymentStatus.actions.dashboard')}
               </button>
             </>
           ) : (
@@ -423,7 +425,7 @@ const PaymentStatus: React.FC = () => {
                   boxShadow: '0 8px 24px rgba(23,118,242,0.35)',
                 }}
               >
-                View Pricing Plans
+                {t('paymentStatus.actions.viewPricing')}
               </button>
               <button
                 onClick={() => navigate('/dashboard')}
@@ -442,7 +444,7 @@ const PaymentStatus: React.FC = () => {
                 onMouseEnter={e => { (e.target as HTMLButtonElement).style.borderColor = '#1776F2'; (e.target as HTMLButtonElement).style.color = '#1776F2'; }}
                 onMouseLeave={e => { (e.target as HTMLButtonElement).style.borderColor = '#DAD2D2'; (e.target as HTMLButtonElement).style.color = '#707070'; }}
               >
-                Back to Dashboard
+                {t('paymentStatus.actions.backToDashboard')}
               </button>
             </>
           )}
@@ -458,9 +460,9 @@ const PaymentStatus: React.FC = () => {
             animation: 'fadeInUp 0.5s 0.9s both',
           }}>
             {[
-              { icon: '⚡', label: 'Instant Credits' },
-              { icon: '🤖', label: 'AI Matching' },
-              { icon: '🔒', label: 'Secure & Safe' },
+              { icon: '⚡', label: t('paymentStatus.features.instantCredits') },
+              { icon: '🤖', label: t('paymentStatus.features.aiMatching') },
+              { icon: '🔒', label: t('paymentStatus.features.secureSafe') },
             ].map(({ icon, label }) => (
               <div key={label} style={{
                 background: 'linear-gradient(135deg, rgba(23,118,242,0.06), rgba(0,212,168,0.06))',

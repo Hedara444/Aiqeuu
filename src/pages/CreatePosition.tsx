@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { usePositionsStore } from '@/store/positionsStore';
 import Stepper from '@/components/ui/Stepper';
+import { useTranslation } from 'react-i18next';
 
 const injectCreatePositionStyles = () => {
   if (document.getElementById('create-position-ux-styles')) return;
@@ -26,6 +27,7 @@ const injectCreatePositionStyles = () => {
 export default function CreatePosition() {
   useEffect(() => { injectCreatePositionStyles(); }, []);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { createPosition, isLoading } = usePositionsStore();
 
@@ -77,7 +79,7 @@ export default function CreatePosition() {
                 fontSize: { xs: '0.7rem', md: '0.7rem' },
                 fontWeight: 700
               }}>
-                + Create New Position 
+                {t('createPosition.header')}
               </Typography>
             </Box>
 
@@ -93,7 +95,7 @@ export default function CreatePosition() {
                     fontWeight: 700,
                     py:1
                   }}>
-                    Title
+                    {t('createPosition.fields.title.label')}
                   </Typography>
                   <TextField
                     name="title"
@@ -101,7 +103,7 @@ export default function CreatePosition() {
                     onChange={handleInputChange}
                     fullWidth
                     required
-                    placeholder="ui/ux designer"
+                    placeholder={t('createPosition.fields.title.placeholder')}
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         height: { xs: '34px', md: '38px' },
@@ -135,7 +137,7 @@ export default function CreatePosition() {
                     fontWeight: 700,
                     py:1
                   }}>
-                    Description
+                    {t('createPosition.fields.description.label')}
                   </Typography>
                   <TextField
                     name="description"
@@ -144,7 +146,7 @@ export default function CreatePosition() {
                     fullWidth
                     multiline
                     rows={3}
-                    placeholder="this position is abot picking up  a ui/ux designer with experince in metrial UI design concept "
+                    placeholder={t('createPosition.fields.description.placeholder')}
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '12px',
@@ -194,7 +196,7 @@ export default function CreatePosition() {
                       },
                     }}
                   >
-                    Cancel
+                    {t('common.actions.cancel')}
                   </Button>
                   <Button
                     type="submit"
@@ -220,7 +222,7 @@ export default function CreatePosition() {
                       },
                     }}
                   >
-                    Next
+                    {t('common.actions.next')}
                   </Button>
                 </Stack>
               </Box>

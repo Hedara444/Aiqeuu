@@ -12,12 +12,14 @@ import {
 } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { useProfileStore } from '@/store/profileStore';
+import { useTranslation } from 'react-i18next';
 
 export default function History() {
   const { history, getHistory, isLoading } = useProfileStore();
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const pageSize = 10;
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,7 +74,7 @@ export default function History() {
               color: "text.primary",
             }}
           >
-            History
+            {t('history.heading')}
           </Typography>
         </Box>
 
@@ -81,7 +83,7 @@ export default function History() {
           {history.length === 0 ? (
             <Box textAlign="center" sx={{ py: 8 }}>
               <Typography variant="h6" color="text.secondary">
-                No history found
+                {t('history.empty')}
               </Typography>
             </Box>
           ) : (
@@ -113,7 +115,7 @@ export default function History() {
                               fontSize: { xs: "1.125rem", md: "1.25rem" },
                             }}
                           >
-                            Amount : {entry.amount}
+                            {t('history.item.amount', { amount: entry.amount })}
                           </Typography>
                         </Grid>
                         <Grid>
@@ -125,7 +127,7 @@ export default function History() {
                               fontSize: { xs: "1.125rem", md: "1.25rem" },
                             }}
                           >
-                            paid at: {new Date(entry.createdAt).toLocaleString()}
+                            {t('history.item.paidAt', { date: new Date(entry.createdAt).toLocaleString() })}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -151,7 +153,7 @@ export default function History() {
                       minWidth: { xs: 180, md: 200 },
                     }}
                   >
-                    {isLoading ? 'Loading...' : 'See More'}
+                    {isLoading ? t('history.actions.loading') : t('history.actions.seeMore')}
                   </Button>
                 </Box>
               )}
