@@ -85,10 +85,14 @@ const CriteriaCard: React.FC<{
 
 const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean; }> = ({ result , showAnalysisGlobal }) => {
   const progressPercentage = result.score;
-  const [showAnalysisLocal, setShowAnalysisLocal] = useState(true);
+  const { t } = useTranslation();
+  const [showAnalysisLocal, setShowAnalysisLocal] = useState(showAnalysisGlobal);
 
-  const shouldShowExplanation = showAnalysisGlobal && showAnalysisLocal;
+  useEffect(() => {
+    setShowAnalysisLocal(showAnalysisGlobal);
+  }, [showAnalysisGlobal]);
 
+  const shouldShowExplanation = showAnalysisLocal;
 
   return (
     <Card variant="outlined" sx={{ borderRadius: 2, borderColor: 'rgba(23,118,242,0.18)', transition: 'all .22s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 12px 24px rgba(23,118,242,0.14)' } }}>
@@ -106,7 +110,7 @@ const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean; }>
           {/* LOCAL toggle */}
           <ToggleSwitch
             isActive={showAnalysisLocal}
-            label="Analysis cv2"
+            label={t('analysisCompleted.sections.analysis')}
             onToggle={() => setShowAnalysisLocal(prev => !prev)}
           />
 

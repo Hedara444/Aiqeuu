@@ -30,6 +30,7 @@ import { useParams, Link as RouterLink } from 'react-router-dom';
 import { usePositionsStore } from '@/store/positionsStore';
 import { useUIStore } from '@/store/uiStore';
 import { useTranslation } from 'react-i18next';
+import { exportCSV, exportExcel, exportJSON } from '@/utils/export';
 
 const injectViewResultStyles = () => {
   if (document.getElementById('view-result-ux-styles')) return;
@@ -173,17 +174,20 @@ export default function ViewResult() {
   }, [])
 
   const handleExportCSV = () => {
-    console.log("CSV")
+    if (!currentPosition) return;
+    exportCSV(currentPosition);
     handleCloseMenu();
   };
 
   const handleExportExcel = () => {
-    console.log("Excel")
+    if (!currentPosition) return;
+    exportExcel(currentPosition);
     handleCloseMenu();
   };
 
   const handleExportJSON = () => {
-    console.log("JSON")
+    if (!currentPosition) return;
+    exportJSON(currentPosition);
     handleCloseMenu();
   };
 
@@ -252,16 +256,16 @@ export default function ViewResult() {
           </Stack>
 
 
-            <Grid container spacing={3}>
-              {currentPosition.resumes.map((result) => (
-                <Grid size={6} key={result.id}>
-                  <AnalysisCard
-                    result={result}
-                    showAnalysisGlobal={showAnalysis}
-                  />
-                </Grid>
-              ))}
-            </Grid>
+          <Grid container spacing={3}>
+            {currentPosition.resumes.map((result) => (
+              <Grid size={6} key={result.id}>
+                <AnalysisCard
+                  result={result}
+                  showAnalysisGlobal={showAnalysis}
+                />
+              </Grid>
+            ))}
+          </Grid>
 
         </Container>
       </Box>
@@ -297,9 +301,14 @@ const CriteriaCard: React.FC<{
 
 const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean }> = ({ result , showAnalysisGlobal  }) => {
   const progressPercentage = result.score;
-  const [showAnalysisLocal, setShowAnalysisLocal] = useState(true);
+  const { t } = useTranslation();
+  const [showAnalysisLocal, setShowAnalysisLocal] = useState(showAnalysisGlobal);
 
-  const shouldShowExplanation = showAnalysisGlobal && showAnalysisLocal;
+  useEffect(() => {
+    setShowAnalysisLocal(showAnalysisGlobal);
+  }, [showAnalysisGlobal]);
+
+  const shouldShowExplanation = showAnalysisGlobal ? true : showAnalysisLocal;
   return (
     <Card variant="outlined" sx={{ borderColor: 'rgba(23,118,242,0.18)', borderRadius: '16px', transition: 'all .22s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 12px 24px rgba(23,118,242,0.14)' } }}>
       <CardContent>
@@ -315,8 +324,8 @@ const AnalysisCard: React.FC<{ result: Resume ,  showAnalysisGlobal: boolean }> 
 
           {/* LOCAL toggle */}
           <ToggleSwitch
-            isActive={showAnalysisLocal}
-            label="Analysis cv"
+            isActive={showAnalysisGlobal ? true : showAnalysisLocal}
+            label={t('viewResult.sections.analysis')}
             onToggle={() => setShowAnalysisLocal(prev => !prev)}
           />
 

@@ -7,6 +7,7 @@ interface BillingHistoryItem {
   id: number;
   productName: string;
   quantity: number;
+  pointsPerUnit?: number;
   amount: number;
   createdAt: string;
   currency: string;
@@ -77,12 +78,16 @@ export const useBillingStore = create<BillingState>()(
             };
 
             const currencySymbol = getCurrencySymbol(item.currency);
+            const packageSize =
+              item.pointsPerUnit != null
+                ? item.pointsPerUnit * item.quantity
+                : item.quantity;
 
             return {
               id: item.id.toString(),
               plan: item.productName ,
               startDate: startDate,
-              package: `${item.quantity} CVs`,
+              package: `${packageSize} CVs`,
               price: `${currencySymbol}${item.amount}`,
               status: item.status,
             };

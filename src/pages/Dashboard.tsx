@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography, Paper, Container } from '@mui/material';
+import { Box, Typography, Paper, Container, Grid } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
   ArrowForward as ArrowForwardIcon,
+  WorkOutline as WorkOutlineIcon,
+  ListAlt as ListAltIcon,
+  Description as DescriptionIcon,
+  Insights as InsightsIcon,
 } from '@mui/icons-material';
 import Stepper from '@/components/ui/Stepper';
 import { useProfileStore } from '@/store/profileStore';
@@ -94,7 +98,7 @@ const TIPS = [
 /* ── Component ───────────────────────────────────────────────────────── */
 export default function Dashboard() {
   useEffect(() => { injectDashStyles(); }, []);
-  const { profile, balance } = useProfileStore();
+  const { profile, balance, stats, getStats } = useProfileStore();
   const { t } = useTranslation();
 
   const hour = new Date().getHours();
@@ -104,6 +108,60 @@ export default function Dashboard() {
       : hour < 17
         ? t('dashboard.greeting.afternoon')
         : t('dashboard.greeting.evening');
+
+  useEffect(() => {
+    if (!stats) {
+      void getStats();
+    }
+  }, [getStats, stats]);
+
+  const positionsCount = stats?.positionsCount ?? null;
+  const avgCriteriasPerUseCase = stats?.avgCriteriasPerUseCase != null ? Math.round(stats.avgCriteriasPerUseCase * 100) / 100 : null;
+  const processedResumesCount = stats?.processedResumesCount ?? null;
+  const avgScorePercent = stats?.avgScore != null ? Math.round(stats.avgScore) : null;
+
+  const statCardSx = (accentA: string, accentB: string, glow: string) => ({
+    borderRadius: '16px',
+    p: 2,
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    position: 'relative',
+    overflow: 'hidden',
+    backdropFilter: 'blur(2px)',
+    minHeight: 12,
+    border: '1px solid rgba(23,118,242,0.12)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      background: `linear-gradient(135deg, ${accentA} 0%, ${accentB} 100%)`,
+      opacity: 0.08,
+      transform: 'translate3d(0,0,0)',
+      backgroundSize: '200% auto',
+      animation: 'dash-shimmer 6s linear infinite',
+      pointerEvents: 'none',
+    },
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      top: -60,
+      right: -70,
+      width: 160,
+      height: 160,
+      borderRadius: '50%',
+      background: `radial-gradient(circle, ${accentA} 0%, rgba(255,255,255,0) 70%)`,
+      opacity: 0.12,
+      animation: 'dash-orb 10s ease-in-out infinite',
+      pointerEvents: 'none',
+    },
+    '&:hover': {
+      borderColor: 'rgba(23,118,242,0.18)',
+      boxShadow: `${glow}, 0 16px 38px rgba(16,36,63,0.10)`,
+    },
+  });
 
   return (
     <Box sx={{
@@ -171,6 +229,82 @@ export default function Dashboard() {
         {/* ── Stepper ── */}
         <Box sx={{ animation: 'dash-fade-up 0.5s 0.1s both' }}>
           <Stepper step={1} />
+        </Box>
+
+        <Box sx={{
+          mt: 2.2,
+          mb: 3,
+          animation: 'dash-fade-up 0.5s 0.22s both',
+        }}>
+          <Typography sx={{
+            fontFamily: 'Montserrat',
+            fontSize: { xs: '0.78rem', md: '0.85rem' },
+            fontWeight: 700,
+            color: 'text.secondary',
+            mb: 1.5,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}>
+            {t('dashboard.stats.title')}
+          </Typography>
+
+          <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center" sx={{ maxWidth: 1060, mx: 'auto' }}>
+            <Grid item xs={12} sm={6} md="auto" sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Paper className="stat-card" elevation={0} sx={{ ...statCardSx('rgb(0,196,255)', 'rgba(23,118,242,1)', '0 14px 30px rgba(23,118,242,0.16)'), width: { xs: '100%', sm: 240 } }}>
+                <Box sx={{ width: 34, height: 34, borderRadius: '10px', background: 'linear-gradient(135deg, rgba(0,196,255,0.16), rgba(23,118,242,0.18))', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 0.7 }}>
+                  <WorkOutlineIcon sx={{ fontSize: '1.05rem', color: '#1776F2' }} />
+                </Box>
+                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: '0.7rem', color: 'text.secondary', mb: 0.6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  {t('dashboard.stats.positionsCount')}
+                </Typography>
+                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: '1.72rem', lineHeight: 1.1, background: 'linear-gradient(135deg, #1776F2, #00D4A8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'stat-count 0.35s both' }}>
+                  {positionsCount ?? '—'}
+                </Typography>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md="auto" sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Paper className="stat-card" elevation={0} sx={{ ...statCardSx('rgb(0,196,255)', 'rgba(23,118,242,1)', '0 14px 30px rgba(99,102,241,0.16)'), width: { xs: '100%', sm: 240 } }}>
+                <Box sx={{ width: 34, height: 34, borderRadius: '10px', background: 'linear-gradient(135deg, rgba(99,102,241,0.16), rgba(23,118,242,0.18))', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 0.7 }}>
+                  <ListAltIcon sx={{ fontSize: '1.05rem', color: '#4f46e5' }} />
+                </Box>
+                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: '0.7rem', color: 'text.secondary', mb: 0.6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  {t('dashboard.stats.avgCriteriasPerUseCase')}
+                </Typography>
+                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: '1.72rem', lineHeight: 1.1, background: 'linear-gradient(135deg, #4f46e5, #1776F2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'stat-count 0.35s both' }}>
+                  {avgCriteriasPerUseCase ?? '—'}
+                </Typography>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md="auto" sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Paper className="stat-card" elevation={0} sx={{ ...statCardSx('rgb(103,227,241)', 'rgba(23,118,242,1)', '0 14px 30px rgba(0,212,168,0.16)'), width: { xs: '100%', sm: 240 } }}>
+                <Box sx={{ width: 34, height: 34, borderRadius: '10px', background: 'linear-gradient(135deg, rgba(0,212,168,0.16), rgba(23,118,242,0.18))', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 0.7 }}>
+                  <DescriptionIcon sx={{ fontSize: '1.05rem', color: '#00b894' }} />
+                </Box>
+                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: '0.7rem', color: 'text.secondary', mb: 0.6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  {t('dashboard.stats.processedResumesCount')}
+                </Typography>
+                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: '1.72rem', lineHeight: 1.1, background: 'linear-gradient(135deg, #00b894, #1776F2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'stat-count 0.35s both' }}>
+                  {processedResumesCount ?? '—'}
+                </Typography>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md="auto" sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Paper className="stat-card" elevation={0} sx={{ ...statCardSx('rgb(71,255,175)', 'rgba(23,118,242,1)', '0 14px 30px rgba(255,140,66,0.16)'), width: { xs: '100%', sm: 240 } }}>
+                <Box sx={{ width: 34, height: 34, borderRadius: '10px', background: 'linear-gradient(135deg, rgba(71,255,175,0.18), rgba(23,118,242,0.16))', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 0.7 }}>
+                  <InsightsIcon sx={{ fontSize: '1.05rem', color: '#12b886' }} />
+                </Box>
+                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: '0.7rem', color: 'text.secondary', mb: 0.6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  {t('dashboard.stats.avgScore')}
+                </Typography>
+                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: '1.72rem', lineHeight: 1.1, background: 'linear-gradient(135deg, #12b886, #1776F2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'stat-count 0.35s both' }}>
+                  {avgScorePercent != null ? `${avgScorePercent}%` : '—'}
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
         </Box>
 
 

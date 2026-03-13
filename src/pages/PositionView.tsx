@@ -35,6 +35,7 @@ import {
   Brush as BrushIcon,
 } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const injectPositionViewStyles = () => {
   if (document.getElementById('position-view-ux-styles')) return;
@@ -529,11 +530,11 @@ export default function PositionView() {
 
   const handleStartAnalysis = async () => {
     if (currentPosition.criterias.length === 0) {
-      alert(t('positionView.alerts.addCriteriaFirst'));
+      toast.warn(t('positionView.alerts.addCriteriaFirst'));
       return;
     }
     if (currentPosition.resumes.length === 0) {
-      alert(t('positionView.alerts.uploadResumeFirst'));
+      toast.warn(t('positionView.alerts.uploadResumeFirst'));
       return;
     }
 
@@ -584,11 +585,11 @@ export default function PositionView() {
                   color: 'white',
                   fontWeight: 700,
                   border: '1px solid rgba(255,255,255,0.26)',
-                  ...config.chipSx
+                  ...config?.chipSx
                 }}
               />
             </Stack>
-            {currentPosition.description && (
+            {currentPosition?.description && (
               <Typography color="text.secondary">{currentPosition.description}</Typography>
             )}
           </Stack>
@@ -619,7 +620,11 @@ export default function PositionView() {
         {/* Actions */}
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <Button variant="contained" color="success" sx={{ color: 'white', width: '240px', height: '40px', fontSize: '0.7rem', borderRadius: '12px', background: 'linear-gradient(135deg, #0dbf8c 0%, #0aa675 100%)', boxShadow: '0 10px 22px rgba(13,191,140,0.28)', '&:hover': { transform: 'translateY(-1px)', boxShadow: '0 14px 26px rgba(13,191,140,0.32)' } }} onClick={handleStartAnalysis} disabled={isAnalyzing}>
-            {isAnalyzing ? t('positionView.actions.analyzing') : t('positionView.actions.startAnalysis')}
+            {isAnalyzing
+              ? t('positionView.actions.analyzing')
+              : currentPosition.status === 'completed'
+                ? t('positionView.actions.showAnalysis')
+                : t('positionView.actions.startAnalysis')}
           </Button>
           {/* <Button component={RouterLink} to="/use-cases" variant="outlined">Back to Use Cases</Button> */}
         </Stack>

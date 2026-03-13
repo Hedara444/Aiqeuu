@@ -9,6 +9,12 @@ interface ProfileState {
     balance: number | null;
     history: TransactionHistory[] | null;
     products: Product[] | null;
+    stats: {
+        positionsCount: number;
+        avgCriteriasPerUseCase: number;
+        processedResumesCount: number;
+        avgScore: number;
+    } | null;
     isLoading: boolean;
     error: string | null;
 
@@ -17,6 +23,7 @@ interface ProfileState {
     getBalance: () => Promise<void>;
     getHistory: (pageNumber: number, pageSize?: number) => Promise<void>;
     getProducts: () => Promise<void>;
+    getStats: () => Promise<void>;
     changePassword: (data: ChangePasswordFormData) => Promise<void>;
     buyProduct: (productId: string, quantity: number) => Promise<{ url: string }>;
     submitFeedback: (title: string, description: string, imageUrl: string) => Promise<void>;
@@ -29,6 +36,7 @@ const endPoint = {
     balance: "/v1/user/pointsCharges/balance",
     history: "/v1/user/pointsCharges/history",
     changePassword: "/v1/user/profile/password",
+    stats: "/v1/user/profile/stats",
     products: "/v1/user/payment/products",
     buyProduct: "/v1/user/payment/one-time",
     feedback: "/v1/user/feedbacks",
@@ -57,6 +65,7 @@ export const useProfileStore = create<ProfileState>()(
                 balance: null,
                 history: null,
                 products: null,
+                stats: null,
                 isLoading: false,
                 error: null,
 
@@ -131,6 +140,26 @@ export const useProfileStore = create<ProfileState>()(
                         });
                     } catch (error: any) {
                         const errorMessage = error.response?.data?.message || 'Failed to fetch products';
+                        set({
+                            isLoading: false,
+                            error: errorMessage
+                        });
+                        toast.error(errorMessage);
+                        throw error;
+                    }
+                },
+
+                getStats: async () => {
+                    set({ isLoading: true, error: null });
+                    try {
+                        const response = await api.get(endPoint.stats);
+                        set({
+                            stats: response.data,
+                            isLoading: false,
+                            error: null
+                        });
+                    } catch (error: any) {
+                        const errorMessage = error.response?.data?.message || 'Failed to fetch stats';
                         set({
                             isLoading: false,
                             error: errorMessage
@@ -242,7 +271,8 @@ export const useProfileStore = create<ProfileState>()(
                     profile: state.profile,
                     balance: state.balance,
                     history: state.history,
-                    products: state.products
+                    products: state.products,
+                    stats: state.stats
                 })
             }
         ),

@@ -9,6 +9,13 @@
     "creditsLine": "You have <strong>{{credits}} credits</strong> — ready to evaluate candidates.",
     "createNewPosition": "Create New Position",
     "howItWorks": "How it works",
+    "stats": {
+      "title": "Your stats",
+      "positionsCount": "Positions",
+      "avgCriteriasPerUseCase": "Avg criterias / position",
+      "processedResumesCount": "Processed resumes",
+      "avgScore": "Average score"
+    },
     "tips": {
       "createPosition": {
         "title": "Create a Position",
@@ -252,6 +259,7 @@
       "uploadResume": "Upload Resume",
       "addCriteria": "Add Criteria",
       "startAnalysis": "Start Analysis",
+      "showAnalysis": "Show Analysis",
       "analyzing": "Analyzing..."
     },
     "sections": {
