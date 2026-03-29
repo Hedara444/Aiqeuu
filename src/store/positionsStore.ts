@@ -223,7 +223,11 @@ export const usePositionsStore = create<PositionsState>()(
               isLoading: false,
               error: errorMessage
             });
-            toast.warning(errorMessage);
+            if(errorMessage !== "Position already proccessed"){
+              toast.warning(errorMessage);
+
+            }
+            //
             throw error;
           }
         },
